@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerState
 {
-    private float transitionTime;
+    private float _animClipLength;
+    private float _animClipSpeed;
+
     public PlayerJumpState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
     {
     }
@@ -12,7 +14,6 @@ public class PlayerJumpState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        transitionTime = player.JumpPrepAnimTime;
     }
 
     public override void Exit()
@@ -23,7 +24,11 @@ public class PlayerJumpState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if(Time.time >= startTimer + transitionTime)
+
+        _animClipLength = player.Anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
+        _animClipSpeed = player.Anim.GetCurrentAnimatorStateInfo(0).speed;
+
+        if (Time.time >= startTimer + _animClipLength / _animClipSpeed)
         {
             player.SetJumpHeigth(player.JumpHeight);
             stateMachine.ChangeState(player.PlayerInAirState);

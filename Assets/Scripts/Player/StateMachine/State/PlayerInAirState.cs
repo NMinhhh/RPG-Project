@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
-    Vector3 direction;
+    Vector3 _direction;
     public PlayerInAirState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
     {
     }
@@ -23,8 +23,8 @@ public class PlayerInAirState : PlayerState
     {
         base.LogicUpdate();
 
-        direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
-        player.Move(direction);
+        _direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
+        player.Move(_direction);
 
         if (player.isGround && player.velocity.y <= 0)
         {

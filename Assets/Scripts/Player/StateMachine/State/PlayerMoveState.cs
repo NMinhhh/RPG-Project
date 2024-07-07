@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerState
 {
-    Vector3 direction;
+    private Vector3 _direction;
+
+    private bool _isGrounded;
+
+    private bool _isJump;
+
+    private bool _isAttack;
 
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
     {
@@ -13,6 +19,7 @@ public class PlayerMoveState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        _isAttack = false;
     }
 
     public override void Exit()
@@ -20,22 +27,46 @@ public class PlayerMoveState : PlayerState
         base.Exit();
     }
 
+    public override void HandleInput()
+    {
+        base.HandleInput();
+        _direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
+        if (InputManager.Instance.JumpInput && player.isGround)
+        {
+            _isJump = true;
+        }
+        else
+        {
+            _isJump = false;
+        }
+
+        if (InputManager.Instance.AttackInput)
+        {
+            _isAttack = true;
+        }
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
-        player.Move(direction);
+        _isGrounded = player.isGround;
 
-        if(!player.isGround && player.velocity.y <= 0)
+        player.Move(_direction);
+
+        if (_isAttack)
+        {
+            stateMachine.ChangeState(player.PlayerAttackState);
+        }
+        else if(!_isGrounded && player.velocity.y <= 0)
         {
             stateMachine.ChangeState(player.PlayerInAirState);
         }
-        else if (InputManager.Instance.JumpInput)
+        else if (_isJump)
         {
             stateMachine.ChangeState(player.PlayerJumpState);
         }
-        else if(direction.magnitude < .1f)
+        else if(_direction.magnitude < .1f)
         {
             stateMachine.ChangeState(player.PlayerIdleState);
         }

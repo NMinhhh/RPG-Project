@@ -10,6 +10,7 @@ public class InputManager : Singleton<InputManager>
 
     public bool JumpInput {  get; private set; }
 
+    public bool AttackInput {  get; private set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -22,5 +23,9 @@ public class InputManager : Singleton<InputManager>
         XInput = Input.GetAxisRaw("Horizontal");
         ZInput = Input.GetAxisRaw("Vertical");
         JumpInput = Input.GetKey(KeyCode.Space);
+        AttackInput = Input.GetMouseButtonDown(0);
+
     }
+
+
 }

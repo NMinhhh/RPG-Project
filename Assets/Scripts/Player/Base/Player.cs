@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, IJumpable
+public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, IJumpable, IAttackable
 {
     [field: SerializeField] public CharacterController character { get; set; }
 
@@ -14,9 +14,19 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     [field: SerializeField] public float JumpHeight { get; set; }
 
+    [field:SerializeField]public int CombonAtttack { get; set; }
+
+    public int CurrentComboAttack { get; set; }
+
+    [field: SerializeField] public float ResetComboTime {  get; set; }
+
+    public bool isAttack {  get; set; }
+
     #region State Machine Variable
 
     public PlayerStateMachine StateMachine { get; private set; }
+    
+
     public PlayerIdleState PlayerIdleState { get; private set; }
     public PlayerMoveState PlayerMoveState { get; private set; }
     public PlayerJumpState PlayerJumpState { get; private set; }
@@ -24,6 +34,8 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     public PlayerInAirState PlayerInAirState { get; private set; }
 
     public PlayerLandingState PlayerLandingState { get; private set; }
+
+    public PlayerAttackState PlayerAttackState {  get; private set; }
 
     #endregion
 
@@ -47,14 +59,18 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
 
     #region Jump Variable
-
-    public float JumpPrepAnimTime { get; private set; }
-    public float JumpLandingAnimTime { get; private set; }
-
-    [SerializeField] private float gravity = -9.81f * 2;
+   
+    [SerializeField] private float _gravity = -9.81f * 2;
 
     [HideInInspector]
     public Vector2 velocity;
+
+    #endregion
+
+
+    #region Attack
+
+    private float _currentComboTime;
 
     #endregion
 
@@ -70,6 +86,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
         PlayerJumpState = new PlayerJumpState(this, StateMachine, "Jump");
         PlayerInAirState = new PlayerInAirState(this, StateMachine, "InAir");
         PlayerLandingState = new PlayerLandingState(this, StateMachine, "Landing");
+        PlayerAttackState = new PlayerAttackState(this, StateMachine, "Attack");
     }
 
     // Start is called before the first frame update
@@ -77,8 +94,10 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     {
         Alive = transform.Find("Alive").gameObject;
         Anim = Alive.GetComponent<Animator>();
-        GetAnimationTime();
         thirdPersonCamera = GetComponent<ThirdPersonCamera>();
+
+        CurrentComboAttack = CombonAtttack;
+
         StateMachine.Intialize(PlayerIdleState);
     }
 
@@ -86,6 +105,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     void Update()
     {
         StateMachine.currentState.LogicUpdate();
+        ResetComboAttack();
     }
 
     private void FixedUpdate()
@@ -145,7 +165,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
         {
             velocity.y = -2;
         }
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += _gravity * Time.deltaTime;
         character.Move(velocity * Time.deltaTime);
 
 
@@ -153,32 +173,48 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public void SetJumpHeigth(float jumpheight)
     {
-        velocity.y = Mathf.Sqrt(jumpheight * -2 * gravity);
+        velocity.y = Mathf.Sqrt(jumpheight * -2 * _gravity);
     }
 
 
     #endregion
 
-    
-    #region Others Function
 
-    public void GetAnimationTime()
+    #region Attack Function
+
+    public void IsAttack(bool isAttack)
     {
-        AnimationClip[] clips = Anim.runtimeAnimatorController.animationClips;
-        foreach(AnimationClip clip in clips)
-        {
-            switch(clip.name)
-            {
-                case "Jump_Prep":
-                    JumpPrepAnimTime = clip.length;
-                    break;
-                case "Jump_Landing":
-                    JumpLandingAnimTime = clip.length;
-                    break;
+        this.isAttack = isAttack;
+    }
 
+    public void SetComboAttack()
+    {
+        _currentComboTime = ResetComboTime;
+        CurrentComboAttack++;
+        if(CurrentComboAttack > CombonAtttack)
+        {
+            CurrentComboAttack = 1;
+        }
+    }
+
+    public void ResetComboAttack()
+    {
+        if(CurrentComboAttack != 0 && !isAttack)
+        {
+            _currentComboTime -= Time.deltaTime;
+            if(_currentComboTime <= 0)
+            {
+                CurrentComboAttack = 0;
+                _currentComboTime = ResetComboTime;
             }
         }
     }
+
+    #endregion
+
+
+    #region Others Function
+
     public void TrtiggerAnimation() => StateMachine.currentState.TriggerAnimation();
 
     public void FinishAnimatio() => StateMachine.currentState.FinishAnimation();

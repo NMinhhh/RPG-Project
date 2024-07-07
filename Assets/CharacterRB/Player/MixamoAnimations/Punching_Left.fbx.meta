@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 891ab4d1b14e8df4a8bf3ea8f4250d7f
+guid: c791fc07889c9e14c96978b6904ec919
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,18 +33,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: Punch_Left
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
-      lastFrame: 117
+      lastFrame: 62
       wrapMode: 0
-      orientationOffsetY: -25
+      orientationOffsetY: -27
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1

@@ -31,7 +31,9 @@ public class PlayerState
 
     public virtual void Exit() => player.Anim.SetBool(isAnimationName, false);
 
-    public virtual void LogicUpdate() { }
+    public virtual void HandleInput() { }
+
+    public virtual void LogicUpdate() => HandleInput();
     public virtual void PhysicUpdate() { }
 
     public virtual void TriggerAnimation() { }
