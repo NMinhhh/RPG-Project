@@ -48,7 +48,10 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public ThirdPersonCamera thirdPersonCamera { get; private set; }
 
+    public WeaponsController WeaponsController { get; private set; }
+
     #endregion
+
 
 
     #region Idle Variable
@@ -70,7 +73,15 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     #region Attack
 
-    private float _currentComboTime;
+    public enum CombatType
+    {
+        Normal,
+        Sword,
+        SwordAndShield,
+        HeavySword
+    }
+
+    public CombatType currentCombatType { get; private set; }
 
     #endregion
 
@@ -95,7 +106,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
         Alive = transform.Find("Alive").gameObject;
         Anim = Alive.GetComponent<Animator>();
         thirdPersonCamera = GetComponent<ThirdPersonCamera>();
-
+        WeaponsController = GetComponent<WeaponsController>();
         CurrentComboAttack = CombonAtttack;
 
         StateMachine.Intialize(PlayerIdleState);
@@ -105,12 +116,11 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     void Update()
     {
         StateMachine.currentState.LogicUpdate();
-        ResetComboAttack();
+        WorldGravity();
     }
 
     private void FixedUpdate()
     {
-        WorldGravity();
         StateMachine.currentState.PhysicUpdate();
     }
 
@@ -189,7 +199,6 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public void SetComboAttack()
     {
-        _currentComboTime = ResetComboTime;
         CurrentComboAttack++;
         if(CurrentComboAttack > CombonAtttack)
         {
@@ -199,21 +208,20 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public void ResetComboAttack()
     {
-        if(CurrentComboAttack != 0 && !isAttack)
-        {
-            _currentComboTime -= Time.deltaTime;
-            if(_currentComboTime <= 0)
-            {
-                CurrentComboAttack = 0;
-                _currentComboTime = ResetComboTime;
-            }
-        }
+        CurrentComboAttack = 0;
     }
 
     #endregion
 
 
     #region Others Function
+
+    public void ChangeWeapons(WeaponsObject weapons)
+    {
+        Anim.runtimeAnimatorController = weapons.controller;
+        CombonAtttack = weapons.comboAttack;
+        StateMachine.ChangeState(PlayerIdleState);
+    }
 
     public void TrtiggerAnimation() => StateMachine.currentState.TriggerAnimation();
 

@@ -27,5 +27,5 @@ public class InputManager : Singleton<InputManager>
 
     }
 
-
+    public void UseAttackInput() => AttackInput = false;
 }

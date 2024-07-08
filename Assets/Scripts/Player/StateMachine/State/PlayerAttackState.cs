@@ -52,6 +52,7 @@ public class PlayerAttackState : PlayerState
         }
         else if (Time.time >= startTimer + _animClipLength / _animClipSpeed)
         {
+            player.ResetComboAttack();
             stateMachine.ChangeState(player.PlayerIdleState);
         }
         
