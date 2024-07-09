@@ -5,8 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class WeaponsObject 
 {
-    public string nameW;
-    public RuntimeAnimatorController controller;
+    public string nameWeapons;
+    public TypeAnimator.AttackType type;
     public int comboAttack;
 
 }

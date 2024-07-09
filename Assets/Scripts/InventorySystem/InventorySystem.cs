@@ -29,15 +29,12 @@ public class InventorySystem : MonoBehaviour
 
     private void GenerateListSlots()
     {
-        //for(int i = 0; i < 21; i++)
-        //{
-        //    ItemSlot slot = Instantiate(slotTemplate, slotsContainer).GetComponent<ItemSlot>();
-        //    slotList.Add(slot.gameObject);
-        //}
-        foreach(Transform chill  in slotsContainer.transform)
+        for (int i = 0; i < 21; i++)
         {
-            slotList.Add(chill.gameObject);
+            ItemSlot slot = Instantiate(slotTemplate, slotsContainer).GetComponent<ItemSlot>();
+            slotList.Add(slot.gameObject);
         }
+
     }
 
     public void AddToInventory(string itemName)

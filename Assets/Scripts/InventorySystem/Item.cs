@@ -5,9 +5,13 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     public string itemName;
-
+    public TypeAnimator.AttackType animator;
     private bool canPickup;
-    // Start is called before the first frame update
+    public int combo;
+
+    private PlayerAnimatorController playerAnimatorController;
+    private WeaponsController weaponsController;
+
     void Start()
     {
         
@@ -19,6 +23,9 @@ public class Item : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F) && canPickup && InventorySystem.Instance.CheckForAvailableSlot()) 
         {
             InventorySystem.Instance.AddToInventory("Axe");
+            playerAnimatorController.SetAnimator(animator);
+            weaponsController.EquippedRightWeapons("Axe");
+            weaponsController.SetAmountOfCombo(combo);
             Destroy(gameObject);
         }
     }
@@ -27,7 +34,18 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            WeaponsController weaponController = other.GetComponent<WeaponsController>();
+            PlayerAnimatorController playerAnimator = other.GetComponent<PlayerAnimatorController>();
+            if(weaponController != null)
+            {
+                this.weaponsController = weaponController;
+            }
+            if(playerAnimator != null)
+            {
+                this.playerAnimatorController = playerAnimator;
+            }
             canPickup = true;
+            
         }
     }
 
@@ -35,6 +53,8 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            weaponsController = null;
+            playerAnimatorController = null;
             canPickup = false;
         }
     }

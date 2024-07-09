@@ -650,7 +650,7 @@ Animator:
   m_GameObject: {fileID: 2826327872530912829}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4a73bb40f47d33e4c9c375a8bb3caebb, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1e83527f93b59d340a976dcb268951fa, type: 2}
+  m_Controller: {fileID: 9100000, guid: b9b7abc5229f731419af8fdaa6de31af, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1478,6 +1478,7 @@ GameObject:
   - component: {fileID: 7447151552295185218}
   - component: {fileID: 2617343248429443025}
   - component: {fileID: 720926681072105698}
+  - component: {fileID: 1515894334672908016}
   - component: {fileID: 1465261376273179563}
   - component: {fileID: 383495772943388428}
   m_Layer: 0
@@ -1550,6 +1551,20 @@ MonoBehaviour:
   _speed: 5
   _gravity: -19.62
   velocity: {x: 0, y: 0}
+--- !u!114 &1515894334672908016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557755342905726408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ab737844b7a1d4f8099d2fbc2cff10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handAnimator: {fileID: 9100000, guid: 1e83527f93b59d340a976dcb268951fa, type: 2}
+  weaponsInRightHandAnimator: {fileID: 9100000, guid: b9b7abc5229f731419af8fdaa6de31af, type: 2}
 --- !u!114 &1465261376273179563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1563,20 +1578,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponsObjects:
-  - nameW: Handle
-    controller: {fileID: 9100000, guid: 1e83527f93b59d340a976dcb268951fa, type: 2}
+  - nameWeapons: Hand
+    type: 0
     comboAttack: 2
-  - nameW: Axe
-    controller: {fileID: 9100000, guid: b9b7abc5229f731419af8fdaa6de31af, type: 2}
+  - nameWeapons: Axe
+    type: 1
     comboAttack: 3
-  weapon: {fileID: 3949601081220960702, guid: 97f5694a68fc52346b206edc1ecf9450, type: 3}
-  weapon2: {fileID: 8244926624902354343, guid: 0ced25fce5ca521469d957f839d57506, type: 3}
   rightWeaponsHolder: {fileID: 9182946320387350572}
   leftWeaponsHolder: {fileID: 6544914768376523072}
-  weaponsObject:
-    nameW: 
-    controller: {fileID: 0}
-    comboAttack: 0
 --- !u!114 &383495772943388428
 MonoBehaviour:
   m_ObjectHideFlags: 0

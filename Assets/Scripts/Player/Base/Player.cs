@@ -14,18 +14,18 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     [field: SerializeField] public float JumpHeight { get; set; }
 
-    [field:SerializeField] public int CombonAtttack { get; set; }
+    [field: SerializeField] public int CombonAtttack { get; set; }
 
     public int CurrentComboAttack { get; set; }
 
-    [field: SerializeField] public float ResetComboTime {  get; set; }
+    [field: SerializeField] public float ResetComboTime { get; set; }
 
-    public bool isAttack {  get; set; }
+    public bool isAttack { get; set; }
 
     #region State Machine Variable
 
     public PlayerStateMachine StateMachine { get; private set; }
-    
+
 
     public PlayerIdleState PlayerIdleState { get; private set; }
     public PlayerMoveState PlayerMoveState { get; private set; }
@@ -35,16 +35,16 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public PlayerLandingState PlayerLandingState { get; private set; }
 
-    public PlayerAttackState PlayerAttackState {  get; private set; }
+    public PlayerAttackState PlayerAttackState { get; private set; }
 
     #endregion
 
 
     #region Component Variable
 
-    public GameObject Alive {  get; private set; }
+    public GameObject Alive { get; private set; }
 
-    public Animator Anim {  get; private set; }
+    public Animator Anim { get; private set; }
 
     public ThirdPersonCamera thirdPersonCamera { get; private set; }
 
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
 
     #region Jump Variable
-   
+
     [SerializeField] private float _gravity = -9.81f * 2;
 
     [HideInInspector]
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     public void Damage(float damage)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
-        if(CurrentHealth < 0)
+        if (CurrentHealth < 0)
         {
             Die();
         }
@@ -140,7 +140,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public void Die()
     {
-        
+
     }
 
     #endregion
@@ -172,7 +172,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     void WorldGravity()
     {
-        if(isGround && velocity.y <= 0)
+        if (isGround && velocity.y <= 0)
         {
             velocity.y = -2;
         }
@@ -192,6 +192,16 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
 
     #region Attack Function
+
+    public void SetAmoutOfCombo(int combo)
+    {
+        CombonAtttack = combo;
+        CurrentComboAttack = 0;
+        if(StateMachine != null || StateMachine.currentState != PlayerIdleState)
+        {
+            StateMachine.ChangeState(PlayerIdleState);
+        }
+    }
 
     public void IsAttack(bool isAttack)
     {
@@ -216,13 +226,6 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
 
     #region Others Function
-
-    public void ChangeWeapons(WeaponsObject weapons)
-    {
-        Anim.runtimeAnimatorController = weapons.controller;
-        CombonAtttack = weapons.comboAttack;
-        StateMachine.ChangeState(PlayerIdleState);
-    }
 
     public void TrtiggerAnimation() => StateMachine.currentState.TriggerAnimation();
 

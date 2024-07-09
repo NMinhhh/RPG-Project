@@ -4,69 +4,69 @@ using UnityEngine;
 
 public class WeaponsController : MonoBehaviour
 {
+
     [SerializeField] private List<WeaponsObject> weaponsObjects;
-    [SerializeField] private EquippedWeapons weapon;
-    [SerializeField] private EquippedWeapons weapon2;
+
     [SerializeField] private Transform rightWeaponsHolder;
     [SerializeField] private Transform leftWeaponsHolder;
     private EquippedWeapons currentLeftWeapons;
     private EquippedWeapons currentRightWeapons;
+    PlayerAnimatorController playerAnimatorController;
 
-    public WeaponsObject weaponsObject;
     Player player;
     void Start()
     {
         player = GetComponent<Player>();
-        EquippedRightWeapons(weapon.gameObject);
-        EquippedLeftWeapons(weapon.gameObject);
+        playerAnimatorController = GetComponent<PlayerAnimatorController>();
+        EquippedRightWeapons("Hand");
+        EquippedLeftWeapons("Hand");
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && CheckWeaponObject(0))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            player.ChangeWeapons(weaponsObjects[0]);
-            EquippedRightWeapons(weapon.gameObject);
-            EquippedLeftWeapons(weapon.gameObject);
+            EquippedRightWeapons("Hand");
+            EquippedLeftWeapons("Hand");
+            playerAnimatorController.SetAnimator(TypeAnimator.AttackType.Hand);
+            player.SetAmoutOfCombo(2);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && CheckWeaponObject(1))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            player.ChangeWeapons(weaponsObjects[1]);
-            EquippedRightWeapons(weapon2.gameObject);
+            EquippedRightWeapons("Axe");
+            playerAnimatorController.SetAnimator(TypeAnimator.AttackType.WeaponsInRightHand);
+            player.SetAmoutOfCombo(3);
+
         }
 
     }
 
-    bool CheckWeaponObject(int i)
+    public void SetAmountOfCombo(int combo)
     {
-        if(weaponsObject == weaponsObjects[i])
-        {
-            return false;
-        }
-        return true;
+        player.SetAmoutOfCombo(combo);
     }
 
-    public void EquippedLeftWeapons(GameObject weapon)
+    public void EquippedLeftWeapons(string weaponsName)
     {
         if(currentLeftWeapons != null)
         {
             DestroyImmediate(currentLeftWeapons.gameObject);
             currentLeftWeapons = null;
         }
-        EquippedWeapons weapons = Resources.Load<EquippedWeapons>(weapon.name);
+        EquippedWeapons weapons = Resources.Load<EquippedWeapons>(weaponsName);
         currentLeftWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;
         currentLeftWeapons.transform.SetParent(leftWeaponsHolder.transform, false);
 
     }
 
-    public void EquippedRightWeapons(GameObject weapon)
+    public void EquippedRightWeapons(string weaponsName)
     {
         if (currentRightWeapons != null)
         {
             DestroyImmediate(currentRightWeapons.gameObject);
             currentRightWeapons = null;
         }
-        EquippedWeapons weapons = Resources.Load<EquippedWeapons>(weapon.name);
+        EquippedWeapons weapons = Resources.Load<EquippedWeapons>(weaponsName);
         currentRightWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;
         currentRightWeapons.transform.SetParent(rightWeaponsHolder.transform, false);
 
