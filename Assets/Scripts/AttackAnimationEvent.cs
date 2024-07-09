@@ -6,6 +6,13 @@ public class AttackAnimationEvent : MonoBehaviour
 {
     [SerializeField] private WeaponsController weaponController;
 
+    Player player;
+
+    private void Start()
+    {
+        player = GetComponentInParent<Player>();
+    }
+
     public void StartDealDamageToTheLeft()
     {
         weaponController.StartDealDamageToTheLeft();
@@ -27,4 +34,9 @@ public class AttackAnimationEvent : MonoBehaviour
     }
 
     public void NextAttack() => InputManager.Instance.UseAttackInput();
+
+    public void FinishAnimation()
+    {
+        player.FinishAnimation();
+    }
 }

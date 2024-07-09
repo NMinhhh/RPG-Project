@@ -6,7 +6,7 @@ public class PlayerGroundCheck : MonoBehaviour
 {
     private Player _player;
 
-    [SerializeField] private float distance;
+    [SerializeField] private float radius;
 
     [SerializeField] private LayerMask whatIsGround;
 
@@ -21,10 +21,15 @@ public class PlayerGroundCheck : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGround = Physics.CheckSphere(transform.position, distance, whatIsGround);
+        isGround = Physics.CheckSphere(transform.position, radius, whatIsGround);
 
 
         _player.CheckGround(isGround);
         
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

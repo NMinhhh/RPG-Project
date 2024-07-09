@@ -16,7 +16,6 @@ public class PlayerIdleState : PlayerState
         base.Enter();
         _isAttack = false;
         _isJump = false;
-        player.Move(Vector3.zero);
     }
 
     public override void Exit()

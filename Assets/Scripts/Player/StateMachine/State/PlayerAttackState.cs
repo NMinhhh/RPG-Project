@@ -5,9 +5,8 @@ using UnityEngine;
 public class PlayerAttackState : PlayerState
 {
     private int _comboAttack;
-    private float _animClipLength;
-    private float _animClipSpeed;
     private bool isAttack;
+    private Vector3 _direction;
     public PlayerAttackState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
     {
     }
@@ -32,6 +31,9 @@ public class PlayerAttackState : PlayerState
     public override void HandleInput()
     {
         base.HandleInput();
+
+        _direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
+
         if (InputManager.Instance.AttackInput)
         {
             isAttack = true;
@@ -41,20 +43,24 @@ public class PlayerAttackState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (isFinishAnimtion)
+        {
+            if (isAttack)
+            {
+                stateMachine.ChangeState(player.PlayerAttackState);
+            }
+            else if (_direction.magnitude > .1f)
+            {
+                player.ResetComboAttack();
+                stateMachine.ChangeState(player.PlayerIdleState);
+            }else
+            {
+                player.ResetComboAttack();
+                stateMachine.ChangeState(player.PlayerIdleState);
+            }
+        }
        
-        _animClipLength = player.Anim.GetCurrentAnimatorClipInfo(0)[0].clip.length;
-
-        _animClipSpeed = player.Anim.GetCurrentAnimatorStateInfo(0).speed;
-
-        if (isAttack && Time.time >= startTimer + _animClipLength / _animClipSpeed)
-        {
-            stateMachine.ChangeState(player.PlayerAttackState);
-        }
-        else if (Time.time >= startTimer + _animClipLength / _animClipSpeed)
-        {
-            player.ResetComboAttack();
-            stateMachine.ChangeState(player.PlayerIdleState);
-        }
         
     }
 

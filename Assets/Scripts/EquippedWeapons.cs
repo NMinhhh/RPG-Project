@@ -8,7 +8,7 @@ public class EquippedWeapons : MonoBehaviour
     [SerializeField] private List<GameObject> enemy;
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private BoxCollider box;
-
+    [SerializeField] private GameObject blood;
     private bool isAttack;
 
     void Start()
@@ -30,6 +30,8 @@ public class EquippedWeapons : MonoBehaviour
                     if (damagaeble != null)
                     {
                         damagaeble.Damage(damage);
+                        GameObject hole = Instantiate(blood, hit2.transform.position, Quaternion.identity);
+                        hole.transform.SetParent(hit2.transform);
                     }
                     enemy.Add(hit2.collider.gameObject);
                 }

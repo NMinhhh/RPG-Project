@@ -19,11 +19,17 @@ public class PlayerInAirState : PlayerState
         base.Exit();
     }
 
+    public override void HandleInput()
+    {
+        base.HandleInput();
+        _direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
+
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        _direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
         player.Move(_direction);
 
         if (player.isGround && player.velocity.y <= 0)

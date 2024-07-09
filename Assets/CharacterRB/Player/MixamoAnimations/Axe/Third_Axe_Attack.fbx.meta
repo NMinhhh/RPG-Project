@@ -71,8 +71,15 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9320795
+      - time: 0.9829059
         functionName: NextAttack
+        data: 
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 1
+        functionName: FinishAnimation
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

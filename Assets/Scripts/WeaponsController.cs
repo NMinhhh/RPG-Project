@@ -17,6 +17,8 @@ public class WeaponsController : MonoBehaviour
     void Start()
     {
         player = GetComponent<Player>();
+        EquippedRightWeapons(weapon.gameObject);
+        EquippedLeftWeapons(weapon.gameObject);
     }
 
     private void Update()
@@ -48,6 +50,7 @@ public class WeaponsController : MonoBehaviour
     {
         if(currentLeftWeapons != null)
         {
+            DestroyImmediate(currentLeftWeapons.gameObject);
             currentLeftWeapons = null;
         }
         EquippedWeapons weapons = Resources.Load<EquippedWeapons>(weapon.name);
@@ -60,6 +63,7 @@ public class WeaponsController : MonoBehaviour
     {
         if (currentRightWeapons != null)
         {
+            DestroyImmediate(currentRightWeapons.gameObject);
             currentRightWeapons = null;
         }
         EquippedWeapons weapons = Resources.Load<EquippedWeapons>(weapon.name);

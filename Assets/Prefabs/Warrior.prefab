@@ -1523,11 +1523,11 @@ CharacterController:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Height: 1.76
+  m_Height: 1.88
   m_Radius: 0.25
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_StepOffset: 0.1
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.95, z: 0}
 --- !u!114 &720926681072105698
@@ -1562,9 +1562,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf0918fd02d8da498d4bdd4eada8e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponsObjects:
+  - nameW: Handle
+    controller: {fileID: 9100000, guid: 1e83527f93b59d340a976dcb268951fa, type: 2}
+    comboAttack: 2
+  - nameW: Axe
+    controller: {fileID: 9100000, guid: b9b7abc5229f731419af8fdaa6de31af, type: 2}
+    comboAttack: 3
   weapon: {fileID: 3949601081220960702, guid: 97f5694a68fc52346b206edc1ecf9450, type: 3}
+  weapon2: {fileID: 8244926624902354343, guid: 0ced25fce5ca521469d957f839d57506, type: 3}
   rightWeaponsHolder: {fileID: 9182946320387350572}
   leftWeaponsHolder: {fileID: 6544914768376523072}
+  weaponsObject:
+    nameW: 
+    controller: {fileID: 0}
+    comboAttack: 0
 --- !u!114 &383495772943388428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1926,7 +1938,7 @@ Transform:
   m_GameObject: {fileID: 6801420762897904552}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.033, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1944,7 +1956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb95af1d69072064e9cc27738bc5627b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 0.2
+  radius: 0.25
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128

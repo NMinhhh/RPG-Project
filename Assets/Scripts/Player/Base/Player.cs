@@ -14,7 +14,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     [field: SerializeField] public float JumpHeight { get; set; }
 
-    [field:SerializeField]public int CombonAtttack { get; set; }
+    [field:SerializeField] public int CombonAtttack { get; set; }
 
     public int CurrentComboAttack { get; set; }
 
@@ -150,7 +150,8 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public void Move(Vector3 direction)
     {
-        character.Move(thirdPersonCamera.MoveRotation(direction) * _speed * Time.deltaTime);
+        Vector3 motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.XInput == 1 && InputManager.Instance.XInput == 1 ? .7f : 1);
+        character.Move(motion * _speed * Time.deltaTime);
     }
 
     #endregion
@@ -225,7 +226,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public void TrtiggerAnimation() => StateMachine.currentState.TriggerAnimation();
 
-    public void FinishAnimatio() => StateMachine.currentState.FinishAnimation();
+    public void FinishAnimation() => StateMachine.currentState.FinishAnimation();
 
 
     #endregion
