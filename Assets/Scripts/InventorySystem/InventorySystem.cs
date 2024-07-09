@@ -3,15 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventorySystem : MonoBehaviour
+public class InventorySystem : Singleton<InventorySystem>
 {
-    public static InventorySystem Instance;
-
-    private void Awake()
-    {
-        if(Instance == null)
-        Instance = this;
-    }
 
     [SerializeField] private GameObject slotTemplate;
     [SerializeField] private Transform slotsContainer;

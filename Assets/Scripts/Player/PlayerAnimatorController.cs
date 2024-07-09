@@ -7,15 +7,15 @@ public class PlayerAnimatorController : MonoBehaviour
 
     private RuntimeAnimatorController currentAnimator;
 
-    private Animator anim;
-    [SerializeField] private RuntimeAnimatorController handAnimator;
-    [SerializeField] private RuntimeAnimatorController weaponsInRightHandAnimator;
+    private Animator _anim;
+    [SerializeField] private RuntimeAnimatorController _handAnimator;
+    [SerializeField] private RuntimeAnimatorController _weaponsInRightHandAnimator;
     //[SerializeField] private RuntimeAnimatorController weaponsAndShieldAnimator;
     //[SerializeField] private RuntimeAnimatorController heavyWeaponAnimator;
     
     void Start()
     {
-        anim = GetComponentInChildren<Animator>();
+        _anim = GetComponentInChildren<Animator>();
         SetAnimator(TypeAnimator.AttackType.Hand);
     }
 
@@ -24,10 +24,10 @@ public class PlayerAnimatorController : MonoBehaviour
         switch (type)
         {
             case TypeAnimator.AttackType.Hand:
-                anim.runtimeAnimatorController = handAnimator;
+                _anim.runtimeAnimatorController = _handAnimator;
                 break;
             case TypeAnimator.AttackType.WeaponsInRightHand:
-                anim.runtimeAnimatorController = weaponsInRightHandAnimator;
+                _anim.runtimeAnimatorController = _weaponsInRightHandAnimator;
                 break;
             //case TypeAnimator.AttackType.WeaponsAndShield:
             //    anim.runtimeAnimatorController = weaponsAndShieldAnimator;
@@ -51,6 +51,6 @@ public class TypeAnimator
         HeavyWeapon
     }
 
-    public AttackType attackType;
+    public AttackType Type;
 
 }

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public string itemName;
-    public TypeAnimator.AttackType animator;
-    private bool canPickup;
-    public int combo;
+    public string ItemName;
+    public TypeAnimator.AttackType Animator;
+    private bool _canPickup;
+    public int Combo;
 
-    private PlayerAnimatorController playerAnimatorController;
-    private WeaponsController weaponsController;
+    private PlayerAnimatorController _playerAnimatorController;
+    private WeaponsController _weaponsController;
 
     void Start()
     {
@@ -20,12 +20,12 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F) && canPickup && InventorySystem.Instance.CheckForAvailableSlot()) 
+        if(Input.GetKeyDown(KeyCode.F) && _canPickup && InventorySystem.Instance.CheckForAvailableSlot()) 
         {
             InventorySystem.Instance.AddToInventory("Axe");
-            playerAnimatorController.SetAnimator(animator);
-            weaponsController.EquippedRightWeapons("Axe");
-            weaponsController.SetAmountOfCombo(combo);
+            _playerAnimatorController.SetAnimator(Animator);
+            _weaponsController.EquippedRightWeapons("Axe");
+            _weaponsController.SetAmountOfCombo(Combo);
             Destroy(gameObject);
         }
     }
@@ -38,13 +38,13 @@ public class Item : MonoBehaviour
             PlayerAnimatorController playerAnimator = other.GetComponent<PlayerAnimatorController>();
             if(weaponController != null)
             {
-                this.weaponsController = weaponController;
+                this._weaponsController = weaponController;
             }
             if(playerAnimator != null)
             {
-                this.playerAnimatorController = playerAnimator;
+                this._playerAnimatorController = playerAnimator;
             }
-            canPickup = true;
+            _canPickup = true;
             
         }
     }
@@ -53,9 +53,10 @@ public class Item : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            weaponsController = null;
-            playerAnimatorController = null;
-            canPickup = false;
+            _weaponsController = null;
+            _playerAnimatorController = null;
+            _canPickup = false;
         }
     }
+
 }
