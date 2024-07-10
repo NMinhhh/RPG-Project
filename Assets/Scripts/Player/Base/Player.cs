@@ -108,7 +108,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
         thirdPersonCamera = GetComponent<ThirdPersonCamera>();
         WeaponsController = GetComponent<WeaponsController>();
         CurrentComboAttack = CombonAtttack;
-
+        CurrentHealth = MaxHealth;
         StateMachine.Intialize(PlayerIdleState);
     }
 
@@ -132,6 +132,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     public void Damage(float damage)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
+        Debug.Log("Damage Player");
         if (CurrentHealth < 0)
         {
             Die();

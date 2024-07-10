@@ -5,8 +5,6 @@ using UnityEngine;
 public class WeaponsController : MonoBehaviour
 {
 
-    [SerializeField] private List<WeaponsObject> weaponsObjects;
-
     [SerializeField] private Transform rightWeaponsHolder;
     [SerializeField] private Transform leftWeaponsHolder;
     private EquippedWeapons currentLeftWeapons;

@@ -9,6 +9,7 @@ public class EquippedWeapons : MonoBehaviour
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private BoxCollider box;
     [SerializeField] private GameObject blood;
+    private Transform damagePoint;
     private bool isAttack;
 
     void Start()
@@ -26,11 +27,12 @@ public class EquippedWeapons : MonoBehaviour
             {
                 if (!enemy.Contains(hit2.collider.gameObject))
                 {
+                    damagePoint = hit2.collider.transform.Find("DamagePoint");
                     IDamagaeble damagaeble = hit2.collider.gameObject.GetComponent<IDamagaeble>();
                     if (damagaeble != null)
                     {
                         damagaeble.Damage(damage);
-                        GameObject hole = Instantiate(blood, hit2.transform.position, Quaternion.identity);
+                        GameObject hole = Instantiate(blood, damagePoint.position, Quaternion.identity);
                         hole.transform.SetParent(hit2.transform);
                     }
                     enemy.Add(hit2.collider.gameObject);

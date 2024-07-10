@@ -17,9 +17,9 @@ public class ItemIdleEffect : MonoBehaviour
     private float _currentRotation;
 
     [Header("Translate Postion Y")]
-    [SerializeField] private float _maxDistance;
+    [SerializeField] private float _maxTranslateTime;
     [SerializeField] private float _speedTranslate;
-    private float _currentDistance;
+    private float _currentTranslateTime;
     private bool isChangDir;
 
     private Camera _camera;
@@ -51,17 +51,17 @@ public class ItemIdleEffect : MonoBehaviour
     {
         if (isChangDir)
         {
-            _currentDistance += _speedTranslate * Time.deltaTime;
-            if (_currentDistance >= _maxDistance)
+            _currentTranslateTime += _speedTranslate * Time.deltaTime;
+            if (_currentTranslateTime >= _maxTranslateTime)
                 isChangDir = false;
         }
         else
         {
-            _currentDistance -= _speedTranslate * Time.deltaTime;
-            if (_currentDistance <= 0)
+            _currentTranslateTime -= _speedTranslate * Time.deltaTime;
+            if (_currentTranslateTime <= 0)
                 isChangDir = true;
         }
-        _item.transform.localPosition = new Vector3(0, _currentDistance, 0);
+        _item.transform.localPosition = new Vector3(0, _currentTranslateTime, 0);
     }
 
     private void OnTriggerEnter(Collider other)
