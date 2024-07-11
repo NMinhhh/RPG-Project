@@ -13,8 +13,8 @@ public class EnemyWeaponController : MonoBehaviour
     [SerializeField] private bool isLeft;
     [SerializeField] private bool isRight;
 
-    private EnemyWeapon currentRightWeapon;
-    private EnemyWeapon currentLeftWeapon;
+    public EnemyWeapon currentRightWeapon {  get; private set; }
+    public EnemyWeapon currentLeftWeapon { get; private set; }
 
     void Start()
     {
@@ -24,6 +24,21 @@ public class EnemyWeaponController : MonoBehaviour
             EquippedRightWeapons(rightWeapon.name);
     }
 
+    public void SetDamageRightWeapon(float damage)
+    {
+        if (currentRightWeapon != null)
+        {
+            currentRightWeapon.SetDamage(damage);
+        }
+    }
+
+    public void SetDamageLeftWeapon(float damage)
+    {
+        if (currentLeftWeapon != null)
+        {
+            currentLeftWeapon.SetDamage(damage);
+        }
+    }
 
     public void EquippedRightWeapons(string weaponsName)
     {
@@ -47,6 +62,21 @@ public class EnemyWeaponController : MonoBehaviour
 
         }
 
+    }
+
+    private void OnDisable()
+    {
+        if (currentLeftWeapon != null)
+        {
+            EndDealDamageToTheLeft();
+            DestroyImmediate(currentLeftWeapon);
+        }
+        if (currentRightWeapon != null)
+        {
+            EndDealDamageToTheRight();
+            DestroyImmediate(currentRightWeapon);
+
+        }
     }
 
     public void StartDealDamageToTheLeft()

@@ -28,7 +28,11 @@ public class DemonMoveState : EnemyMoveState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (isFinishMove)
+        if (isPlayerDetected)
+        {
+            stateMachine.ChangeState(_demon.PlayerDetectedState);
+        }
+        else if (isFinishMove)
         {
             stateMachine.ChangeState(_demon.IdleState);
         }

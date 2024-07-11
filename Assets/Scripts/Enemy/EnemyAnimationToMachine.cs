@@ -33,6 +33,6 @@ public class EnemyAnimationToMachine : MonoBehaviour
         weaponController.EndDealDamageToTheRight();
     }
 
-    public void FinishAnimtion() => enemy.FinishAnimtion();
+    public void FinishAnimation() => enemy.FinishAnimation();
 
 }

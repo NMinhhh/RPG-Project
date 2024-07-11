@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMoveState : EnemyState
+public class EnemyPlayerDetectedState : EnemyState
 {
-    protected EnemyMoveData data;
-    protected Vector3 randomPos;
-    protected bool isFinishMove;
+    protected EnemyPlayerDetectedData data;
     protected bool isPlayerDetected;
-
-    public EnemyMoveState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyMoveData data) : base(enemy, stateMachine, isAnimationName)
+    protected bool isPlayerInRange;
+    protected bool isDetectedOver;
+    public EnemyPlayerDetectedState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyPlayerDetectedData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
     }
@@ -18,21 +17,15 @@ public class EnemyMoveState : EnemyState
     {
         base.DoCheck();
         isPlayerDetected = enemy.CheckPlayerDetected();
-        if (enemy.GetDistance(enemy.transform.position, randomPos) <= 0.5f)
-        {
-            isFinishMove = true;
-        }
+        isPlayerInRange = enemy.CheckPlayerInRange();
     }
 
     public override void Enter()
     {
         base.Enter();
-        isFinishMove = false;
-        randomPos = enemy.GetRandomPos(data.XPosRandom, data.YPosRandom);
-        enemy.SetSpeed(data.Speed);
-        enemy.transform.LookAt(randomPos);
-        enemy.Move(randomPos);
+        isDetectedOver = false;
     }
+
 
     public override void Exit()
     {
@@ -47,6 +40,10 @@ public class EnemyMoveState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (Time.time >= startTime + data.detectedTime)
+        {
+            isDetectedOver = true;
+        }
     }
 
     public override void PhysicUpdate()

@@ -6,6 +6,4 @@ using UnityEngine;
 public class EnemyChaseData : ScriptableObject
 {
     public float chaseSpeed;
-    public float checkPlayerInRangeToAttack;
-
 }

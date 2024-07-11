@@ -5,5 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="newMeleeAttackData",menuName = "Enemy Data/ Enemy Melee Attack Data")]
 public class EnemyMeleeAttackData : ScriptableObject
 {
-    public float inRangeAttack;
+    public float leftDamage;
+    public float rightDamage;
 }

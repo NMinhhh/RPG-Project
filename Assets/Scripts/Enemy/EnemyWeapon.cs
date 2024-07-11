@@ -8,6 +8,10 @@ public class EnemyWeapon : MonoBehaviour
     [SerializeField] private float _damage;
     private List<GameObject> hit = new List<GameObject>();
 
+    public void SetDamage(float damage)
+    {
+        this._damage = damage;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

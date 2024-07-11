@@ -31,7 +31,7 @@ public class DemonIdleState : EnemyIdleState
         base.LogicUpdate();
         if (isPlayerDetected)
         {
-            stateMachine.ChangeState(_demon.ChaseState);
+            stateMachine.ChangeState(_demon.PlayerDetectedState);
         }
         else if (isIdleFinish)
         {

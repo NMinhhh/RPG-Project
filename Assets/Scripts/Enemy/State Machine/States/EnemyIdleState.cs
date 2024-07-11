@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyIdleState : EnemyState
@@ -14,12 +13,18 @@ public class EnemyIdleState : EnemyState
         this.data = data;
     }
 
+    public override void DoCheck()
+    {
+        base.DoCheck();
+        isPlayerDetected = enemy.CheckPlayerDetected();
+
+    }
+
     public override void Enter()
     {
         base.Enter();
         enemy.Move(enemy.transform.position);
         isIdleFinish = false;
-        isPlayerDetected = false;
     }
 
     public override void Exit()
@@ -38,11 +43,6 @@ public class EnemyIdleState : EnemyState
         if(Time.time >= startTime + data.idleTime)
         {
             isIdleFinish = true;
-        }
-        if (enemy.CheckDistance(enemy.transform.position, enemy.PlayerPos.position) <= data.checkDistanceRadius)
-        {
-            enemy.transform.LookAt(enemy.PlayerPos.transform.position);
-            isPlayerDetected = true;
         }
     }
 

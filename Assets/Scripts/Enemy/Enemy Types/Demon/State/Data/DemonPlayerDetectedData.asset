@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f869b1a60c1dd342b41d5df3e483ea0, type: 3}
-  m_Name: DemonMeleeAttackData
+  m_Script: {fileID: 11500000, guid: a1a679f3b6dca1b4286aa65c490c6ec0, type: 3}
+  m_Name: DemonPlayerDetectedData
   m_EditorClassIdentifier: 
-  leftDamage: 10
-  rightDamage: 20
+  detectedTime: 1

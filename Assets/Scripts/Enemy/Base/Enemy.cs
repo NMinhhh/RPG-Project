@@ -11,6 +11,11 @@ public class Enemy : MonoBehaviour, IDamagaeble
 
     #endregion
 
+    #region Data
+
+    [SerializeField] protected EnemyData data;
+
+    #endregion
 
     #region Component Variable
 
@@ -20,19 +25,25 @@ public class Enemy : MonoBehaviour, IDamagaeble
 
     public NavMeshAgent Agent {  get; private set; }
 
-    #endregion
-
-    #region Health Variable
-
-    [field: SerializeField] public float MaxHealth { get; set; }
-    public float CurrentHealth { get; set; }
+    public EnemyWeaponController WeaponsController { get; private set; }
 
     #endregion
 
-    public Transform PlayerPos {  get; private set; }
+    #region Variable
+
+    public Transform PlayerPos { get; private set; }
+
+    //Health
+    protected float maxHelth;
+
+    protected float currentHealth;
 
     protected bool isHurt;
     protected bool isDie;
+
+    #endregion
+
+    #region Unity Function
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -42,7 +53,9 @@ public class Enemy : MonoBehaviour, IDamagaeble
         Anim = alive.GetComponent<Animator>();
         Agent = GetComponent<NavMeshAgent>();
         StateMachine = new EnemyStateMachine();
-        CurrentHealth = MaxHealth;
+        WeaponsController = GetComponent<EnemyWeaponController>();
+        maxHelth = data.MaxHealthData;
+        currentHealth = maxHelth;
     }
 
     // Update is called once per frame
@@ -55,6 +68,8 @@ public class Enemy : MonoBehaviour, IDamagaeble
     {
         StateMachine.CurrentEnemyState.PhysicUpdate();
     }
+
+    #endregion
 
     #region Move Fuction
 
@@ -75,12 +90,14 @@ public class Enemy : MonoBehaviour, IDamagaeble
 
     #endregion
 
+
     #region Health Function
+
     public virtual void Damage(float damage)
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
-        Debug.Log(CurrentHealth);
-        if (CurrentHealth > 0)
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
+        Debug.Log(currentHealth);
+        if (currentHealth > 0)
         {
             isHurt = true;
         }
@@ -92,7 +109,6 @@ public class Enemy : MonoBehaviour, IDamagaeble
 
     public virtual void Die()
     {
-        Debug.Log("Die");
         Destroy(gameObject);
     }
 
@@ -100,16 +116,28 @@ public class Enemy : MonoBehaviour, IDamagaeble
 
     #region Check Function
 
-    public float CheckDistance(Vector3 orginal, Vector3 target)
+    public float GetDistance(Vector3 orginal, Vector3 target)
     {
         return Vector3.Distance(orginal, target);
     }
 
+    public bool CheckPlayerDetected()
+    {
+        return Vector3.Distance(transform.position, PlayerPos.position) <= data.radiusCheckToChase;
+    }
+
+    public bool CheckPlayerInRange()
+    {
+        return Vector3.Distance(transform.position, PlayerPos.position) <= data.radiusCheckToAttack;
+    }
+
     #endregion
-    
+
+
+    #region Others Function
     public virtual void TriggerAnimation() => StateMachine.CurrentEnemyState.TriggerAnimation();
 
-    public virtual void FinishAnimtion()
+    public virtual void FinishAnimation()
     {
        
         StateMachine.CurrentEnemyState.FinishAnimation();
@@ -117,6 +145,13 @@ public class Enemy : MonoBehaviour, IDamagaeble
 
     protected virtual void OnDrawGizmos()
     {
-        
+        if (data != null)
+        {
+            Gizmos.DrawWireSphere(transform.position, data.radiusCheckToChase);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, data.radiusCheckToAttack);
+        }
     }
+
+    #endregion
 }

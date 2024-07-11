@@ -7,5 +7,7 @@ public class EnemyData : ScriptableObject
 {
     public float MaxHealthData;
 
-    public float radiusCheck;
+    public float radiusCheckToChase;
+
+    public float radiusCheckToAttack;
 }

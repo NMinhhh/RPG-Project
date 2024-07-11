@@ -5,10 +5,17 @@ using UnityEngine;
 public class EnemyHurtState : EnemyState
 {
     protected EnemyHurtData data;
+    protected bool isPlayerDetected;
     protected bool isHurtFinish;
     public EnemyHurtState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyHurtData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
+    }
+
+    public override void DoCheck()
+    {
+        base.DoCheck();
+        isPlayerDetected = enemy.CheckPlayerDetected();
     }
 
     public override void Enter()

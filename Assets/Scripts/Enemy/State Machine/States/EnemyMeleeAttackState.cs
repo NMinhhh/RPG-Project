@@ -14,9 +14,12 @@ public class EnemyMeleeAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        enemy.WeaponsController.SetDamageRightWeapon(data.rightDamage);
+        enemy.WeaponsController.SetDamageLeftWeapon(data.leftDamage);
         isPlayerInRange = false;
         enemy.SetSpeed(0);
         enemy.Move(enemy.transform.position);
+        enemy.transform.LookAt(enemy.PlayerPos.position);
     }
 
     public override void Exit()
@@ -32,7 +35,7 @@ public class EnemyMeleeAttackState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        isPlayerInRange = enemy.CheckDistance(enemy.transform.position, enemy.PlayerPos.position) <= data.inRangeAttack ? true : false;
+        
     }
 
     public override void PhysicUpdate()

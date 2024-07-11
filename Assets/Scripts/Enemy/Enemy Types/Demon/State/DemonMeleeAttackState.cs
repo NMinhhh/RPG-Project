@@ -14,7 +14,6 @@ public class DemonMeleeAttackState : EnemyMeleeAttackState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("ChangeState");
        
     }
 

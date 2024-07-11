@@ -16,6 +16,10 @@ public class Demon : Enemy
 
     public DemonMeleeAttackState MeleeAttackState { get; private set; }
 
+    public DemonPlayerDetectedState PlayerDetectedState { get; private set; }
+
+    public DemonDeathState DeathState { get; private set; }
+
     #endregion
 
     #region Data
@@ -29,7 +33,12 @@ public class Demon : Enemy
     [SerializeField] private EnemyChaseData _chaseData;
 
     [SerializeField] private EnemyMeleeAttackData _meleeAttackData;
+
+    [SerializeField] private EnemyPlayerDetectedData _playerDetectedData;
+
+    [SerializeField] private EnemyDeathData _deathData;
     #endregion
+
 
     protected override void Start()
     {
@@ -39,6 +48,8 @@ public class Demon : Enemy
         MoveState = new DemonMoveState(this, StateMachine, "Move", _moveData, this);
         ChaseState = new DemonChaseState(this, StateMachine, "Chase", _chaseData, this);
         MeleeAttackState = new DemonMeleeAttackState(this, StateMachine, "MeleeAttack", _meleeAttackData, this);
+        PlayerDetectedState = new DemonPlayerDetectedState(this, StateMachine, "PlayerDetected", _playerDetectedData, this);
+        DeathState = new DemonDeathState(this, StateMachine, "Death", _deathData, this);
         StateMachine.Intialize(IdleState);
     }
 
@@ -50,13 +61,13 @@ public class Demon : Enemy
     public override void Damage(float damage)
     {
         base.Damage(damage);
-        if (isHurt && StateMachine.CurrentEnemyState != HurtState && !isDie && StateMachine.CurrentEnemyState != MeleeAttackState)
+        if (isHurt && StateMachine.CurrentEnemyState != HurtState && !isDie)
         {
             StateMachine.ChangeState(HurtState);
         }
         if (isDie)
         {
-            Die();
+            StateMachine.ChangeState(DeathState);
         }
     }
 
@@ -68,8 +79,5 @@ public class Demon : Enemy
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        Gizmos.DrawWireSphere(transform.position, _idleData.checkDistanceRadius);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _meleeAttackData.inRangeAttack);
     }
 }

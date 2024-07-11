@@ -17,18 +17,20 @@ public class EnemyState
         this.isAnimationName = isAnimationName;
     }
 
+    public virtual void DoCheck() { }
     public virtual void Enter()
     {
         startTime = Time.time;
         isFinishAnimation = false;
         enemy.Anim.SetBool(isAnimationName, true);
+        DoCheck();
     }
 
     public virtual void Exit() => enemy.Anim.SetBool(isAnimationName,false);
 
     public virtual void LogicUpdate() { }
 
-    public virtual void PhysicUpdate() { }
+    public virtual void PhysicUpdate() => DoCheck();
 
     public virtual void TriggerAnimation() { }
 

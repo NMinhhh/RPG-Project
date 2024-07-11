@@ -7,6 +7,4 @@ using UnityEngine;
 public class EnemyIdleData : ScriptableObject
 {
     public float idleTime;
-    public float checkDistanceRadius;
-
 }

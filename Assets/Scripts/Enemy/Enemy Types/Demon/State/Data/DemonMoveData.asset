@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: DemonMoveData
   m_EditorClassIdentifier: 
   Speed: 3
-  XPosRandom: {x: -10, y: 10}
-  YPosRandom: {x: -10, y: 10}
+  XPosRandom: {x: -20, y: 20}
+  YPosRandom: {x: -20, y: 20}

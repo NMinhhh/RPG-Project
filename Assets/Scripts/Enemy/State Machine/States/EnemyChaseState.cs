@@ -5,10 +5,18 @@ using UnityEngine;
 public class EnemyChaseState : EnemyState
 {
     protected EnemyChaseData data;
-    protected bool isPlayerInRangeToAttack;
+    protected bool isPlayerInRange;
+    protected bool isPlayerDetected;
     public EnemyChaseState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyChaseData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
+    }
+
+    public override void DoCheck()
+    {
+        base.DoCheck();
+        isPlayerInRange = enemy.CheckPlayerInRange();
+        isPlayerDetected = enemy.CheckPlayerDetected();
     }
 
     public override void Enter()
@@ -32,7 +40,7 @@ public class EnemyChaseState : EnemyState
         base.LogicUpdate();
         enemy.Move(enemy.PlayerPos.position);
         enemy.transform.LookAt(enemy.PlayerPos.position);
-        isPlayerInRangeToAttack = enemy.CheckDistance(enemy.transform.position, enemy.PlayerPos.position) <= data.checkPlayerInRangeToAttack ? true : false;
+
     }
 
     public override void PhysicUpdate()

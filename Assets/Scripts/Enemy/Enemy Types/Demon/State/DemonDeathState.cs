@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DemonChaseState : EnemyChaseState
+public class DemonDeathState : EnemyDeathState
 {
     private Demon _demon;
-    public DemonChaseState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyChaseData data, Demon demon) : base(enemy, stateMachine, isAnimationName, data)
+    public DemonDeathState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyDeathData data, Demon demon) : base(enemy, stateMachine, isAnimationName, data)
     {
         _demon = demon;
+    }
+
+    public override void DoCheck()
+    {
+        base.DoCheck();
     }
 
     public override void Enter()
     {
         base.Enter();
+        enemy.GetComponent<CapsuleCollider>().enabled = false;
     }
 
     public override void Exit()
@@ -28,13 +34,9 @@ public class DemonChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (isPlayerInRange)
+        if (isFinishAnimation)
         {
-            stateMachine.ChangeState(_demon.MeleeAttackState);
-        }
-        else if (!isPlayerDetected)
-        {
-            stateMachine.ChangeState(_demon.IdleState);
+            enemy.Die();
         }
     }
 
