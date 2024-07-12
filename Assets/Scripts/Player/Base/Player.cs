@@ -132,7 +132,6 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     public void Damage(float damage)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
-        Debug.Log("Damage Player");
         if (CurrentHealth < 0)
         {
             Die();
@@ -198,7 +197,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     {
         CombonAtttack = combo;
         CurrentComboAttack = 0;
-        if(StateMachine != null || StateMachine.currentState != PlayerIdleState)
+        if (StateMachine != null && StateMachine.currentState != PlayerIdleState && Anim != null)
         {
             StateMachine.ChangeState(PlayerIdleState);
         }

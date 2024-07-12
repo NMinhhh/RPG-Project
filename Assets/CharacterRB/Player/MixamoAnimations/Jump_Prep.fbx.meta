@@ -528,18 +528,18 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Warrior(Clone)
+    - name: Ch44_nonPBR (1)(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Ch44
-      parentName: Warrior(Clone)
+      parentName: Ch44_nonPBR (1)(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Hips
-      parentName: Warrior(Clone)
+      parentName: Ch44_nonPBR (1)(Clone)
       position: {x: 0.0000057329244, y: 1.0405816, z: -0.0055953157}
       rotation: {x: -0.0000005580517, y: 0.0000014747264, z: -0.000047255227, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -875,7 +875,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 4a73bb40f47d33e4c9c375a8bb3caebb, type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 0a3c0acbae82e0c44852c83e41f7ea53, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1

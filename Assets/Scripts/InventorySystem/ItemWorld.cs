@@ -12,7 +12,5 @@ public class ItemWorld : MonoBehaviour, IInteracable
         InventorySystem.Instance.AddToInventory(data);
         Destroy(gameObject);
     }
-    
-
 
 }

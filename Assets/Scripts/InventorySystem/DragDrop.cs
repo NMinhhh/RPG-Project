@@ -10,8 +10,8 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public static DragDrop itemBeingDragged;
 
-    private Vector3 startPos;
-    private Transform startParent;
+    public Vector3 startPos {  get; private set; }
+    public Transform startParent {  get; private set; }
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -26,7 +26,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         startPos = transform.position;
         startParent = transform.parent;
         transform.SetParent(transform.root);
-
     }
 
 

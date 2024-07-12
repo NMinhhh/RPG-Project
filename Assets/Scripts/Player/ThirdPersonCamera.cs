@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,17 +6,40 @@ using UnityEngine.TextCore.Text;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-
+    [SerializeField] private CinemachineFreeLook cinemachine;
     [SerializeField] private Camera _camera;
     [SerializeField] protected float smooth;
     private float velocity;
 
+    private float yAxisSpeed;
+    private float xAxisSpeed;
     // Start is called before the first frame update
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        InventorySystem.cameraLock += CameraLock;
+        InventorySystem.cameraUnlock += CameraUnlock;
+        xAxisSpeed = cinemachine.m_XAxis.m_MaxSpeed;
+        yAxisSpeed = cinemachine.m_YAxis.m_MaxSpeed;
     }
+
+    void CameraLock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        cinemachine.m_YAxis.m_MaxSpeed = 0f;
+        cinemachine.m_XAxis.m_MaxSpeed = 0f;
+    }
+    
+    void CameraUnlock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        cinemachine.m_YAxis.m_MaxSpeed = yAxisSpeed;
+        cinemachine.m_XAxis.m_MaxSpeed = xAxisSpeed;
+    }
+    
 
     public Vector3 MoveRotation(Vector3 direction)
     {

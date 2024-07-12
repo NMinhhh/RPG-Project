@@ -13,6 +13,9 @@ public class InventorySystem : Singleton<InventorySystem>
     [SerializeField] private List<GameObject> slotList = new List<GameObject>();
     [SerializeField] private List<ItemData> itemList = new List<ItemData>();
 
+    public static event Action cameraLock;
+    public static event Action cameraUnlock;
+
     public bool isOpen { get; private set; }
     void Start()
     {
@@ -28,13 +31,16 @@ public class InventorySystem : Singleton<InventorySystem>
             {
                 isOpen = true;
                 inventorySystemUI.SetActive(true);
+                cameraLock?.Invoke();
             }
             else
             {
                 isOpen = false;
                 inventorySystemUI.SetActive(false);
+                cameraUnlock?.Invoke();
             }
         }
+        
     }
 
     private void GenerateListSlots()

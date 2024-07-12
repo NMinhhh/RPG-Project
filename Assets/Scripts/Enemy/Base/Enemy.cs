@@ -96,7 +96,6 @@ public class Enemy : MonoBehaviour, IDamagaeble
     public virtual void Damage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
-        Debug.Log(currentHealth);
         if (currentHealth > 0)
         {
             isHurt = true;

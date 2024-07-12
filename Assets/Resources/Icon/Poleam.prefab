@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 818889215080932537}
   - component: {fileID: 876747000541177246}
   - component: {fileID: 3128646264630623553}
+  - component: {fileID: 2229050510404468113}
   m_Layer: 5
   m_Name: Poleam
   m_TagString: Untagged
@@ -101,3 +102,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &2229050510404468113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9045083844735774136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cc291ad86943d44ba4d09b0b1cfef90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponData: {fileID: 11400000, guid: a1fb53d843d7b9c4f9ec0477f6f1554c, type: 2}
+  isEquip: 1

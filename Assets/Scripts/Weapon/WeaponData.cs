@@ -7,5 +7,9 @@ public class WeaponData : ItemData
 {
     public TypeAnimator.AttackType attackType;
     public int combo;
-    public GameObject model;
+    public bool isRightHand;
+    public bool isLeftHand;
+    public GameObject modelRightHand;
+    public GameObject modelLeftHand;
+
 }

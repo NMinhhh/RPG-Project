@@ -5,25 +5,30 @@ using UnityEngine.EventSystems;
 
 public class ItemSlot : MonoBehaviour,IDropHandler
 {
-
+    [SerializeField] private bool isQuickSlot;
     public GameObject Getitem
     {
         get
         {
-            if (DragDrop.itemBeingDragged != null)
+            if (transform.childCount > 0)
             {
-                return DragDrop.itemBeingDragged.gameObject;
+                return transform.GetChild(0).gameObject;
             }
             return null;
         }
     }
 
+
     public void OnDrop(PointerEventData eventData)
     {
         if (Getitem)
         {
-            DragDrop.itemBeingDragged.SetNewPos(transform.position, transform);
+            Getitem.GetComponent<DragDrop>().SetNewPos(DragDrop.itemBeingDragged.startPos, DragDrop.itemBeingDragged.startParent);
+        }
+        DragDrop.itemBeingDragged.SetNewPos(transform.position, transform);
+        if (isQuickSlot)
+        {
+            EquipSystem.Instance.EquipWeapon(DragDrop.itemBeingDragged.gameObject);
         }
     }
-
 }
