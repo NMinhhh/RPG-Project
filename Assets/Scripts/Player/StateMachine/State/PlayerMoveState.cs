@@ -30,8 +30,8 @@ public class PlayerMoveState : PlayerState
     public override void HandleInput()
     {
         base.HandleInput();
-        _direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
-        if (InputManager.Instance.JumpInput && player.isGround)
+        _direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
+        if (InputManager.Instance.jumpInput && player.isGround)
         {
             _isJump = true;
         }
@@ -40,7 +40,7 @@ public class PlayerMoveState : PlayerState
             _isJump = false;
         }
 
-        if (InputManager.Instance.AttackInput)
+        if (InputManager.Instance.attackInput)
         {
             _isAttack = true;
         }

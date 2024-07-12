@@ -151,7 +151,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public void Move(Vector3 direction)
     {
-        Vector3 motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.XInput == 1 && InputManager.Instance.XInput == 1 ? .7f : 1);
+        Vector3 motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.xInput == 1 && InputManager.Instance.xInput == 1 ? .7f : 1);
         character.Move(motion * _speed * Time.deltaTime);
     }
 

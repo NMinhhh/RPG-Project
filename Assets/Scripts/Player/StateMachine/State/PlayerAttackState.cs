@@ -32,9 +32,9 @@ public class PlayerAttackState : PlayerState
     {
         base.HandleInput();
 
-        _direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
+        _direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
 
-        if (InputManager.Instance.AttackInput)
+        if (InputManager.Instance.attackInput)
         {
             isAttack = true;
         }

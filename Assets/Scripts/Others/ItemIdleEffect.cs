@@ -25,7 +25,6 @@ public class ItemIdleEffect : MonoBehaviour
     private Camera _camera;
 
 
-
     void Start()
     {
         _camera = Camera.main;
@@ -71,6 +70,15 @@ public class ItemIdleEffect : MonoBehaviour
             _particleSystem.Stop();
             _canvas.transform.rotation = Quaternion.LookRotation(_canvas.transform.position - _camera.transform.position);
             _canvas.gameObject.SetActive(true);
+
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            _canvas.transform.rotation = Quaternion.LookRotation(_canvas.transform.position - _camera.transform.position);
 
         }
     }

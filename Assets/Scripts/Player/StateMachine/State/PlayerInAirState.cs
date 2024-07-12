@@ -22,7 +22,7 @@ public class PlayerInAirState : PlayerState
     public override void HandleInput()
     {
         base.HandleInput();
-        _direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput).normalized;
+        _direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
 
     }
 

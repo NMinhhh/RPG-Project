@@ -27,11 +27,11 @@ public class PlayerIdleState : PlayerState
     {
         base.HandleInput();
 
-        _isAttack = InputManager.Instance.AttackInput;
+        _isAttack = InputManager.Instance.attackInput;
 
-        _direction = new Vector3(InputManager.Instance.XInput, 0, InputManager.Instance.ZInput);
+        _direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput);
 
-        if (InputManager.Instance.JumpInput && player.isGround)
+        if (InputManager.Instance.jumpInput && player.isGround)
         {
             _isJump = true;
         }

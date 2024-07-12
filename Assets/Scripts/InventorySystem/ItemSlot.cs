@@ -1,18 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ItemSlot : MonoBehaviour
+public class ItemSlot : MonoBehaviour,IDropHandler
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public GameObject Getitem
     {
-        
+        get
+        {
+            if (DragDrop.itemBeingDragged != null)
+            {
+                return DragDrop.itemBeingDragged.gameObject;
+            }
+            return null;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnDrop(PointerEventData eventData)
     {
-        
+        if (Getitem)
+        {
+            DragDrop.itemBeingDragged.SetNewPos(transform.position, transform);
+        }
     }
+
 }

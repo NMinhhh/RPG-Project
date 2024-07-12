@@ -13,8 +13,8 @@ public class ThirdPersonCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 
     public Vector3 MoveRotation(Vector3 direction)
