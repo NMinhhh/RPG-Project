@@ -27,6 +27,8 @@ public class Enemy : MonoBehaviour, IDamagaeble
 
     public EnemyWeaponController WeaponsController { get; private set; }
 
+    public EnemyHealthBar HealthBar { get; private set; }
+
     #endregion
 
     #region Variable
@@ -53,6 +55,7 @@ public class Enemy : MonoBehaviour, IDamagaeble
         Anim = alive.GetComponent<Animator>();
         Agent = GetComponent<NavMeshAgent>();
         StateMachine = new EnemyStateMachine();
+        HealthBar = GetComponentInChildren<EnemyHealthBar>();
         WeaponsController = GetComponent<EnemyWeaponController>();
         maxHelth = data.MaxHealthData;
         currentHealth = maxHelth;
@@ -96,6 +99,7 @@ public class Enemy : MonoBehaviour, IDamagaeble
     public virtual void Damage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
+        HealthBar.UpdateHealthBar(currentHealth, maxHelth);
         if (currentHealth > 0)
         {
             isHurt = true;
@@ -103,6 +107,7 @@ public class Enemy : MonoBehaviour, IDamagaeble
         else
         {
             isDie = true;
+            Destroy(HealthBar.gameObject);
         }
     }
 
