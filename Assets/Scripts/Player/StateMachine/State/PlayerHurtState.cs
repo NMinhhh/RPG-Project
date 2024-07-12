@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTransitionState : PlayerState
+public class PlayerHurtState : PlayerState
 {
-    public PlayerTransitionState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
+    public PlayerHurtState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
     {
     }
 
@@ -21,6 +21,10 @@ public class PlayerTransitionState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (isFinishAnimtion)
+        {
+            stateMachine.ChangeState(player.IdleState);
+        }
     }
 
     public override void PhysicUpdate()

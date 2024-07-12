@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerState
 {
-    private Vector3 _direction;
-    private bool _isAttack;
-    private bool _isJump;
+    private Vector3 direction;
+    private bool isAttack;
+    private bool isJump;
     public PlayerIdleState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
     {
     }
@@ -14,8 +14,8 @@ public class PlayerIdleState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        _isAttack = false;
-        _isJump = false;
+        isAttack = false;
+        isJump = false;
     }
 
     public override void Exit()
@@ -27,17 +27,17 @@ public class PlayerIdleState : PlayerState
     {
         base.HandleInput();
 
-        _isAttack = InputManager.Instance.attackInput;
+        isAttack = InputManager.Instance.attackInput;
 
-        _direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput);
+        direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput);
 
-        if (InputManager.Instance.jumpInput && player.isGround)
+        if (InputManager.Instance.jumpInput && player.CheckGround())
         {
-            _isJump = true;
+            isJump = true;
         }
         else
         {
-            _isJump = false;
+            isJump = false;
         }
     }
 
@@ -45,17 +45,17 @@ public class PlayerIdleState : PlayerState
     {
         base.LogicUpdate();
 
-        if (_isAttack)
+        if (isAttack)
         {
-            stateMachine.ChangeState(player.PlayerAttackState);
+            stateMachine.ChangeState(player.AttackState);
         }
-        else if (_direction.magnitude >= .1f)
+        else if (direction.magnitude >= .1f)
         {
-            stateMachine.ChangeState(player.PlayerMoveState);
+            stateMachine.ChangeState(player.MoveState);
         }
-        else if (_isJump)
+        else if (isJump)
         {
-            stateMachine.ChangeState(player.PlayerJumpState);
+            stateMachine.ChangeState(player.JumpState);
         }
     }
 

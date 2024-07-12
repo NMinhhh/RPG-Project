@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttackState : PlayerState
 {
-    private int _comboAttack;
+    private int comboAttack;
     private bool isAttack;
     private Vector3 _direction;
     public PlayerAttackState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
@@ -15,10 +15,8 @@ public class PlayerAttackState : PlayerState
     {
         base.Enter();
         isAttack = false;
-        player.SetComboAttack();
         player.IsAttack(true);
-        _comboAttack = player.CurrentComboAttack;
-        player.Anim.SetInteger("Combo", _comboAttack);
+        player.Anim.SetInteger("Combo", player.GetComboAttack());
     }
 
     public override void Exit()
@@ -48,16 +46,16 @@ public class PlayerAttackState : PlayerState
         {
             if (isAttack)
             {
-                stateMachine.ChangeState(player.PlayerAttackState);
+                stateMachine.ChangeState(player.AttackState);
             }
             else if (_direction.magnitude > .1f)
             {
                 player.ResetComboAttack();
-                stateMachine.ChangeState(player.PlayerIdleState);
+                stateMachine.ChangeState(player.IdleState);
             }else
             {
                 player.ResetComboAttack();
-                stateMachine.ChangeState(player.PlayerIdleState);
+                stateMachine.ChangeState(player.IdleState);
             }
         }
        

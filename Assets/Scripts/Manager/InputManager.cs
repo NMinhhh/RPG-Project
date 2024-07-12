@@ -14,6 +14,8 @@ public class InputManager : Singleton<InputManager>
 
     public bool pressEKey {  get; private set; }
 
+    public bool pressTKey {  get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,7 @@ public class InputManager : Singleton<InputManager>
             zInput = Input.GetAxisRaw("Vertical");
             jumpInput = Input.GetKey(KeyCode.Space);
             attackInput = Input.GetMouseButtonDown(0);
+            pressTKey = Input.GetKeyDown(KeyCode.T);
         }
         else
         {
@@ -36,6 +39,7 @@ public class InputManager : Singleton<InputManager>
             zInput = 0;
             jumpInput = false;
             attackInput = false;
+            pressTKey = false;
         }
         pressEKey = Input.GetKeyDown(KeyCode.E);
 

@@ -27,8 +27,14 @@ public class PlayerHealthBar : MonoBehaviour
 
     IEnumerator UpdateBar(float target)
     {
-        healthImage.fillAmount = target;
         easeHealthImage.color = damageColor;
+        float time1 = 0;
+        while(time1 < decreaseTime)
+        {
+            time1 += Time.deltaTime;
+            healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, target, time1 / decreaseTime);
+            yield return null;
+        }
         yield return new WaitForSeconds(delay);
         easeHealthImage.color = normalColor;
         float timer = 0;

@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class PlayerMoveState : PlayerState
 {
-    private Vector3 _direction;
+    private Vector3 direction;
 
-    private bool _isGrounded;
+    private bool isJump;
 
-    private bool _isJump;
-
-    private bool _isAttack;
+    private bool isAttack;
 
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
     {
@@ -19,7 +17,7 @@ public class PlayerMoveState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        _isAttack = false;
+        isAttack = false;
     }
 
     public override void Exit()
@@ -30,19 +28,19 @@ public class PlayerMoveState : PlayerState
     public override void HandleInput()
     {
         base.HandleInput();
-        _direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
-        if (InputManager.Instance.jumpInput && player.isGround)
+        direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
+        if (InputManager.Instance.jumpInput && player.CheckGround())
         {
-            _isJump = true;
+            isJump = true;
         }
         else
         {
-            _isJump = false;
+            isJump = false;
         }
 
         if (InputManager.Instance.attackInput)
         {
-            _isAttack = true;
+            isAttack = true;
         }
     }
 
@@ -50,25 +48,23 @@ public class PlayerMoveState : PlayerState
     {
         base.LogicUpdate();
 
-        _isGrounded = player.isGround;
+        player.Move(direction);
 
-        player.Move(_direction);
-
-        if (_isAttack)
+        if (isAttack)
         {
-            stateMachine.ChangeState(player.PlayerAttackState);
+            stateMachine.ChangeState(player.AttackState);
         }
-        else if(!_isGrounded && player.velocity.y <= 0)
+        else if(!player.CheckGround() && player.velocity.y <= 0)
         {
-            stateMachine.ChangeState(player.PlayerInAirState);
+            stateMachine.ChangeState(player.InAirState);
         }
-        else if (_isJump)
+        else if (isJump)
         {
-            stateMachine.ChangeState(player.PlayerJumpState);
+            stateMachine.ChangeState(player.JumpState);
         }
-        else if(_direction.magnitude < .1f)
+        else if(direction.magnitude < .1f)
         {
-            stateMachine.ChangeState(player.PlayerIdleState);
+            stateMachine.ChangeState(player.IdleState);
         }
 
     }

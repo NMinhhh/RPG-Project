@@ -3,45 +3,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, IJumpable, IAttackable
+public class Player : MonoBehaviour, IDamagaeble
 {
-    [field: SerializeField] public CharacterController character { get; set; }
 
-    [field: SerializeField] public float MaxHealth { get; set; }
+    #region Data
 
-    public float CurrentHealth { get; set; }
+    [SerializeField] private PlayerData data;
 
-    public bool isGround { get; set; }
-
-    [field: SerializeField] public float JumpHeight { get; set; }
-
-    [field: SerializeField] public int CombonAtttack { get; set; }
-
-    public int CurrentComboAttack { get; set; }
-
-    [field: SerializeField] public float ResetComboTime { get; set; }
-
-    public bool isAttack { get; set; }
-
-    public static event Action UpdateHealthBar;
+    #endregion
 
     #region State Machine Variable
 
     public PlayerStateMachine StateMachine { get; private set; }
 
+    public PlayerIdleState IdleState { get; private set; }
 
-    public PlayerIdleState PlayerIdleState { get; private set; }
-    public PlayerMoveState PlayerMoveState { get; private set; }
-    public PlayerJumpState PlayerJumpState { get; private set; }
+    public PlayerMoveState MoveState { get; private set; }
 
-    public PlayerInAirState PlayerInAirState { get; private set; }
+    public PlayerJumpState JumpState { get; private set; }
 
-    public PlayerLandingState PlayerLandingState { get; private set; }
+    public PlayerInAirState InAirState { get; private set; }
 
-    public PlayerAttackState PlayerAttackState { get; private set; }
+    public PlayerLandingState LandingState { get; private set; }
+
+    public PlayerAttackState AttackState { get; private set; }
+
+    public PlayerHurtState HurtState { get; private set; }
 
     #endregion
-
 
     #region Component Variable
 
@@ -53,40 +42,36 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public WeaponsController WeaponsController { get; private set; }
 
-    #endregion
-
-
-
-    #region Idle Variable
-
-    [SerializeField] private float _speed;
+    public CharacterController character { get; private set; }
 
     #endregion
 
+    #region Check Transform
 
-    #region Jump Variable
+    [SerializeField] private Transform groundCheck;
 
-    [SerializeField] private float _gravity = -9.81f * 2;
+    #endregion
 
+    #region Others Variable
+
+    //Health
+    private float currentHealth;
+
+    //Velocity
     [HideInInspector]
     public Vector2 velocity;
 
+    //Attack
+    public int maxComboAttack;
+    private int currentComboAttack;
+    private bool isAttack;
+
+    //Action
+    public static event Action UpdateHealthBar;
+
+
     #endregion
 
-
-    #region Attack
-
-    public enum CombatType
-    {
-        Normal,
-        Sword,
-        SwordAndShield,
-        HeavySword
-    }
-
-    public CombatType currentCombatType { get; private set; }
-
-    #endregion
 
     //---------------------------Function-----------------------------------------
 
@@ -95,12 +80,13 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     private void Awake()
     {
         StateMachine = new PlayerStateMachine();
-        PlayerIdleState = new PlayerIdleState(this, StateMachine, "Idle");
-        PlayerMoveState = new PlayerMoveState(this, StateMachine, "Move");
-        PlayerJumpState = new PlayerJumpState(this, StateMachine, "Jump");
-        PlayerInAirState = new PlayerInAirState(this, StateMachine, "InAir");
-        PlayerLandingState = new PlayerLandingState(this, StateMachine, "Landing");
-        PlayerAttackState = new PlayerAttackState(this, StateMachine, "Attack");
+        IdleState = new PlayerIdleState(this, StateMachine, "Idle");
+        MoveState = new PlayerMoveState(this, StateMachine, "Move");
+        JumpState = new PlayerJumpState(this, StateMachine, "Jump");
+        InAirState = new PlayerInAirState(this, StateMachine, "InAir");
+        LandingState = new PlayerLandingState(this, StateMachine, "Landing");
+        AttackState = new PlayerAttackState(this, StateMachine, "Attack");
+        HurtState = new PlayerHurtState(this, StateMachine, "Hurt");
     }
 
     // Start is called before the first frame update
@@ -108,12 +94,13 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     {
         Alive = transform.Find("Alive").gameObject;
         Anim = Alive.GetComponent<Animator>();
+        character = GetComponent<CharacterController>();
         thirdPersonCamera = GetComponent<ThirdPersonCamera>();
         WeaponsController = GetComponent<WeaponsController>();
-        CurrentComboAttack = CombonAtttack;
-        CurrentHealth = MaxHealth;
-        PlayerStats.Instance.SetHealth(CurrentHealth, MaxHealth);
-        StateMachine.Intialize(PlayerIdleState);
+        currentHealth = data.maxHealth;
+        PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
+        EquipSystem.Instance.usePotion += UpdateHealth;
+        StateMachine.Intialize(IdleState);
     }
 
     // Update is called once per frame
@@ -133,13 +120,25 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     #region Health / Die Function
 
+    public void UpdateHealth(float health)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + health, 0, data.maxHealth);
+        PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
+        if (UpdateHealthBar != null)
+            UpdateHealthBar();
+    }
+
     public void Damage(float damage)
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
-        PlayerStats.Instance.SetHealth(CurrentHealth, MaxHealth);
+        currentHealth = Mathf.Clamp(currentHealth - damage, 0, data.maxHealth);
+        PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
         if(UpdateHealthBar != null)
             UpdateHealthBar();
-        if (CurrentHealth < 0)
+        if(currentHealth > 0 && StateMachine.currentState != HurtState)
+        {
+            StateMachine.ChangeState(HurtState);
+        }
+        if (currentHealth < 0)
         {
             Die();
         }
@@ -158,7 +157,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     public void Move(Vector3 direction)
     {
         Vector3 motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.xInput == 1 && InputManager.Instance.xInput == 1 ? .7f : 1);
-        character.Move(motion * _speed * Time.deltaTime);
+        character.Move(motion * data.speed * Time.deltaTime);
     }
 
     #endregion
@@ -166,9 +165,9 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     #region Check Fuction
 
-    public void CheckGround(bool isGround)
+    public bool CheckGround()
     {
-        this.isGround = isGround;
+        return Physics.CheckSphere(groundCheck.position, data.radius, data.whatIsGround);
     }
 
 
@@ -179,19 +178,19 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     void WorldGravity()
     {
-        if (isGround && velocity.y <= 0)
+        if (CheckGround() && velocity.y <= 0)
         {
             velocity.y = -2;
         }
-        velocity.y += _gravity * Time.deltaTime;
+        velocity.y += data.gravity * Time.deltaTime;
         character.Move(velocity * Time.deltaTime);
 
 
     }
 
-    public void SetJumpHeigth(float jumpheight)
+    public void Jump()
     {
-        velocity.y = Mathf.Sqrt(jumpheight * -2 * _gravity);
+        velocity.y = Mathf.Sqrt(data.jumpHeight * -2 * data.gravity);
     }
 
 
@@ -202,11 +201,11 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public void SetAmoutOfCombo(int combo)
     {
-        CombonAtttack = combo;
-        CurrentComboAttack = 0;
-        if (StateMachine != null && StateMachine.currentState != PlayerIdleState && Anim != null)
+        maxComboAttack = combo;
+        currentComboAttack = 0;
+        if (StateMachine != null && StateMachine.currentState != IdleState && Anim != null)
         {
-            StateMachine.ChangeState(PlayerIdleState);
+            StateMachine.ChangeState(IdleState);
         }
     }
 
@@ -215,18 +214,19 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
         this.isAttack = isAttack;
     }
 
-    public void SetComboAttack()
+    public int GetComboAttack()
     {
-        CurrentComboAttack++;
-        if(CurrentComboAttack > CombonAtttack)
+        currentComboAttack++;
+        if(currentComboAttack > maxComboAttack)
         {
-            CurrentComboAttack = 1;
+            currentComboAttack = 1;
         }
+        return currentComboAttack;
     }
 
     public void ResetComboAttack()
     {
-        CurrentComboAttack = 0;
+        currentComboAttack = 0;
     }
 
     #endregion
@@ -238,6 +238,12 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
 
     public void FinishAnimation() => StateMachine.currentState.FinishAnimation();
 
+
+    private void OnDrawGizmos()
+    {
+        if(groundCheck != null)
+            Gizmos.DrawWireSphere(groundCheck.position, data.radius);
+    }
 
     #endregion
 
