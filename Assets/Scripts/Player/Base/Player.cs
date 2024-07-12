@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,8 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     [field: SerializeField] public float ResetComboTime { get; set; }
 
     public bool isAttack { get; set; }
+
+    public static event Action UpdateHealthBar;
 
     #region State Machine Variable
 
@@ -109,6 +112,7 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
         WeaponsController = GetComponent<WeaponsController>();
         CurrentComboAttack = CombonAtttack;
         CurrentHealth = MaxHealth;
+        PlayerStats.Instance.SetHealth(CurrentHealth, MaxHealth);
         StateMachine.Intialize(PlayerIdleState);
     }
 
@@ -132,6 +136,9 @@ public class Player : MonoBehaviour, IDamagaeble, IPlayerMoveable, ICheckable, I
     public void Damage(float damage)
     {
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, MaxHealth);
+        PlayerStats.Instance.SetHealth(CurrentHealth, MaxHealth);
+        if(UpdateHealthBar != null)
+            UpdateHealthBar();
         if (CurrentHealth < 0)
         {
             Die();

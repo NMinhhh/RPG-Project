@@ -22,4 +22,10 @@ public class PlayerStats : Singleton<PlayerStats>
     {
         
     }
+
+    public void SetHealth(float currentHealth, float maxHealth)
+    {
+        this.currentHealth = currentHealth;
+        this.maxHealth = maxHealth;
+    }
 }
