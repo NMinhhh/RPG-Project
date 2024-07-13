@@ -30,6 +30,9 @@ public class Player : MonoBehaviour, IDamagaeble
 
     public PlayerHurtState HurtState { get; private set; }
 
+    public PlayerStrongAttack StrongAttack { get; private set; }
+
+
     #endregion
 
     #region Component Variable
@@ -80,13 +83,14 @@ public class Player : MonoBehaviour, IDamagaeble
     private void Awake()
     {
         StateMachine = new PlayerStateMachine();
-        IdleState = new PlayerIdleState(this, StateMachine, "Idle");
-        MoveState = new PlayerMoveState(this, StateMachine, "Move");
-        JumpState = new PlayerJumpState(this, StateMachine, "Jump");
-        InAirState = new PlayerInAirState(this, StateMachine, "InAir");
-        LandingState = new PlayerLandingState(this, StateMachine, "Landing");
-        AttackState = new PlayerAttackState(this, StateMachine, "Attack");
-        HurtState = new PlayerHurtState(this, StateMachine, "Hurt");
+        IdleState = new PlayerIdleState(this, StateMachine, data, "Idle");
+        MoveState = new PlayerMoveState(this, StateMachine, data, "Move");
+        JumpState = new PlayerJumpState(this, StateMachine, data, "Jump");
+        InAirState = new PlayerInAirState(this, StateMachine, data, "InAir");
+        LandingState = new PlayerLandingState(this, StateMachine, data,  "Landing");
+        AttackState = new PlayerAttackState(this, StateMachine, data, "Attack");
+        StrongAttack = new PlayerStrongAttack(this, StateMachine, data, "StrongAttack");
+        HurtState = new PlayerHurtState(this, StateMachine, data, "Hurt");
     }
 
     // Start is called before the first frame update
@@ -102,6 +106,7 @@ public class Player : MonoBehaviour, IDamagaeble
         EquipSystem.Instance.usePotion += UpdateHealth;
         StateMachine.Intialize(IdleState);
     }
+
 
     // Update is called once per frame
     void Update()
@@ -124,17 +129,15 @@ public class Player : MonoBehaviour, IDamagaeble
     {
         currentHealth = Mathf.Clamp(currentHealth + health, 0, data.maxHealth);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
-        if (UpdateHealthBar != null)
-            UpdateHealthBar();
+        UpdateHealthBar?.Invoke();
     }
 
     public void Damage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, data.maxHealth);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
-        if(UpdateHealthBar != null)
-            UpdateHealthBar();
-        if(currentHealth > 0 && StateMachine.currentState != HurtState)
+        UpdateHealthBar?.Invoke();
+        if(currentHealth > 0 && StateMachine.currentState != HurtState && StateMachine.currentState != StrongAttack)
         {
             StateMachine.ChangeState(HurtState);
         }
@@ -154,10 +157,10 @@ public class Player : MonoBehaviour, IDamagaeble
 
     #region Move Function
 
-    public void Move(Vector3 direction)
+    public void Move(Vector3 direction, float speed)
     {
-        Vector3 motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.xInput == 1 && InputManager.Instance.xInput == 1 ? .7f : 1);
-        character.Move(motion * data.speed * Time.deltaTime);
+        Vector3 motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.xInput == 1 && InputManager.Instance.zInput == 1 ? .7f : 1);
+        character.Move(motion * speed * Time.deltaTime);
     }
 
     #endregion
@@ -192,7 +195,6 @@ public class Player : MonoBehaviour, IDamagaeble
     {
         velocity.y = Mathf.Sqrt(data.jumpHeight * -2 * data.gravity);
     }
-
 
     #endregion
 

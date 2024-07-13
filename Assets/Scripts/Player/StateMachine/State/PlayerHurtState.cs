@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHurtState : PlayerState
 {
-    public PlayerHurtState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
+    public PlayerHurtState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
 

@@ -9,8 +9,20 @@ public class ItemWorld : MonoBehaviour, IInteracable
 
     public void Interact()
     {
-        InventorySystem.Instance.AddToInventory(data);
+        AddToInventory(data);
         Destroy(gameObject);
     }
 
+    void AddToInventory(ItemData data)
+    {
+        switch (data.itemType)
+        {
+            case ItemData.ItemType.Weapon:
+                InventorySystem.Instance.AddToInventory(data);
+                break;
+            case ItemData.ItemType.Potion:
+                EquipSystem.Instance.AddPotionItem(data.number);
+                break;
+        }
+    }
 }

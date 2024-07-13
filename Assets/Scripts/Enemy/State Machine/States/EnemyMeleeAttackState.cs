@@ -19,7 +19,7 @@ public class EnemyMeleeAttackState : EnemyState
         isPlayerInRange = false;
         enemy.SetSpeed(0);
         enemy.Move(enemy.transform.position);
-        enemy.transform.LookAt(enemy.PlayerPos.position);
+        enemy.transform.LookAt(new Vector3(enemy.PlayerPos.position.x, enemy.transform.position.y, enemy.PlayerPos.position.z));
     }
 
     public override void Exit()

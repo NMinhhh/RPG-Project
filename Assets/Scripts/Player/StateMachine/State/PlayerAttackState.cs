@@ -4,17 +4,23 @@ using UnityEngine;
 
 public class PlayerAttackState : PlayerState
 {
-    private int comboAttack;
+    private Vector3 direction;
+    private bool isMove;
+    private float moveTime;
     private bool isAttack;
-    private Vector3 _direction;
-    public PlayerAttackState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
+    private int comboAttack;
+    private bool isStrongAttack;
+    public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
 
     public override void Enter()
     {
         base.Enter();
+        isMove = false;
+        moveTime = data.attackMoveTime;
         isAttack = false;
+        isStrongAttack = false;
         player.IsAttack(true);
         player.Anim.SetInteger("Combo", player.GetComboAttack());
     }
@@ -30,31 +36,47 @@ public class PlayerAttackState : PlayerState
     {
         base.HandleInput();
 
-        _direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
+        direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
 
+       
         if (InputManager.Instance.attackInput)
         {
             isAttack = true;
         }
+        
+        if(InputManager.Instance.strongAttackInput)
+        {
+            isAttack = false;
+            isStrongAttack = true;
+        }
+        
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
+        if (isMove)
+        {
+            if (Time.time <= startTimer + moveTime)
+            {
+                player.Move(direction, data.speed);
+            }
+        }
         if (isFinishAnimtion)
         {
-            if (isAttack)
+            if (isStrongAttack)
+            {
+                stateMachine.ChangeState(player.StrongAttack);
+            }
+            else if (isAttack)
             {
                 stateMachine.ChangeState(player.AttackState);
             }
-            else if (_direction.magnitude > .1f)
+            else if (direction.magnitude > .1f)
             {
-                player.ResetComboAttack();
-                stateMachine.ChangeState(player.IdleState);
+                stateMachine.ChangeState(player.MoveState);
             }else
             {
-                player.ResetComboAttack();
                 stateMachine.ChangeState(player.IdleState);
             }
         }
@@ -65,5 +87,13 @@ public class PlayerAttackState : PlayerState
     public override void PhysicUpdate()
     {
         base.PhysicUpdate();
+    }
+
+    public override void TriggerAnimation()
+    {
+        base.TriggerAnimation();
+        startTimer = Time.time;
+        isMove = true;
+
     }
 }

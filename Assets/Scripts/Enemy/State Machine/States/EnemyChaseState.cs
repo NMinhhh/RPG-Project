@@ -39,7 +39,7 @@ public class EnemyChaseState : EnemyState
     {
         base.LogicUpdate();
         enemy.Move(enemy.PlayerPos.position);
-        enemy.transform.LookAt(enemy.PlayerPos.position);
+        enemy.transform.LookAt(new Vector3(enemy.PlayerPos.position.x,enemy.transform.position.y,enemy.PlayerPos.position.z));
 
     }
 

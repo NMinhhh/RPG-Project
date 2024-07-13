@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerJumpState : PlayerState
 {
-
-    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
+    public PlayerJumpState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
 
@@ -19,10 +18,14 @@ public class PlayerJumpState : PlayerState
         base.Exit();
     }
 
+    public override void HandleInput()
+    {
+        base.HandleInput();
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         if (isFinishAnimtion)
         {
             player.Jump();

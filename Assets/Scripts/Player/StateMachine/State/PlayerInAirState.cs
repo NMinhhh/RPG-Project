@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInAirState : PlayerState
 {
     Vector3 direction;
-    public PlayerInAirState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
+    public PlayerInAirState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
 
@@ -29,8 +29,7 @@ public class PlayerInAirState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        player.Move(direction);
+        player.Move(direction, data.jumpSpeed);
 
         if (player.CheckGround() && player.velocity.y <= 0)
         {

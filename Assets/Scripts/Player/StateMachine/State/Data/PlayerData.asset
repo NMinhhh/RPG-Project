@@ -13,10 +13,15 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   maxHealth: 300
-  speed: 8
+  speed: 5
   gravity: -19.62
+  jumpSpeed: 6
   jumpHeight: 2
-  radius: 0.25
+  radius: 0.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
+  attackMoveTime: 0.1
+  dashSpeed: 15
+  dashTime: 0.2
+  strongAttackMoveTime: 0.3

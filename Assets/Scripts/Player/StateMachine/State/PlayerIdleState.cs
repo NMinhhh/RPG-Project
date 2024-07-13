@@ -6,8 +6,9 @@ public class PlayerIdleState : PlayerState
 {
     private Vector3 direction;
     private bool isAttack;
+    private bool isStrongAttack;
     private bool isJump;
-    public PlayerIdleState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
+    public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
 
@@ -15,7 +16,7 @@ public class PlayerIdleState : PlayerState
     {
         base.Enter();
         isAttack = false;
-        isJump = false;
+        player.ResetComboAttack();
     }
 
     public override void Exit()
@@ -28,34 +29,29 @@ public class PlayerIdleState : PlayerState
         base.HandleInput();
 
         isAttack = InputManager.Instance.attackInput;
-
+        isStrongAttack = InputManager.Instance.strongAttackInput;
+        isJump = InputManager.Instance.jumpInput;
         direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput);
-
-        if (InputManager.Instance.jumpInput && player.CheckGround())
-        {
-            isJump = true;
-        }
-        else
-        {
-            isJump = false;
-        }
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        if (isAttack)
+        if (isJump) 
+        {
+            stateMachine.ChangeState(player.JumpState);
+        }
+        else if (isStrongAttack)
+        {
+            stateMachine.ChangeState(player.StrongAttack);
+        }
+        else if (isAttack)
         {
             stateMachine.ChangeState(player.AttackState);
         }
         else if (direction.magnitude >= .1f)
         {
             stateMachine.ChangeState(player.MoveState);
-        }
-        else if (isJump)
-        {
-            stateMachine.ChangeState(player.JumpState);
         }
     }
 

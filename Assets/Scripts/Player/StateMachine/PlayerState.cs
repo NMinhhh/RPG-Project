@@ -8,16 +8,19 @@ public class PlayerState
 
     protected PlayerStateMachine stateMachine;
 
+    protected PlayerData data;
+
     protected string isAnimationName;
 
     protected float startTimer;
 
     protected bool isFinishAnimtion;
 
-    public PlayerState(Player player, PlayerStateMachine stateMachine, string isAnimationName)
+    public PlayerState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName)
     {
         this.player = player;
         this.stateMachine = stateMachine;
+        this.data = data;
         this.isAnimationName = isAnimationName;
     }
 

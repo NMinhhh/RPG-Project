@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventorySystem : Singleton<InventorySystem>
 {
@@ -10,13 +11,18 @@ public class InventorySystem : Singleton<InventorySystem>
     [Header("Slot template")]
     [SerializeField] private GameObject slotTemplate;
     [SerializeField] private Transform slotsContainer;
+
+    [Header("Slot List (Read only)")]
     [SerializeField] private List<GameObject> slotList = new List<GameObject>();
-    [SerializeField] private List<ItemData> itemList = new List<ItemData>();
+
+    [Header("Weapon Item List (Read only)")]
+    [SerializeField] private List<ItemData> weaponItemList = new List<ItemData>();
 
     public static event Action cameraLock;
     public static event Action cameraUnlock;
 
     public bool isOpen { get; private set; }
+
     void Start()
     {
         GenerateListSlots();
@@ -56,16 +62,11 @@ public class InventorySystem : Singleton<InventorySystem>
     public void AddToInventory(ItemData itemData)
     {
         Transform slotAvailable = GetAvailableSlot().transform;
-        GameObject item = Instantiate(Resources.Load<GameObject>("Icon/"+itemData.itemName), slotAvailable.position, slotAvailable.rotation);
+        GameObject item = Instantiate(Resources.Load<GameObject>("Item/item"), slotAvailable.position, slotAvailable.rotation);
+        item.GetComponent<Image>().sprite = itemData.image;
         item.transform.SetParent(slotAvailable);
-        itemList.Add(itemData);
+        weaponItemList.Add(itemData);
     }
-
-    public void RefreshInventoryItem()
-    {
-        
-    }
-
 
     GameObject GetAvailableSlot()
     {

@@ -39,4 +39,6 @@ public class AttackAnimationEvent : MonoBehaviour
     {
         player.FinishAnimation();
     }
+
+    public void TriggerAnimation() => player.TrtiggerAnimation();
 }

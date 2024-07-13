@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class ItemSlot : MonoBehaviour,IDropHandler
 {
     [SerializeField] private bool isQuickSlot;
+    [SerializeField] private bool isLock;
     public GameObject Getitem
     {
         get
@@ -21,6 +22,7 @@ public class ItemSlot : MonoBehaviour,IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
+        if (isLock) return;
         if (Getitem)
         {
             Getitem.GetComponent<DragDrop>().SetNewPos(DragDrop.itemBeingDragged.startPos, DragDrop.itemBeingDragged.startParent);

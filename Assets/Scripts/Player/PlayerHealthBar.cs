@@ -10,13 +10,21 @@ public class PlayerHealthBar : MonoBehaviour
     [SerializeField] private Color normalColor;
     [SerializeField] private Color damageColor;
     [SerializeField] private float decreaseTime;
-    [SerializeField] private float delay = 0.05f;
 
     void Start()
     {
         healthImage.fillAmount = 1;
         easeHealthImage.fillAmount = 1;
+    }
+
+    private void OnEnable()
+    {
         Player.UpdateHealthBar += UpdateHealthBar;
+    }
+
+    private void OnDisable()
+    {
+        Player.UpdateHealthBar -= UpdateHealthBar;
     }
 
     public void UpdateHealthBar()
@@ -35,7 +43,6 @@ public class PlayerHealthBar : MonoBehaviour
             healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, target, time1 / decreaseTime);
             yield return null;
         }
-        yield return new WaitForSeconds(delay);
         easeHealthImage.color = normalColor;
         float timer = 0;
         while(timer < decreaseTime)

@@ -6,18 +6,22 @@ public class PlayerMoveState : PlayerState
 {
     private Vector3 direction;
 
-    private bool isJump;
-
     private bool isAttack;
 
-    public PlayerMoveState(Player player, PlayerStateMachine stateMachine, string isAnimationName) : base(player, stateMachine, isAnimationName)
+    private bool isStrongAttack;
+
+    private bool isJump;
+
+    public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
+
 
     public override void Enter()
     {
         base.Enter();
         isAttack = false;
+        player.ResetComboAttack();
     }
 
     public override void Exit()
@@ -29,44 +33,34 @@ public class PlayerMoveState : PlayerState
     {
         base.HandleInput();
         direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
-        if (InputManager.Instance.jumpInput && player.CheckGround())
-        {
-            isJump = true;
-        }
-        else
-        {
-            isJump = false;
-        }
+        isJump = InputManager.Instance.jumpInput;
+        isStrongAttack = InputManager.Instance.strongAttackInput;
+        isAttack = InputManager.Instance.attackInput;
 
-        if (InputManager.Instance.attackInput)
-        {
-            isAttack = true;
-        }
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
 
-        player.Move(direction);
+        player.Move(direction, data.speed);
 
-        if (isAttack)
-        {
-            stateMachine.ChangeState(player.AttackState);
-        }
-        else if(!player.CheckGround() && player.velocity.y <= 0)
-        {
-            stateMachine.ChangeState(player.InAirState);
-        }
-        else if (isJump)
+        if (isJump)
         {
             stateMachine.ChangeState(player.JumpState);
         }
-        else if(direction.magnitude < .1f)
+        else if (isStrongAttack)
+        {
+            stateMachine.ChangeState(player.StrongAttack);
+        }
+        else if (isAttack)
+        {
+            stateMachine.ChangeState(player.AttackState);
+        }
+        else if (direction.magnitude < .1f)
         {
             stateMachine.ChangeState(player.IdleState);
         }
-
     }
 
     public override void PhysicUpdate()
