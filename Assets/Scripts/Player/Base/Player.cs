@@ -32,6 +32,7 @@ public class Player : MonoBehaviour, IDamagaeble
 
     public PlayerStrongAttack StrongAttack { get; private set; }
 
+    public PlayerBlockState BlockState { get; private set; }
 
     #endregion
 
@@ -43,7 +44,7 @@ public class Player : MonoBehaviour, IDamagaeble
 
     public ThirdPersonCamera thirdPersonCamera { get; private set; }
 
-    public WeaponsController WeaponsController { get; private set; }
+    public WeaponsController weaponsController { get; private set; }
 
     public CharacterController character { get; private set; }
 
@@ -52,6 +53,12 @@ public class Player : MonoBehaviour, IDamagaeble
     #region Check Transform
 
     [SerializeField] private Transform groundCheck;
+
+    #endregion
+
+    #region Particle Effect
+
+    [SerializeField] private ParticleSystem healingParticle;
 
     #endregion
 
@@ -65,9 +72,11 @@ public class Player : MonoBehaviour, IDamagaeble
     public Vector2 velocity;
 
     //Attack
-    public int maxComboAttack;
+    private int maxComboAttack;
     private int currentComboAttack;
-    private bool isAttack;
+
+    //Block/Parry
+    private bool isParry;
 
     //Action
     public static event Action UpdateHealthBar;
@@ -90,6 +99,7 @@ public class Player : MonoBehaviour, IDamagaeble
         LandingState = new PlayerLandingState(this, StateMachine, data,  "Landing");
         AttackState = new PlayerAttackState(this, StateMachine, data, "Attack");
         StrongAttack = new PlayerStrongAttack(this, StateMachine, data, "StrongAttack");
+        BlockState = new PlayerBlockState(this, StateMachine, data, "Block");
         HurtState = new PlayerHurtState(this, StateMachine, data, "Hurt");
     }
 
@@ -100,11 +110,13 @@ public class Player : MonoBehaviour, IDamagaeble
         Anim = Alive.GetComponent<Animator>();
         character = GetComponent<CharacterController>();
         thirdPersonCamera = GetComponent<ThirdPersonCamera>();
-        WeaponsController = GetComponent<WeaponsController>();
+        weaponsController = GetComponent<WeaponsController>();
         currentHealth = data.maxHealth;
+        maxComboAttack = data.combo;
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
         EquipSystem.Instance.usePotion += UpdateHealth;
         StateMachine.Intialize(IdleState);
+        isParry = false;
     }
 
 
@@ -127,6 +139,7 @@ public class Player : MonoBehaviour, IDamagaeble
 
     public void UpdateHealth(float health)
     {
+        healingParticle.Play();
         currentHealth = Mathf.Clamp(currentHealth + health, 0, data.maxHealth);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
         UpdateHealthBar?.Invoke();
@@ -134,6 +147,7 @@ public class Player : MonoBehaviour, IDamagaeble
 
     public void Damage(float damage)
     {
+        if (isParry) return;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, data.maxHealth);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
         UpdateHealthBar?.Invoke();
@@ -201,21 +215,6 @@ public class Player : MonoBehaviour, IDamagaeble
 
     #region Attack Function
 
-    public void SetAmoutOfCombo(int combo)
-    {
-        maxComboAttack = combo;
-        currentComboAttack = 0;
-        if (StateMachine != null && StateMachine.currentState != IdleState && Anim != null)
-        {
-            StateMachine.ChangeState(IdleState);
-        }
-    }
-
-    public void IsAttack(bool isAttack)
-    {
-        this.isAttack = isAttack;
-    }
-
     public int GetComboAttack()
     {
         currentComboAttack++;
@@ -233,6 +232,15 @@ public class Player : MonoBehaviour, IDamagaeble
 
     #endregion
 
+    #region Block/Parry Function
+
+    public void IsParry(bool state)
+    {
+        isParry = state;
+    }
+
+    #endregion
+
 
     #region Others Function
 
@@ -243,8 +251,8 @@ public class Player : MonoBehaviour, IDamagaeble
 
     private void OnDrawGizmos()
     {
-        if(groundCheck != null)
-            Gizmos.DrawWireSphere(groundCheck.position, data.radius);
+        //if(groundCheck != null)
+        //    Gizmos.DrawWireSphere(groundCheck.position, data.radius);
     }
 
     #endregion

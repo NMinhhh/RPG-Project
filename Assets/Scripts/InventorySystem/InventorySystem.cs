@@ -62,7 +62,7 @@ public class InventorySystem : Singleton<InventorySystem>
     public void AddToInventory(ItemData itemData)
     {
         Transform slotAvailable = GetAvailableSlot().transform;
-        GameObject item = Instantiate(Resources.Load<GameObject>("Item/item"), slotAvailable.position, slotAvailable.rotation);
+        GameObject item = Instantiate(Resources.Load<GameObject>("Item/" + itemData.itemName), slotAvailable.position, slotAvailable.rotation);
         item.GetComponent<Image>().sprite = itemData.image;
         item.transform.SetParent(slotAvailable);
         weaponItemList.Add(itemData);

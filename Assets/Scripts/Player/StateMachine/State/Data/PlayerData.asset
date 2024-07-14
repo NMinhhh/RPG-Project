@@ -21,7 +21,10 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
+  combo: 3
   attackMoveTime: 0.1
   dashSpeed: 15
   dashTime: 0.2
   strongAttackMoveTime: 0.3
+  readyTime: 0.5
+  parryTime: 0.2

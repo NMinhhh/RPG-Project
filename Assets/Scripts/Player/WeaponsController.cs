@@ -12,7 +12,10 @@ public class WeaponsController : MonoBehaviour
     PlayerAnimatorController playerAnimatorController;
     [SerializeField] private WeaponData weaponData;
 
+    public WeaponData currentWeaponData { get; private set; }
+
     Player player;
+
     void Start()
     {
         player = GetComponent<Player>();
@@ -20,36 +23,26 @@ public class WeaponsController : MonoBehaviour
         EquippedWeapons(weaponData);
     }
 
-    private void Update()
-    {
-
-    }
-
-    public void SetAmountOfCombo(int combo)
-    {
-        player.SetAmoutOfCombo(combo);
-    }
-
     public void EquippedWeapons(WeaponData weaponData)
     {
         RemoveWeapons();
-        if (weaponData.isRightHand)
+        currentWeaponData = weaponData;
+        if (currentWeaponData.isRightHand)
         {
-            EquippedRightWeapons(weaponData);
+            EquippedRightWeapons(currentWeaponData);
         }
-        if (weaponData.isLeftHand)
+        if (currentWeaponData.isLeftHand)
         {
-            EquippedLeftWeapons(weaponData);    
+            EquippedLeftWeapons(currentWeaponData);    
         }
-       
-        playerAnimatorController.SetAnimator(weaponData.attackType);
-        player.SetAmoutOfCombo(weaponData.combo);
-
+        player.ResetComboAttack();
+        playerAnimatorController.SetAnimator(currentWeaponData.attackType);
     }
 
     public void EquippedLeftWeapons(WeaponData weaponData)
     {
         EquippedWeapons weapons = weaponData.modelRightHand.GetComponent<EquippedWeapons>();
+        weapons.SetDamage(weaponData.damage);
         currentRightWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;
         currentRightWeapons.transform.SetParent(leftWeaponsHolder.transform, false);
 

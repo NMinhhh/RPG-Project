@@ -8,6 +8,7 @@ public class PlayerIdleState : PlayerState
     private bool isAttack;
     private bool isStrongAttack;
     private bool isJump;
+    private bool isBlock;
     public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
@@ -27,7 +28,7 @@ public class PlayerIdleState : PlayerState
     public override void HandleInput()
     {
         base.HandleInput();
-
+        isBlock = InputManager.Instance.blockInput;
         isAttack = InputManager.Instance.attackInput;
         isStrongAttack = InputManager.Instance.strongAttackInput;
         isJump = InputManager.Instance.jumpInput;
@@ -40,6 +41,10 @@ public class PlayerIdleState : PlayerState
         if (isJump) 
         {
             stateMachine.ChangeState(player.JumpState);
+        }
+        else if (isBlock)
+        {
+            stateMachine.ChangeState(player.BlockState);
         }
         else if (isStrongAttack)
         {

@@ -12,6 +12,8 @@ public class PlayerMoveState : PlayerState
 
     private bool isJump;
 
+    private bool isBlock;
+
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
@@ -33,6 +35,7 @@ public class PlayerMoveState : PlayerState
     {
         base.HandleInput();
         direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
+        isBlock = InputManager.Instance.blockInput;
         isJump = InputManager.Instance.jumpInput;
         isStrongAttack = InputManager.Instance.strongAttackInput;
         isAttack = InputManager.Instance.attackInput;
@@ -48,6 +51,10 @@ public class PlayerMoveState : PlayerState
         if (isJump)
         {
             stateMachine.ChangeState(player.JumpState);
+        }
+        else if (isBlock)
+        {
+            stateMachine.ChangeState(player.BlockState);
         }
         else if (isStrongAttack)
         {

@@ -8,8 +8,9 @@ public class PlayerAttackState : PlayerState
     private bool isMove;
     private float moveTime;
     private bool isAttack;
-    private int comboAttack;
     private bool isStrongAttack;
+    private bool isBlock;
+
     public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
@@ -17,19 +18,17 @@ public class PlayerAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        isBlock = false;
         isMove = false;
         moveTime = data.attackMoveTime;
         isAttack = false;
         isStrongAttack = false;
-        player.IsAttack(true);
         player.Anim.SetInteger("Combo", player.GetComboAttack());
     }
 
     public override void Exit()
     {
         base.Exit();
-        player.IsAttack(false);
-        
     }
 
     public override void HandleInput()
@@ -38,18 +37,21 @@ public class PlayerAttackState : PlayerState
 
         direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
 
-       
         if (InputManager.Instance.attackInput)
         {
             isAttack = true;
         }
-        
         if(InputManager.Instance.strongAttackInput)
         {
             isAttack = false;
             isStrongAttack = true;
         }
-        
+        if (InputManager.Instance.blockInput)
+        {
+            isBlock = true;
+            isAttack = false;
+            isStrongAttack = false;
+        }
     }
 
     public override void LogicUpdate()
@@ -64,7 +66,11 @@ public class PlayerAttackState : PlayerState
         }
         if (isFinishAnimtion)
         {
-            if (isStrongAttack)
+            if (isBlock)
+            {
+                stateMachine.ChangeState(player.BlockState);
+            }
+            else if (isStrongAttack)
             {
                 stateMachine.ChangeState(player.StrongAttack);
             }

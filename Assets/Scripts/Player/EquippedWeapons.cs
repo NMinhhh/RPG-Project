@@ -42,15 +42,20 @@ public class EquippedWeapons : MonoBehaviour
       
     }
 
+    public void SetDamage(float damage)
+    {
+        this.damage = damage;
+    }
+
     public void StartDealDamage()
     {
         isAttack = true;
-        enemy.Clear();
     }
 
     public void EndDealDamage()
     {
         isAttack = false;
+        enemy.Clear();
     }
 
 }

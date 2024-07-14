@@ -10,9 +10,11 @@ public class PlayerHealthBar : MonoBehaviour
     [SerializeField] private Color normalColor;
     [SerializeField] private Color damageColor;
     [SerializeField] private float decreaseTime;
-
+    [SerializeField] private float delay = .1f;
+    private float target;
     void Start()
     {
+        target = 1;
         healthImage.fillAmount = 1;
         easeHealthImage.fillAmount = 1;
     }
@@ -29,20 +31,24 @@ public class PlayerHealthBar : MonoBehaviour
 
     public void UpdateHealthBar()
     {
-        float target = PlayerStats.Instance.currentHealth / PlayerStats.Instance.maxHealth;
-        StartCoroutine(UpdateBar(target));
+        float newTarget = PlayerStats.Instance.currentHealth / PlayerStats.Instance.maxHealth;
+        if(newTarget <= target)
+        {
+            target = newTarget;
+            StartCoroutine(UpdateBar(target));
+        }
+        else
+        {
+            target = newTarget;
+            StartCoroutine(Healing(target));
+        }
     }
 
     IEnumerator UpdateBar(float target)
     {
+        healthImage.fillAmount = target;
         easeHealthImage.color = damageColor;
-        float time1 = 0;
-        while(time1 < decreaseTime)
-        {
-            time1 += Time.deltaTime;
-            healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, target, time1 / decreaseTime);
-            yield return null;
-        }
+        yield return new WaitForSeconds(delay);
         easeHealthImage.color = normalColor;
         float timer = 0;
         while(timer < decreaseTime)
@@ -51,6 +57,18 @@ public class PlayerHealthBar : MonoBehaviour
             easeHealthImage.fillAmount = Mathf.Lerp(easeHealthImage.fillAmount, target, timer / decreaseTime);
             yield return null;
         } 
+    }
+
+    IEnumerator Healing(float target)
+    {
+        float time = 0;
+        while (time < decreaseTime)
+        {
+            time += Time.deltaTime;
+            healthImage.fillAmount = Mathf.Lerp(healthImage.fillAmount, target, time / decreaseTime);
+            easeHealthImage.fillAmount = Mathf.Lerp(easeHealthImage.fillAmount, target, time / decreaseTime);
+            yield return null;
+        }
     }
     
 }

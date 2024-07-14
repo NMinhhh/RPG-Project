@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerStrongAttack : PlayerState
 {
     private Vector3 direction;
-    private float prepareTime;
+    private float moveTime;
     private bool isMove;
+    private bool isBlock;
+
     public PlayerStrongAttack(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
@@ -16,7 +18,7 @@ public class PlayerStrongAttack : PlayerState
         base.Enter();
         isMove = false;
         player.ResetComboAttack();
-        prepareTime = data.strongAttackMoveTime;
+        moveTime = data.strongAttackMoveTime;
     }
 
     public override void Exit()
@@ -33,6 +35,7 @@ public class PlayerStrongAttack : PlayerState
     {
         base.HandleInput();
         direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
+        isBlock = InputManager.Instance.blockInput;
     }
 
     public override void LogicUpdate()
@@ -40,14 +43,18 @@ public class PlayerStrongAttack : PlayerState
         base.LogicUpdate();
         if(isMove)
         {
-            if (Time.time <= startTimer + prepareTime)
+            if (Time.time <= startTimer + moveTime)
             {
                 player.Move(direction, data.speed);
             }
         }
         if (isFinishAnimtion)
         {
-            if(direction.magnitude > .1f)
+            if (isBlock)
+            {
+
+            }
+            else if(direction.magnitude > .1f)
             {
                 stateMachine.ChangeState(player.MoveState);
             }

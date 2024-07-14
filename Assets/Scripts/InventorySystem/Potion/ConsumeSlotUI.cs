@@ -17,11 +17,6 @@ public class ConsumeSlotUI : MonoBehaviour
         EquipSystem.Instance.ChangeNumberOfItem += SetUI;
     }
 
-    private void OnDestroy()
-    {
-        EquipSystem.Instance.ChangeNumberOfItem -= SetUI;
-    }
-
     // Update is called once per frame
     void Update()
     {

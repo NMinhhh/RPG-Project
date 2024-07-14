@@ -6,10 +6,9 @@ using UnityEngine;
 public class WeaponData : ItemData
 {
     public TypeAnimator.AttackType attackType;
-    public int combo;
+    public float damage;
     public bool isRightHand;
     public bool isLeftHand;
     public GameObject modelRightHand;
     public GameObject modelLeftHand;
-
 }

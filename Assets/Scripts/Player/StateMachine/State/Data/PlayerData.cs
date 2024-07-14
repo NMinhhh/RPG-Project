@@ -21,6 +21,7 @@ public class PlayerData : ScriptableObject
     public LayerMask whatIsGround;
 
     [Header("Attack")]
+    public int combo = 3;
     public float attackMoveTime;
 
     [Header("Dodge")]
@@ -29,5 +30,7 @@ public class PlayerData : ScriptableObject
 
     [Header("Strong Attack")]
     public float strongAttackMoveTime = .5f;
-    public float readyTime = .5f;
+
+    [Header("Block")]
+    public float parryTime = .5f;
 }
