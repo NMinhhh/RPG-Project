@@ -35,8 +35,10 @@ public class PlayerAttackState : PlayerState
     {
         base.HandleInput();
 
-        direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
-
+        if (!player.lockOn)
+            direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
+        else
+            direction = player.lockOnTarget.direction;
         if (InputManager.Instance.attackInput)
         {
             isAttack = true;

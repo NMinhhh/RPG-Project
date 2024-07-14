@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamagaeble 
+public interface IDamageable 
 {
     void Damage(float damage);
 

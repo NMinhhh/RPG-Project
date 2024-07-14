@@ -22,7 +22,9 @@ public class EnemyHurtState : EnemyState
     {
         base.Enter();
         isHurtFinish = false;
+        enemy.SetSpeed(0);
         enemy.Move(enemy.transform.position);
+        enemy.KnockBack();
     }
 
     public override void Exit()

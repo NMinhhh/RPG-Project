@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamagaeble
+public class Player : MonoBehaviour, IDamageable
 {
 
     #region Data
@@ -48,6 +48,8 @@ public class Player : MonoBehaviour, IDamagaeble
 
     public CharacterController character { get; private set; }
 
+    public LockOnTarget lockOnTarget { get; private set; }
+
     #endregion
 
     #region Check Transform
@@ -81,6 +83,7 @@ public class Player : MonoBehaviour, IDamagaeble
     //Action
     public static event Action UpdateHealthBar;
 
+    public bool lockOn;
 
     #endregion
 
@@ -111,6 +114,7 @@ public class Player : MonoBehaviour, IDamagaeble
         character = GetComponent<CharacterController>();
         thirdPersonCamera = GetComponent<ThirdPersonCamera>();
         weaponsController = GetComponent<WeaponsController>();
+        lockOnTarget = GetComponent<LockOnTarget>();
         currentHealth = data.maxHealth;
         maxComboAttack = data.combo;
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
@@ -173,7 +177,15 @@ public class Player : MonoBehaviour, IDamagaeble
 
     public void Move(Vector3 direction, float speed)
     {
-        Vector3 motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.xInput == 1 && InputManager.Instance.zInput == 1 ? .7f : 1);
+        Vector3 motion;
+        if (!lockOn || StateMachine.currentState == MoveState)
+        {
+            motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.xInput == 1 && InputManager.Instance.zInput == 1 ? .7f : 1);
+        }
+        else
+        {
+            motion = (direction) * (InputManager.Instance.xInput == 1 && InputManager.Instance.zInput == 1 ? .7f : 1);
+        }
         character.Move(motion * speed * Time.deltaTime);
     }
 

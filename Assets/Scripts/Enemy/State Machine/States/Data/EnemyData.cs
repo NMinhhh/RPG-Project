@@ -10,4 +10,6 @@ public class EnemyData : ScriptableObject
     public float radiusCheckToChase;
 
     public float radiusCheckToAttack;
+
+    public float knockBackSpeed = 1;
 }

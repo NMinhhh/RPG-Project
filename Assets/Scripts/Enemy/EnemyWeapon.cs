@@ -17,7 +17,7 @@ public class EnemyWeapon : MonoBehaviour
     {
         if (other.CompareTag("Player") && !hit.Contains(other.gameObject))
         {
-            IDamagaeble damagaeble = other.GetComponent<IDamagaeble>();
+            IDamageable damagaeble = other.GetComponent<IDamageable>();
             if(damagaeble != null)
             {
                 damagaeble.Damage(_damage);

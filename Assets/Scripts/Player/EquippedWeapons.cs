@@ -12,9 +12,12 @@ public class EquippedWeapons : MonoBehaviour
     private Transform damagePoint;
     private bool isAttack;
 
+    Transform player;
+
     void Start()
     {
         enemy = new List<GameObject>();
+        player = GameObject.FindWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -28,9 +31,15 @@ public class EquippedWeapons : MonoBehaviour
                 if (!enemy.Contains(hit2.collider.gameObject))
                 {
                     damagePoint = hit2.collider.transform.Find("DamagePoint");
-                    IDamagaeble damagaeble = hit2.collider.gameObject.GetComponent<IDamagaeble>();
+                    IDamageable damagaeble = hit2.collider.gameObject.GetComponent<IDamageable>();
+                    Vector3 dir = (hit2.transform.position - player.position).normalized;
                     if (damagaeble != null)
                     {
+                        IKnockBackable knockBackable = hit2.collider.GetComponent<IKnockBackable>();
+                        if(knockBackable != null)
+                        {
+                            knockBackable.DamageDiretion(dir);
+                        }
                         damagaeble.Damage(damage);
                         GameObject hole = Instantiate(blood, damagePoint.position, Quaternion.identity);
                         hole.transform.SetParent(hit2.transform);

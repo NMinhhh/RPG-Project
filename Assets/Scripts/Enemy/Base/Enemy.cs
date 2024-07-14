@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IDamagaeble
+public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 {
     #region State Machine
 
@@ -41,7 +41,10 @@ public class Enemy : MonoBehaviour, IDamagaeble
     protected float currentHealth;
 
     protected bool isHurt;
-    protected bool isDie;
+
+    public bool isDie {  get; private set; }
+
+    public Vector3 damageDir {  get; private set; }
 
     #endregion
 
@@ -137,6 +140,20 @@ public class Enemy : MonoBehaviour, IDamagaeble
 
     #endregion
 
+
+    #region Knock Back Function
+
+    public void DamageDiretion(Vector3 direction)
+    {
+        damageDir = direction;
+    }
+
+    public void KnockBack()
+    {
+        transform.position += damageDir * data.knockBackSpeed;
+    }
+
+    #endregion
 
     #region Others Function
     public virtual void TriggerAnimation() => StateMachine.CurrentEnemyState.TriggerAnimation();
