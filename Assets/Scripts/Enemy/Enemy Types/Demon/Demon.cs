@@ -61,6 +61,7 @@ public class Demon : Enemy
     public override void Damage(float damage)
     {
         base.Damage(damage);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Hit), transform.position, .5f);
         if (isHurt && StateMachine.CurrentEnemyState != HurtState && !isDie)
         {
             StateMachine.ChangeState(HurtState);

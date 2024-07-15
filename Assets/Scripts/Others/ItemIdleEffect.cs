@@ -6,29 +6,29 @@ using static UnityEngine.ParticleSystem;
 public class ItemIdleEffect : MonoBehaviour
 {
     [Header("Particle")]
-    [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private ParticleSystem particleEffect;
 
     [Header("Canvas")]
-    [SerializeField] private Canvas _canvas;
+    [SerializeField] private Canvas canvas;
 
     [Header("Item Obj")]
-    [SerializeField] private GameObject _item;
-    [SerializeField] private float _valueRotation;
-    private float _currentRotation;
+    [SerializeField] private GameObject[] items;
+    [SerializeField] private float valueRotation;
+    private float currentRotation;
 
     [Header("Translate Postion Y")]
-    [SerializeField] private float _maxTranslateTime;
-    [SerializeField] private float _speedTranslate;
-    private float _currentTranslateTime;
+    [SerializeField] private float maxTranslateTime;
+    [SerializeField] private float speedTranslate;
+    private float currentTranslateTime;
     private bool isChangDir;
 
-    private Camera _camera;
+    private Camera cam;
 
 
     void Start()
     {
-        _camera = Camera.main;
-        _canvas.gameObject.SetActive(false);
+        cam = Camera.main;
+        canvas.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,36 +40,43 @@ public class ItemIdleEffect : MonoBehaviour
 
     void ItemRotation()
     {
-        _currentRotation += _valueRotation * Time.deltaTime;
-        if(_currentRotation >= 360)
-            _currentRotation = 0;
-        _item.transform.localRotation = Quaternion.Euler(0, _currentRotation, 0);
+        currentRotation += valueRotation * Time.deltaTime;
+        if(currentRotation >= 360)
+            currentRotation = 0;
+        foreach(GameObject item in items)
+        {
+            item.transform.localRotation = Quaternion.Euler(0, currentRotation, 0);
+        }
     }
 
     void TranslatePosY()
     {
         if (isChangDir)
         {
-            _currentTranslateTime += _speedTranslate * Time.deltaTime;
-            if (_currentTranslateTime >= _maxTranslateTime)
+            currentTranslateTime += speedTranslate * Time.deltaTime;
+            if (currentTranslateTime >= maxTranslateTime)
                 isChangDir = false;
         }
         else
         {
-            _currentTranslateTime -= _speedTranslate * Time.deltaTime;
-            if (_currentTranslateTime <= 0)
+            currentTranslateTime -= speedTranslate * Time.deltaTime;
+            if (currentTranslateTime <= 0)
                 isChangDir = true;
         }
-        _item.transform.localPosition = new Vector3(0, _currentTranslateTime, 0);
+        foreach (GameObject item in items)
+        {
+            item.transform.localPosition = new Vector3(0, currentTranslateTime, 0);
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            _particleSystem.Stop();
-            _canvas.transform.rotation = Quaternion.LookRotation(_canvas.transform.position - _camera.transform.position);
-            _canvas.gameObject.SetActive(true);
+            particleEffect.Stop();
+            canvas.transform.rotation = Quaternion.LookRotation(canvas.transform.position - cam.transform.position);
+            canvas.gameObject.SetActive(true);
 
         }
     }
@@ -78,7 +85,7 @@ public class ItemIdleEffect : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _canvas.transform.rotation = Quaternion.LookRotation(_canvas.transform.position - _camera.transform.position);
+            canvas.transform.rotation = Quaternion.LookRotation(canvas.transform.position - cam.transform.position);
 
         }
     }
@@ -87,8 +94,8 @@ public class ItemIdleEffect : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _particleSystem.Play();
-            _canvas.gameObject.SetActive(false);
+            particleEffect.Play();
+            canvas.gameObject.SetActive(false);
 
         }
     }

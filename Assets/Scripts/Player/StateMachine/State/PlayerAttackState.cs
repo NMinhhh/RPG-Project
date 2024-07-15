@@ -10,6 +10,7 @@ public class PlayerAttackState : PlayerState
     private bool isAttack;
     private bool isStrongAttack;
     private bool isBlock;
+    private bool isJump;
 
     public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
@@ -38,7 +39,7 @@ public class PlayerAttackState : PlayerState
         if (!player.lockOn)
             direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
         else
-            direction = player.lockOnTarget.direction;
+            direction = player.lockOnDirection;
         if (InputManager.Instance.attackInput)
         {
             isAttack = true;
@@ -52,6 +53,13 @@ public class PlayerAttackState : PlayerState
         {
             isBlock = true;
             isAttack = false;
+            isStrongAttack = false;
+        }
+        isJump = InputManager.Instance.jumpInput;
+        if (isJump)
+        {
+            isAttack = false;
+            isBlock = false;
             isStrongAttack = false;
         }
     }
@@ -68,7 +76,11 @@ public class PlayerAttackState : PlayerState
         }
         if (isFinishAnimtion)
         {
-            if (isBlock)
+            if (isJump)
+            {
+                stateMachine.ChangeState(player.JumpState);
+            }
+            else if (isBlock)
             {
                 stateMachine.ChangeState(player.BlockState);
             }

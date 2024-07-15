@@ -35,16 +35,16 @@ public class WeaponsController : MonoBehaviour
         {
             EquippedLeftWeapons(currentWeaponData);    
         }
-        player.ResetComboAttack();
         playerAnimatorController.SetAnimator(currentWeaponData.attackType);
+        player.ChangeWeapon();
     }
 
     public void EquippedLeftWeapons(WeaponData weaponData)
     {
-        EquippedWeapons weapons = weaponData.modelRightHand.GetComponent<EquippedWeapons>();
-        weapons.SetDamage(weaponData.damage);
-        currentRightWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;
-        currentRightWeapons.transform.SetParent(leftWeaponsHolder.transform, false);
+        EquippedWeapons weapons = weaponData.modelLeftHand.GetComponent<EquippedWeapons>();
+        currentLeftWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;
+        currentLeftWeapons.SetDamage(weaponData.damage);
+        currentLeftWeapons.transform.SetParent(leftWeaponsHolder.transform, false);
 
     }
 
@@ -53,6 +53,7 @@ public class WeaponsController : MonoBehaviour
     {
         EquippedWeapons weapons = weaponData.modelRightHand.GetComponent<EquippedWeapons>();
         currentRightWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;
+        currentRightWeapons.SetDamage(weaponData.damage);
         currentRightWeapons.transform.SetParent(rightWeaponsHolder.transform, false);
 
     }

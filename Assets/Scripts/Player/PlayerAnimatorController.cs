@@ -7,15 +7,15 @@ public class PlayerAnimatorController : MonoBehaviour
 
     private RuntimeAnimatorController currentAnimator;
 
-    private Animator _anim;
-    [SerializeField] private RuntimeAnimatorController _handAnimator;
-    [SerializeField] private RuntimeAnimatorController _weaponsInRightHandAnimator;
-    //[SerializeField] private RuntimeAnimatorController weaponsAndShieldAnimator;
-    //[SerializeField] private RuntimeAnimatorController heavyWeaponAnimator;
-    
+    private Animator anim;
+    [SerializeField] private RuntimeAnimatorController handAnimator;
+    [SerializeField] private RuntimeAnimatorController weaponsInRightHandAnimator;
+    [SerializeField] private RuntimeAnimatorController weaponsAndShieldAnimator;
+    [SerializeField] private RuntimeAnimatorController heavyWeaponAnimator;
+
     void Start()
     {
-        _anim = GetComponentInChildren<Animator>();
+        anim = GetComponentInChildren<Animator>();
         SetAnimator(TypeAnimator.AttackType.WeaponsInRightHand);
     }
 
@@ -24,17 +24,17 @@ public class PlayerAnimatorController : MonoBehaviour
         switch (type)
         {
             case TypeAnimator.AttackType.Hand:
-                _anim.runtimeAnimatorController = _handAnimator;
+                anim.runtimeAnimatorController = handAnimator;
                 break;
             case TypeAnimator.AttackType.WeaponsInRightHand:
-                _anim.runtimeAnimatorController = _weaponsInRightHandAnimator;
+                anim.runtimeAnimatorController = weaponsInRightHandAnimator;
                 break;
-            //case TypeAnimator.AttackType.WeaponsAndShield:
-            //    anim.runtimeAnimatorController = weaponsAndShieldAnimator;
-            //    break;
-            //case TypeAnimator.AttackType.HeavyWeapon:
-            //    anim.runtimeAnimatorController = heavyWeaponAnimator;
-            //    break;
+            case TypeAnimator.AttackType.WeaponsAndShield:
+                anim.runtimeAnimatorController = weaponsAndShieldAnimator;
+                break;
+            case TypeAnimator.AttackType.HeavyWeapon:
+                anim.runtimeAnimatorController = heavyWeaponAnimator;
+                break;
         }
     }
 

@@ -48,7 +48,6 @@ public class Player : MonoBehaviour, IDamageable
 
     public CharacterController character { get; private set; }
 
-    public LockOnTarget lockOnTarget { get; private set; }
 
     #endregion
 
@@ -85,6 +84,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public bool lockOn;
 
+    public Vector3 lockOnDirection;
+
     #endregion
 
 
@@ -114,7 +115,6 @@ public class Player : MonoBehaviour, IDamageable
         character = GetComponent<CharacterController>();
         thirdPersonCamera = GetComponent<ThirdPersonCamera>();
         weaponsController = GetComponent<WeaponsController>();
-        lockOnTarget = GetComponent<LockOnTarget>();
         currentHealth = data.maxHealth;
         maxComboAttack = data.combo;
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
@@ -227,6 +227,15 @@ public class Player : MonoBehaviour, IDamageable
 
     #region Attack Function
 
+    public void ChangeWeapon()
+    {
+        ResetComboAttack();
+        if(StateMachine != null && Anim != null)
+        {
+            StateMachine.ChangeState(IdleState);
+        }
+    }
+
     public int GetComboAttack()
     {
         currentComboAttack++;
@@ -254,6 +263,16 @@ public class Player : MonoBehaviour, IDamageable
     #endregion
 
 
+    #region Lock On Target
+
+    public void SetLockOnDirectio(Vector3 direction)
+    {
+        lockOnDirection = direction;
+    }
+
+    #endregion
+
+
     #region Others Function
 
     public void TrtiggerAnimation() => StateMachine.currentState.TriggerAnimation();
@@ -263,8 +282,8 @@ public class Player : MonoBehaviour, IDamageable
 
     private void OnDrawGizmos()
     {
-        //if(groundCheck != null)
-        //    Gizmos.DrawWireSphere(groundCheck.position, data.radius);
+        if (groundCheck != null)
+            Gizmos.DrawWireSphere(groundCheck.position, data.radius);
     }
 
     #endregion

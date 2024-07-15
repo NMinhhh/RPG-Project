@@ -28,6 +28,7 @@ public class PlayerLandingState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        player.Move(direction, data.speed);
         if (isFinishAnimtion)
         {
             if (direction.magnitude > .1f)

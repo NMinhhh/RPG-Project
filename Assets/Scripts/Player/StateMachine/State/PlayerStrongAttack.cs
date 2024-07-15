@@ -37,7 +37,7 @@ public class PlayerStrongAttack : PlayerState
         if (!player.lockOn)
             direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
         else
-            direction = player.lockOnTarget.direction;
+            direction = player.lockOnDirection;
         isBlock = InputManager.Instance.blockInput;
     }
 

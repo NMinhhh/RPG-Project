@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: DemonChaseData
   m_EditorClassIdentifier: 
   chaseSpeed: 5
-  checkPlayerInRangeToAttack: 1.8

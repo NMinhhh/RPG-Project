@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c76f4b53d2cc1c143bd394cb7cba96d0, type: 3}
+  m_Name: WAS_1
+  m_EditorClassIdentifier: 
+  itemName: SwordAndShield1
+  number: 1
+  image: {fileID: 21300000, guid: 2c04f4986ebc72e48a8b0c3eb2e42db2, type: 3}
+  itemType: 0
+  attackType: 2
+  damage: 15
+  isRightHand: 1
+  isLeftHand: 1
+  modelRightHand: {fileID: 2599180948242105604, guid: 7fb8d10f8e1238a4284fd0af721eabd9, type: 3}
+  modelLeftHand: {fileID: 8934281381293760020, guid: 666082c6f34703e4abfcfc1208b99e13, type: 3}
