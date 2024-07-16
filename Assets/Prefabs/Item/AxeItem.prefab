@@ -4936,12 +4936,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812fe32d414d3489db735da06c1508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 81774192706597718}
-  _canvas: {fileID: 684256306853223105}
-  _item: {fileID: 4824927917338383622}
-  _valueRotation: 30
-  _maxTranslateTime: 0.05
-  _speedTranslate: 0.05
+  particleEffect: {fileID: 81774192706597718}
+  canvas: {fileID: 684256306853223105}
+  items:
+  - {fileID: 4824927917338383622}
+  valueRotation: 30
+  maxTranslateTime: 0.05
+  speedTranslate: 0.05
 --- !u!114 &9011447864951200450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4954,7 +4955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5700006e5544844aac82805f72f9c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 1ba7dc5c15debf24faef1724cfab7f03, type: 2}
+  data: {fileID: 11400000, guid: 68c32d3318ace16449123e11b1f4dd53, type: 2}
 --- !u!65 &1870740368686995729
 BoxCollider:
   m_ObjectHideFlags: 0

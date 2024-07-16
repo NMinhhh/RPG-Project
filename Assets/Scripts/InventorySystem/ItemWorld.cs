@@ -6,11 +6,10 @@ public class ItemWorld : MonoBehaviour, IInteracable
 {
     [SerializeField] private ItemData data;
 
-
     public void Interact()
     {
         AddToInventory(data);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     void AddToInventory(ItemData data)

@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class InventoryItem : MonoBehaviour
 {
-    [SerializeField] private WeaponData weaponData;
+    private ItemData itemData;
 
-    public bool isEquip;
-
-    public WeaponData GetWeapon
+    public ItemData GetItemData
     {
-        get { return weaponData; }
+        get { return itemData; }
+    }
+
+    public void SetItemData(ItemData itemData)
+    {
+        this.itemData = itemData;
     }
 }

@@ -48,12 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7812fe32d414d3489db735da06c1508, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _particleSystem: {fileID: 84663696569061686}
-  _canvas: {fileID: 7943025192437830933}
-  _item: {fileID: 1215106108182577042}
-  _valueRotation: 30
-  _maxTranslateTime: 0.05
-  _speedTranslate: 0.05
+  particleEffect: {fileID: 84663696569061686}
+  canvas: {fileID: 7943025192437830933}
+  items:
+  - {fileID: 1215106108182577042}
+  valueRotation: 30
+  maxTranslateTime: 0.05
+  speedTranslate: 0.05
 --- !u!114 &6847084092422013873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5700006e5544844aac82805f72f9c7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: a1fb53d843d7b9c4f9ec0477f6f1554c, type: 2}
+  data: {fileID: 11400000, guid: 2887f8b52959da14b988dcc66b747160, type: 2}
 --- !u!65 &3352258165130983265
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -86,7 +87,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.23434798, y: 1.6628795, z: 0.2857244}
+  m_Size: {x: 1.8911214, y: 1.6628795, z: 1.5801328}
   m_Center: {x: 0, y: 0.33143973, z: 0}
 --- !u!1 &508654960758149654
 GameObject:
@@ -15292,8 +15293,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.9559748, g: 0.6595561, b: 0.1473041, a: 1}
-      maxColor: {r: 0.98742133, g: 0.35402697, b: 0.09004776, a: 1}
+      minColor: {r: 0.91194963, g: 0.7737072, b: 0.11757835, a: 1}
+      maxColor: {r: 0.9583857, g: 0.9811321, b: 0.15735123, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

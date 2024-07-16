@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4f315e3aa03fd47aabc5e47ca3a4f1, type: 3}
+  m_Name: DarkScytheData
+  m_EditorClassIdentifier: 
+  itemName: Dark Scythe
+  number: 1
+  image: {fileID: 21300000, guid: a0340539ec218d442b652e01d047fbbe, type: 3}
+  itemType: 0
+  attackType: 1
+  damage: 20
+  isRightHand: 1
+  isLeftHand: 0
+  modelRightHand: {fileID: 3237210737695942993, guid: 5075152d707a3f34392a183660bde18e, type: 3}
+  modelLeftHand: {fileID: 0}
+  consumeValue: 0

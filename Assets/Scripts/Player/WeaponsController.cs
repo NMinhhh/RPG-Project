@@ -10,9 +10,8 @@ public class WeaponsController : MonoBehaviour
     private EquippedWeapons currentLeftWeapons;
     private EquippedWeapons currentRightWeapons;
     PlayerAnimatorController playerAnimatorController;
-    [SerializeField] private WeaponData weaponData;
+    [SerializeField] private ItemData weaponData;
 
-    public WeaponData currentWeaponData { get; private set; }
 
     Player player;
 
@@ -23,23 +22,22 @@ public class WeaponsController : MonoBehaviour
         EquippedWeapons(weaponData);
     }
 
-    public void EquippedWeapons(WeaponData weaponData)
+    public void EquippedWeapons(ItemData itemData)
     {
         RemoveWeapons();
-        currentWeaponData = weaponData;
-        if (currentWeaponData.isRightHand)
+        if (itemData.isRightHand)
         {
-            EquippedRightWeapons(currentWeaponData);
+            EquippedRightWeapons(itemData);
         }
-        if (currentWeaponData.isLeftHand)
+        if (itemData.isLeftHand)
         {
-            EquippedLeftWeapons(currentWeaponData);    
+            EquippedLeftWeapons(itemData);    
         }
-        playerAnimatorController.SetAnimator(currentWeaponData.attackType);
+        playerAnimatorController.SetAnimator(itemData.attackType);
         player.ChangeWeapon();
     }
 
-    public void EquippedLeftWeapons(WeaponData weaponData)
+    public void EquippedLeftWeapons(ItemData weaponData)
     {
         EquippedWeapons weapons = weaponData.modelLeftHand.GetComponent<EquippedWeapons>();
         currentLeftWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;
@@ -49,7 +47,7 @@ public class WeaponsController : MonoBehaviour
     }
 
 
-    public void EquippedRightWeapons(WeaponData weaponData)
+    public void EquippedRightWeapons(ItemData weaponData)
     {
         EquippedWeapons weapons = weaponData.modelRightHand.GetComponent<EquippedWeapons>();
         currentRightWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;

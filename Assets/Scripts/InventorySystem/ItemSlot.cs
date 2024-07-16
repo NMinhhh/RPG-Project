@@ -30,7 +30,7 @@ public class ItemSlot : MonoBehaviour,IDropHandler
         DragDrop.itemBeingDragged.SetNewPos(transform.position, transform);
         if (isQuickSlot)
         {
-            EquipSystem.Instance.EquipWeapon(DragDrop.itemBeingDragged.gameObject);
+            EquipSystem.Instance.EquipWeapon(DragDrop.itemBeingDragged.GetComponent<InventoryItem>().GetItemData);
         }
     }
 }

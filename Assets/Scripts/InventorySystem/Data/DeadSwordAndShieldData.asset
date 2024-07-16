@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4f315e3aa03fd47aabc5e47ca3a4f1, type: 3}
+  m_Name: DeadSwordAndShieldData
+  m_EditorClassIdentifier: 
+  itemName: Dead Sword and Shield
+  number: 1
+  image: {fileID: 21300000, guid: a056db9b047ba394e8b6cb2fb0bdb028, type: 3}
+  itemType: 0
+  attackType: 2
+  damage: 20
+  isRightHand: 1
+  isLeftHand: 1
+  modelRightHand: {fileID: 3265568171121243950, guid: 1d1300b0d12c4564c8c0fb95f4e09bbe, type: 3}
+  modelLeftHand: {fileID: 4339727047562516594, guid: db941ca8b023f974d8707daa371bbb2e, type: 3}
+  consumeValue: 0

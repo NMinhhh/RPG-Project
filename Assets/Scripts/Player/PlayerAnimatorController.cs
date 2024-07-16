@@ -9,9 +9,10 @@ public class PlayerAnimatorController : MonoBehaviour
 
     private Animator anim;
     [SerializeField] private RuntimeAnimatorController handAnimator;
-    [SerializeField] private RuntimeAnimatorController weaponsInRightHandAnimator;
-    [SerializeField] private RuntimeAnimatorController weaponsAndShieldAnimator;
+    [SerializeField] private RuntimeAnimatorController weaponInRightHandAnimator;
+    [SerializeField] private RuntimeAnimatorController weaponAndShieldAnimator;
     [SerializeField] private RuntimeAnimatorController heavyWeaponAnimator;
+    [SerializeField] private RuntimeAnimatorController weaponAndWeaponAnimator;
 
     void Start()
     {
@@ -27,13 +28,16 @@ public class PlayerAnimatorController : MonoBehaviour
                 anim.runtimeAnimatorController = handAnimator;
                 break;
             case TypeAnimator.AttackType.WeaponsInRightHand:
-                anim.runtimeAnimatorController = weaponsInRightHandAnimator;
+                anim.runtimeAnimatorController = weaponInRightHandAnimator;
                 break;
             case TypeAnimator.AttackType.WeaponsAndShield:
-                anim.runtimeAnimatorController = weaponsAndShieldAnimator;
+                anim.runtimeAnimatorController = weaponAndShieldAnimator;
                 break;
             case TypeAnimator.AttackType.HeavyWeapon:
                 anim.runtimeAnimatorController = heavyWeaponAnimator;
+                break;
+            case TypeAnimator.AttackType.WeaponAndWeapon:
+                anim.runtimeAnimatorController = weaponAndWeaponAnimator;
                 break;
         }
     }
@@ -48,7 +52,8 @@ public class TypeAnimator
         Hand,
         WeaponsInRightHand,
         WeaponsAndShield,
-        HeavyWeapon
+        HeavyWeapon,
+        WeaponAndWeapon,
     }
 
     public AttackType Type;

@@ -303,7 +303,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 31f7a0fa22d37124888800559e95648e, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -748,8 +748,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handAnimator: {fileID: 9100000, guid: 1e83527f93b59d340a976dcb268951fa, type: 2}
-  weaponsInRightHandAnimator: {fileID: 9100000, guid: b9b7abc5229f731419af8fdaa6de31af, type: 2}
-  weaponsAndShieldAnimator: {fileID: 9100000, guid: 31f7a0fa22d37124888800559e95648e, type: 2}
+  weaponInRightHandAnimator: {fileID: 9100000, guid: b9b7abc5229f731419af8fdaa6de31af, type: 2}
+  weaponAndShieldAnimator: {fileID: 9100000, guid: 31f7a0fa22d37124888800559e95648e, type: 2}
+  heavyWeaponAnimator: {fileID: 9100000, guid: d24eb19c7ebf49c4f8afe93b2728b109, type: 2}
+  weaponAndWeaponAnimator: {fileID: 9100000, guid: 3a103920dbf8d7c4bbb6c69ca10d70da, type: 2}
 --- !u!114 &827181214567348044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,6 +795,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47906b2cadaf5584c86fbc73f14916f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crossHair: {fileID: 0}
+  offset: 0
   radius: 20
   whatIsEnemy:
     serializedVersion: 2

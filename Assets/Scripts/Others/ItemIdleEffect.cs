@@ -45,7 +45,7 @@ public class ItemIdleEffect : MonoBehaviour
             currentRotation = 0;
         foreach(GameObject item in items)
         {
-            item.transform.localRotation = Quaternion.Euler(0, currentRotation, 0);
+            item.transform.localEulerAngles = new Vector3(item.transform.localEulerAngles.x, currentRotation, item.transform.localEulerAngles.z);
         }
     }
 
@@ -65,7 +65,7 @@ public class ItemIdleEffect : MonoBehaviour
         }
         foreach (GameObject item in items)
         {
-            item.transform.localPosition = new Vector3(0, currentTranslateTime, 0);
+            item.transform.localPosition = new Vector3(item.transform.localPosition.x, currentTranslateTime, item.transform.localPosition.z);
         }
         
     }

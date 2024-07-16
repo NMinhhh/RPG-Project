@@ -114,5 +114,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cc291ad86943d44ba4d09b0b1cfef90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 1ba7dc5c15debf24faef1724cfab7f03, type: 2}
-  isEquip: 1

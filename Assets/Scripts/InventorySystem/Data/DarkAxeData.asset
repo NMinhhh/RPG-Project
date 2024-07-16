@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c4f315e3aa03fd47aabc5e47ca3a4f1, type: 3}
+  m_Name: DarkAxeData
+  m_EditorClassIdentifier: 
+  itemName: Dark Axe
+  number: 1
+  image: {fileID: 21300000, guid: 88b33dda69de2b445999a1a41c79c6fd, type: 3}
+  itemType: 0
+  attackType: 1
+  damage: 20
+  isRightHand: 1
+  isLeftHand: 0
+  modelRightHand: {fileID: 8817234707655122858, guid: 0ced25fce5ca521469d957f839d57506, type: 3}
+  modelLeftHand: {fileID: 0}
+  consumeValue: 0

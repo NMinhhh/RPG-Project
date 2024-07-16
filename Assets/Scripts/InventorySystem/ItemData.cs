@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public abstract class ItemData : ScriptableObject
+[CreateAssetMenu(fileName = "newItemData", menuName = "Item/Item Data")]
+public class ItemData : ScriptableObject
 {
     public enum ItemType
     {
@@ -16,4 +16,14 @@ public abstract class ItemData : ScriptableObject
     public Sprite image;
     public ItemType itemType;
 
+    [Header("Weapon Data")]
+    public TypeAnimator.AttackType attackType;
+    public float damage;
+    public bool isRightHand;
+    public bool isLeftHand;
+    public GameObject modelRightHand;
+    public GameObject modelLeftHand;
+
+    [Header("Potion Data")]
+    public float consumeValue;
 }
