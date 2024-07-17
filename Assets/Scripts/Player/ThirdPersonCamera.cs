@@ -6,40 +6,52 @@ using UnityEngine.TextCore.Text;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    [SerializeField] private CinemachineFreeLook cinemachine;
+    [SerializeField] private GameObject cinemachineTargetCamera;
+
+    [SerializeField] private float sensivitive;
+    private float cinemachineTargetYaw;
+    private float cinemachineTargetPitch;
+
     [SerializeField] private Camera _camera;
     [SerializeField] protected float smooth;
     private float velocity;
 
-    private float yAxisSpeed;
-    private float xAxisSpeed;
+    private bool isRotaionOnMove;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        isRotaionOnMove = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         InventorySystem.cameraLock += CameraLock;
         InventorySystem.cameraUnlock += CameraUnlock;
-        xAxisSpeed = cinemachine.m_XAxis.m_MaxSpeed;
-        yAxisSpeed = cinemachine.m_YAxis.m_MaxSpeed;
+
     }
 
-    void CameraLock()
+    private void LateUpdate()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        cinemachine.m_YAxis.m_MaxSpeed = 0f;
-        cinemachine.m_XAxis.m_MaxSpeed = 0f;
+        UpdateCameraRotation();  
     }
-    
-    void CameraUnlock()
+
+    private void UpdateCameraRotation()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        cinemachine.m_YAxis.m_MaxSpeed = yAxisSpeed;
-        cinemachine.m_XAxis.m_MaxSpeed = xAxisSpeed;
+        cinemachineTargetPitch = GetCameraRotaion(cinemachineTargetPitch, GetMouseSpeed(InputManager.Instance.mouseY), -70, 70, true);
+        cinemachineTargetYaw = GetCameraRotaion(cinemachineTargetYaw, GetMouseSpeed(InputManager.Instance.mouseX), float.MinValue, float.MaxValue, false);
+        cinemachineTargetCamera.transform.rotation = Quaternion.Euler(cinemachineTargetPitch, cinemachineTargetYaw, 0);
     }
-    
+
+    private float GetCameraRotaion(float currentRotaion,float input, float min, float max, bool isXAxis)
+    {
+        currentRotaion += isXAxis ? -input : input;
+        return Mathf.Clamp(currentRotaion, min, max);
+    }
+
+    public float GetMouseSpeed(float input)
+    {
+        return input * sensivitive * Time.deltaTime;
+    }
 
     public Vector3 MoveRotation(Vector3 direction)
     {
@@ -47,11 +59,19 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
             float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref velocity, smooth * Time.deltaTime);
-            transform.rotation = Quaternion.Euler(0, angle, 0);
+            if (isRotaionOnMove)
+            {
+                transform.rotation = Quaternion.Euler(0, angle, 0);
+            }
             return Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
         }
         return Vector3.zero;
        
+    }
+
+    public void SetRotaionOnMove(bool state)
+    {
+        isRotaionOnMove = state;
     }
 
     public Vector3 Rotation(Vector3 direction)
@@ -59,5 +79,17 @@ public class ThirdPersonCamera : MonoBehaviour
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
         transform.rotation = Quaternion.Euler(0, targetAngle, 0);
         return Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
+    }
+
+    void CameraLock()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    void CameraUnlock()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 }

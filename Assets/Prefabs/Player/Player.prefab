@@ -300,7 +300,7 @@ Animator:
   m_GameObject: {fileID: 861309747441808903}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 705b65868d9bb1244843345f4255fc4e, type: 3}
-  m_Controller: {fileID: 9100000, guid: 31f7a0fa22d37124888800559e95648e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3a103920dbf8d7c4bbb6c69ca10d70da, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -672,6 +672,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 7644202712527886690}
   - {fileID: 5721377440736070588}
   - {fileID: 4227461966388534189}
   m_Father: {fileID: 0}
@@ -734,7 +735,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeaponsHolder: {fileID: 3523143557747734074}
   leftWeaponsHolder: {fileID: 8153916993259139618}
-  weaponData: {fileID: 11400000, guid: 1ba7dc5c15debf24faef1724cfab7f03, type: 2}
+  weaponData: {fileID: 11400000, guid: 2240bb1f62aec9144a1e2e37483a077f, type: 2}
 --- !u!114 &618282454051062440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,7 +765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527a8eb8686ccc148a18a242e06c533a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cinemachine: {fileID: 0}
+  cinemachineTargetCamera: {fileID: 4660792615388253153}
+  sensivitive: 60
   _camera: {fileID: 0}
   smooth: 5
 --- !u!114 &3978341794153642948
@@ -796,7 +798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   crossHair: {fileID: 0}
-  offset: 0
+  offset: 1
   radius: 20
   whatIsEnemy:
     serializedVersion: 2
@@ -6356,6 +6358,37 @@ Transform:
   m_Children:
   - {fileID: 6160071955464591421}
   m_Father: {fileID: 5779188002782069441}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4660792615388253153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7644202712527886690}
+  m_Layer: 0
+  m_Name: CinemachineTargetCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7644202712527886690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4660792615388253153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.285, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2712121793048287720}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4682468079730327403
 GameObject:

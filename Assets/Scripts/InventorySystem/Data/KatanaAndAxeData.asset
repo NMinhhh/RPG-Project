@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c4f315e3aa03fd47aabc5e47ca3a4f1, type: 3}
-  m_Name: DualDaggerData
+  m_Name: KatanaAndAxeData
   m_EditorClassIdentifier: 
-  itemName: Dual Dagger
+  itemName: Katan and Axe
   number: 1
   image: {fileID: 21300000, guid: 29516f9814d32be4e862303be73f61ea, type: 3}
   itemType: 0
@@ -20,6 +20,6 @@ MonoBehaviour:
   damage: 15
   isRightHand: 1
   isLeftHand: 1
-  modelRightHand: {fileID: 289913839317343508, guid: 19196bab7749da14486581d762f49b2b, type: 3}
-  modelLeftHand: {fileID: 5182235900632736850, guid: cc70bef3466fc5b41944017a9033dac7, type: 3}
+  modelRightHand: {fileID: 293312046880657348, guid: f3f6d8db619469244a73726cbb39957f, type: 3}
+  modelLeftHand: {fileID: 7532400075797545039, guid: fe81ff557efa4864bb2ba4b8be2aa868, type: 3}
   consumeValue: 0
