@@ -650,6 +650,7 @@ GameObject:
   - component: {fileID: 4642901303050889476}
   - component: {fileID: 618282454051062440}
   - component: {fileID: 827181214567348044}
+  - component: {fileID: 9092287954486400499}
   - component: {fileID: 3978341794153642948}
   - component: {fileID: 5034313641803396533}
   m_Layer: 0
@@ -769,6 +770,23 @@ MonoBehaviour:
   sensivitive: 60
   _camera: {fileID: 0}
   smooth: 5
+--- !u!114 &9092287954486400499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883767012510258534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a7d469c399d064d8b569fd07cbd3a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cinemachineVirtual: {fileID: 0}
+  crossHair: {fileID: 0}
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &3978341794153642948
 MonoBehaviour:
   m_ObjectHideFlags: 0

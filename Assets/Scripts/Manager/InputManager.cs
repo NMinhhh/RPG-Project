@@ -20,8 +20,6 @@ public class InputManager : Singleton<InputManager>
 
     public bool blockInput {  get; private set; }
 
-    public bool lockOn {  get; private set; }
-
     public float mouseX {  get; private set; }
 
     public float mouseY { get; private set; }
@@ -45,7 +43,6 @@ public class InputManager : Singleton<InputManager>
             pressTKey = Input.GetKeyDown(KeyCode.T);
             strongAttackInput = Input.GetMouseButton(1);
             blockInput = Input.GetKey(KeyCode.LeftShift);
-            lockOn = Input.GetMouseButtonDown(2);
             mouseX = Input.GetAxis("Mouse X");
             mouseY = Input.GetAxis("Mouse Y");
             isAim = Input.GetKey(KeyCode.Tab);

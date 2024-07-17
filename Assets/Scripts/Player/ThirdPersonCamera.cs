@@ -74,13 +74,6 @@ public class ThirdPersonCamera : MonoBehaviour
         isRotaionOnMove = state;
     }
 
-    public Vector3 Rotation(Vector3 direction)
-    {
-        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _camera.transform.eulerAngles.y;
-        transform.rotation = Quaternion.Euler(0, targetAngle, 0);
-        return Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;
-    }
-
     void CameraLock()
     {
         Cursor.lockState = CursorLockMode.None;

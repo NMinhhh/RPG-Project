@@ -178,7 +178,10 @@ public class Player : MonoBehaviour, IDamageable
     public void Move(Vector3 direction, float speed)
     {
         Vector3 motion;
-        if (!lockOn || StateMachine.currentState == MoveState)
+        if (!lockOn || StateMachine.currentState == MoveState 
+            || StateMachine.currentState == JumpState 
+            || StateMachine.currentState == InAirState 
+            || StateMachine.currentState == LandingState)
         {
             motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.xInput == 1 && InputManager.Instance.zInput == 1 ? .7f : 1);
         }

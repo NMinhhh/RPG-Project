@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class LockOnTarget : MonoBehaviour
 {
-    [SerializeField] private Transform crossHair;
-    [SerializeField] private float offset;
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private GameObject closesTarget;
+    private float minDistance = 1000;
+    private float currentMinDistance;
+
 
     private Player player;
 
-    float minAngle = 180;
 
     private bool lockOn;
 
@@ -22,72 +22,62 @@ public class LockOnTarget : MonoBehaviour
     {
         player = GetComponent<Player>();
         lockOn = false;
+        currentMinDistance = minDistance;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(InputManager.Instance.lockOn && !lockOn)
+        if (CheckTarget())
         {
-            lockOn = true;
-            closesTarget = GetTarget();
-            if(closesTarget == null)
-                lockOn = false;
-            player.lockOn = lockOn;
-        }else if(InputManager.Instance.lockOn && lockOn)
-        {
-            if(closesTarget != null) 
-                closesTarget = null;
-            lockOn = false;
-            player.lockOn = lockOn;
+            GetTargetInRange();
         }
-        if (lockOn && player.StateMachine.currentState != player.MoveState)
+        else
         {
-            if(closesTarget == null || closesTarget.GetComponent<Enemy>().isDie)
-            {
-                player.lockOn = false;
-                lockOn = false;
-                closesTarget = null;
-
-            }if(closesTarget != null)
-            {
-                player.transform.LookAt(new Vector3(closesTarget.transform.position.x, player.transform.position.y, closesTarget.transform.position.z));
-                direction = (closesTarget.transform.position - player.transform.position).normalized;
-                player.SetLockOnDirectio(direction);
-            }
-          
+            closesTarget = null;
+            player.lockOn = false;
+            currentMinDistance = minDistance;
         }
-        LockAtTarget();
     }
 
-    public GameObject GetTarget()
+    public bool CheckTarget()
+    {
+        return Physics.CheckSphere(transform.position, radius, whatIsEnemy);
+    }
+
+    public void GetTargetInRange()
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, radius, whatIsEnemy);
-        minAngle = 180;
-        if (cols.Length <= 0 || closesTarget != null) return null;
-        GameObject target = null;
-        foreach(var col in cols)
+        currentMinDistance = minDistance;
+        if (cols.Length > 0)
         {
-            float agle = Vector3.Angle(transform.position, col.transform.position);
-            if (agle < minAngle)
+            foreach (var col in cols)
             {
-                minAngle = agle;
-                target = col.gameObject;
+                float distance = Vector3.Distance(transform.position, col.transform.position);
+                if (distance < currentMinDistance)
+                {
+                    currentMinDistance = distance;
+                    closesTarget = col.gameObject;
+                }
             }
         }
-        return target;
-    }
 
-    void LockAtTarget()
-    {
-        if (closesTarget == null)
+        if (closesTarget != null) 
         {
-            crossHair.gameObject.SetActive(false);
-            return;
+            if (closesTarget.GetComponent<Enemy>().isDie)
+            {
+                closesTarget = null;
+                player.lockOn = false;
+                currentMinDistance = minDistance;
+            }
+            else
+            {
+                direction = (closesTarget.transform.position - player.transform.position).normalized;
+                player.SetLockOnDirectio(direction);
+                player.lockOn = true;
+            }
         }
-        crossHair.gameObject.SetActive(true);
-        crossHair.position = closesTarget.transform.position + new Vector3(0, offset, 0);
-        crossHair.transform.rotation = Quaternion.LookRotation(crossHair.transform.position -  Camera.main.transform.position);
+
     }
 
     private void OnDrawGizmos()

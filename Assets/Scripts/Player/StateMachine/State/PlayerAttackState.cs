@@ -39,7 +39,10 @@ public class PlayerAttackState : PlayerState
         if (!player.lockOn)
             direction = new Vector3(InputManager.Instance.xInput, 0, InputManager.Instance.zInput).normalized;
         else
+        {
             direction = player.lockOnDirection;
+            player.transform.forward = direction;
+        }
         if (InputManager.Instance.attackInput)
         {
             isAttack = true;
