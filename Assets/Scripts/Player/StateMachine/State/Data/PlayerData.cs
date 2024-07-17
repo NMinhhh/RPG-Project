@@ -33,4 +33,8 @@ public class PlayerData : ScriptableObject
 
     [Header("Block")]
     public float parryTime = .5f;
+
+    [Header("Shoot")]
+    public GameObject arrow;
+
 }

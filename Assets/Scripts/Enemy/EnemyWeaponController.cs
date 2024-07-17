@@ -64,21 +64,6 @@ public class EnemyWeaponController : MonoBehaviour
 
     }
 
-    private void OnDisable()
-    {
-        if (currentLeftWeapon != null)
-        {
-            EndDealDamageToTheLeft();
-            DestroyImmediate(currentLeftWeapon);
-        }
-        if (currentRightWeapon != null)
-        {
-            EndDealDamageToTheRight();
-            DestroyImmediate(currentRightWeapon);
-
-        }
-    }
-
     public void StartDealDamageToTheLeft()
     {
         currentLeftWeapon.StartDealDamage();

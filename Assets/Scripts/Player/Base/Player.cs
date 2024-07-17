@@ -34,6 +34,10 @@ public class Player : MonoBehaviour, IDamageable
 
     public PlayerBlockState BlockState { get; private set; }
 
+    public PlayerAimState AimState { get; private set; }
+
+    public PlayerShootState ShootState { get; private set; }
+
     #endregion
 
     #region Component Variable
@@ -48,12 +52,16 @@ public class Player : MonoBehaviour, IDamageable
 
     public CharacterController character { get; private set; }
 
+    public ThirdPersonAim thirdPersonAim {  get; private set; }
+
 
     #endregion
 
     #region Check Transform
 
     [SerializeField] private Transform groundCheck;
+
+    [SerializeField] private Transform shootPoint;
 
     #endregion
 
@@ -105,6 +113,8 @@ public class Player : MonoBehaviour, IDamageable
         StrongAttack = new PlayerStrongAttack(this, StateMachine, data, "StrongAttack");
         BlockState = new PlayerBlockState(this, StateMachine, data, "Block");
         HurtState = new PlayerHurtState(this, StateMachine, data, "Hurt");
+        AimState = new PlayerAimState(this, StateMachine, data, "Aim");
+        ShootState = new PlayerShootState(this, StateMachine, data, "Shoot", shootPoint);
     }
 
     // Start is called before the first frame update
@@ -115,6 +125,7 @@ public class Player : MonoBehaviour, IDamageable
         character = GetComponent<CharacterController>();
         thirdPersonCamera = GetComponent<ThirdPersonCamera>();
         weaponsController = GetComponent<WeaponsController>();
+        thirdPersonAim = GetComponent<ThirdPersonAim>();
         currentHealth = data.maxHealth;
         maxComboAttack = data.combo;
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);

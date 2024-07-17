@@ -24,7 +24,8 @@ public class InputManager : Singleton<InputManager>
 
     public float mouseY { get; private set; }
 
-    public bool isAim { get; private set; }
+    public bool aimInput { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +46,7 @@ public class InputManager : Singleton<InputManager>
             blockInput = Input.GetKey(KeyCode.LeftShift);
             mouseX = Input.GetAxis("Mouse X");
             mouseY = Input.GetAxis("Mouse Y");
-            isAim = Input.GetKey(KeyCode.Tab);
+            aimInput = Input.GetKey(KeyCode.Tab);
         }
         else
         {
@@ -57,7 +58,7 @@ public class InputManager : Singleton<InputManager>
             strongAttackInput = false;
             blockInput = false;
             mouseX = mouseY = 0;
-            isAim = false;
+            aimInput = false;
         }
         pressEKey = Input.GetKeyDown(KeyCode.E);
 

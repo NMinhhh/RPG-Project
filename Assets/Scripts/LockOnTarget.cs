@@ -13,15 +13,12 @@ public class LockOnTarget : MonoBehaviour
 
     private Player player;
 
-
-    private bool lockOn;
-
     public Vector3 direction;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<Player>();
-        lockOn = false;
         currentMinDistance = minDistance;
     }
 

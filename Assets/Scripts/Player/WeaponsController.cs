@@ -7,19 +7,47 @@ public class WeaponsController : MonoBehaviour
 
     [SerializeField] private Transform rightWeaponsHolder;
     [SerializeField] private Transform leftWeaponsHolder;
+
     private EquippedWeapons currentLeftWeapons;
     private EquippedWeapons currentRightWeapons;
-    PlayerAnimatorController playerAnimatorController;
+    public GameObject currentBow;
     [SerializeField] private ItemData weaponData;
-
+    
+    PlayerAnimatorController playerAnimatorController;
 
     Player player;
+
+    private bool isRangeAttack;
 
     void Start()
     {
         player = GetComponent<Player>();
         playerAnimatorController = GetComponent<PlayerAnimatorController>();
         EquippedWeapons(weaponData);
+    }
+
+    private void Update()
+    {
+        if (isRangeAttack)
+        {
+            if(currentLeftWeapons != null)
+                currentLeftWeapons.gameObject.SetActive(false);
+             if(currentRightWeapons != null)
+                currentRightWeapons.gameObject.SetActive(false);
+            currentBow.SetActive(true);
+        }
+        else
+        {
+            if(currentLeftWeapons != null)
+                currentLeftWeapons.gameObject.SetActive(true);
+            if(currentRightWeapons != null)
+                currentRightWeapons.gameObject.SetActive(true);
+            currentBow.SetActive(false);
+        }
+    }
+    public void SetIsRangeAttack(bool state)
+    {
+        isRangeAttack = state;
     }
 
     public void EquippedWeapons(ItemData itemData)
