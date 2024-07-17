@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class WeaponsController : MonoBehaviour
 {
-
+    [Header("Holder Transform")]
     [SerializeField] private Transform rightWeaponsHolder;
     [SerializeField] private Transform leftWeaponsHolder;
+    [SerializeField] private Transform bowHolder;
+    [SerializeField] private Transform arrowHolder;
+    [Space]
+
+    [Header("Base Weapon Data")]
+    [SerializeField] private ItemData weaponData;
+    [Space]
+
+    [Header("Bow")]
+    [SerializeField] private Bow bow;
+    [Space]
+
 
     private EquippedWeapons currentLeftWeapons;
     private EquippedWeapons currentRightWeapons;
-    public GameObject currentBow;
-    [SerializeField] private ItemData weaponData;
-    
+
     PlayerAnimatorController playerAnimatorController;
 
     Player player;
@@ -30,19 +40,15 @@ public class WeaponsController : MonoBehaviour
     {
         if (isRangeAttack)
         {
-            if(currentLeftWeapons != null)
-                currentLeftWeapons.gameObject.SetActive(false);
-             if(currentRightWeapons != null)
-                currentRightWeapons.gameObject.SetActive(false);
-            currentBow.SetActive(true);
+            leftWeaponsHolder.gameObject.SetActive(false);
+            rightWeaponsHolder.gameObject.SetActive(false);
+            bowHolder.gameObject.SetActive(true);
         }
         else
         {
-            if(currentLeftWeapons != null)
-                currentLeftWeapons.gameObject.SetActive(true);
-            if(currentRightWeapons != null)
-                currentRightWeapons.gameObject.SetActive(true);
-            currentBow.SetActive(false);
+            leftWeaponsHolder.gameObject.SetActive(true);
+            rightWeaponsHolder.gameObject.SetActive(true);
+            bowHolder.gameObject.SetActive(false);
         }
     }
     public void SetIsRangeAttack(bool state)
@@ -118,4 +124,23 @@ public class WeaponsController : MonoBehaviour
         currentRightWeapons.EndDealDamage();
     }
 
+    public void StartArrowShoot()
+    {
+        arrowHolder.gameObject.SetActive(true);
+    }
+
+    public void EndArrowShoot()
+    {
+        arrowHolder.gameObject.SetActive(false);
+    }
+
+    public void BowStringPull()
+    {
+        bow.BowStringPull();
+    }
+
+    public void BowStringNotPull()
+    {
+        bow.BowStringNotPull();
+    }
 }

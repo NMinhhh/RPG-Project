@@ -33,6 +33,18 @@ public class AttackAnimationEvent : MonoBehaviour
         weaponController.EndDealDamageToTheRight();
     }
 
+    public void BowStringPull()
+    {
+        weaponController.BowStringPull();
+        weaponController.StartArrowShoot();
+    }
+
+    public void BowStringNotPull()
+    {
+        weaponController.BowStringNotPull();
+        weaponController.EndArrowShoot();
+    }
+
     public void NextAttack() => InputManager.Instance.UseAttackInput();
 
     public void FinishAnimation()

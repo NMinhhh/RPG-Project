@@ -14,6 +14,8 @@ public class PlayerAimState : PlayerState
     {
         base.Enter();
         player.Anim.SetLayerWeight(1, 1);
+        player.weaponsController.StartArrowShoot();
+        player.weaponsController.BowStringPull();
 
     }
 
@@ -43,6 +45,8 @@ public class PlayerAimState : PlayerState
         }
         else if (!isAim)
         {
+            player.weaponsController.EndArrowShoot();
+            player.weaponsController.BowStringNotPull();
             player.Anim.SetLayerWeight(1, 0);
             stateMachine.ChangeState(player.IdleState);
         }

@@ -52049,18 +52049,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 649383069912331487, guid: f9984bc55ffc7c946905a040be6b00e2, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b9b7abc5229f731419af8fdaa6de31af, type: 2}
     - target: {fileID: 827181214567348044, guid: f9984bc55ffc7c946905a040be6b00e2, type: 3}
       propertyPath: _camera
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 1421620520287085970, guid: f9984bc55ffc7c946905a040be6b00e2, type: 3}
-      propertyPath: shootPoint
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1883767012510258534, guid: f9984bc55ffc7c946905a040be6b00e2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -52105,10 +52097,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4642901303050889476, guid: f9984bc55ffc7c946905a040be6b00e2, type: 3}
-      propertyPath: currentBow
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 9092287954486400499, guid: f9984bc55ffc7c946905a040be6b00e2, type: 3}
       propertyPath: crossHair
       value: 
@@ -52117,10 +52105,6 @@ PrefabInstance:
       propertyPath: cinemachineVirtual
       value: 
       objectReference: {fileID: 124495650}
-    - target: {fileID: 9092287954486400499, guid: f9984bc55ffc7c946905a040be6b00e2, type: 3}
-      propertyPath: whatIsGround.m_Bits
-      value: 384
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
