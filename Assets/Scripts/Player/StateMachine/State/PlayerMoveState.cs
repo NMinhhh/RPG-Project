@@ -14,6 +14,8 @@ public class PlayerMoveState : PlayerState
 
     private bool isBlock;
 
+    private bool isAim;
+
     public PlayerMoveState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
@@ -39,6 +41,7 @@ public class PlayerMoveState : PlayerState
         isJump = InputManager.Instance.jumpInput;
         isStrongAttack = InputManager.Instance.strongAttackInput;
         isAttack = InputManager.Instance.attackInput;
+        isAim = InputManager.Instance.aimInput;
 
     }
 
@@ -51,6 +54,10 @@ public class PlayerMoveState : PlayerState
         if (isJump)
         {
             stateMachine.ChangeState(player.JumpState);
+        }
+        else if(isAim)
+        {
+            stateMachine.ChangeState(player.AimState);
         }
         else if (isBlock)
         {

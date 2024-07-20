@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7632453712996371258}
   - component: {fileID: 6181088191989575048}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7860631509418751461}
   - component: {fileID: 6415741883385282092}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 6060717582089053052}
   - component: {fileID: 4200883536590220526}
   - component: {fileID: 3916744129140911548}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,6 +15,7 @@ public class PlayerShootState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.thirdPersonAim.Aim();
     }
 
     public override void Exit()
@@ -36,6 +37,7 @@ public class PlayerShootState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        player.thirdPersonAim.Aim();
         if (isFinishAnimtion)
         {
             if (isAim)
@@ -45,6 +47,7 @@ public class PlayerShootState : PlayerState
             else
             {
                 player.Anim.SetLayerWeight(1, 0);
+                player.thirdPersonAim.NotAim();
                 stateMachine.ChangeState(player.IdleState);
             }
  

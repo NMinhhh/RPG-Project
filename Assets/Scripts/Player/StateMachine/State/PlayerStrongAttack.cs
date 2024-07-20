@@ -8,7 +8,7 @@ public class PlayerStrongAttack : PlayerState
     private float moveTime;
     private bool isMove;
     private bool isBlock;
-
+    private bool isAim;
     public PlayerStrongAttack(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
     }
@@ -42,6 +42,7 @@ public class PlayerStrongAttack : PlayerState
             player.transform.forward = direction;
         }
         isBlock = InputManager.Instance.blockInput;
+        isAim = InputManager.Instance.aimInput;
     }
 
     public override void LogicUpdate()
@@ -56,7 +57,11 @@ public class PlayerStrongAttack : PlayerState
         }
         if (isFinishAnimtion)
         {
-            if (isBlock)
+            if (isAim)
+            {
+                stateMachine.ChangeState(player.AimState);
+            }
+            else if (isBlock)
             {
 
             }

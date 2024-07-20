@@ -132,6 +132,7 @@ public class Player : MonoBehaviour, IDamageable
         EquipSystem.Instance.usePotion += UpdateHealth;
         StateMachine.Intialize(IdleState);
         isParry = false;
+        
     }
 
 
@@ -192,7 +193,8 @@ public class Player : MonoBehaviour, IDamageable
         if (!lockOn || StateMachine.currentState == MoveState 
             || StateMachine.currentState == JumpState 
             || StateMachine.currentState == InAirState 
-            || StateMachine.currentState == LandingState)
+            || StateMachine.currentState == LandingState 
+            || StateMachine.currentState == AimState)
         {
             motion = thirdPersonCamera.MoveRotation(direction) * (InputManager.Instance.xInput == 1 && InputManager.Instance.zInput == 1 ? .7f : 1);
         }

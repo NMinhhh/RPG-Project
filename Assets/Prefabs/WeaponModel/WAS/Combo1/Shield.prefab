@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6764697719488647322}
   - component: {fileID: 8812101359378786353}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 1460920020811434563}
   - component: {fileID: 5999582247096804009}
   - component: {fileID: 2002518986664921984}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShieldHandle_Arm1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 4359000826502182797}
   - component: {fileID: 4054695285069927555}
   - component: {fileID: 2054922627159106534}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}

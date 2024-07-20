@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9182417137875643288}
   - component: {fileID: 7032270066932343575}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: mo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1258729902766630095}
   - component: {fileID: 7310766596838042102}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1444289782795325319}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2930263893311381371}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Muzzle_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 362792260619822078}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: roll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3373741697723679641}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 495328018702436305}
   - component: {fileID: 1271152449670952345}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Katana_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6764135769045025403}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Katana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -364,7 +364,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6416599795138576840}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: roll_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -16,7 +16,14 @@ public class EnemyIdleState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        isPlayerDetected = enemy.CheckPlayerDetected();
+        if(enemy.CheckPlayerDetected() && !enemy.CheckBlock())
+        {
+            isPlayerDetected = true;
+        }
+        else
+        {
+            isPlayerDetected = false;
+        }
 
     }
 

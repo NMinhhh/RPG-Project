@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4193896985745503153}
   - component: {fileID: 2751513202781388319}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 3382718723413919361}
   - component: {fileID: 935425471935262225}
   - component: {fileID: 581266533779229671}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Axe_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}

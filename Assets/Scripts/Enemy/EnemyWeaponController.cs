@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyWeaponController : MonoBehaviour
 {
-    [SerializeField] private Transform rightWeaponsHolder;
-    [SerializeField] private Transform leftWeaponsHolder;
 
     [SerializeField] private EnemyWeapon rightWeapon;
     [SerializeField] private EnemyWeapon leftWeapon;
@@ -19,9 +17,9 @@ public class EnemyWeaponController : MonoBehaviour
     void Start()
     {
         if (isLeft)
-            EquippedLeftWeapons(rightWeapon.name);
+            currentLeftWeapon = leftWeapon;
         if (isRight)
-            EquippedRightWeapons(rightWeapon.name);
+            currentRightWeapon = rightWeapon;
     }
 
     public void SetDamageRightWeapon(float damage)
@@ -40,47 +38,18 @@ public class EnemyWeaponController : MonoBehaviour
         }
     }
 
-    public void EquippedRightWeapons(string weaponsName)
+    public void StartDealDamageToTheLeft() => currentLeftWeapon.StartDealDamage();
+
+    public void EndDealDamageToTheLeft() => currentLeftWeapon.EndDealDamage();
+
+    public void StartDealDamageToTheRight() => currentRightWeapon.StartDealDamage();
+
+    public void EndDealDamageToTheRight() => currentRightWeapon.EndDealDamage();
+
+    public void EndDealDamageAll()
     {
-        if (rightWeapon != null)
-        {
-            EnemyWeapon enemyWeapon = Resources.Load<EnemyWeapon>("Enemy/"+ weaponsName);
-            currentRightWeapon = Instantiate(enemyWeapon, enemyWeapon.transform.localPosition, enemyWeapon.transform.rotation) as EnemyWeapon;
-            currentRightWeapon.transform.SetParent(rightWeaponsHolder.transform, false);
+        if(currentLeftWeapon!= null) currentLeftWeapon.EndDealDamage();
 
-        }
-
-    }
-
-    public void EquippedLeftWeapons(string weaponsName)
-    {
-        if (rightWeapon != null)
-        {
-            EnemyWeapon enemyWeapon = Resources.Load<EnemyWeapon>("Enemy/" + weaponsName);
-            currentLeftWeapon = Instantiate(enemyWeapon, enemyWeapon.transform.localPosition, enemyWeapon.transform.rotation) as EnemyWeapon;
-            currentLeftWeapon.transform.SetParent(leftWeaponsHolder.transform, false);
-
-        }
-
-    }
-
-    public void StartDealDamageToTheLeft()
-    {
-        currentLeftWeapon.StartDealDamage();
-    }
-
-    public void EndDealDamageToTheLeft()
-    {
-        currentLeftWeapon.EndDealDamage();
-    }
-
-    public void StartDealDamageToTheRight()
-    {
-        currentRightWeapon.StartDealDamage();
-    }
-
-    public void EndDealDamageToTheRight()
-    {
-        currentRightWeapon.EndDealDamage();
+        if(currentRightWeapon!= null) currentRightWeapon.EndDealDamage();
     }
 }

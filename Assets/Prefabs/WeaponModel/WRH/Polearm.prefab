@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 573965775919571621}
   - component: {fileID: 1232736423196993338}
   - component: {fileID: 6956046774266691281}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Polearm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4204968229349926988}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: 'FVX '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 1490918615250203270}
   - component: {fileID: 6782549801722082508}
   - component: {fileID: 7015693802535984056}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5039,7 +5039,7 @@ GameObject:
   - component: {fileID: 8015370664482870343}
   - component: {fileID: 5070555202122015416}
   - component: {fileID: 7585533403075362739}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Glow (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9927,7 +9927,7 @@ GameObject:
   - component: {fileID: 4832824035919047899}
   - component: {fileID: 4009460286519459478}
   - component: {fileID: 8738747855526409560}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14815,7 +14815,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3862816456457443085}
   - component: {fileID: 60293445957293248}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Attack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14869,7 +14869,7 @@ GameObject:
   - component: {fileID: 4578601415253485158}
   - component: {fileID: 1198000194621468754}
   - component: {fileID: 398990115079832164}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

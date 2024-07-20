@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8352674992953719204}
   - component: {fileID: 1903614196916931108}
   - component: {fileID: 1882191867912924982}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Arrow_stick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4521420235123058133}
   - component: {fileID: 2206518822176301220}
   - component: {fileID: 6813461271654497188}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: arrowhead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8406247470470926773}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Arrowhead_place
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,8 @@ GameObject:
   - component: {fileID: 983216656265841024}
   - component: {fileID: 8127498548412829017}
   - component: {fileID: 8561232624512847314}
-  m_Layer: 0
+  - component: {fileID: 3376697300793901487}
+  m_Layer: 12
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +265,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3623f53bea4d714a956f285d0203c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 30
+--- !u!54 &3376697300793901487
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8330857282276292541}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &8595933452819092133
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,7 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 405173677505629034}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}

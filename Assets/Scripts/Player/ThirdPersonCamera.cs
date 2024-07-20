@@ -9,12 +9,17 @@ public class ThirdPersonCamera : MonoBehaviour
     [SerializeField] private GameObject cinemachineTargetCamera;
 
     [SerializeField] private float sensivitive;
+    [SerializeField] private float mixPitch;
+    [SerializeField] private float maxPitch;
     private float cinemachineTargetYaw;
     private float cinemachineTargetPitch;
 
     [SerializeField] private Camera _camera;
     [SerializeField] protected float smooth;
     private float velocity;
+
+    private float currentMinPitch;
+    private float currentMaxPitch;
 
     private bool isRotaionOnMove;
 
@@ -27,7 +32,7 @@ public class ThirdPersonCamera : MonoBehaviour
         Cursor.visible = false;
         InventorySystem.cameraLock += CameraLock;
         InventorySystem.cameraUnlock += CameraUnlock;
-
+        SetPitch(mixPitch, maxPitch);
     }
 
     private void LateUpdate()
@@ -35,9 +40,15 @@ public class ThirdPersonCamera : MonoBehaviour
         UpdateCameraRotation();  
     }
 
+    public void SetPitch(float mixpitch, float maxPitch)
+    {
+        this.currentMinPitch = mixpitch;
+        this.currentMaxPitch = maxPitch;
+    }
+
     private void UpdateCameraRotation()
     {
-        cinemachineTargetPitch = GetCameraRotaion(cinemachineTargetPitch, GetMouseSpeed(InputManager.Instance.mouseY), -70, 70, true);
+        cinemachineTargetPitch = GetCameraRotaion(cinemachineTargetPitch, GetMouseSpeed(InputManager.Instance.mouseY), currentMinPitch, currentMaxPitch, true);
         cinemachineTargetYaw = GetCameraRotaion(cinemachineTargetYaw, GetMouseSpeed(InputManager.Instance.mouseX), float.MinValue, float.MaxValue, false);
         cinemachineTargetCamera.transform.rotation = Quaternion.Euler(cinemachineTargetPitch, cinemachineTargetYaw, 0);
     }

@@ -16,6 +16,7 @@ public class EnemyPlayerDetectedState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
+        enemy.WeaponsController.EndDealDamageAll();
         isPlayerDetected = enemy.CheckPlayerDetected();
         isPlayerInRange = enemy.CheckPlayerInRange();
     }

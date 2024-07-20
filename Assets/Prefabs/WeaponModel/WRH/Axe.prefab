@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1532527641308647905}
   - component: {fileID: 4037189799050239740}
   - component: {fileID: 5134828527985157639}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4898,7 +4898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4918996886303999254}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: FVX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4935,7 +4935,7 @@ GameObject:
   - component: {fileID: 2597980771864564353}
   - component: {fileID: 7570780672265878360}
   - component: {fileID: 2992640473766128972}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9823,7 +9823,7 @@ GameObject:
   - component: {fileID: 4215996086368706279}
   - component: {fileID: 6227523101418679726}
   - component: {fileID: 4170569709462548592}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Glow (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14711,7 +14711,7 @@ GameObject:
   - component: {fileID: 1072090843365257102}
   - component: {fileID: 8717665504228264780}
   - component: {fileID: 755690662967397945}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Particle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19600,7 +19600,7 @@ GameObject:
   - component: {fileID: 5625045349525344406}
   - component: {fileID: 2695933775015427391}
   - component: {fileID: 8244926624902354343}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19703,7 +19703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3751838251545100602}
   - component: {fileID: 6878655929784333741}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: 'Attack '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

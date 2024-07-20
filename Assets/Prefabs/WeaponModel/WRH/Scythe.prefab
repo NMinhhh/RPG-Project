@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6325956790548117617}
   - component: {fileID: 4192904434281557190}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 3591822628865734701}
   - component: {fileID: 7834482415176323076}
   - component: {fileID: 2283605736802217370}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Scythe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

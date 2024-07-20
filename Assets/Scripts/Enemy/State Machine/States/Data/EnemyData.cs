@@ -12,4 +12,10 @@ public class EnemyData : ScriptableObject
     public float radiusCheckToAttack;
 
     public float knockBackSpeed = 1;
+
+    public LayerMask whatIsWall;
+
+    public int maxCombo = 1;
+
+    public int amountOfDamageToHurt = 1;
 }

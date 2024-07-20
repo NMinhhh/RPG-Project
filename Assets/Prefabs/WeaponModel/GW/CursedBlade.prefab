@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5172207808810210819}
   - component: {fileID: 7227596590930449548}
   - component: {fileID: 3169815355661040503}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CursedBlade
   m_TagString: Untagged
   m_Icon: {fileID: 0}

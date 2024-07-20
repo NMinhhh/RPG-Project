@@ -37,13 +37,9 @@ public class DemonPlayerDetectedState : EnemyPlayerDetectedState
         {
             stateMachine.ChangeState(_demon.MeleeAttackState);
         }
-        else if (isPlayerDetected && !isPlayerInRange)
+        else if ((isPlayerDetected && !isPlayerInRange) || !isPlayerDetected)
         {
             stateMachine.ChangeState(_demon.ChaseState);
-        }
-        else if(!isPlayerDetected)
-        {
-            stateMachine.ChangeState(_demon.IdleState);
         }
     }
 

@@ -5,7 +5,8 @@ using UnityEngine;
 public class DemonMoveState : EnemyMoveState
 {
     private Demon _demon;
-    public DemonMoveState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyMoveData data, Demon demon) : base(enemy, stateMachine, isAnimationName, data)
+
+    public DemonMoveState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyMoveData data, Transform[] destination, Demon demon) : base(enemy, stateMachine, isAnimationName, data, destination)
     {
         _demon = demon;
     }

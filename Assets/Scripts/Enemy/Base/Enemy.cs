@@ -31,9 +31,15 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     #endregion
 
+    #region Transform
+
+    [SerializeField] protected Transform[] destinations; 
+
+    #endregion
+
     #region Variable
 
-    public Transform PlayerPos { get; private set; }
+    public Transform playerPos { get; private set; }
 
     //Health
     protected float maxHelth;
@@ -46,6 +52,18 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     public Vector3 damageDir {  get; private set; }
 
+    protected int maxCombo;
+    protected int currentCombo;
+
+    //Amount of damage to change hurt state
+    protected int currentAODToHurt;
+
+    //Amount of attack to change state
+    public int amountOfAttack {  get; private set; }
+
+    //Check first damage to attack player
+    protected bool isCheckFirstDamage;
+
     #endregion
 
     #region Unity Function
@@ -53,7 +71,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        PlayerPos = GameObject.FindGameObjectWithTag("Player").transform;
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         alive = transform.Find("Alive").gameObject;
         Anim = alive.GetComponent<Animator>();
         Agent = GetComponent<NavMeshAgent>();
@@ -62,6 +80,8 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         WeaponsController = GetComponent<EnemyWeaponController>();
         maxHelth = data.MaxHealthData;
         currentHealth = maxHelth;
+        maxCombo = data.maxCombo;
+        currentAODToHurt = data.amountOfDamageToHurt;
     }
 
     // Update is called once per frame
@@ -96,21 +116,23 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     #endregion
 
-
     #region Health Function
 
     public virtual void Damage(float damage)
     {
+        isHurt = false;
+        currentAODToHurt--;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
         HealthBar.UpdateHealthBar(currentHealth, maxHelth);
-        if (currentHealth > 0)
+        if (currentHealth > 0 && currentAODToHurt <= 0)
         {
+            currentAODToHurt = data.amountOfDamageToHurt;
             isHurt = true;
         }
-        else
+        else if(currentHealth <= 0)
         {
             isDie = true;
-            Destroy(HealthBar.gameObject);
+            HealthBar.gameObject.SetActive(false);
         }
     }
 
@@ -118,6 +140,8 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     {
         Destroy(gameObject);
     }
+
+    
 
     #endregion
 
@@ -130,16 +154,21 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     public bool CheckPlayerDetected()
     {
-        return Vector3.Distance(transform.position, PlayerPos.position) <= data.radiusCheckToChase;
+        return Vector3.Distance(transform.position, playerPos.position) <= data.radiusCheckToChase;
     }
 
     public bool CheckPlayerInRange()
     {
-        return Vector3.Distance(transform.position, PlayerPos.position) <= data.radiusCheckToAttack;
+        return Vector3.Distance(transform.position, playerPos.position) <= data.radiusCheckToAttack;
+    }
+
+    public bool CheckBlock()
+    {
+        float distance = Vector3.Distance(transform.position, playerPos.position);
+        return Physics.Raycast(transform.position + Vector3.up, (playerPos.position - transform.position).normalized, distance, data.whatIsWall);
     }
 
     #endregion
-
 
     #region Knock Back Function
 
@@ -155,7 +184,41 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     #endregion
 
+    #region Attack Function
+
+    public void IncreaseAmountOfAttack()
+    {
+        amountOfAttack++;
+    }
+
+    public void ResetAmountOfAttack()
+    {
+        amountOfAttack = 0;
+    }
+    public int GetCurrentCombo()
+    {
+        currentCombo++;
+        if(currentCombo > maxCombo)
+        {
+            currentCombo = 1;
+        }
+        return currentCombo;
+    }
+
+    public void ResetCombo()
+    {
+        currentCombo = 0;
+    }
+
+    #endregion
+
     #region Others Function
+
+    public virtual Vector3 GetPlayerDirection()
+    {
+        return (playerPos.position - transform.position).normalized;
+    }
+
     public virtual void TriggerAnimation() => StateMachine.CurrentEnemyState.TriggerAnimation();
 
     public virtual void FinishAnimation()

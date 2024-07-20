@@ -32,10 +32,6 @@ public class DemonChaseState : EnemyChaseState
         {
             stateMachine.ChangeState(_demon.MeleeAttackState);
         }
-        else if (!isPlayerDetected)
-        {
-            stateMachine.ChangeState(_demon.IdleState);
-        }
     }
 
     public override void PhysicUpdate()

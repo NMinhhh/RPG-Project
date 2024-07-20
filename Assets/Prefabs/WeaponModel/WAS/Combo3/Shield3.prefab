@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7818552246185476830}
   - component: {fileID: 5813147818786462736}
   - component: {fileID: 3017730469058164495}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShieldHandle_Hand2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 2608773792543352854}
   - component: {fileID: 3966474385106123397}
   - component: {fileID: 1950607399943327220}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Shield3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

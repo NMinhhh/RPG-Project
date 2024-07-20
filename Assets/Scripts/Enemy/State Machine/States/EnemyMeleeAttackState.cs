@@ -5,21 +5,28 @@ using UnityEngine;
 public class EnemyMeleeAttackState : EnemyState
 {
     protected EnemyMeleeAttackData data;
-    protected bool isPlayerInRange;
+    protected bool isPlayerDetected;
     public EnemyMeleeAttackState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyMeleeAttackData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
     }
 
+    public override void DoCheck()
+    {
+        base.DoCheck();
+        isPlayerDetected = enemy.CheckPlayerDetected();
+    }
+
     public override void Enter()
     {
         base.Enter();
+        enemy.Anim.SetInteger("Combo",enemy.GetCurrentCombo());
         enemy.WeaponsController.SetDamageRightWeapon(data.rightDamage);
         enemy.WeaponsController.SetDamageLeftWeapon(data.leftDamage);
-        isPlayerInRange = false;
         enemy.SetSpeed(0);
         enemy.Move(enemy.transform.position);
-        enemy.transform.LookAt(new Vector3(enemy.PlayerPos.position.x, enemy.transform.position.y, enemy.PlayerPos.position.z));
+        enemy.transform.LookAt(new Vector3(enemy.playerPos.position.x, enemy.transform.position.y, enemy.playerPos.position.z));
+        enemy.IncreaseAmountOfAttack();
     }
 
     public override void Exit()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6349465838626710451}
   - component: {fileID: 8024032684218951925}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 5446000195605444645}
   - component: {fileID: 5227059397305319768}
   - component: {fileID: 1125318294305372864}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

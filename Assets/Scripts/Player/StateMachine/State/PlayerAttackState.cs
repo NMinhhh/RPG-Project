@@ -11,6 +11,7 @@ public class PlayerAttackState : PlayerState
     private bool isStrongAttack;
     private bool isBlock;
     private bool isJump;
+    private bool isAim;
 
     public PlayerAttackState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName) : base(player, stateMachine, data, isAnimationName)
     {
@@ -65,6 +66,13 @@ public class PlayerAttackState : PlayerState
             isBlock = false;
             isStrongAttack = false;
         }
+        isAim = InputManager.Instance.aimInput;
+        if (isAim)
+        {
+            isAttack = false;
+            isBlock = false;
+            isStrongAttack = false;
+        }
     }
 
     public override void LogicUpdate()
@@ -82,6 +90,10 @@ public class PlayerAttackState : PlayerState
             if (isJump)
             {
                 stateMachine.ChangeState(player.JumpState);
+            }
+            else if(isAim)
+            {
+                stateMachine.ChangeState(player.AimState);
             }
             else if (isBlock)
             {

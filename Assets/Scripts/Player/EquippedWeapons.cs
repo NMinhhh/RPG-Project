@@ -56,10 +56,7 @@ public class EquippedWeapons : MonoBehaviour
         this.damage = damage;
     }
 
-    public void StartDealDamage()
-    {
-        isAttack = true;
-    }
+    public void StartDealDamage() => isAttack = true;
 
     public void EndDealDamage()
     {

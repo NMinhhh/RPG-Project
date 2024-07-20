@@ -8,17 +8,26 @@ public class EnemyMoveState : EnemyState
     protected Vector3 randomPos;
     protected bool isFinishMove;
     protected bool isPlayerDetected;
+    protected Transform[] destination;
 
-    public EnemyMoveState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyMoveData data) : base(enemy, stateMachine, isAnimationName)
+    public EnemyMoveState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyMoveData data, Transform[] destination) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
+        this.destination = destination;
     }
 
     public override void DoCheck()
     {
         base.DoCheck();
-        isPlayerDetected = enemy.CheckPlayerDetected();
-        if (enemy.GetDistance(enemy.transform.position, randomPos) <= 0.5f)
+        if(enemy.CheckPlayerDetected() && !enemy.CheckBlock())
+        {
+            isPlayerDetected = true;
+        }
+        else
+        {
+            isPlayerDetected = false;
+        }
+        if (enemy.GetDistance(enemy.transform.position, randomPos) <= 0.1f)
         {
             isFinishMove = true;
         }
@@ -28,7 +37,7 @@ public class EnemyMoveState : EnemyState
     {
         base.Enter();
         isFinishMove = false;
-        randomPos = enemy.GetRandomPos(data.XPosRandom, data.YPosRandom);
+        randomPos = destination[Random.Range(0,destination.Length)].position;
         enemy.SetSpeed(data.Speed);
         enemy.transform.LookAt(randomPos);
         enemy.Move(randomPos);

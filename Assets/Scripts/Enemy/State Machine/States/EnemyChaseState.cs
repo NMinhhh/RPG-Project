@@ -6,7 +6,6 @@ public class EnemyChaseState : EnemyState
 {
     protected EnemyChaseData data;
     protected bool isPlayerInRange;
-    protected bool isPlayerDetected;
     public EnemyChaseState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyChaseData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
@@ -16,7 +15,6 @@ public class EnemyChaseState : EnemyState
     {
         base.DoCheck();
         isPlayerInRange = enemy.CheckPlayerInRange();
-        isPlayerDetected = enemy.CheckPlayerDetected();
     }
 
     public override void Enter()
@@ -38,8 +36,8 @@ public class EnemyChaseState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        enemy.Move(enemy.PlayerPos.position);
-        enemy.transform.LookAt(new Vector3(enemy.PlayerPos.position.x,enemy.transform.position.y,enemy.PlayerPos.position.z));
+        enemy.Move(enemy.playerPos.position);
+        enemy.transform.LookAt(new Vector3(enemy.playerPos.position.x,enemy.transform.position.y,enemy.playerPos.position.z));
 
     }
 

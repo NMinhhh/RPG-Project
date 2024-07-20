@@ -39,13 +39,12 @@ public class Demon : Enemy
     [SerializeField] private EnemyDeathData _deathData;
     #endregion
 
-
     protected override void Start()
     {
         base.Start();
         IdleState = new DemonIdleState(this, StateMachine, "Idle", _idleData, this);
         HurtState = new DemonHurtState(this, StateMachine, "Hurt", _hurtData, this);
-        MoveState = new DemonMoveState(this, StateMachine, "Move", _moveData, this);
+        MoveState = new DemonMoveState(this, StateMachine, "Move", _moveData, destinations, this);
         ChaseState = new DemonChaseState(this, StateMachine, "Chase", _chaseData, this);
         MeleeAttackState = new DemonMeleeAttackState(this, StateMachine, "MeleeAttack", _meleeAttackData, this);
         PlayerDetectedState = new DemonPlayerDetectedState(this, StateMachine, "PlayerDetected", _playerDetectedData, this);

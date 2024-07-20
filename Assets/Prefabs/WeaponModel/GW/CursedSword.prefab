@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 231994001120449322}
   - component: {fileID: 2106084374876640953}
   - component: {fileID: 1787651186188661656}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CursedSword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5507329278142821475}
   - component: {fileID: 3846527995182820252}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Attack Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}

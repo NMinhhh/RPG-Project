@@ -33,7 +33,7 @@ public class DemonMeleeAttackState : EnemyMeleeAttackState
         base.LogicUpdate();
         if (isFinishAnimation)
         {
-            stateMachine.ChangeState(_demon.IdleState);
+            stateMachine.ChangeState(_demon.PlayerDetectedState);
         }
     }
 

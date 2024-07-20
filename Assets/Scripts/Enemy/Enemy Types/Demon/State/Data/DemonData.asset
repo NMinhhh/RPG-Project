@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdc73453c6a85a4aba6c0ff89e8a72f, type: 3}
   m_Name: DemonData
   m_EditorClassIdentifier: 
-  MaxHealthData: 453.3
-  radiusCheckToChase: 15
+  MaxHealthData: 200
+  radiusCheckToChase: 10
   radiusCheckToAttack: 1.65
   knockBackSpeed: 0.3
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 128

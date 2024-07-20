@@ -28,13 +28,9 @@ public class DemonHurtState : EnemyHurtState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (isPlayerDetected && isHurtFinish)
+        if (isHurtFinish)
         {
             stateMachine.ChangeState(_demon.PlayerDetectedState);
-        }
-        else if (isHurtFinish)
-        {
-            stateMachine.ChangeState(_demon.IdleState);
         }
     }
 
