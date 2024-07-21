@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1d8d55151cbe654b9881a9b891b38ab, type: 3}
   m_Name: OrkDashAttackData
   m_EditorClassIdentifier: 
-  dashTime: 2
+  dashTime: 1.5
   leftDamage: 20
   rightDamage: 20
-  dashSpeed: 16
+  dashSpeed: 15
+  dashDelayTime: 0.2

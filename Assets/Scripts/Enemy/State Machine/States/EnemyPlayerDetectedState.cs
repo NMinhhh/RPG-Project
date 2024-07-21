@@ -8,6 +8,7 @@ public class EnemyPlayerDetectedState : EnemyState
     protected bool isPlayerDetected;
     protected bool isPlayerInRange;
     protected bool isDetectedOver;
+    protected bool canDash;
     public EnemyPlayerDetectedState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyPlayerDetectedData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
@@ -16,9 +17,10 @@ public class EnemyPlayerDetectedState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        enemy.WeaponsController.EndDealDamageAll();
         isPlayerDetected = enemy.CheckPlayerDetected();
         isPlayerInRange = enemy.CheckPlayerInRange();
+        enemy.WeaponsController.EndDealDamageAll();
+        canDash = enemy.CanDash();
     }
 
     public override void Enter()

@@ -6,6 +6,7 @@ public class EnemyDashAttackState : EnemyState
 {
     protected EnemyDashAttackData data;
     protected Vector3 direction;
+    protected bool isStartDash;
     protected bool isFinishDash;
     public EnemyDashAttackState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyDashAttackData data) : base(enemy, stateMachine, isAnimationName)
     {
@@ -26,7 +27,7 @@ public class EnemyDashAttackState : EnemyState
         isFinishDash = false;
         enemy.WeaponsController.SetDamageRightWeapon(data.rightDamage);
         enemy.WeaponsController.SetDamageLeftWeapon(data.leftDamage);
-        direction = enemy.GetPlayerDirection();
+        isStartDash = false;
         
     }
 
@@ -43,11 +44,22 @@ public class EnemyDashAttackState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        enemy.transform.position += direction * data.dashSpeed * Time.deltaTime;
-        if (Time.time >= startTime + data.dashTime)
+        if (isStartDash)
         {
+            enemy.Dash(direction, data.dashSpeed);
+        }
+        if (Time.time >= startTime + data.dashDelayTime && !isStartDash)
+        {
+            startTime = Time.time;
+            direction = enemy.GetPlayerDirection();
+            isStartDash = true;
+        }
+        if (Time.time >= startTime + data.dashTime && isStartDash)
+        {
+            enemy.SetDashState(false);
             isFinishDash = true;
         }
+      
     }
 
     public override void PhysicUpdate()

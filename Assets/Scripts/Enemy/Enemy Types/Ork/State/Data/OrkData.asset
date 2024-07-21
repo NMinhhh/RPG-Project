@@ -21,3 +21,5 @@ MonoBehaviour:
     m_Bits: 128
   maxCombo: 2
   amountOfDamageToHurt: 10
+  isDash: 1
+  dashCooldownRan: {x: 10, y: 15}

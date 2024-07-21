@@ -37,6 +37,9 @@ public class OrkChaseState : EnemyChaseState
         if (isPlayerInRange)
         {
             stateMachine.ChangeState(ork.MeleeAttackState);
+        }else if(canDash && !isPlayerInRange)
+        {
+            stateMachine.ChangeState(ork.DashAttackState);
         }
     }
 

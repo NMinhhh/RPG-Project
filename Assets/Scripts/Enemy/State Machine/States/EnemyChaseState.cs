@@ -6,6 +6,7 @@ public class EnemyChaseState : EnemyState
 {
     protected EnemyChaseData data;
     protected bool isPlayerInRange;
+    protected bool canDash;
     public EnemyChaseState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyChaseData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
@@ -15,6 +16,7 @@ public class EnemyChaseState : EnemyState
     {
         base.DoCheck();
         isPlayerInRange = enemy.CheckPlayerInRange();
+        canDash = enemy.CanDash();
     }
 
     public override void Enter()

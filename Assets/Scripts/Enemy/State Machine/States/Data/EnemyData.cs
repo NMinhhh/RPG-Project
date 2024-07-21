@@ -18,4 +18,8 @@ public class EnemyData : ScriptableObject
     public int maxCombo = 1;
 
     public int amountOfDamageToHurt = 1;
+
+    [Header("Dash Attack")]
+    public bool isDash;
+    public Vector2 dashCooldownRan;
 }

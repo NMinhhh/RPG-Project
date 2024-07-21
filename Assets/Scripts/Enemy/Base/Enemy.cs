@@ -62,7 +62,11 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     public int amountOfAttack {  get; private set; }
 
     //Check first damage to attack player
-    protected bool isCheckFirstDamage;
+    protected bool isFirstDamage;
+
+    //Check to dash
+    protected float currentDashCooldown;
+    protected bool canDash;
 
     #endregion
 
@@ -82,12 +86,18 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         currentHealth = maxHelth;
         maxCombo = data.maxCombo;
         currentAODToHurt = data.amountOfDamageToHurt;
+        currentDashCooldown = Random.Range(data.dashCooldownRan.x, data.dashCooldownRan.y);
+        isFirstDamage = false;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
         StateMachine.CurrentEnemyState.LogicUpdate();
+        if (data.isDash)
+        {
+            CheckToDash();
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -209,6 +219,53 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     {
         currentCombo = 0;
     }
+
+    #endregion
+
+    #region Is First Damage Function
+
+    public bool IsFirstDamage()
+    {
+        return isFirstDamage;
+    }
+
+    public void SetIsFirstDamage(bool isFirstDamage)
+    {
+        this.isFirstDamage = isFirstDamage;
+    }
+
+    #endregion
+
+    #region Dash Function
+
+    public void Dash(Vector3 direction, float speed)
+    {
+        transform.position += direction * speed * Time.deltaTime;
+    }
+
+    public void CheckToDash()
+    {
+        if (!canDash)
+        {
+            currentDashCooldown -= Time.deltaTime;
+            if (currentDashCooldown <= 0)
+            {
+                currentDashCooldown = Random.Range(data.dashCooldownRan.x, data.dashCooldownRan.y);
+                canDash = true;
+            }
+        }
+    }
+
+    public void SetDashState(bool state)
+    {
+        canDash = state;
+    }
+
+    public bool CanDash()
+    {
+        return canDash;
+    }
+    
 
     #endregion
 

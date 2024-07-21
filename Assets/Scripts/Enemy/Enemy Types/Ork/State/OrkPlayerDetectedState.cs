@@ -5,7 +5,6 @@ using UnityEngine;
 public class OrkPlayerDetectedState : EnemyPlayerDetectedState
 {
     private Ork ork;
-    private bool isDashAttack;
     public OrkPlayerDetectedState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyPlayerDetectedData data, Ork ork) : base(enemy, stateMachine, isAnimationName, data)
     {
         this.ork = ork;
@@ -14,7 +13,6 @@ public class OrkPlayerDetectedState : EnemyPlayerDetectedState
     public override void DoCheck()
     {
         base.DoCheck();
-        isDashAttack = enemy.amountOfAttack == 5;
     }
 
     public override void Enter()
@@ -35,7 +33,12 @@ public class OrkPlayerDetectedState : EnemyPlayerDetectedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (!isPlayerInRange && isPlayerDetected && isDashAttack)
+        if (!enemy.IsFirstDamage())
+        {
+            enemy.SetIsFirstDamage(true);
+            stateMachine.ChangeState(ork.RoarState);
+        }
+        else if(!isPlayerInRange && isPlayerDetected && canDash)
         {
             stateMachine.ChangeState(ork.DashAttackState);
         }
