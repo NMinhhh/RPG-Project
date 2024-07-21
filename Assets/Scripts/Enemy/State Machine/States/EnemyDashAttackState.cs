@@ -52,6 +52,8 @@ public class EnemyDashAttackState : EnemyState
         {
             startTime = Time.time;
             direction = enemy.GetPlayerDirection();
+            enemy.WeaponsController.StartDealDamageToTheRight();
+            enemy.WeaponsController.StartDealDamageToTheLeft();
             isStartDash = true;
         }
         if (Time.time >= startTime + data.dashTime && isStartDash)

@@ -6,25 +6,13 @@ public class SoundFXManager : Singleton<SoundFXManager>
 {
     [SerializeField] private List<Sound> soundList = new List<Sound>();
     [SerializeField] private AudioSource soundSource;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void PlaySound(Sound sound, Vector3 pos, float value)
     {
-        AudioSource soundS = Instantiate(soundSource, pos, Quaternion.identity);
+        AudioSource soundS = ObjectPool.Instance.SpawnFromPool(Pool.Type.Sound, pos, Quaternion.identity).GetComponent<AudioSource>();
         soundS.volume = value;
         soundS.clip = sound.clip;
         soundS.Play();
-        float lenth = soundS.clip.length;
-        Destroy(soundS, lenth);
     }
 
     public Sound GetSound(Sound.SoundType type)

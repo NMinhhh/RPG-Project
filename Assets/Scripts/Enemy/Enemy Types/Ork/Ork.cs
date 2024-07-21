@@ -54,7 +54,7 @@ public class Ork : Enemy
         DeathState = new OrkDeathState(this, StateMachine, "Death", deathData, this);
         DashAttackState = new OrkDashAttackState(this, StateMachine, "DashAttack", dashAttackData, this);
         RoarState = new OrkRoarState(this, StateMachine, "Roar", roarData, this);
-        StateMachine.Intialize(IdleState);
+        StateMachine.Intialize(PlayerDetectedState);
     }
 
     protected override void Update()
@@ -65,11 +65,6 @@ public class Ork : Enemy
     public override void Damage(float damage)
     {
         base.Damage(damage);
-        if (!isFirstDamage)
-        {
-            isFirstDamage = true;
-            StateMachine.ChangeState(RoarState);
-        }
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Hit), transform.position, .5f);
         if (isHurt && StateMachine.CurrentEnemyState != HurtState && !isDie && StateMachine.CurrentEnemyState != DashAttackState)
         {

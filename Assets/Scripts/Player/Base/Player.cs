@@ -167,7 +167,7 @@ public class Player : MonoBehaviour, IDamageable
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, data.maxHealth);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
         UpdateHealthBar?.Invoke();
-        if(currentHealth > 0 && StateMachine.currentState != HurtState && StateMachine.currentState != StrongAttack)
+        if(currentHealth > 0 && StateMachine.currentState != HurtState && StateMachine.currentState != StrongAttack && StateMachine.currentState != ShootState)
         {
             StateMachine.ChangeState(HurtState);
         }

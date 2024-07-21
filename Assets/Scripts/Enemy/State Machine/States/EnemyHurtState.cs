@@ -25,7 +25,7 @@ public class EnemyHurtState : EnemyState
         isHurtFinish = false;
         enemy.SetSpeed(0);
         enemy.Move(enemy.transform.position);
-        enemy.KnockBack();
+        enemy.KnockBack(data.knockBackSpeed);
     }
 
     public override void Exit()

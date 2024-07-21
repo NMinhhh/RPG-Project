@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DemonHurtData
   m_EditorClassIdentifier: 
   hurtTime: 0.5
-  knockback: 0
+  knockBackSpeed: 0.5

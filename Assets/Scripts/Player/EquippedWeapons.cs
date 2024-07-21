@@ -41,8 +41,6 @@ public class EquippedWeapons : MonoBehaviour
                             knockBackable.DamageDiretion(dir);
                         }
                         damagaeble.Damage(damage);
-                        //GameObject hole = Instantiate(blood, damagePoint.position, Quaternion.identity);
-                        //hole.transform.SetParent(hit2.transform);
                         ObjectPool.Instance.SpawnFromPool(Pool.Type.BloodParticle,damagePoint.position, Quaternion.identity).transform.SetParent(hit2.transform);
                     }
                     enemy.Add(hit2.collider.gameObject);

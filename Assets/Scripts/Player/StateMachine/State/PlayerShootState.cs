@@ -63,6 +63,7 @@ public class PlayerShootState : PlayerState
     {
         base.TriggerAnimation();
         Vector3 direction = (player.thirdPersonAim.mousePos - shootPoint.position).normalized;
-        GameObject.Instantiate(data.arrow, shootPoint.position, Quaternion.LookRotation(direction, Vector3.up));
+        //GameObject.Instantiate(data.arrow, shootPoint.position, Quaternion.LookRotation(direction, Vector3.up));
+        ObjectPool.Instance.SpawnFromPool(Pool.Type.Arrow, shootPoint.position, Quaternion.LookRotation(direction, Vector3.up));
     }
 }

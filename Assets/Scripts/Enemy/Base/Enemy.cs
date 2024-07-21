@@ -187,9 +187,9 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         damageDir = direction;
     }
 
-    public void KnockBack()
+    public void KnockBack(float knockBackSpeed)
     {
-        transform.position += damageDir * data.knockBackSpeed;
+        transform.position += damageDir * knockBackSpeed;
     }
 
     #endregion

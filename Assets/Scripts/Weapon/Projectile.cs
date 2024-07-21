@@ -5,17 +5,28 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed = 10;
+    [SerializeField] private float timeLife = 5f;
+    private float currentTimeLife;
     void Start()
     {
-        Destroy(gameObject, 5);
+        currentTimeLife = timeLife;
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
+        currentTimeLife -= Time.deltaTime;
+        if(currentTimeLife <= 0)
+        {
+            ObjectPool.Instance.AddInPool(Pool.Type.Arrow, this.gameObject);
+        }
     }
 
+    private void OnDisable()
+    {
+        currentTimeLife = timeLife;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -26,7 +37,8 @@ public class Projectile : MonoBehaviour
             {
                 damageable.Damage(20);
             }
-            Destroy(gameObject);
+            ObjectPool.Instance.AddInPool(Pool.Type.Arrow, this.gameObject);
+
         }
     }
 }

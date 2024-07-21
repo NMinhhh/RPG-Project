@@ -33,12 +33,7 @@ public class OrkPlayerDetectedState : EnemyPlayerDetectedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (!enemy.IsFirstDamage())
-        {
-            enemy.SetIsFirstDamage(true);
-            stateMachine.ChangeState(ork.RoarState);
-        }
-        else if(!isPlayerInRange && isPlayerDetected && canDash)
+        if(!isPlayerInRange && isPlayerDetected && canDash)
         {
             stateMachine.ChangeState(ork.DashAttackState);
         }

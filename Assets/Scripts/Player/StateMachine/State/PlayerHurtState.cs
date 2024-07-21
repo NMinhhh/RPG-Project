@@ -11,6 +11,8 @@ public class PlayerHurtState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.Anim.SetLayerWeight(1, 0);
+        player.thirdPersonAim.NotAim();
     }
 
     public override void Exit()

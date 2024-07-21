@@ -26,7 +26,7 @@ public class ObjectPool : Singleton<ObjectPool>
             {
                 GameObject objectPool = Instantiate(pool.objectPref);
                 objectPool.SetActive(false);
-                objectPool.transform.SetParent(transform);
+                objectPool.transform.SetParent(pool.objectHolder);
                 queue.Enqueue(objectPool);
             }
             poolDictionary.Add(pool.type, queue);
@@ -59,7 +59,7 @@ public class ObjectPool : Singleton<ObjectPool>
     public void AddInPool(Pool.Type type, GameObject objectPool)
     {
         objectPool.SetActive(false);
-        objectPool.transform.SetParent(transform);
+        objectPool.transform.SetParent(GetPool(type).objectHolder);
         poolDictionary[type].Enqueue(objectPool);
 
     }
@@ -87,4 +87,5 @@ public class Pool
     public Type type;
     public GameObject objectPref;
     public int size;
+    public Transform objectHolder;
 }

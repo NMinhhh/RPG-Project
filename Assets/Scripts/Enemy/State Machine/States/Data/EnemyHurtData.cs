@@ -6,5 +6,5 @@ using UnityEngine;
 public class EnemyHurtData : ScriptableObject
 {
     public float hurtTime;
-    public float knockback;
+    public float knockBackSpeed;
 }

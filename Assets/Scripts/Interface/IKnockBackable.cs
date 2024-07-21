@@ -5,5 +5,5 @@ using UnityEngine;
 public interface IKnockBackable 
 {
     void DamageDiretion(Vector3 direction);
-    void KnockBack();
+    void KnockBack(float knockBackSpeed);
 }
