@@ -26,6 +26,8 @@ public class InputManager : Singleton<InputManager>
 
     public bool aimInput { get; private set; }
 
+    public bool canGetInput {  get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,7 @@ public class InputManager : Singleton<InputManager>
     // Update is called once per frame
     void Update()
     {
+        if (!canGetInput) return;
         if (!InventorySystem.instance.isOpen)
         {
             xInput = Input.GetAxisRaw("Horizontal");
@@ -65,4 +68,8 @@ public class InputManager : Singleton<InputManager>
     }
 
     public void UseAttackInput() => attackInput = false;
+
+    public void SetCanGetInput(bool state) => canGetInput = state;
+
+    public void CanNotGetInput() => canGetInput = false;
 }

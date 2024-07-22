@@ -17,7 +17,7 @@ public class PlayerAnimatorController : MonoBehaviour
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
-        SetAnimator(TypeAnimator.AttackType.WeaponsInRightHand);
+        SetAnimator(TypeAnimator.AttackType.Hand);
     }
 
     public void SetAnimator(TypeAnimator.AttackType type)

@@ -10,6 +10,8 @@ public class Chest : MonoBehaviour, IInteracable
 
     private BoxCollider boxCollider;
 
+    public bool isOpen;
+
     public void Interact()
     {
         boxCollider.enabled = false;
@@ -18,6 +20,7 @@ public class Chest : MonoBehaviour, IInteracable
 
     void TriggerAnimation()
     {
+        isOpen = true;
         foreach (ItemData item in itemList)
         {
             AddToInventory(item);

@@ -5,6 +5,7 @@ using UnityEngine;
 public class InventoryItem : MonoBehaviour
 {
     private ItemData itemData;
+    public bool isEqui0ped;
 
     public ItemData GetItemData
     {

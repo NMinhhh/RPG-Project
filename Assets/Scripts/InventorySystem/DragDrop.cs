@@ -12,10 +12,19 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public Vector3 startPos {  get; private set; }
     public Transform startParent {  get; private set; }
+
+    private bool canDrag;
+
     void Start()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    public void SetCanDrag(bool state)
+    {
+        canDrag = state;
+        canvasGroup.blocksRaycasts = canDrag;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -43,7 +52,10 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             transform.position = startPos;
             transform.SetParent(startParent);
         }
-        canvasGroup.blocksRaycasts = true;
+        if (canDrag)
+            canvasGroup.blocksRaycasts = true;
+        else
+            canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 1;
 
     }

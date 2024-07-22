@@ -25,11 +25,13 @@ public class ItemSlot : MonoBehaviour,IDropHandler
         if (isLock) return;
         if (Getitem)
         {
+            Getitem.GetComponent<DragDrop>().SetCanDrag(true);
             Getitem.GetComponent<DragDrop>().SetNewPos(DragDrop.itemBeingDragged.startPos, DragDrop.itemBeingDragged.startParent);
         }
         DragDrop.itemBeingDragged.SetNewPos(transform.position, transform);
         if (isQuickSlot)
         {
+            DragDrop.itemBeingDragged.SetCanDrag(false);
             EquipSystem.Instance.EquipWeapon(DragDrop.itemBeingDragged.GetComponent<InventoryItem>().GetItemData);
         }
     }

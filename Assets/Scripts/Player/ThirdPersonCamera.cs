@@ -85,7 +85,7 @@ public class ThirdPersonCamera : MonoBehaviour
         isRotaionOnMove = state;
     }
 
-    void CameraLock()
+    public void CameraLock()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

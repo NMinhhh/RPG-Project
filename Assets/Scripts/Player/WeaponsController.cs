@@ -29,11 +29,13 @@ public class WeaponsController : MonoBehaviour
 
     private bool isRangeAttack;
 
+    public bool isEquippedWeapon {  get; private set; }
+
+
     void Start()
     {
         player = GetComponent<Player>();
         playerAnimatorController = GetComponent<PlayerAnimatorController>();
-        EquippedWeapons(weaponData);
     }
 
     private void Update()
@@ -69,6 +71,7 @@ public class WeaponsController : MonoBehaviour
         }
         playerAnimatorController.SetAnimator(itemData.attackType);
         player.ChangeWeapon();
+        isEquippedWeapon = true;
     }
 
     public void EquippedLeftWeapons(ItemData weaponData)

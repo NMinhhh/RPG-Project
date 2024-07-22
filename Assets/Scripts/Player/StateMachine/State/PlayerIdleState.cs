@@ -44,19 +44,19 @@ public class PlayerIdleState : PlayerState
         {
             stateMachine.ChangeState(player.JumpState);
         }
-        else if (isAim)
+        else if (isAim && player.weaponsController.isEquippedWeapon)
         {
             stateMachine.ChangeState(player.AimState);
         }
-        else if (isBlock)
+        else if (isBlock && player.weaponsController.isEquippedWeapon)
         {
             stateMachine.ChangeState(player.BlockState);
         }
-        else if (isStrongAttack)
+        else if (isStrongAttack && player.weaponsController.isEquippedWeapon)
         {
             stateMachine.ChangeState(player.StrongAttack);
         }
-        else if (isAttack)
+        else if (isAttack && player.weaponsController.isEquippedWeapon)
         {
             stateMachine.ChangeState(player.AttackState);
         }
