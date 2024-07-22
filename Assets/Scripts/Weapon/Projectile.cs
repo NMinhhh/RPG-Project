@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class Projectile : MonoBehaviour, IPooledObject
 {
     [SerializeField] private float speed = 10;
     [SerializeField] private float timeLife = 5f;
@@ -23,11 +23,6 @@ public class Projectile : MonoBehaviour
         }
     }
 
-    private void OnDisable()
-    {
-        currentTimeLife = timeLife;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
@@ -40,5 +35,10 @@ public class Projectile : MonoBehaviour
             ObjectPool.Instance.AddInPool(Pool.Type.Arrow, this.gameObject);
 
         }
+    }
+
+    public void OnObjectSpawn()
+    {
+        currentTimeLife = timeLife;
     }
 }

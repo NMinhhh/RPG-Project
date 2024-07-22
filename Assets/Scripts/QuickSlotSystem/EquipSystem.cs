@@ -29,10 +29,12 @@ public class EquipSystem : Singleton<EquipSystem>
         {
             UsePotion(potionItem.consumeValue);
         }
+        
     }
 
     public void AddPotionItem(int number)
     {
+        NoticePickUpManager.instance.Notice(potionItem.image, "+1 "+ number + " " + potionItem.name);
         numberOfItem += number;
         ChangeNumberOfItem?.Invoke();
     }

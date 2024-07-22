@@ -52,6 +52,11 @@ public class ObjectPool : Singleton<ObjectPool>
         objectSpawn.transform.SetParent(transform.root);
         objectSpawn.transform.position = position; 
         objectSpawn.transform.rotation = rotation;
+        IPooledObject pooledObject = objectSpawn.GetComponent<IPooledObject>();
+        if (pooledObject != null)
+        {
+            pooledObject.OnObjectSpawn();
+        }
         objectSpawn.SetActive(true);
         return objectSpawn;
     }
@@ -82,6 +87,7 @@ public class Pool
         BloodParticle,
         Sound,
         Arrow,
+        NoticePickUp,
     }
 
     public Type type;

@@ -61,6 +61,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
     public void AddToInventory(ItemData itemData)
     {
+        NoticePickUpManager.instance.Notice(itemData.image, "+1 " + itemData.name);
         Transform slotAvailable = GetAvailableSlot().transform;
         GameObject item = Instantiate(Resources.Load<GameObject>("Item/Item"), slotAvailable.position, slotAvailable.rotation);
         item.GetComponent<InventoryItem>().SetItemData(itemData);
