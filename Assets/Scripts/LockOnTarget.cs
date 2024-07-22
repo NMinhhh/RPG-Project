@@ -7,6 +7,7 @@ public class LockOnTarget : MonoBehaviour
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private GameObject closesTarget;
+    [SerializeField] private LayerMask whatIsBlock;
     private float minDistance = 1000;
     private float currentMinDistance;
 

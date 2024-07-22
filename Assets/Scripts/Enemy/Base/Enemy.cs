@@ -148,7 +148,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     public virtual void Die()
     {
-        Destroy(gameObject);
+        gameObject.transform.parent.gameObject.SetActive(false);
     }
 
     
