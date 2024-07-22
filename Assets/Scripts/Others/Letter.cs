@@ -14,7 +14,7 @@ public class Letter : MonoBehaviour
     public void CloseUI()
     {
         gameObject.SetActive(false);
-        TaskManager.Instance.StartTask(Task.TaskName.OpenChest);
+        TaskManager.Instance.StartTask();
         InputManager.Instance.SetCanGetInput(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

@@ -11,11 +11,16 @@ public class TaskManager : Singleton<TaskManager>
 
     private void Start()
     {
+        Initialize(Task.TaskName.OpenChest);
     }
 
-    public void StartTask(Task.TaskName taskName)
+    public void Initialize(Task.TaskName taskName)
     {
         currentTask = GetTask(taskName);
+    }
+
+    public void StartTask()
+    {
         currentTask.isCompleted = false;
         currentTask.taskObj.SetActive(true);
     }
@@ -24,9 +29,10 @@ public class TaskManager : Singleton<TaskManager>
     {
         currentTask.isCompleted = true;
         currentTask.taskObj.SetActive(false);
-        StartTask(taskName);
-
+        currentTask = GetTask(taskName);
     }
+
+
 
     public Task GetTask(Task.TaskName taskName)
     {
@@ -48,6 +54,8 @@ public class Task
     public enum TaskName
     {
         OpenChest,
+        KillEnemy,
+        KillOrk
     }
 
     public TaskName taskName;

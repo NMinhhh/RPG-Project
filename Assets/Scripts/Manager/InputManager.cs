@@ -37,8 +37,7 @@ public class InputManager : Singleton<InputManager>
     // Update is called once per frame
     void Update()
     {
-        if (!canGetInput) return;
-        if (!InventorySystem.instance.isOpen)
+        if (!InventorySystem.instance.isOpen && canGetInput)
         {
             xInput = Input.GetAxisRaw("Horizontal");
             zInput = Input.GetAxisRaw("Vertical");
@@ -72,4 +71,5 @@ public class InputManager : Singleton<InputManager>
     public void SetCanGetInput(bool state) => canGetInput = state;
 
     public void CanNotGetInput() => canGetInput = false;
+    public void CanGetInput() => canGetInput = true;
 }

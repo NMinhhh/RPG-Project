@@ -27,6 +27,7 @@ public class TaskOpenChest : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             door.SetActive(false);
+            TaskManager.Instance.ChangeTask(Task.TaskName.KillEnemy);
         }
     }
 }
