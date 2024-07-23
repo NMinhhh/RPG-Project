@@ -49,7 +49,10 @@ public class Demon : Enemy
         MeleeAttackState = new DemonMeleeAttackState(this, StateMachine, "MeleeAttack", _meleeAttackData, this);
         PlayerDetectedState = new DemonPlayerDetectedState(this, StateMachine, "PlayerDetected", _playerDetectedData, this);
         DeathState = new DemonDeathState(this, StateMachine, "Death", _deathData, this);
-        StateMachine.Intialize(IdleState);
+        if (data.isEnemyPatrol)
+            StateMachine.Intialize(IdleState);
+        else
+            StateMachine.Intialize(PlayerDetectedState);
     }
 
     protected override void Update()

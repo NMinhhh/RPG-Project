@@ -4,16 +4,29 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
+    [Header("Door")]
+    [SerializeField] private Door door;
+
+    [Header("Pos to spawn enemy")]
     [SerializeField] private Transform[] spawnPos;
 
+    [Header("Enemy list to spawn")]
     [SerializeField] private List<EnemyToSpawn> enemyToSpawnList;
 
+    [Header("Enemy Holder")]
     [SerializeField] private Transform enemyHolder;
 
+    [Header("Delay time next wave")]
+    [SerializeField] private float waveDelayTime;
+    protected float currentWDT;
+
+    [Header("delay time next enemy spawn")]
     [SerializeField] private float spawnDelayTime;
 
+    //Current all wave to spawn
     private Dictionary<int, List<GameObject>> enemyDictionary;
 
+    //Enemy in current wave
     private List<GameObject> currentEnemyList;
 
     private int currentWave;
@@ -25,9 +38,11 @@ public class SpawnEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        door.CloseDoor();
         currentEnemyList = new List<GameObject>();
         enemyDictionary = new Dictionary<int, List<GameObject>>();
         currentWave = 1;
+        currentWDT = waveDelayTime;
         CreateAllEnemy();
     }
 
@@ -44,7 +59,12 @@ public class SpawnEnemy : MonoBehaviour
         {
             if (CheckToNextWave())
             {
-                NextWave();
+                currentWDT -= Time.deltaTime;
+                if (currentWDT <= 0)
+                {
+                    currentWDT = waveDelayTime;
+                    NextWave();
+                }
             }
         }
     }
@@ -55,6 +75,9 @@ public class SpawnEnemy : MonoBehaviour
         if (currentWave > enemyDictionary.Count)
         {
             canSpawn = false;
+            door.OpenDoor();
+            gameObject.SetActive(false);
+
         }
         isStartSpawn = true;
     }
@@ -64,7 +87,7 @@ public class SpawnEnemy : MonoBehaviour
         int count = 0 ;
         foreach (GameObject enemy in currentEnemyList)
         {
-            if (!enemy.activeInHierarchy)
+            if (enemy.GetComponentInChildren<Enemy>().isDie)
             {
                 count++;
             }
@@ -80,6 +103,7 @@ public class SpawnEnemy : MonoBehaviour
         currentEnemyList = enemyDictionary[currentWave];
         StartCoroutine(Spawn());
     }
+
 
     IEnumerator Spawn()
     {

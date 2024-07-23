@@ -5,12 +5,15 @@ using UnityEngine;
 public class TaskOpenChest : MonoBehaviour
 {
     [SerializeField] private Chest chest;
-    [SerializeField] private GameObject door;
+    [SerializeField] private Animator doorAnim;
     [SerializeField] private BoxCollider boxCollider;
-    // Start is called before the first frame update
+
+    private Door door;
+
     void Start()
     {
         boxCollider.enabled = false;
+        door = GetComponent<Door>();
     }
 
     // Update is called once per frame
@@ -26,7 +29,7 @@ public class TaskOpenChest : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            door.SetActive(false);
+            door.OpenDoor();
             TaskManager.Instance.ChangeTask(Task.TaskName.KillEnemy);
         }
     }

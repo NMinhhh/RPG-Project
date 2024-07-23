@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class TaskKillEnemy : MonoBehaviour
 {
+    [Header("Door")]
+    [SerializeField] protected Door door;
+
+    [Header("Amount of enemy need kill")]
     [SerializeField] private GameObject[] enemys;
-    [SerializeField] private GameObject[] doors;
-    // Start is called before the first frame update
+    
+    [SerializeField] protected Intro.IntroType introType;
+    [SerializeField] protected Task.TaskName taskNameNext;
+
     protected virtual void Start()
     {
         TaskManager.Instance.StartTask();
-        OpenDoor();
+        door.CloseDoor();
     }
 
     // Update is called once per frame
@@ -18,34 +24,20 @@ public class TaskKillEnemy : MonoBehaviour
     {
         if (CheckToChangeTask())
         {
-            TaskManager.Instance.ChangeTask(Task.TaskName.KillOrk);
-            CloseDoor();
+            TaskManager.Instance.ChangeTask(taskNameNext);
+            door.OpenDoor();
             gameObject.SetActive(false);
         }
     }
 
-    public virtual void OpenDoor()
-    {
-        foreach (GameObject go in doors)
-        {
-            go.SetActive(true);
-        }
-    }
-
-    public virtual void CloseDoor()
-    {
-        foreach (GameObject go in doors)
-        {
-            go.SetActive(false);
-        }
-    }
+   
 
     protected virtual bool CheckToChangeTask()
     {
         int count = 0;
         foreach (GameObject enemy in enemys)
         {
-            if (!enemy.activeInHierarchy)
+            if (enemy.GetComponentInChildren<Enemy>().isDie)
             {
                 count++;
             }

@@ -4,30 +4,20 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    [SerializeField] private GameObject[] door;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Animator[] doorAnims;
+    public virtual void OpenDoor()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void OpenDoor()
-    {
-
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        foreach (Animator anim in doorAnims)
         {
-            IntroManager.Instance.PlayCutSceen(Intro.IntroType.OrkIntro);
+            anim.SetBool("Open", true);
+        }
+    }
+
+    public virtual void CloseDoor()
+    {
+        foreach (Animator anim in doorAnims)
+        {
+            anim.SetBool("Open", false);
         }
     }
 }

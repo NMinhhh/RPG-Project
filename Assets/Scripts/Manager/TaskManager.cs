@@ -55,7 +55,8 @@ public class Task
     {
         OpenChest,
         KillEnemy,
-        KillOrk
+        KillOrk,
+        KillEnemySpawn,
     }
 
     public TaskName taskName;
