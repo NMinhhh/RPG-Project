@@ -36,5 +36,5 @@ public class PlayerData : ScriptableObject
 
     [Header("Shoot")]
     public GameObject arrow;
-
+    public float arrowDamage = 30;
 }

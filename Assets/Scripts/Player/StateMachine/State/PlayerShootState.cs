@@ -6,6 +6,8 @@ public class PlayerShootState : PlayerState
 {
     private Transform shootPoint;
     private bool isAim;
+    private GameObject go;
+    private Projectile projectile;
 
     public PlayerShootState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName, Transform shootPoint) : base(player, stateMachine, data, isAnimationName)
     {
@@ -63,7 +65,8 @@ public class PlayerShootState : PlayerState
     {
         base.TriggerAnimation();
         Vector3 direction = (player.thirdPersonAim.mousePos - shootPoint.position).normalized;
-        //GameObject.Instantiate(data.arrow, shootPoint.position, Quaternion.LookRotation(direction, Vector3.up));
-        ObjectPool.Instance.SpawnFromPool(Pool.Type.Arrow, shootPoint.position, Quaternion.LookRotation(direction, Vector3.up));
+        go = ObjectPool.Instance.SpawnFromPool(Pool.Type.Arrow, shootPoint.position, Quaternion.LookRotation(direction, Vector3.up));
+        projectile = go.GetComponent<Projectile>();
+        projectile.SetDamage(data.arrowDamage);
     }
 }

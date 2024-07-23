@@ -88,6 +88,7 @@ public class Pool
         Sound,
         Arrow,
         NoticePickUp,
+        GhoulProjectile,
     }
 
     public Type type;

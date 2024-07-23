@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IPooledObject
 {
-    [SerializeField] private float speed = 10;
-    [SerializeField] private float timeLife = 5f;
-    private float currentTimeLife;
-    void Start()
+    [SerializeField] protected float damage = 20f;
+    [SerializeField] protected float speed = 10;
+    [SerializeField] protected float timeLife = 5f;
+    protected float currentTimeLife;
+    protected virtual void Start()
     {
         currentTimeLife = timeLife;
     }
 
     // Update is called once per frame
-    void Update()
+    protected virtual void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
         currentTimeLife -= Time.deltaTime;
@@ -23,21 +24,26 @@ public class Projectile : MonoBehaviour, IPooledObject
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
         {
             IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
             if (damageable != null)
             {
-                damageable.Damage(20);
+                damageable.Damage(damage);
             }
             ObjectPool.Instance.AddInPool(Pool.Type.Arrow, this.gameObject);
 
         }
     }
 
-    public void OnObjectSpawn()
+    public virtual void SetDamage(float damage)
+    {
+        this.damage = damage;
+    }
+
+    public virtual void OnObjectSpawn()
     {
         currentTimeLife = timeLife;
     }

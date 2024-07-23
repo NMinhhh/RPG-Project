@@ -40,6 +40,13 @@ public class EnemyAnimationToMachine : MonoBehaviour
             return;
         }
         enemy.FinishAnimation();
-    } 
-
+    }
+    public void TriggerAnimation()
+    {
+        if (IntroManager.Instance.isPlayIntro)
+        {
+            return;
+        }
+        enemy.TriggerAnimation();
+    }
 }
