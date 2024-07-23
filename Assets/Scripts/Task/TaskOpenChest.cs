@@ -7,7 +7,7 @@ public class TaskOpenChest : MonoBehaviour
     [SerializeField] private Chest chest;
     [SerializeField] private Animator doorAnim;
     [SerializeField] private BoxCollider boxCollider;
-
+ 
     private Door door;
 
     void Start()

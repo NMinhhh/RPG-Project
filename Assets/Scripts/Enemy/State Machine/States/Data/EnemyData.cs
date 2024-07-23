@@ -22,4 +22,5 @@ public class EnemyData : ScriptableObject
     [Header("Dash Attack")]
     public bool isDash;
     public Vector2 dashCooldownRan;
+
 }

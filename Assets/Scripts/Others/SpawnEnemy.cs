@@ -110,6 +110,7 @@ public class SpawnEnemy : MonoBehaviour
         for (int i = 0; i < currentEnemyList.Count; i++)
         {
             currentEnemyList[i].transform.position = spawnPos[Random.Range(0, spawnPos.Length)].position;
+            currentEnemyList[i].GetComponentInChildren<EnemyAppearEffect>().StartAppear();
             currentEnemyList[i].SetActive(true);
             yield return new WaitForSeconds(spawnDelayTime);
         }

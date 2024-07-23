@@ -23,3 +23,4 @@ MonoBehaviour:
   amountOfDamageToHurt: 1
   isDash: 0
   dashCooldownRan: {x: 0, y: 0}
+  dissolveTime: 3

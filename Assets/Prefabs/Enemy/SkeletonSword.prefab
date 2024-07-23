@@ -1242,7 +1242,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ed14df0368fe53543907335c0e3902c6, type: 2}
+  - {fileID: 2100000, guid: 3b2fff2eeffffd7468254b0fb8f30907, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1425,7 +1425,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ed14df0368fe53543907335c0e3902c6, type: 2}
+  - {fileID: 2100000, guid: 3b2fff2eeffffd7468254b0fb8f30907, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2031,6 +2031,7 @@ GameObject:
   - component: {fileID: 7307990914109238725}
   - component: {fileID: 8394122367978847391}
   - component: {fileID: 7225400639917568913}
+  - component: {fileID: 8127839001354072609}
   m_Layer: 8
   m_Name: SkeletonSword
   m_TagString: Untagged
@@ -2140,6 +2141,24 @@ CapsuleCollider:
   m_Height: 1.8719754
   m_Direction: 1
   m_Center: {x: 0, y: 0.93761146, z: 0.03809631}
+--- !u!114 &8127839001354072609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7884701547087028686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e2bdbc538076e48934740764208e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMeshRenderers:
+  - {fileID: 4303710724096184052}
+  - {fileID: 5117368549368807187}
+  dissolveSpeed: 0.2
+  enemy: {fileID: 1870854907840006209}
+  healthBar: {fileID: 5894457300241611508}
 --- !u!1 &7932626663444719284
 GameObject:
   m_ObjectHideFlags: 0

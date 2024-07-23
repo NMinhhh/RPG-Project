@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 89850492646659727}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.51, y: 0, z: -7.44}
+  m_LocalPosition: {x: -11.38, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 1220342687962888068}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.83, y: 0, z: -2.2}
+  m_LocalPosition: {x: 4.83, y: 0, z: -1.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -87,7 +87,7 @@ Transform:
   m_GameObject: {fileID: 2248876106475719904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.62, y: 0, z: 1.81}
+  m_LocalPosition: {x: 6.49, y: 0, z: 1.46}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -151,7 +151,7 @@ Transform:
   m_GameObject: {fileID: 5991552521086460274}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.57, y: 0, z: 2.06}
+  m_LocalPosition: {x: -6.49, y: 0, z: 0.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -204,6 +204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demon
       objectReference: {fileID: 0}
+    - target: {fileID: 4774996852042643464, guid: 99a6a271ef8bf704dbb0b9a8c09e8476, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: de0e9e622d89126479a89df28f1dd942, type: 2}
     - target: {fileID: 6152722983681810238, guid: 99a6a271ef8bf704dbb0b9a8c09e8476, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -260,6 +264,10 @@ PrefabInstance:
       propertyPath: destinations.Array.data[3]
       value: 
       objectReference: {fileID: 7056992603924135720}
+    - target: {fileID: 7216866234934824156, guid: 99a6a271ef8bf704dbb0b9a8c09e8476, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 743485f4fbbac50488eb186ffd67e4a7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

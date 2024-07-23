@@ -36,6 +36,7 @@ public class DemonDeathState : EnemyDeathState
         base.LogicUpdate();
         if (isFinishAnimation)
         {
+            isFinishAnimation = false;
             enemy.Die();
         }
     }

@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     #region Transform
 
-    [SerializeField] protected Transform[] destinations; 
+    [SerializeField] protected Transform[] destinations;
 
     #endregion
 
@@ -150,7 +150,6 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     {
         gameObject.transform.parent.gameObject.SetActive(false);
     }
-
     
 
     #endregion
