@@ -57,7 +57,7 @@ public class PlayerStrongAttack : PlayerState
         }
         if (isFinishAnimtion)
         {
-            if (isAim)
+            if (isAim && player.weaponsController.isEquippedBow)
             {
                 stateMachine.ChangeState(player.AimState);
             }

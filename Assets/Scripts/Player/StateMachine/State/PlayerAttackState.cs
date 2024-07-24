@@ -91,7 +91,7 @@ public class PlayerAttackState : PlayerState
             {
                 stateMachine.ChangeState(player.JumpState);
             }
-            else if(isAim)
+            else if(isAim && player.weaponsController.isEquippedBow)
             {
                 stateMachine.ChangeState(player.AimState);
             }

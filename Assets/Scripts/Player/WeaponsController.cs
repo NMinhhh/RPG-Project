@@ -30,12 +30,14 @@ public class WeaponsController : MonoBehaviour
     private bool isRangeAttack;
 
     public bool isEquippedWeapon {  get; private set; }
+    public bool isEquippedBow { get; private set; }
 
 
     void Start()
     {
         player = GetComponent<Player>();
         playerAnimatorController = GetComponent<PlayerAnimatorController>();
+        InventorySystem.Instance.equippedBow += EquippedBow;
     }
 
     private void Update()
@@ -125,6 +127,12 @@ public class WeaponsController : MonoBehaviour
     public void EndDealDamageToTheRight()
     {
         currentRightWeapons.EndDealDamage();
+    }
+
+    public void EquippedBow()
+    {
+        isEquippedBow = true;
+        TaskManager.Instance.currentTask.taskObj.GetComponent<TaskPickUpBow>().BowIntructUIActive();
     }
 
     public void StartArrowShoot()

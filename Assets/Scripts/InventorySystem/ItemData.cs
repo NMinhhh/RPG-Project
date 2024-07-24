@@ -23,6 +23,7 @@ public class ItemData : ScriptableObject
     public bool isLeftHand;
     public GameObject modelRightHand;
     public GameObject modelLeftHand;
+    public bool isBow;
 
     [Header("Potion Data")]
     public float consumeValue;

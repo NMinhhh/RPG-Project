@@ -8,9 +8,6 @@ public class ItemIdleEffect : MonoBehaviour
     [Header("Particle")]
     [SerializeField] private ParticleSystem particleEffect;
 
-    [Header("Canvas")]
-    [SerializeField] private Canvas canvas;
-
     [Header("Item Obj")]
     [SerializeField] private GameObject[] items;
     [SerializeField] private float valueRotation;
@@ -28,7 +25,6 @@ public class ItemIdleEffect : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        canvas.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -75,28 +71,16 @@ public class ItemIdleEffect : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             particleEffect.Stop();
-            canvas.transform.rotation = Quaternion.LookRotation(canvas.transform.position - cam.transform.position);
-            canvas.gameObject.SetActive(true);
-
         }
     }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            canvas.transform.rotation = Quaternion.LookRotation(canvas.transform.position - cam.transform.position);
-
-        }
-    }
+   
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             particleEffect.Play();
-            canvas.gameObject.SetActive(false);
-
         }
     }
 }

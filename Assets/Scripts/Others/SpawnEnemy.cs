@@ -77,6 +77,7 @@ public class SpawnEnemy : MonoBehaviour
             canSpawn = false;
             door.OpenDoor();
             gameObject.SetActive(false);
+            TaskManager.Instance.ChangeTask(Task.TaskName.PickUpBow);
 
         }
         isStartSpawn = true;

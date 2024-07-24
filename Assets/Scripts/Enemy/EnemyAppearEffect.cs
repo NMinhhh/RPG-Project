@@ -40,7 +40,7 @@ public class EnemyAppearEffect : MonoBehaviour
         if (isAppear)
         {
             dissolveAmount = Mathf.Clamp01(dissolveAmount - dissolveSpeed * Time.deltaTime);
-            Dissolve();
+            Appear();
             if(dissolveAmount == 0)
             {
                 healthBar.SetActive(true);
@@ -51,7 +51,7 @@ public class EnemyAppearEffect : MonoBehaviour
         
     }
 
-    public void Dissolve()
+    public void Appear()
     {
         foreach (Material m in material)
         {

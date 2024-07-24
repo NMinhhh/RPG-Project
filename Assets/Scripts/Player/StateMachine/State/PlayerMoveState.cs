@@ -55,7 +55,7 @@ public class PlayerMoveState : PlayerState
         {
             stateMachine.ChangeState(player.JumpState);
         }
-        else if(isAim && player.weaponsController.isEquippedWeapon)
+        else if(isAim && player.weaponsController.isEquippedBow)
         {
             stateMachine.ChangeState(player.AimState);
         }

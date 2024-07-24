@@ -6,7 +6,7 @@ public class TaskManager : Singleton<TaskManager>
 {
     [SerializeField] private List<Task> taskList;
 
-    private Task currentTask;
+    public Task currentTask {  get; private set; }
     private int currentTaskId;
 
     private void Start()
@@ -57,6 +57,7 @@ public class Task
         KillEnemy,
         KillOrk,
         KillEnemySpawn,
+        PickUpBow
     }
 
     public TaskName taskName;
