@@ -29,6 +29,7 @@ public class ItemSlot : MonoBehaviour,IDropHandler
             Getitem.GetComponent<DragDrop>().SetNewPos(DragDrop.itemBeingDragged.startPos, DragDrop.itemBeingDragged.startParent);
         }
         DragDrop.itemBeingDragged.SetNewPos(transform.position, transform);
+        DragDrop.itemBeingDragged.SetCanDrag(true);
         if (isQuickSlot)
         {
             DragDrop.itemBeingDragged.SetCanDrag(false);

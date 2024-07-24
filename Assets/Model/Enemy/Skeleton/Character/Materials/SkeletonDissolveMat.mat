@@ -54,9 +54,9 @@ Material:
     m_Ints: []
     m_Floats:
     - _Dissolve: 0
-    - _Edge_Width: 0.02
+    - _Edge_Width: 0.05
     - _Metallic: 0
-    - _Noise_Scale: 50
+    - _Noise_Scale: 80
     - _NormalsStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -64,7 +64,7 @@ Material:
     - _UseMetallicTex: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Edge_Color: {r: 1.1572322, g: 0, b: 0, a: 1}
+    - _Edge_Color: {r: 5.9921565, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &7381338139240028923
 MonoBehaviour:

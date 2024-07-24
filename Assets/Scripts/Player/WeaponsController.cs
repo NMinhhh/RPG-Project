@@ -129,6 +129,14 @@ public class WeaponsController : MonoBehaviour
         currentRightWeapons.EndDealDamage();
     }
 
+    public void EndDealDamageAll()
+    {
+        if(currentLeftWeapons != null)
+            EndDealDamageToTheLeft();
+        if(currentRightWeapons != null)
+            EndDealDamageToTheRight();
+    }
+
     public void EquippedBow()
     {
         isEquippedBow = true;
