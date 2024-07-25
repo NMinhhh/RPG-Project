@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac3dc64c4f51e3d40b06458932b6b32d, type: 3}
+  m_Name: NecromanserSpawnObjectsData
+  m_EditorClassIdentifier: 
+  amountOfObject: 10
+  damage: 20
+  speed: 35
+  timeLife: 3
+  spawnDelayTime: 0.5
+  prepTime: 2
+  offsetY: 1
+  spawnObject: {fileID: 6721096272149411946, guid: f01bfa9f705086744b1890725cacb5d6, type: 3}

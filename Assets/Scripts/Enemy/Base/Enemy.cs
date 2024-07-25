@@ -72,6 +72,10 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     protected float currentThrowWeaponCooldown;
     protected bool canThrow;
 
+    //Check to spawn
+    protected float currentSpawnObjectsCooldown;
+    protected bool canSpawn;
+
     #endregion
 
     #region Unity Function
@@ -90,23 +94,26 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         currentHealth = maxHelth;
         maxCombo = data.maxCombo;
         currentAODToHurt = data.amountOfDamageToHurt;
-        currentDashCooldown = Random.Range(data.dashCooldownRan.x, data.dashCooldownRan.y);
-        currentThrowWeaponCooldown = Random.Range(data.throwWeaponCooldownRan.x, data.throwWeaponCooldownRan.y);
         isFirstDamage = false;
+        if (data.isDash)
+        {
+            DashCooldown();
+        }
+        if (data.isThrowWeapon)
+        {
+            ThrowCooldown();
+        }
+        if (data.isSpawnObjects)
+        {
+            SpawnCooldown();
+        }
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
         StateMachine.CurrentEnemyState.LogicUpdate();
-        if (data.isDash)
-        {
-            CheckToDash();
-        }
-        if (data.isThrowWeapon)
-        {
-            CheckToThrow();
-        }
+       
     }
 
     protected virtual void FixedUpdate()
@@ -185,6 +192,11 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         return Vector3.Distance(transform.position, playerPos.position) <= data.radiusCheckThrow;
     }
 
+    public bool CheckPlayerInRangeToSpawn()
+    {
+        return Vector3.Distance(transform.position, playerPos.position) <= data.raidusCheckSpawn;
+    }
+
     public bool CheckBlock()
     {
         float distance = Vector3.Distance(transform.position, playerPos.position);
@@ -256,22 +268,16 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         transform.position += direction * speed * Time.deltaTime;
     }
 
-    public void CheckToDash()
+    public void DashCooldown()
     {
-        if (!canDash)
-        {
-            currentDashCooldown -= Time.deltaTime;
-            if (currentDashCooldown <= 0)
-            {
-                currentDashCooldown = Random.Range(data.dashCooldownRan.x, data.dashCooldownRan.y);
-                canDash = true;
-            }
-        }
+        canDash = false;
+        currentDashCooldown = Random.Range(data.dashCooldownRan.x, data.dashCooldownRan.y);
+        Invoke(nameof(ResetDash), currentDashCooldown);
     }
 
-    public void SetDashState(bool state)
+    private void ResetDash()
     {
-        canDash = state;
+        canDash = true;
     }
 
     public bool CanDash()
@@ -284,27 +290,43 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     #region Throw Weapon
 
-    public void CheckToThrow()
+    public void ThrowCooldown()
     {
-        if (!canThrow)
-        {
-            currentThrowWeaponCooldown -= Time.deltaTime;
-            if (currentThrowWeaponCooldown <= 0)
-            {
-                currentThrowWeaponCooldown = Random.Range(data.throwWeaponCooldownRan.x, data.throwWeaponCooldownRan.y);
-                canThrow = true;
-            }
-        }
+        canThrow = false;
+        currentThrowWeaponCooldown = Random.Range(data.throwWeaponCooldownRan.x, data.throwWeaponCooldownRan.y);
+        Invoke(nameof(ResetThrow), currentThrowWeaponCooldown);
     }
 
-    public void SetThrowtSate(bool state)
+
+    public void ResetThrow()
     {
-        canThrow = state;
+        canThrow = true;
     }
 
     public bool CanThrow()
     {
         return canThrow;
+    }
+
+    #endregion
+
+    #region Spawn Objects
+
+    public void SpawnCooldown()
+    {
+        canSpawn = false;
+        currentSpawnObjectsCooldown = Random.Range(data.spawnObjectCooldown.x, data.spawnObjectCooldown.y);
+        Invoke(nameof(ResetSpawn), currentSpawnObjectsCooldown);
+    }
+
+    private void ResetSpawn()
+    {
+        canSpawn = true;
+    }
+
+    public bool CanSpawn()
+    {
+        return canSpawn;
     }
 
     #endregion

@@ -33,7 +33,11 @@ public class NecromanserChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if(canThrow && isPlayerInRangeToThrow)
+        if(canSpawn && isPlayerInRangeToSpawn)
+        {
+            stateMachine.ChangeState(necromanser.SpawnSkillState);
+        }
+        else if(canThrow && isPlayerInRangeToThrow)
         {
             stateMachine.ChangeState(necromanser.ThrowWeaponState);
         }

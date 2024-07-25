@@ -8,9 +8,11 @@ public class EnemyPlayerDetectedState : EnemyState
     protected bool isPlayerDetected;
     protected bool isPlayerInRange;
     protected bool isPlayerInRangeToThrow;
+    protected bool isPlayerInRangeToSpawn;
     protected bool isDetectedOver;
     protected bool canDash;
     protected bool canThrow;
+    protected bool canSpawn;
     public EnemyPlayerDetectedState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyPlayerDetectedData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
@@ -22,10 +24,11 @@ public class EnemyPlayerDetectedState : EnemyState
         isPlayerDetected = enemy.CheckPlayerDetected();
         isPlayerInRange = enemy.CheckPlayerInRange();
         isPlayerInRangeToThrow = enemy.CheckPlayerInRangeToThrow();
+        isPlayerInRangeToSpawn = enemy.CheckPlayerInRangeToSpawn();
         enemy.WeaponsController.EndDealDamageAll();
         canDash = enemy.CanDash();
         canThrow = enemy.CanThrow();
-
+        canSpawn = enemy.CanSpawn();
     }
 
     public override void Enter()

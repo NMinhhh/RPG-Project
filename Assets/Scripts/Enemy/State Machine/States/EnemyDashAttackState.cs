@@ -58,7 +58,7 @@ public class EnemyDashAttackState : EnemyState
         }
         if (Time.time >= startTime + data.dashTime && isStartDash)
         {
-            enemy.SetDashState(false);
+            enemy.DashCooldown();
             isFinishDash = true;
         }
       

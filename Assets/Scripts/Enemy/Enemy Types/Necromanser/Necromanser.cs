@@ -19,6 +19,8 @@ public class Necromanser : Enemy
 
     public NecromanserDeathState DeathState { get; private set; }
 
+    public NecromanserSpawnSkillState SpawnSkillState { get; private set; }
+
     #endregion
 
 
@@ -30,12 +32,13 @@ public class Necromanser : Enemy
     [SerializeField] private EnemyThrowWeaponData throwWeaponData;
     [SerializeField] private EnemyHurtData hurtData;
     [SerializeField] private EnemyDeathData deathData;
-
+    [SerializeField] private EnemySpawnObjectsData spawnObjectsData;
     #endregion
 
     #region Transform
 
     [SerializeField] private GameObject weaponToThrow;
+    [SerializeField] private Transform[] spawnPoints;
     #endregion
 
     protected override void Start()
@@ -47,6 +50,7 @@ public class Necromanser : Enemy
         ThrowWeaponState = new NecromanserThrowWeaponState(this, StateMachine, "ControlWPAttack", throwWeaponData, weaponToThrow , this);
         HurtState = new NecromanserHurtState(this, StateMachine, "Hurt", hurtData, this);
         DeathState = new NecromanserDeathState(this, StateMachine, "Death", deathData, this);
+        SpawnSkillState = new NecromanserSpawnSkillState(this, StateMachine, "SpawnKill", spawnObjectsData, spawnPoints, this);
         StateMachine.Intialize(PlayerDetectedState);
     }
 
@@ -58,7 +62,7 @@ public class Necromanser : Enemy
     public override void Damage(float damage)
     {
         base.Damage(damage);
-        if(isHurt && StateMachine.CurrentEnemyState != HurtState)
+        if(isHurt && StateMachine.CurrentEnemyState != HurtState && StateMachine.CurrentEnemyState != ThrowWeaponState && StateMachine.CurrentEnemyState != SpawnSkillState)
         {
             StateMachine.ChangeState(HurtState);
         }

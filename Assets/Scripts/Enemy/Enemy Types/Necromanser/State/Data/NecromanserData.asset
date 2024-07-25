@@ -23,6 +23,9 @@ MonoBehaviour:
   amountOfDamageToHurt: 10
   isDash: 0
   dashCooldownRan: {x: 0, y: 0}
-  radiusCheckThrow: 12
   isThrowWeapon: 1
+  radiusCheckThrow: 20
   throwWeaponCooldownRan: {x: 8, y: 12}
+  isSpawnObjects: 1
+  raidusCheckSpawn: 25
+  spawnObjectCooldown: {x: 15, y: 30}

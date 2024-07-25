@@ -37,4 +37,6 @@ public class PlayerData : ScriptableObject
     [Header("Shoot")]
     public GameObject arrow;
     public float arrowDamage = 30;
+    public float arrowSpeed = 25f;
+    public float arrowTimeLife = 3f;
 }

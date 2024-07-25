@@ -34,7 +34,11 @@ public class NecromanserPlayerDetectedState : EnemyPlayerDetectedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (canThrow && !isPlayerInRange && isPlayerInRangeToThrow)
+        if (canSpawn && isDetectedOver && isPlayerInRangeToSpawn)
+        {
+            stateMachine.ChangeState(necromanser.SpawnSkillState);
+        }
+        else if (canThrow && !isPlayerInRange && isPlayerInRangeToThrow)
         {
             stateMachine.ChangeState(necromanser.ThrowWeaponState);
         }

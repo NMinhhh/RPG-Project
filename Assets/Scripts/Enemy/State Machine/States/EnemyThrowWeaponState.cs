@@ -71,7 +71,7 @@ public class EnemyThrowWeaponState : EnemyState
         //Check finish catch animation
         if(Time.time >= startTime + data.catchTime && isFinishAttack && !isFinishCatch)
         {
-            enemy.SetThrowtSate(false);
+            enemy.ThrowCooldown();
             isFinishCatch = true;
         }
     }

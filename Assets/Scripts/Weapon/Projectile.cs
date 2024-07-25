@@ -38,9 +38,11 @@ public class Projectile : MonoBehaviour, IPooledObject
         }
     }
 
-    public virtual void SetDamage(float damage)
+    public virtual void CreateProjectile(float damage, float speed, float timeLife)
     {
         this.damage = damage;
+        this.speed = speed;
+        this.timeLife = timeLife;
     }
 
     public virtual void OnObjectSpawn()

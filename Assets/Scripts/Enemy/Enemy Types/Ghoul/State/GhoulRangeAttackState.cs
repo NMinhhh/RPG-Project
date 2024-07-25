@@ -53,6 +53,6 @@ public class GhoulRangeAttackState : EnemyRangeAttackState
         Vector3 direction = (new Vector3(enemy.playerPos.position.x, enemy.playerPos.position.y + data.offsetY, enemy.playerPos.position.z) - attackPoint.position).normalized;
         go = ObjectPool.Instance.SpawnFromPool(Pool.Type.GhoulProjectile, attackPoint.position, Quaternion.LookRotation(direction, Vector3.up));
         projectile = go.GetComponent<EnemyProjectile>();
-        projectile.SetDamage(data.damage);
+        projectile.CreateProjectile(data.damage, data.speed, data.timeLife);
     }
 }

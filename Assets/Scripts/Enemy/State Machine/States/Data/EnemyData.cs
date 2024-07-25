@@ -24,8 +24,13 @@ public class EnemyData : ScriptableObject
     public Vector2 dashCooldownRan;
 
     [Header("Throw Weapon")]
-    public float radiusCheckThrow = 5f;
     public bool isThrowWeapon;
+    public float radiusCheckThrow = 5f;
     public Vector2 throwWeaponCooldownRan;
+
+    [Header("Spawn Objects")]
+    public bool isSpawnObjects;
+    public float raidusCheckSpawn = 5f;
+    public Vector2 spawnObjectCooldown;
 
 }

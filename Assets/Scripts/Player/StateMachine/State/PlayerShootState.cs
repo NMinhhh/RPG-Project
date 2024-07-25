@@ -67,6 +67,6 @@ public class PlayerShootState : PlayerState
         Vector3 direction = (player.thirdPersonAim.mousePos - shootPoint.position).normalized;
         go = ObjectPool.Instance.SpawnFromPool(Pool.Type.Arrow, shootPoint.position, Quaternion.LookRotation(direction, Vector3.up));
         projectile = go.GetComponent<Projectile>();
-        projectile.SetDamage(data.arrowDamage);
+        projectile.CreateProjectile(data.arrowDamage, data.arrowSpeed, data.arrowTimeLife);
     }
 }

@@ -7,8 +7,10 @@ public class EnemyChaseState : EnemyState
     protected EnemyChaseData data;
     protected bool isPlayerInRange;
     protected bool isPlayerInRangeToThrow;
+    protected bool isPlayerInRangeToSpawn;
     protected bool canDash;
     protected bool canThrow;
+    protected bool canSpawn;
     public EnemyChaseState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyChaseData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
@@ -19,8 +21,10 @@ public class EnemyChaseState : EnemyState
         base.DoCheck();
         isPlayerInRange = enemy.CheckPlayerInRange();
         isPlayerInRangeToThrow = enemy.CheckPlayerInRangeToThrow();
+        isPlayerInRangeToSpawn = enemy.CheckPlayerInRangeToSpawn();
         canDash = enemy.CanDash();
         canThrow = enemy.CanThrow();
+        canSpawn = enemy.CanSpawn();
     }
 
     public override void Enter()
