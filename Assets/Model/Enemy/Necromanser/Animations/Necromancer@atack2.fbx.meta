@@ -3498,7 +3498,7 @@ ModelImporter:
       name: atack2
       takeName: Take 001
       internalID: 7400000
-      firstFrame: 188
+      firstFrame: 1
       lastFrame: 220
       wrapMode: 0
       orientationOffsetY: 0

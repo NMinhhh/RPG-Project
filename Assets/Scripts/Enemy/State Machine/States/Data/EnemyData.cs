@@ -23,4 +23,9 @@ public class EnemyData : ScriptableObject
     public bool isDash;
     public Vector2 dashCooldownRan;
 
+    [Header("Throw Weapon")]
+    public float radiusCheckThrow = 5f;
+    public bool isThrowWeapon;
+    public Vector2 throwWeaponCooldownRan;
+
 }

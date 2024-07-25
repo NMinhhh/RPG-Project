@@ -68,6 +68,10 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     protected float currentDashCooldown;
     protected bool canDash;
 
+    //Check to throw weapon
+    protected float currentThrowWeaponCooldown;
+    protected bool canThrow;
+
     #endregion
 
     #region Unity Function
@@ -87,6 +91,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         maxCombo = data.maxCombo;
         currentAODToHurt = data.amountOfDamageToHurt;
         currentDashCooldown = Random.Range(data.dashCooldownRan.x, data.dashCooldownRan.y);
+        currentThrowWeaponCooldown = Random.Range(data.throwWeaponCooldownRan.x, data.throwWeaponCooldownRan.y);
         isFirstDamage = false;
     }
 
@@ -97,6 +102,10 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         if (data.isDash)
         {
             CheckToDash();
+        }
+        if (data.isThrowWeapon)
+        {
+            CheckToThrow();
         }
     }
 
@@ -169,6 +178,11 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     public bool CheckPlayerInRange()
     {
         return Vector3.Distance(transform.position, playerPos.position) <= data.radiusCheckToAttack;
+    }
+
+    public bool CheckPlayerInRangeToThrow()
+    {
+        return Vector3.Distance(transform.position, playerPos.position) <= data.radiusCheckThrow;
     }
 
     public bool CheckBlock()
@@ -264,7 +278,34 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     {
         return canDash;
     }
-    
+
+
+    #endregion
+
+    #region Throw Weapon
+
+    public void CheckToThrow()
+    {
+        if (!canThrow)
+        {
+            currentThrowWeaponCooldown -= Time.deltaTime;
+            if (currentThrowWeaponCooldown <= 0)
+            {
+                currentThrowWeaponCooldown = Random.Range(data.throwWeaponCooldownRan.x, data.throwWeaponCooldownRan.y);
+                canThrow = true;
+            }
+        }
+    }
+
+    public void SetThrowtSate(bool state)
+    {
+        canThrow = state;
+    }
+
+    public bool CanThrow()
+    {
+        return canThrow;
+    }
 
     #endregion
 
@@ -290,6 +331,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckToChase);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckToAttack);
+            Gizmos.DrawWireSphere(transform.position, data.radiusCheckThrow);
         }
     }
 

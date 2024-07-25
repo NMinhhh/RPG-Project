@@ -13,7 +13,7 @@ public class Necromanser : Enemy
 
     public NecromanserMeleeAttackState MeleeAttackState { get; private set; }
 
-    public NecromanserControlWeaponAttackState ControlWeaponAttackState { get; private set; }
+    public NecromanserThrowWeaponState ThrowWeaponState { get; private set; }
 
     public NecromanserHurtState HurtState { get; private set; } 
 
@@ -27,7 +27,7 @@ public class Necromanser : Enemy
     [SerializeField] private EnemyPlayerDetectedData playerDetectedData;
     [SerializeField] private EnemyChaseData chaseData;
     [SerializeField] private EnemyMeleeAttackData meleeAttackData;
-    [SerializeField] private EnemyControlWeaponAttackData controlWeaponAttackData;
+    [SerializeField] private EnemyThrowWeaponData throwWeaponData;
     [SerializeField] private EnemyHurtData hurtData;
     [SerializeField] private EnemyDeathData deathData;
 
@@ -35,8 +35,7 @@ public class Necromanser : Enemy
 
     #region Transform
 
-    [SerializeField] private Transform attackPoint;
-
+    [SerializeField] private GameObject weaponToThrow;
     #endregion
 
     protected override void Start()
@@ -45,7 +44,7 @@ public class Necromanser : Enemy
         PlayerDetectedState = new NecromanserPlayerDetectedState(this, StateMachine, "PlayerDetected", playerDetectedData, this);
         ChaseState = new NecromanserChaseState(this, StateMachine, "Chase", chaseData, this);
         MeleeAttackState = new NecromanserMeleeAttackState(this, StateMachine, "MeleeAttack", meleeAttackData, this);
-        ControlWeaponAttackState = new NecromanserControlWeaponAttackState(this, StateMachine, "ControlWPAttack", controlWeaponAttackData, attackPoint, this);
+        ThrowWeaponState = new NecromanserThrowWeaponState(this, StateMachine, "ControlWPAttack", throwWeaponData, weaponToThrow , this);
         HurtState = new NecromanserHurtState(this, StateMachine, "Hurt", hurtData, this);
         DeathState = new NecromanserDeathState(this, StateMachine, "Death", deathData, this);
         StateMachine.Intialize(PlayerDetectedState);

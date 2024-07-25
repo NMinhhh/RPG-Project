@@ -7,8 +7,10 @@ public class EnemyPlayerDetectedState : EnemyState
     protected EnemyPlayerDetectedData data;
     protected bool isPlayerDetected;
     protected bool isPlayerInRange;
+    protected bool isPlayerInRangeToThrow;
     protected bool isDetectedOver;
     protected bool canDash;
+    protected bool canThrow;
     public EnemyPlayerDetectedState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyPlayerDetectedData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
@@ -19,14 +21,20 @@ public class EnemyPlayerDetectedState : EnemyState
         base.DoCheck();
         isPlayerDetected = enemy.CheckPlayerDetected();
         isPlayerInRange = enemy.CheckPlayerInRange();
+        isPlayerInRangeToThrow = enemy.CheckPlayerInRangeToThrow();
         enemy.WeaponsController.EndDealDamageAll();
         canDash = enemy.CanDash();
+        canThrow = enemy.CanThrow();
+
     }
 
     public override void Enter()
     {
         base.Enter();
         isDetectedOver = false;
+        enemy.SetSpeed(0);
+        enemy.Move(enemy.transform.position);
+        enemy.transform.LookAt(new Vector3(enemy.playerPos.position.x, enemy.transform.position.y, enemy.playerPos.position.z));
     }
 
 
