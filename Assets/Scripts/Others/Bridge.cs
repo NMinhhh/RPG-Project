@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Brigde : MonoBehaviour, IDamageable
+public class Bridge : MonoBehaviour, IDamageable
 {
     [SerializeField] private MeshRenderer[] skinnedMeshRenderers;
     [SerializeField] private float dissolveSpeed = 0.5f;
