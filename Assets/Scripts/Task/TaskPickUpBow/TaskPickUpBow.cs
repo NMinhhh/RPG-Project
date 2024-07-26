@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TaskPickUpBow : MonoBehaviour
 {
+    [Header("Task Name Next")]
+    [SerializeField] private Task.TaskName taskNameNext;
+
     [Header("Door")]
     [SerializeField] protected Door door;
     [Header("Bow Intruct UI")]
@@ -36,6 +39,7 @@ public class TaskPickUpBow : MonoBehaviour
         if (CheckToChangeTask())
         {
             door.OpenDoor();
+            TaskManager.Instance.ChangeTask(taskNameNext);
             gameObject.SetActive(false);
         }
     }

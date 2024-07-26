@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdc73453c6a85a4aba6c0ff89e8a72f, type: 3}
   m_Name: DemonData
   m_EditorClassIdentifier: 
-  isEnemyPatrol: 1
+  isMeleeAttack: 1
   MaxHealthData: 200
   radiusCheckToChase: 10
   radiusCheckToAttack: 1.65
@@ -23,4 +23,9 @@ MonoBehaviour:
   amountOfDamageToHurt: 1
   isDash: 0
   dashCooldownRan: {x: 0, y: 0}
-  dissolveTime: 3
+  isThrowWeapon: 0
+  radiusCheckThrow: 5
+  throwWeaponCooldownRan: {x: 0, y: 0}
+  isSpawnObjects: 0
+  raidusCheckSpawn: 5
+  spawnObjectCooldown: {x: 0, y: 0}

@@ -1244,10 +1244,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aimTarget: {fileID: 2648315485508851086}
   cinemachineVirtual: {fileID: 0}
-  crossHair: {fileID: 0}
-  whatIsGround:
+  crossHairIdle: {fileID: 0}
+  crossHairOnTarget: {fileID: 0}
+  whatIsTarget:
     serializedVersion: 2
     m_Bits: 384
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 256
   animRig: {fileID: 1926334322166455147}
   mixPitchAim: -30
   maxPitchAim: 20

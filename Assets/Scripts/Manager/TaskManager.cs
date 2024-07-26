@@ -57,7 +57,9 @@ public class Task
         KillEnemy,
         KillOrk,
         KillEnemySpawn,
-        PickUpBow
+        PickUpBow,
+        KillEnemySapwn2,
+        KillNecromanser
     }
 
     public TaskName taskName;

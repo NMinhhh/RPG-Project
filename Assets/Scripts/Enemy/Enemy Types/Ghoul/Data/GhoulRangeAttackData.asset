@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: GhoulRangeAttackData
   m_EditorClassIdentifier: 
   damage: 30
+  speed: 25
+  timeLife: 3
   offsetY: 1

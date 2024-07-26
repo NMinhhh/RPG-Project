@@ -5,8 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="newData",menuName = "Enemy Data/Base Data")]
 public class EnemyData : ScriptableObject
 {
-    public bool isEnemyPatrol;
-
     public float MaxHealthData;
 
     public float radiusCheckToChase;

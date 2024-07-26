@@ -42,6 +42,7 @@ public class Demon : Enemy
     protected override void Start()
     {
         base.Start();
+        enemyType = EnemyType.MeleeAttack;
         IdleState = new DemonIdleState(this, StateMachine, "Idle", _idleData, this);
         HurtState = new DemonHurtState(this, StateMachine, "Hurt", _hurtData, this);
         MoveState = new DemonMoveState(this, StateMachine, "Move", _moveData, destinations, this);
@@ -49,10 +50,8 @@ public class Demon : Enemy
         MeleeAttackState = new DemonMeleeAttackState(this, StateMachine, "MeleeAttack", _meleeAttackData, this);
         PlayerDetectedState = new DemonPlayerDetectedState(this, StateMachine, "PlayerDetected", _playerDetectedData, this);
         DeathState = new DemonDeathState(this, StateMachine, "Death", _deathData, this);
-        if (data.isEnemyPatrol)
-            StateMachine.Intialize(IdleState);
-        else
-            StateMachine.Intialize(PlayerDetectedState);
+        StateMachine.Intialize(IdleState);
+
     }
 
     protected override void Update()

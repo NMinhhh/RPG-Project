@@ -28,4 +28,6 @@ MonoBehaviour:
   strongAttackMoveTime: 0.3
   parryTime: 0.2
   arrow: {fileID: 8330857282276292541, guid: e17a91aa3e1172541bffad2fcdb0b8a6, type: 3}
-  arrowDamage: 30
+  arrowDamage: 35
+  arrowSpeed: 25
+  arrowTimeLife: 3

@@ -12,7 +12,7 @@ public class IntroManager : Singleton<IntroManager>
     // Start is called before the first frame update
     void Start()
     {
-        //PlayCutSceen(Intro.IntroType.StartGameIntro);
+        PlayCutSceen(Intro.IntroType.StartGameIntro);
     }
 
   
@@ -50,7 +50,8 @@ public class Intro
     {
         StartGameIntro,
         OrkIntro,
-        DummyIntro
+        DummyIntro,
+        NecromanserIntro
     }
 
     public IntroType type;

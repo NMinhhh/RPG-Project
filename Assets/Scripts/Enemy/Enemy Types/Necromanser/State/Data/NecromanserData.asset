@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdc73453c6a85a4aba6c0ff89e8a72f, type: 3}
   m_Name: NecromanserData
   m_EditorClassIdentifier: 
-  isEnemyPatrol: 0
+  isMeleeAttack: 1
   MaxHealthData: 300
   radiusCheckToChase: 14.51
   radiusCheckToAttack: 1.7

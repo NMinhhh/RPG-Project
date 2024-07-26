@@ -114,7 +114,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f67e135b035c98438334f6650155ec5, type: 2}
+  - {fileID: 2100000, guid: 831c46ccf3800ea4c86170f9b60664c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4655,6 +4655,7 @@ GameObject:
   - component: {fileID: 2256411068246953191}
   - component: {fileID: 2322495597709752671}
   - component: {fileID: 8765855504656580932}
+  - component: {fileID: 4811062136619286170}
   m_Layer: 8
   m_Name: Ghoul
   m_TagString: Enemy
@@ -4694,6 +4695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 44e0a79faea1fdb448456334bfdab208, type: 2}
   destinations: []
+  enemyType: 1
   playerDetectedData: {fileID: 11400000, guid: 1a675ef07b3567b40859a335c201954a, type: 2}
   rangeAttackData: {fileID: 11400000, guid: 27002f9c84cdf504fa35b48a9d11c185, type: 2}
   hurtData: {fileID: 11400000, guid: d23c8e27e91cc7348bb1bb3a355deb98, type: 2}
@@ -4760,6 +4762,25 @@ CapsuleCollider:
   m_Height: 1.9208946
   m_Direction: 1
   m_Center: {x: -0.0049467087, y: 0.9654541, z: 0.16833496}
+--- !u!114 &4811062136619286170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2387607231226706650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68e2bdbc538076e48934740764208e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinnedMeshRenderers:
+  - {fileID: 7644755135023620661}
+  - {fileID: 786094924549366312}
+  - {fileID: 375244598841452805}
+  dissolveSpeed: 0.5
+  enemy: {fileID: 7868489080774911863}
+  healthBar: {fileID: 1220349782505132222}
 --- !u!1 &2399093163538343169
 GameObject:
   m_ObjectHideFlags: 0
@@ -5197,7 +5218,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f67e135b035c98438334f6650155ec5, type: 2}
+  - {fileID: 2100000, guid: 831c46ccf3800ea4c86170f9b60664c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15527,7 +15548,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0f67e135b035c98438334f6650155ec5, type: 2}
+  - {fileID: 2100000, guid: 831c46ccf3800ea4c86170f9b60664c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

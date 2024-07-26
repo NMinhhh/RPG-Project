@@ -19,6 +19,7 @@ public class GhoulDeathState : EnemyDeathState
     public override void Enter()
     {
         base.Enter();
+        enemy.GetComponent<CapsuleCollider>().enabled = false;
     }
 
     public override void Exit()

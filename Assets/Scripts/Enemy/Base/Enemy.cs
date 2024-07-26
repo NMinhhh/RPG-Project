@@ -39,6 +39,16 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     #region Variable
 
+    [SerializeField] private bool isDrawGizmos;
+
+    public enum EnemyType
+    {
+        MeleeAttack,
+        RangeAttack,
+    }
+
+    public EnemyType enemyType;
+
     public Transform playerPos { get; private set; }
 
     //Health
@@ -146,6 +156,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     public virtual void Damage(float damage)
     {
+        if (this.enabled == false) return;
         isHurt = false;
         currentAODToHurt--;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
@@ -348,7 +359,8 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     protected virtual void OnDrawGizmos()
     {
-        if (data != null)
+
+        if (data != null && isDrawGizmos)
         {
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckToChase);
             Gizmos.color = Color.red;
