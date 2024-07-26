@@ -38,6 +38,7 @@ public class WeaponsController : MonoBehaviour
         player = GetComponent<Player>();
         playerAnimatorController = GetComponent<PlayerAnimatorController>();
         InventorySystem.Instance.equippedBow += EquippedBow;
+        isEquippedBow = true;
     }
 
     private void Update()

@@ -10,7 +10,7 @@ public class Dummy : MonoBehaviour, IDamageable
     public bool isDie;
     public void Damage(float damage)
     {
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Hit), transform.position, .5f); ;
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Hit), transform.position, .5f);
         amountOfDamage--;
         if(amountOfDamage == 0)
         {

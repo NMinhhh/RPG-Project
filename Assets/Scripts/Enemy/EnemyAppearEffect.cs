@@ -10,7 +10,6 @@ public class EnemyAppearEffect : MonoBehaviour
 
     [SerializeField] private Enemy enemy;
     [SerializeField] private GameObject healthBar;
-
     private Material[] material;
 
     private bool isAppear;
@@ -27,12 +26,16 @@ public class EnemyAppearEffect : MonoBehaviour
 
     void GetMaterial()
     {
-        material = new Material[skinnedMeshRenderers.Length];
-        for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+        if (isAppear)
         {
-            material[i] = skinnedMeshRenderers[i].material;
-            material[i].SetFloat("_Dissolve", 1);
+            material = new Material[skinnedMeshRenderers.Length];
+            for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+            {
+                material[i] = skinnedMeshRenderers[i].material;
+                material[i].SetFloat("_Dissolve", 1);
+            }
         }
+       
     }
 
     private void Update()
