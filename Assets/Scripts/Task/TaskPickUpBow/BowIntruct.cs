@@ -17,7 +17,7 @@ public class BowIntruct : MonoBehaviour
     public void CloseUI()
     {
         gameObject.SetActive(false);
-        IntroManager.Instance.PlayCutSceen(Intro.IntroType.DummyIntro);
+        IntroManager.Instance.PlayCutScene(Intro.IntroName.DummyIntro);
         InputManager.Instance.SetCanGetInput(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

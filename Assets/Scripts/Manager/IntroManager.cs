@@ -17,7 +17,7 @@ public class IntroManager : Singleton<IntroManager>
 
   
 
-    public void PlayCutSceen(Intro.IntroType type)
+    public void PlayCutScene(Intro.IntroName type)
     {
         isPlayIntro = true;
         currentIntro = GetIntro(type);
@@ -30,7 +30,7 @@ public class IntroManager : Singleton<IntroManager>
         currentIntro.SetActive(false);
     }
 
-    public GameObject GetIntro(Intro.IntroType type)
+    public GameObject GetIntro(Intro.IntroName type)
     {
         foreach (Intro intro in intros)
         {
@@ -46,7 +46,7 @@ public class IntroManager : Singleton<IntroManager>
 [System.Serializable]
 public class Intro
 {
-    public enum IntroType
+    public enum IntroName
     {
         StartGameIntro,
         OrkIntro,
@@ -54,6 +54,6 @@ public class Intro
         NecromanserIntro
     }
 
-    public IntroType type;
+    public IntroName type;
     public GameObject cutsceenObject;
 }

@@ -10,14 +10,17 @@ public class Bridge : MonoBehaviour, IDamageable
     [SerializeField] private GameObject brigde;
     [SerializeField] private GameObject blockHolder;
     [SerializeField] private GameObject block;
+    [SerializeField] private ParticleSystem vfx;
     [SerializeField] private int amountOfDamage;
 
     private Animator anim;
     private CapsuleCollider capsuleCollider;
 
-    [SerializeField] private bool isAppear;
+    private bool isAppear;
 
     private float dissolveAmount;
+
+    public bool isFinishFall { get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -25,18 +28,21 @@ public class Bridge : MonoBehaviour, IDamageable
         anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         GetMaterial();
+        isFinishFall = false;
     }
 
     private void Update()
     {
-
-        dissolveAmount = Mathf.Clamp01(dissolveAmount - dissolveSpeed * Time.deltaTime);
-        Appear();
-        if (dissolveAmount == 0)
+        if (isAppear)
         {
-            isAppear = false;
+            dissolveAmount = Mathf.Clamp01(dissolveAmount - dissolveSpeed * Time.deltaTime);
+            Appear();
+            if (dissolveAmount == 0)
+            {
+                vfx.Play();
+                isAppear = false;
+            }
         }
-        
     }
 
     public void Appear()
@@ -51,6 +57,7 @@ public class Bridge : MonoBehaviour, IDamageable
     {
         this.isAppear = true;
         dissolveAmount = 1;
+
     }
 
     void GetMaterial()
@@ -62,6 +69,11 @@ public class Bridge : MonoBehaviour, IDamageable
             material[i] = skinnedMeshRenderers[i].material;
             material[i].SetFloat("_Dissolve", 1);
         }
+    }
+
+    void FinishAnimation()
+    {
+        isFinishFall = true;
     }
 
     public void Damage(float damage)

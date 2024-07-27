@@ -38,7 +38,6 @@ public class WeaponsController : MonoBehaviour
         player = GetComponent<Player>();
         playerAnimatorController = GetComponent<PlayerAnimatorController>();
         InventorySystem.Instance.equippedBow += EquippedBow;
-        isEquippedBow = true;
     }
 
     private void Update()
@@ -74,7 +73,7 @@ public class WeaponsController : MonoBehaviour
         }
         playerAnimatorController.SetAnimator(itemData.attackType);
         player.ChangeWeapon();
-        isEquippedWeapon = true;
+        //isEquippedWeapon = true;
     }
 
     public void EquippedLeftWeapons(ItemData weaponData)
@@ -141,7 +140,7 @@ public class WeaponsController : MonoBehaviour
     public void EquippedBow()
     {
         isEquippedBow = true;
-        TaskManager.Instance.currentTask.taskObj.GetComponent<TaskPickUpBow>().BowIntructUIActive();
+        //TaskManager.Instance.currentTask.taskObj.GetComponent<TaskPickUpBow>().BowIntructUIActive();
     }
 
     public void StartArrowShoot()

@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    [Header("Task Name Next")]
-    [SerializeField] private Task.TaskName taskNameNext;
-     
-    [Header("Door")]
-    [SerializeField] private Door door;
-
     [Header("Pos to spawn enemy melee attack")]
     [SerializeField] private List<Transform> meleeSpawnPos;
     private List<Transform> currentMeleeSpawnPos = new List<Transform>(); 
@@ -44,13 +38,14 @@ public class SpawnEnemy : MonoBehaviour
 
     public bool isStartSpawn;
 
+    public bool isFinishSpawn {  get; private set; }
+
+
     // Start is called before the first frame update
     void Start()
     {
-        door.CloseDoor();
         currentEnemyWave = new List<GameObject>();
         enemyWaveDictionary = new Dictionary<int, List<GameObject>>();
-        currentWave = 1;
         currentWDT = waveDelayTime;
         CreateAllEnemy();
     }
@@ -78,15 +73,22 @@ public class SpawnEnemy : MonoBehaviour
         }
     }
 
+    public void StartSpawn()
+    {
+        currentWave = 1;
+        canSpawn = true;
+        isStartSpawn = true;
+        isFinishSpawn = false;
+    }
+
     public void NextWave()
     {
         currentWave++;
         if (currentWave > enemyWaveDictionary.Count)
         {
             canSpawn = false;
-            door.OpenDoor();
+            isFinishSpawn = true;
             gameObject.SetActive(false);
-            TaskManager.Instance.ChangeTask(taskNameNext);
 
         }
         isStartSpawn = true;

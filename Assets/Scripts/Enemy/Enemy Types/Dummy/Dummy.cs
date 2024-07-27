@@ -2,43 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dummy : MonoBehaviour, IDamageable
+public class Dummy : Enemy
 {
-    [SerializeField] private int amountOfDamage;
-    private Animator anim;
-    private BoxCollider boxCollider;
-    public bool isDie;
-    public void Damage(float damage)
+    #region State
+
+    public DummyIdleState IdleState {  get; private set; }
+
+    public DummyHurtState HurtState { get; private set; }
+
+    public DummyDeathState DeathState { get; private set; }
+
+    #endregion
+
+    #region Data
+
+    [SerializeField] private EnemyIdleData idleData;
+    [SerializeField] private EnemyHurtData hurtData;
+    [SerializeField] private EnemyDeathData deathData;  
+
+    #endregion
+
+    protected override void Start()
     {
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Hit), transform.position, .5f);
-        amountOfDamage--;
-        if(amountOfDamage == 0)
+        base.Start();
+        IdleState = new DummyIdleState(this, StateMachine, "Idle", idleData, this);
+        HurtState = new DummyHurtState(this, StateMachine, "Hurt", hurtData, this);
+        DeathState = new DummyDeathState(this, StateMachine, "Death", deathData, this);
+        StateMachine.Intialize(IdleState);
+    }
+
+    public override void Damage(float damage)
+    {
+        base.Damage(damage);
+        if (isDie)
         {
-            Die();
+            StateMachine.ChangeState(DeathState);
+            return;
         }
-        else
+        if (isHurt)
         {
-            anim.SetTrigger("Damage");
+            StateMachine.ChangeState(HurtState);
         }
     }
 
-    public void Die()
-    {
-        isDie = true;
-        anim.SetTrigger("Death");
-        boxCollider.enabled = false;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        anim = GetComponent<Animator>();
-        boxCollider = GetComponent<BoxCollider>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

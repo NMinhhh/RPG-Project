@@ -5,11 +5,12 @@ using UnityEngine;
 public class EnemyAppearEffect : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer[] skinnedMeshRenderers;
-
+    [SerializeField] private float startDissolveAmount = 1;
     [SerializeField] private float dissolveSpeed = 0.5f;
 
     [SerializeField] private Enemy enemy;
     [SerializeField] private GameObject healthBar;
+    
     private Material[] material;
 
     private bool isAppear;
@@ -44,7 +45,7 @@ public class EnemyAppearEffect : MonoBehaviour
         {
             dissolveAmount = Mathf.Clamp01(dissolveAmount - dissolveSpeed * Time.deltaTime);
             Appear();
-            if(dissolveAmount == 0)
+            if(dissolveAmount <= 0)
             {
                 healthBar.SetActive(true);
                 enemy.enabled = true;
@@ -65,7 +66,7 @@ public class EnemyAppearEffect : MonoBehaviour
     public void StartAppear()
     {
         this.isAppear = true;
-        dissolveAmount = 1;
+        dissolveAmount = startDissolveAmount;
     }
     
 }
