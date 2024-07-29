@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryItem : MonoBehaviour,IPointerClickHandler
+public class InventoryItem : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private Button button;
 
@@ -16,6 +16,8 @@ public class InventoryItem : MonoBehaviour,IPointerClickHandler
     public event Action OnSelectedItem;
 
     public static InventoryItem itemSelected;
+
+
 
     private void OnDisable()
     {
@@ -41,8 +43,11 @@ public class InventoryItem : MonoBehaviour,IPointerClickHandler
     {
         if(eventData.button == PointerEventData.InputButton.Left && itemSelected != this)
         {
+            InventorySystem.Instance.OpenItem3DViewer();
             itemSelected = this;
             OnSelectedItem?.Invoke();
         }
     }
+
+  
 }

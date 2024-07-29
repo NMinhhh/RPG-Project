@@ -44,7 +44,6 @@ public class InventorySystem : Singleton<InventorySystem>
             {
                 isOpen = true;
                 inventorySystemUI.SetActive(true);
-                item3DViewrUI.SetActive(true);
                 cameraLock?.Invoke();
             }
             else
@@ -56,6 +55,11 @@ public class InventorySystem : Singleton<InventorySystem>
             }
         }
         
+    }
+
+    public void OpenItem3DViewer()
+    {
+        item3DViewrUI.SetActive(true);
     }
 
     private void GenerateListSlots()
@@ -70,7 +74,7 @@ public class InventorySystem : Singleton<InventorySystem>
 
     public void AddToInventory(ItemData itemData)
     {
-        NoticePickUpManager.instance.Notice(itemData.image, "+1 " + itemData.name);
+        NoticePickUpManager.instance.Notice(itemData.image, "+1 " + itemData.itemName);
         if (itemData.isBow)
         {
             equippedBow?.Invoke();

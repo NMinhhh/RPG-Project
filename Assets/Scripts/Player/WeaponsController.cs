@@ -109,6 +109,14 @@ public class WeaponsController : MonoBehaviour
         }
     }
 
+    public void StrongAttack()
+    {
+        if (currentLeftWeapons != null)
+            currentLeftWeapons.StrongAttack();
+        if (currentRightWeapons != null)
+            currentRightWeapons.StrongAttack();
+    }
+
     public void StartDealDamageToTheLeft()
     {
         currentLeftWeapons.StartDealDamage();
@@ -140,7 +148,6 @@ public class WeaponsController : MonoBehaviour
     public void EquippedBow()
     {
         isEquippedBow = true;
-        //TaskManager.Instance.currentTask.taskObj.GetComponent<TaskPickUpBow>().BowIntructUIActive();
     }
 
     public void StartArrowShoot()

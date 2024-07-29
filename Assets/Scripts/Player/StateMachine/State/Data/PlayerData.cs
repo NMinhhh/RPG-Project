@@ -31,6 +31,7 @@ public class PlayerData : ScriptableObject
     [Header("Strong Attack")]
     public float strongAttackMoveTime = .5f;
     public float strongAttackStamina = 40f;
+    public float percentDamage = 30;
 
     [Header("Block")]
     public float parryTime = .5f;

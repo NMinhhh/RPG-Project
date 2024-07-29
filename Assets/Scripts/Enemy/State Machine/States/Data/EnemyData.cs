@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="newData",menuName = "Enemy Data/Base Data")]
+[CreateAssetMenu(fileName ="newData",menuName = "Enemy Data/Base Data",order = 0)]
 public class EnemyData : ScriptableObject
 {
+    public bool isBoss;
+
     public float MaxHealthData;
 
     public float radiusCheckToChase;

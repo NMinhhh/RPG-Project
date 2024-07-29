@@ -9,8 +9,10 @@ public class EquippedWeapons : MonoBehaviour
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private BoxCollider box;
     [SerializeField] private GameObject blood;
+    [SerializeField] private float percentStrongDamage = 50f;
     private Transform damagePoint;
     private bool isAttack;
+    private bool isStrongAttack;
 
     Transform player;
 
@@ -40,7 +42,8 @@ public class EquippedWeapons : MonoBehaviour
                         {
                             knockBackable.DamageDiretion(dir);
                         }
-                        damagaeble.Damage(damage);
+                        float currentDamage = (isStrongAttack ? damage + damage * percentStrongDamage / 100 : damage);
+                        damagaeble.Damage(currentDamage);
                         ObjectPool.Instance.SpawnFromPool(Pool.Type.BloodParticle,damagePoint.position, Quaternion.identity).transform.SetParent(hit2.transform);
                     }
                     enemy.Add(hit2.collider.gameObject);
@@ -48,6 +51,11 @@ public class EquippedWeapons : MonoBehaviour
             }
         }
       
+    }
+
+    public void StrongAttack()
+    {
+        isStrongAttack = true;
     }
 
     public void SetDamage(float damage)
@@ -60,6 +68,7 @@ public class EquippedWeapons : MonoBehaviour
     public void EndDealDamage()
     {
         isAttack = false;
+        isStrongAttack = false;
         enemy.Clear();
     }
 

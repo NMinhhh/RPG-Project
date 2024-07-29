@@ -86,6 +86,9 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     protected float currentSpawnObjectsCooldown;
     protected bool canSpawn;
 
+    //Boss
+    protected bool isBoss;
+
     #endregion
 
     #region Unity Function
@@ -98,14 +101,22 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         Anim = alive.GetComponent<Animator>();
         Agent = GetComponent<NavMeshAgent>();
         StateMachine = new EnemyStateMachine();
-        HealthBar = GetComponentInChildren<EnemyHealthBar>();
-        HealthBar.gameObject.SetActive(false);
         WeaponsController = GetComponent<EnemyWeaponController>();
         maxHelth = data.MaxHealthData;
         currentHealth = maxHelth;
         maxCombo = data.maxCombo;
         currentAODToHurt = data.amountOfDamageToHurt;
         isFirstDamage = false;
+        isBoss = data.isBoss;
+        if (!data.isBoss)
+        {
+            HealthBar = GetComponentInChildren<EnemyHealthBar>();
+            HealthBar.gameObject.SetActive(false);
+        }
+        else
+        {
+            BossStats.Instance.SetHealth(currentHealth, maxHelth);
+        }
         if (data.isDash)
         {
             DashCooldown();
@@ -124,7 +135,6 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     protected virtual void Update()
     {
         StateMachine.CurrentEnemyState.LogicUpdate();
-       
     }
 
     protected virtual void FixedUpdate()
@@ -161,9 +171,17 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         isHurt = false;
         currentAODToHurt--;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
-        if(!HealthBar.gameObject.activeInHierarchy)
-            HealthBar.gameObject.SetActive(true);
-        HealthBar.UpdateHealthBar(currentHealth, maxHelth);
+        if (isBoss)
+        {
+            BossStats.Instance.UpdateHealthBar(currentHealth);
+        }
+        else
+        {
+            if (!HealthBar.gameObject.activeInHierarchy)
+                HealthBar.gameObject.SetActive(true);
+            HealthBar.UpdateHealthBar(currentHealth, maxHelth);
+            HealthBar.SetDamage(damage);
+        }
         if (currentHealth > 0 && currentAODToHurt <= 0)
         {
             currentAODToHurt = data.amountOfDamageToHurt;
@@ -172,7 +190,6 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         else if(currentHealth <= 0)
         {
             isDie = true;
-            HealthBar.gameObject.SetActive(false);
         }
     }
 

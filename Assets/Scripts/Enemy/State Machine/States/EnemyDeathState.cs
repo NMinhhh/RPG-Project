@@ -18,6 +18,7 @@ public class EnemyDeathState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        enemy.WeaponsController.EndDealDamageAll();
         enemy.SetSpeed(0);
         enemy.Move(enemy.transform.position);
         enemy.WeaponsController.enabled = false;

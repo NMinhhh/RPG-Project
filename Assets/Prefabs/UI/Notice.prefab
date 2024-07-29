@@ -112,8 +112,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 395.1, y: 60}
+  m_AnchoredPosition: {x: -39.204163, y: 0}
+  m_SizeDelta: {x: 473.5085, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8285038863049242831
 CanvasRenderer:
@@ -248,4 +248,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: +1 Axe and Katana
+  m_Text: +1 Dead Sword And Shield
