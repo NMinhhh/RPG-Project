@@ -63,11 +63,11 @@ public class PlayerMoveState : PlayerState
         {
             stateMachine.ChangeState(player.BlockState);
         }
-        else if (isStrongAttack && player.weaponsController.isEquippedWeapon)
+        else if (isStrongAttack && player.weaponsController.isEquippedWeapon && PlayerStats.Instance.EnoughStamina(data.strongAttackStamina))
         {
             stateMachine.ChangeState(player.StrongAttack);
         }
-        else if (isAttack && player.weaponsController.isEquippedWeapon)
+        else if (isAttack && player.weaponsController.isEquippedWeapon && PlayerStats.Instance.EnoughStamina(data.attackStamina))
         {
             stateMachine.ChangeState(player.AttackState);
         }

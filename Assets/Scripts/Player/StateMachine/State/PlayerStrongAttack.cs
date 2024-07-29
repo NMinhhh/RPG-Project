@@ -16,6 +16,7 @@ public class PlayerStrongAttack : PlayerState
     public override void Enter()
     {
         base.Enter();
+        PlayerStats.Instance.UseStamina(data.strongAttackStamina);
         isMove = false;
         player.ResetComboAttack();
         moveTime = data.strongAttackMoveTime;

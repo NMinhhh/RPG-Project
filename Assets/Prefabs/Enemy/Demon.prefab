@@ -204,10 +204,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Demon
       objectReference: {fileID: 0}
-    - target: {fileID: 4774996852042643464, guid: 99a6a271ef8bf704dbb0b9a8c09e8476, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: de0e9e622d89126479a89df28f1dd942, type: 2}
     - target: {fileID: 6152722983681810238, guid: 99a6a271ef8bf704dbb0b9a8c09e8476, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -264,10 +260,6 @@ PrefabInstance:
       propertyPath: destinations.Array.data[3]
       value: 
       objectReference: {fileID: 7056992603924135720}
-    - target: {fileID: 7216866234934824156, guid: 99a6a271ef8bf704dbb0b9a8c09e8476, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 743485f4fbbac50488eb186ffd67e4a7, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

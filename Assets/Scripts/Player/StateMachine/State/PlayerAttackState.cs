@@ -20,6 +20,7 @@ public class PlayerAttackState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        PlayerStats.Instance.UseStamina(data.attackStamina);
         isBlock = false;
         isMove = false;
         moveTime = data.attackMoveTime;
@@ -99,11 +100,11 @@ public class PlayerAttackState : PlayerState
             {
                 stateMachine.ChangeState(player.BlockState);
             }
-            else if (isStrongAttack)
+            else if (isStrongAttack && PlayerStats.Instance.EnoughStamina(data.strongAttackStamina))
             {
                 stateMachine.ChangeState(player.StrongAttack);
             }
-            else if (isAttack)
+            else if (isAttack && PlayerStats.Instance.EnoughStamina(data.attackStamina))
             {
                 stateMachine.ChangeState(player.AttackState);
             }

@@ -76,6 +76,9 @@ public class Player : MonoBehaviour, IDamageable
     //Health
     private float currentHealth;
 
+    //Stamina
+    private float currentStamina;
+
     //Velocity
     [HideInInspector]
     public Vector2 velocity;
@@ -127,6 +130,8 @@ public class Player : MonoBehaviour, IDamageable
         weaponsController = GetComponent<WeaponsController>();
         thirdPersonAim = GetComponent<ThirdPersonAim>();
         currentHealth = data.maxHealth;
+        currentStamina = data.maxStamina;
+        PlayerStats.Instance.SetStamina(currentStamina,currentStamina);
         maxComboAttack = data.combo;
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
         EquipSystem.Instance.usePotion += UpdateHealth;

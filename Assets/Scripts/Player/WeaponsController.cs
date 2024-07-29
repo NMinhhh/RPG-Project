@@ -73,7 +73,7 @@ public class WeaponsController : MonoBehaviour
         }
         playerAnimatorController.SetAnimator(itemData.attackType);
         player.ChangeWeapon();
-        //isEquippedWeapon = true;
+        isEquippedWeapon = true;
     }
 
     public void EquippedLeftWeapons(ItemData weaponData)

@@ -48,6 +48,8 @@ public class TaskManager : Singleton<TaskManager>
 [System.Serializable]
 public class MainTask
 {
+    public string mainTextName;
+
     public Task[] taskSteps;
 
     public int currentTaskStep;

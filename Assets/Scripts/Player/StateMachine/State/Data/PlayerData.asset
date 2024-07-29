@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerData
   m_EditorClassIdentifier: 
   maxHealth: 300
+  maxStamina: 300
   speed: 8
   gravity: -19.62
   jumpSpeed: 10
@@ -23,11 +24,13 @@ MonoBehaviour:
     m_Bits: 128
   combo: 3
   attackMoveTime: 0.2
-  dashSpeed: 15
-  dashTime: 0.2
+  attackStamina: 20
   strongAttackMoveTime: 0.3
+  strongAttackStamina: 40
   parryTime: 0.2
+  blockStamina: 20
   arrow: {fileID: 8330857282276292541, guid: e17a91aa3e1172541bffad2fcdb0b8a6, type: 3}
   arrowDamage: 35
   arrowSpeed: 25
   arrowTimeLife: 3
+  shootStamina: 20

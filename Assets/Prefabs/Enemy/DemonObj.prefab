@@ -902,6 +902,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  isDrawGizmos: 0
+  enemyType: 0
   _idleData: {fileID: 11400000, guid: ec5eb1797dca2044c84c2d1f0650dc5d, type: 2}
   _hurtData: {fileID: 11400000, guid: 21543a932425b814baea7c1a9b2c109f, type: 2}
   _moveData: {fileID: 11400000, guid: 522472e7aa3fca642910a07b89a0a4d4, type: 2}

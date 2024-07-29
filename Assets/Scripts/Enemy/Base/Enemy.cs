@@ -99,6 +99,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         Agent = GetComponent<NavMeshAgent>();
         StateMachine = new EnemyStateMachine();
         HealthBar = GetComponentInChildren<EnemyHealthBar>();
+        HealthBar.gameObject.SetActive(false);
         WeaponsController = GetComponent<EnemyWeaponController>();
         maxHelth = data.MaxHealthData;
         currentHealth = maxHelth;
@@ -160,6 +161,8 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         isHurt = false;
         currentAODToHurt--;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
+        if(!HealthBar.gameObject.activeInHierarchy)
+            HealthBar.gameObject.SetActive(true);
         HealthBar.UpdateHealthBar(currentHealth, maxHelth);
         if (currentHealth > 0 && currentAODToHurt <= 0)
         {
@@ -185,7 +188,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     public float GetDistance(Vector3 orginal, Vector3 target)
     {
-        return Vector3.Distance(orginal, target);
+        return Vector3.Distance(new Vector3(orginal.x, orginal.y, orginal.z), new Vector3(target.x, orginal.y, target.z));
     }
 
     public bool CheckPlayerDetected()
