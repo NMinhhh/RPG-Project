@@ -51,6 +51,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         {
             transform.position = startPos;
             transform.SetParent(startParent);
+            canDrag = true;
         }
         if (canDrag)
             canvasGroup.blocksRaycasts = true;

@@ -27,4 +27,7 @@ public class ItemData : ScriptableObject
 
     [Header("Potion Data")]
     public float consumeValue;
+
+    [Header("3D Viewer Modle")]
+    public GameObject item3DViewerModel;
 }

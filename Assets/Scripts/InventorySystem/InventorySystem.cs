@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class InventorySystem : Singleton<InventorySystem>
 {
+    [Header("Item 3D Viewer")]
+    [SerializeField] private GameObject item3DViewrUI;
+
     [Header("UI")]
     [SerializeField] private GameObject inventorySystemUI;
     [Header("Slot template")]
@@ -20,7 +23,9 @@ public class InventorySystem : Singleton<InventorySystem>
 
     public static event Action cameraLock;
     public static event Action cameraUnlock;
-    
+    public static event Action OnItemSelected;
+
+
     public event Action equippedBow;
 
     public bool isOpen { get; private set; }
@@ -39,12 +44,14 @@ public class InventorySystem : Singleton<InventorySystem>
             {
                 isOpen = true;
                 inventorySystemUI.SetActive(true);
+                item3DViewrUI.SetActive(true);
                 cameraLock?.Invoke();
             }
             else
             {
                 isOpen = false;
                 inventorySystemUI.SetActive(false);
+                item3DViewrUI.SetActive(false);
                 cameraUnlock?.Invoke();
             }
         }
@@ -71,7 +78,9 @@ public class InventorySystem : Singleton<InventorySystem>
         }
         Transform slotAvailable = GetAvailableSlot().transform;
         GameObject item = Instantiate(Resources.Load<GameObject>("Item/Item"), slotAvailable.position, slotAvailable.rotation);
-        item.GetComponent<InventoryItem>().SetItemData(itemData);
+        InventoryItem inventoryItem = item.GetComponent<InventoryItem>();
+        inventoryItem.SetItemData(itemData);
+        inventoryItem.SetSelectedItem(OnItemSelected);
         item.GetComponent<Image>().sprite = itemData.image;
         item.transform.SetParent(slotAvailable);
         weaponItemList.Add(itemData);

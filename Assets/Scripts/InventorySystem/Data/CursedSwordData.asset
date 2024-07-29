@@ -22,4 +22,6 @@ MonoBehaviour:
   isLeftHand: 0
   modelRightHand: {fileID: 3716356697886013828, guid: 092305b360809304db49334b11cf1668, type: 3}
   modelLeftHand: {fileID: 0}
+  isBow: 0
   consumeValue: 0
+  item3DViewerModel: {fileID: 2962183811398042577, guid: 3f9319398ca9cfc49a7aaba8a876959a, type: 3}
