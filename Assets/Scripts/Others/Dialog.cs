@@ -9,8 +9,8 @@ public class Dialog : MonoBehaviour
     [SerializeField] private Button button;
     [SerializeField] private float duration;
     [SerializeField] private float delayButton;
-
     [SerializeField] private Image image;
+
     public bool isClose {  get; private set; }
 
     void Start()

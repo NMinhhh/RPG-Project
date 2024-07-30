@@ -26,9 +26,14 @@ public class BossStats : Singleton<BossStats>
         healthBar.SetName(name);
     }
 
+    public void SetDamage(float damage)
+    {
+        healthBar.SetDamageText(damage);
+    }
+
     public void UpdateHealthBar(float currentHealth)
     {
-        healthBar.UpdateHealthBar(currentHealth, this.MaxHealth);
+        healthBar.UpdateHealth(currentHealth, this.MaxHealth);
         if (currentHealth <= 0)
             healthBar.gameObject.SetActive(false);
     }

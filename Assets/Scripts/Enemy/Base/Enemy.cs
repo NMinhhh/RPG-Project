@@ -116,6 +116,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         else
         {
             BossStats.Instance.SetHealth(currentHealth, maxHelth);
+            BossStats.Instance.SetName(this.name);
         }
         if (data.isDash)
         {
@@ -173,14 +174,15 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
         if (isBoss)
         {
+            BossStats.Instance.SetDamage(damage);
             BossStats.Instance.UpdateHealthBar(currentHealth);
         }
         else
         {
             if (!HealthBar.gameObject.activeInHierarchy)
                 HealthBar.gameObject.SetActive(true);
-            HealthBar.UpdateHealthBar(currentHealth, maxHelth);
-            HealthBar.SetDamage(damage);
+            HealthBar.UpdateHealth(currentHealth, maxHelth);
+            HealthBar.SetDamageText(damage);
         }
         if (currentHealth > 0 && currentAODToHurt <= 0)
         {

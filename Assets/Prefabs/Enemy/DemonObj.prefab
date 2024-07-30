@@ -781,10 +781,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthImage: {fileID: 8811643763809448701}
   easeHealthImage: {fileID: 3499724739937819580}
-  normalColor: {r: 0.55345905, g: 0.5447568, b: 0.5447568, a: 1}
-  damageColor: {r: 0.9811321, g: 0.32554147, b: 0.23139893, a: 1}
-  decreaseTime: 0.5
-  delay: 0.02
+  lerpSpeed: 0.05
   damageText: {fileID: 947728736495167936}
   disappearTime: 3
 --- !u!1 &1886107731917038722

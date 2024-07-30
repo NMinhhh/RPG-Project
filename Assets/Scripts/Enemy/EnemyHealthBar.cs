@@ -9,10 +9,7 @@ public class EnemyHealthBar : MonoBehaviour
     [Header("Health Bar")]
     [SerializeField] private Image healthImage;
     [SerializeField] private Image easeHealthImage;
-    [SerializeField] private Color normalColor;
-    [SerializeField] private Color damageColor;
-    [SerializeField] private float decreaseTime;
-    [SerializeField] private float delay = 0.05f;
+    [SerializeField] private float lerpSpeed;
 
     [Header("Damage Text")]
     [SerializeField] private Text damageText;
@@ -21,6 +18,9 @@ public class EnemyHealthBar : MonoBehaviour
     private float amountOfDamage;
     private Camera cam;
 
+
+    protected float target = 1;
+    protected bool isTakeDamage;
 
     void Start()
     {
@@ -32,6 +32,12 @@ public class EnemyHealthBar : MonoBehaviour
     protected virtual void Update()
     {
         transform.transform.rotation = Quaternion.LookRotation(transform.position - cam.transform.position);
+        
+    }
+
+    private void LateUpdate()
+    {
+        UpdateBar();
         AppearDamageText();
     }
 
@@ -48,7 +54,7 @@ public class EnemyHealthBar : MonoBehaviour
         }
     }
 
-    public void SetDamage(float damage)
+    public void SetDamageText(float damage)
     {
         amountOfDamage += damage;
         currentDisappearTime = disappearTime;
@@ -56,28 +62,27 @@ public class EnemyHealthBar : MonoBehaviour
         damageText.gameObject.SetActive(true);
     }
 
-    public void UpdateHealthBar(float currentHealth, float maxHealth)
+    public void UpdateHealth(float currentHealth, float maxHealth)
     {
-        float target = currentHealth / maxHealth;
-        StartCoroutine(UpdateBar(target));
-        if (currentHealth <= 0)
+        isTakeDamage = true;
+        target = currentHealth / maxHealth;
+        if(target <= 0)
         {
             gameObject.SetActive(false);
         }
     }
 
-    IEnumerator UpdateBar(float target)
+    public void UpdateBar()
     {
-        healthImage.fillAmount = target;
-        easeHealthImage.color = damageColor;
-        yield return new WaitForSeconds(delay);
-        easeHealthImage.color = normalColor;
-        float timer = 0;
-        while (timer < decreaseTime)
+        if(healthImage.fillAmount != target)
         {
-            timer += Time.deltaTime;
-            easeHealthImage.fillAmount = Mathf.Lerp(easeHealthImage.fillAmount, target, timer / decreaseTime);
-            yield return null;
+            healthImage.fillAmount = target;
+        }
+        if (easeHealthImage.fillAmount != target)
+        {
+            easeHealthImage.fillAmount = Mathf.Lerp(easeHealthImage.fillAmount, target, lerpSpeed);
+
         }
     }
+  
 }
