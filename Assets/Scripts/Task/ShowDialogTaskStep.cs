@@ -10,8 +10,8 @@ public class ShowDialogTaskStep : TaskStep
 
     private void Start()
     {
-        dialog.gameObject.SetActive(true);
         dialog.SetDialogInfo(textInfo);
+        dialog.gameObject.SetActive(true);
     }
 
     private void Update()

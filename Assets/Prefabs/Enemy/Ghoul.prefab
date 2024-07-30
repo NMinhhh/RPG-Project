@@ -4754,7 +4754,7 @@ MonoBehaviour:
   startDissolveAmount: 1
   dissolveSpeed: 0.5
   enemy: {fileID: 7868489080774911863}
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 3950068081537895729}
 --- !u!1 &2399093163538343169
 GameObject:
   m_ObjectHideFlags: 0
