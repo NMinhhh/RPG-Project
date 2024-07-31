@@ -98,13 +98,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  enemy: []
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
   box: {fileID: 6060306875729482866}
-  blood: {fileID: 5829601955516263796, guid: 4d541080d6603aa4bba2c9a2bbb1157f, type: 3}
   percentStrongDamage: 50
+  slashEffect:
+  - {fileID: 5741387039562252182, guid: f822cc1facd396542aa7f7c99aba7160, type: 3}
+  - {fileID: 8342350322664202813, guid: 0077488d29421ff4eacfec02bca3b305, type: 3}
+  - {fileID: 1475437288907276430, guid: 107a98b4c9b814b469d4b650d987b436, type: 3}
 --- !u!1 &4295198346416129004
 GameObject:
   m_ObjectHideFlags: 0

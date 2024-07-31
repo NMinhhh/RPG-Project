@@ -8,10 +8,6 @@ public class BossStats : Singleton<BossStats>
     public float MaxHealth { get; private set; }
     public float CurrentHealth { get; private set; }
 
-    private void Start()
-    {
-        healthBar.gameObject.SetActive(false);
-    }
 
     public void SetHealth(float currentHealth, float maxHealth)
     {
@@ -35,6 +31,6 @@ public class BossStats : Singleton<BossStats>
     {
         healthBar.UpdateHealth(currentHealth, this.MaxHealth);
         if (currentHealth <= 0)
-            healthBar.gameObject.SetActive(false);
+            CanvasManager.Instance.CloseUI(UIObject.UIName.BossHealthBar);
     }
 }

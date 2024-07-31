@@ -26,14 +26,16 @@ public class InputManager : Singleton<InputManager>
 
     public bool aimInput { get; private set; }
 
+    public bool openMenu {  get; private set; }
+
     public bool canGetInput {  get; private set; }
 
-    public bool openMenu {  get; private set; }
+    public bool canGetUIInput { get; private set; }
 
     // Start is called before the first frame update
     void Start()
     {
-        CanGetInput();
+        CanGetUIInput();
     }
 
     // Update is called once per frame
@@ -64,12 +66,27 @@ public class InputManager : Singleton<InputManager>
             mouseX = mouseY = 0;
             aimInput = false;
         }
-        openMenu = Input.GetKeyDown(KeyCode.Escape);
-        pressEKey = Input.GetKeyDown(KeyCode.E);
+        if (canGetUIInput)
+        {
+            openMenu = Input.GetKeyDown(KeyCode.Escape);
+            pressEKey = Input.GetKeyDown(KeyCode.E);
+        }
+  
     }
 
     public void UseAttackInput() => attackInput = false;
 
     public void CanNotGetInput() => canGetInput = false;
     public void CanGetInput() => canGetInput = true;
+    public void CanGetUIInput()
+    {
+        canGetUIInput = true;
+        CanGetInput();
+    }  
+
+    public void CanNotGetUIInput()
+    {
+        canGetUIInput = false;
+        CanNotGetInput();
+    }
 }

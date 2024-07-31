@@ -5,11 +5,14 @@ using UnityEngine;
 public class EquippedWeapons : MonoBehaviour
 {
     [SerializeField] private float damage;
-    [SerializeField] private List<GameObject> enemy;
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private BoxCollider box;
-    [SerializeField] private GameObject blood;
     [SerializeField] private float percentStrongDamage = 50f;
+    [Header("Slash Effect")]
+    [SerializeField] private GameObject[] slashEffect;
+
+    private List<GameObject> enemy;
+
     private Transform damagePoint;
     private bool isAttack;
     private bool isStrongAttack;
@@ -72,4 +75,10 @@ public class EquippedWeapons : MonoBehaviour
         enemy.Clear();
     }
 
+    public void TriggerEffect(int order,Vector3 pos, Quaternion rotaion)
+    {
+        Instantiate(slashEffect[order], pos, rotaion);
+    }
 }
+
+

@@ -117,6 +117,19 @@ public class WeaponsController : MonoBehaviour
             currentRightWeapons.StrongAttack();
     }
 
+    public void SlashEffectRight(int order)
+    {
+        if(currentLeftWeapons != null)
+            currentRightWeapons.TriggerEffect(order ,player.transform.position, player.transform.rotation);
+    }
+    
+    public void SlashEffectLeft(int order)
+    {
+        if(currentLeftWeapons != null)
+            currentLeftWeapons.TriggerEffect(order ,player.transform.position, player.transform.rotation);
+    }
+
+
     public void StartDealDamageToTheLeft()
     {
         currentLeftWeapons.StartDealDamage();

@@ -9,6 +9,7 @@ public class SoundFXManager : Singleton<SoundFXManager>
 
     public void PlaySound(Sound sound, Vector3 pos, float value)
     {
+        if(sound == null) return;
         AudioSource soundS = ObjectPool.Instance.SpawnFromPool(Pool.Type.Sound, pos, Quaternion.identity).GetComponent<AudioSource>();
         soundS.PlayOneShot(sound.clip, value);
     }
@@ -31,7 +32,8 @@ public class Sound
         Hit,
         Swing,
         Arrow,
-        Healing
+        Healing,
+        Click
     }
 
     public SoundType soundType;

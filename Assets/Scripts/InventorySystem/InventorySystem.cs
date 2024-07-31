@@ -52,6 +52,7 @@ public class InventorySystem : Singleton<InventorySystem>
         
     }
 
+
     private void GenerateListSlots()
     {
         for (int i = 0; i < 15; i++)

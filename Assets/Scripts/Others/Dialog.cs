@@ -38,7 +38,7 @@ public class Dialog : MonoBehaviour
         isClose = false;
         this.text.text = "";
         this.text.text = text;
-        InputManager.Instance.CanNotGetInput();
+        InputManager.Instance.CanNotGetUIInput();
         CanvasManager.Instance.CursorUnLock();
     }
 
@@ -51,7 +51,7 @@ public class Dialog : MonoBehaviour
     public void FinishClose()
     {
         gameObject.SetActive(false);
-        InputManager.Instance.CanGetInput();
+        InputManager.Instance.CanGetUIInput();
         CanvasManager.Instance.CursorLock();
         isClose = true;
     }

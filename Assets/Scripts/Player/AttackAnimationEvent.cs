@@ -33,6 +33,16 @@ public class AttackAnimationEvent : MonoBehaviour
         weaponController.EndDealDamageToTheRight();
     }
 
+    public void SlashEffectRight(int order)
+    {
+        weaponController.SlashEffectRight(order);
+    } 
+    
+    public void SlashEffectLeft(int order)
+    {
+        weaponController.SlashEffectLeft(order);
+    }
+
     public void BowStringPull()
     {
         weaponController.BowStringPull();

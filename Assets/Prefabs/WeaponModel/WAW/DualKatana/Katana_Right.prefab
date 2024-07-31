@@ -325,8 +325,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6168141205215832917}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6878814, y: 0.16056879, z: 0.70731753, w: -0.027181888}
-  m_LocalPosition: {x: 0.041, y: -0.003, z: 0.033}
+  m_LocalRotation: {x: -0.64998955, y: -0.028631989, z: 0.74415475, w: 0.15141839}
+  m_LocalPosition: {x: 0.044, y: -0.026, z: 0.019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -334,7 +334,7 @@ Transform:
   - {fileID: 8616745462078309780}
   - {fileID: 7022731873290205458}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -10.938, y: -89.879, z: 195.317}
+  m_LocalEulerAnglesHint: {x: -8.872, y: -81.069, z: 164.588}
 --- !u!114 &7588722744739417373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,13 +348,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  enemy: []
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
   box: {fileID: 680724716326409506}
-  blood: {fileID: 225140961675458032, guid: 1278194835215ab4095456771737dc56, type: 3}
   percentStrongDamage: 50
+  slashEffect:
+  - {fileID: 8793206633940890862, guid: 9c55b9fbde23c6c4090f4c8f9dd74255, type: 3}
+  - {fileID: 3453436869742516054, guid: ca5e548438a77834b9a897524dc6b8c6, type: 3}
+  - {fileID: 8811071366858236519, guid: f69d1033255a9c94bbf05f944326e482, type: 3}
 --- !u!1 &8519814714471022646
 GameObject:
   m_ObjectHideFlags: 0
