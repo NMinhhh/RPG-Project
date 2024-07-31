@@ -90,9 +90,6 @@ public class Player : MonoBehaviour, IDamageable
     //Block/Parry
     private bool isParry;
 
-    //Action
-    public static event Action UpdateHealthBar;
-
     public bool lockOn;
 
     public Vector3 lockOnDirection;
@@ -134,7 +131,7 @@ public class Player : MonoBehaviour, IDamageable
         PlayerStats.Instance.SetStamina(currentStamina,currentStamina);
         maxComboAttack = data.combo;
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
-        EquipSystem.Instance.usePotion += UpdateHealth;
+        EquipSystem.Instance.usePotion += Healing;
         StateMachine.Intialize(IdleState);
         isParry = false;
         
@@ -158,12 +155,12 @@ public class Player : MonoBehaviour, IDamageable
 
     #region Health / Die Function
 
-    public void UpdateHealth(float health)
+    public void Healing(float health)
     {
         healingParticle.Play();
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Healing), transform.position, .5f);
         currentHealth = Mathf.Clamp(currentHealth + health, 0, data.maxHealth);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
-        UpdateHealthBar?.Invoke();
     }
 
     public void Damage(float damage)
@@ -171,7 +168,6 @@ public class Player : MonoBehaviour, IDamageable
         if (isParry) return;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, data.maxHealth);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
-        UpdateHealthBar?.Invoke();
         if(currentHealth > 0 && StateMachine.currentState != HurtState && StateMachine.currentState != StrongAttack && StateMachine.currentState != ShootState)
         {
             StateMachine.ChangeState(HurtState);

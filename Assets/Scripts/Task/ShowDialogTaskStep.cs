@@ -11,7 +11,7 @@ public class ShowDialogTaskStep : TaskStep
     private void Start()
     {
         dialog.SetDialogInfo(textInfo);
-        dialog.gameObject.SetActive(true);
+        CanvasManager.Instance.OpenUI(UIObject.UIName.Dialog);
     }
 
     private void Update()

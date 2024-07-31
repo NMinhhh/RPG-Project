@@ -16,11 +16,10 @@ public class PlayerStats : Singleton<PlayerStats>
 
     public bool isStaminaRecovery {  get; private set; }
 
-    public static event Action UpdateStamina;
+    [SerializeField] private float recoverySpeed = 1f;
+    [SerializeField] private float recoveryDelayTime = 2f;
+    private float currentRecoveryDelayTime;
 
-    [SerializeField] private float recoveryDelayTimer = 2;
-    [SerializeField] private float recoveryAmount = 30f;
-    private float currentDelayTimer;
 
     private void Update()
     {
@@ -39,34 +38,33 @@ public class PlayerStats : Singleton<PlayerStats>
         this.maxStamina = maxStamina;
     }
 
+    public void UseStamina(float staminaAmount)
+    {
+        currentStamina -= staminaAmount;
+        isStaminaRecovery = true;
+        currentRecoveryDelayTime = recoveryDelayTime;
+    }
+
     public bool EnoughStamina(float staminaAmount)
     {
         return currentStamina >= staminaAmount;
     }
 
-    public void UseStamina(float staminaAmount)
-    {
-        isStaminaRecovery = false;
-        currentDelayTimer = recoveryDelayTimer;
-        currentStamina = Mathf.Clamp(currentStamina -= staminaAmount, 0, maxStamina);
-        UpdateStamina?.Invoke();
-    }
-
     public void StaminaRecovery()
     {
-        if (!isStaminaRecovery && currentStamina < maxStamina)
-        {
-            currentDelayTimer -= Time.deltaTime;
-            if (currentDelayTimer <= 0)
-            {
-                isStaminaRecovery = true;
-            }
-        }
         if (isStaminaRecovery && currentStamina < maxStamina)
         {
-            currentStamina = Mathf.Clamp(currentStamina + recoveryAmount * Time.deltaTime, 0, maxStamina);
-            UpdateStamina?.Invoke();
-            isStaminaRecovery = (currentStamina == maxStamina);
+            currentRecoveryDelayTime -= Time.deltaTime;
+            if(currentRecoveryDelayTime <= 0)
+            {
+                currentStamina += recoverySpeed * Time.deltaTime;
+               
+            }
+        }
+        if (currentStamina >= maxStamina)
+        {
+            currentStamina = maxStamina;
+            isStaminaRecovery = false;
         }
     }
 }

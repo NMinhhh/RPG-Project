@@ -7,12 +7,12 @@ using UnityEngine.UI;
 public class EnemyHealthBar : MonoBehaviour
 {
     [Header("Health Bar")]
-    [SerializeField] private Image healthImage;
-    [SerializeField] private Image easeHealthImage;
+    [SerializeField] protected Image healthImage;
+    [SerializeField] protected Image easeHealthImage;
     [SerializeField] private float lerpSpeed;
 
     [Header("Damage Text")]
-    [SerializeField] private Text damageText;
+    [SerializeField] protected Text damageText;
     [SerializeField] private float disappearTime;
     private float currentDisappearTime;
     private float amountOfDamage;

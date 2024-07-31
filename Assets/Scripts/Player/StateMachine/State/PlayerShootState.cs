@@ -17,6 +17,7 @@ public class PlayerShootState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Arrow), player.transform.position, .5f);
         player.thirdPersonAim.Aim();
     }
 

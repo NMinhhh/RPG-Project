@@ -39,8 +39,7 @@ public class Dialog : MonoBehaviour
         this.text.text = "";
         this.text.text = text;
         InputManager.Instance.CanNotGetInput();
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        CanvasManager.Instance.CursorUnLock();
     }
 
     public void CloseUI()
@@ -53,8 +52,7 @@ public class Dialog : MonoBehaviour
     {
         gameObject.SetActive(false);
         InputManager.Instance.CanGetInput();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        CanvasManager.Instance.CursorLock();
         isClose = true;
     }
 }

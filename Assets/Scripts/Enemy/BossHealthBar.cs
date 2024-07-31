@@ -15,5 +15,8 @@ public class BossHealthBar : EnemyHealthBar
     public void SetName(string name)
     {
         nameText.text = name;
+        healthImage.fillAmount = 1;
+        easeHealthImage.fillAmount = 1;
+        damageText.gameObject.SetActive(false);
     }
 }

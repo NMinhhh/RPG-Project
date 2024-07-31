@@ -30,8 +30,6 @@ public class ThirdPersonCamera : MonoBehaviour
         isRotaionOnMove = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        InventorySystem.cameraLock += CameraLock;
-        InventorySystem.cameraUnlock += CameraUnlock;
         SetPitch(mixPitch, maxPitch);
     }
 
@@ -85,15 +83,4 @@ public class ThirdPersonCamera : MonoBehaviour
         isRotaionOnMove = state;
     }
 
-    public void CameraLock()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
-    void CameraUnlock()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
 }

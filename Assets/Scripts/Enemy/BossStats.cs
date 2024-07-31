@@ -17,7 +17,7 @@ public class BossStats : Singleton<BossStats>
     {
         this.CurrentHealth = currentHealth;
         this.MaxHealth = maxHealth;
-        healthBar.gameObject.SetActive(true);
+        CanvasManager.Instance.OpenUI(UIObject.UIName.BossHealthBar);
         
     }
 

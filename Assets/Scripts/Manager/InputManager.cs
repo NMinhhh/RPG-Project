@@ -28,6 +28,8 @@ public class InputManager : Singleton<InputManager>
 
     public bool canGetInput {  get; private set; }
 
+    public bool openMenu {  get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,7 @@ public class InputManager : Singleton<InputManager>
     // Update is called once per frame
     void Update()
     {
-        if (!InventorySystem.instance.isOpen && canGetInput)
+        if (canGetInput)
         {
             xInput = Input.GetAxisRaw("Horizontal");
             zInput = Input.GetAxisRaw("Vertical");
@@ -62,13 +64,11 @@ public class InputManager : Singleton<InputManager>
             mouseX = mouseY = 0;
             aimInput = false;
         }
+        openMenu = Input.GetKeyDown(KeyCode.Escape);
         pressEKey = Input.GetKeyDown(KeyCode.E);
-
     }
 
     public void UseAttackInput() => attackInput = false;
-
-    public void SetCanGetInput(bool state) => canGetInput = state;
 
     public void CanNotGetInput() => canGetInput = false;
     public void CanGetInput() => canGetInput = true;

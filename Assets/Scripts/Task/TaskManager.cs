@@ -8,6 +8,8 @@ public class TaskManager : Singleton<TaskManager>
 
     [SerializeField] private int currentTask;
 
+    private bool isFinishAllTask;
+
     private void Start()
     {
         GetMainTask().InitializeTaskStep(0);
@@ -26,6 +28,10 @@ public class TaskManager : Singleton<TaskManager>
     public void ChangeMainTask()
     {
         currentTask++;
+        if (currentTask == mainTaskList.Count)
+        {
+            isFinishAllTask = true;
+        }
     }
 
     public void FinishTaskStep()
@@ -35,6 +41,8 @@ public class TaskManager : Singleton<TaskManager>
         if (GetMainTask().isFinished)
         {
             ChangeMainTask();
+            if (isFinishAllTask)
+                return;
             GetMainTask().InitializeTaskStep(0);
         }
     }
@@ -84,6 +92,7 @@ public class MainTask
 public class Task
 {
     public GameObject taskObj;
+    public GameObject triggerObj;
     public bool isNeedTrigger;
     public bool isFinished;
 
@@ -99,7 +108,11 @@ public class Task
 
     public void TaskActive()
     {
-        if (isNeedTrigger) return;
+        if (isNeedTrigger)
+        {
+            triggerObj.SetActive(true);
+            return;
+        }
         taskObj.SetActive(true);
     }
 }

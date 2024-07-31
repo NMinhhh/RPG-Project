@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public class InventorySystem : Singleton<InventorySystem>
 {
-    [Header("Item 3D Viewer")]
-    [SerializeField] private GameObject item3DViewrUI;
-
-    [Header("UI")]
-    [SerializeField] private GameObject inventorySystemUI;
     [Header("Slot template")]
     [SerializeField] private GameObject slotTemplate;
     [SerializeField] private Transform slotsContainer;
@@ -21,8 +16,6 @@ public class InventorySystem : Singleton<InventorySystem>
     [Header("Weapon Item List (Read only)")]
     [SerializeField] private List<ItemData> weaponItemList = new List<ItemData>();
 
-    public static event Action cameraLock;
-    public static event Action cameraUnlock;
     public static event Action OnItemSelected;
 
 
@@ -38,28 +31,25 @@ public class InventorySystem : Singleton<InventorySystem>
     // Update is called once per frame
     void Update()
     {
-        if(InputManager.Instance.pressEKey)
+        if(InputManager.Instance.pressEKey && !IntroManager.Instance.isPlayIntro && !MenuGameManager.Instance.isOpen)
         {
             if (!isOpen)
             {
                 isOpen = true;
-                inventorySystemUI.SetActive(true);
-                cameraLock?.Invoke();
+                CanvasManager.Instance.OpenUI(UIObject.UIName.Inventory);
+                CanvasManager.Instance.CursorUnLock();
+                InputManager.Instance.CanNotGetInput();
             }
             else
             {
                 isOpen = false;
-                inventorySystemUI.SetActive(false);
-                item3DViewrUI.SetActive(false);
-                cameraUnlock?.Invoke();
+                CanvasManager.Instance.CloseUI(UIObject.UIName.Inventory);
+                CanvasManager.Instance.CloseUI(UIObject.UIName.Item3DViewer);
+                CanvasManager.Instance.CursorLock();
+                InputManager.Instance.CanGetInput();
             }
         }
         
-    }
-
-    public void OpenItem3DViewer()
-    {
-        item3DViewrUI.SetActive(true);
     }
 
     private void GenerateListSlots()

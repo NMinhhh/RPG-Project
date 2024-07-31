@@ -353,7 +353,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   box: {fileID: 680724716326409506}
-  blood: {fileID: 5829601955516263796, guid: 4d541080d6603aa4bba2c9a2bbb1157f, type: 3}
+  blood: {fileID: 225140961675458032, guid: 1278194835215ab4095456771737dc56, type: 3}
+  percentStrongDamage: 50
 --- !u!1 &8519814714471022646
 GameObject:
   m_ObjectHideFlags: 0

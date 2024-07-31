@@ -43,7 +43,7 @@ public class InventoryItem : MonoBehaviour, IPointerClickHandler
     {
         if(eventData.button == PointerEventData.InputButton.Left && itemSelected != this)
         {
-            InventorySystem.Instance.OpenItem3DViewer();
+            CanvasManager.Instance.OpenUI(UIObject.UIName.Item3DViewer);
             itemSelected = this;
             OnSelectedItem?.Invoke();
         }
