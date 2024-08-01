@@ -89,6 +89,7 @@ public class Pool
         Arrow,
         NoticePickUp,
         GhoulProjectile,
+        SwordSlash,
     }
 
     public Type type;

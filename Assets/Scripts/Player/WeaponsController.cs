@@ -119,7 +119,7 @@ public class WeaponsController : MonoBehaviour
 
     public void SlashEffectRight(int order)
     {
-        if(currentLeftWeapons != null)
+        if(currentRightWeapons != null)
             currentRightWeapons.TriggerEffect(order ,player.transform.position, player.transform.rotation);
     }
     

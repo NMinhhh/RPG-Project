@@ -168,7 +168,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
 
     public virtual void Damage(float damage)
     {
-        if (this.enabled == false) return;
+        if (this.enabled == false || isDie) return;
         isHurt = false;
         currentAODToHurt--;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
@@ -183,6 +183,10 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
                 HealthBar.gameObject.SetActive(true);
             HealthBar.UpdateHealth(currentHealth, maxHelth);
             HealthBar.SetDamageText(damage);
+            if (currentHealth <= 0)
+            {
+                HealthBar.gameObject.SetActive(false);
+            }
         }
         if (currentHealth > 0 && currentAODToHurt <= 0)
         {

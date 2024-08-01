@@ -4904,7 +4904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4918996886303999254
 Transform:
   m_ObjectHideFlags: 0
@@ -19687,12 +19687,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  enemy: []
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
   box: {fileID: 6878655929784333741}
-  blood: {fileID: 5829601955516263796, guid: 4d541080d6603aa4bba2c9a2bbb1157f, type: 3}
+  percentStrongDamage: 50
+  slashEffect:
+  - {fileID: 4899570523202495228, guid: f292a4d3503310148b61a7d5877293aa, type: 3}
+  - {fileID: 3485647826182670916, guid: 1e924a5444d22ba4e900db5696840380, type: 3}
+  - {fileID: 4021579557025741840, guid: 3556269145e81b44ba94e4767bf4541e, type: 3}
 --- !u!1 &9028295792581296211
 GameObject:
   m_ObjectHideFlags: 0

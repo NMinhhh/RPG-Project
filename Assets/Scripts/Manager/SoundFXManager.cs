@@ -1,13 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class SoundFXManager : Singleton<SoundFXManager>
 {
-    [SerializeField] private List<Sound> soundList = new List<Sound>();
-    [SerializeField] private AudioSource soundSource;
+    [Header("Audio Mixer")]
+    [SerializeField] private AudioMixer audioMixer;
 
-    public void PlaySound(Sound sound, Vector3 pos, float value)
+    [Header("Music Slider")]
+    [SerializeField] private Slider musicSlider;
+
+    [Header("Sound Slider")]
+    [SerializeField] private Slider soundSlider;
+
+    [Header("Sound Source")]
+    [SerializeField] private AudioSource soundSource;
+    [SerializeField] private List<Sound> soundList = new List<Sound>();
+
+
+    public void SetMusicVolume(float volume)
+    {
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+    }
+
+    public void SetSoundVolume(float volume)
+    {
+        audioMixer.SetFloat("SoundVolume", Mathf.Log10(volume) * 20);
+    }
+
+
+    public void PlaySound(Sound sound, Vector3 pos, float value = 1)
     {
         if(sound == null) return;
         AudioSource soundS = ObjectPool.Instance.SpawnFromPool(Pool.Type.Sound, pos, Quaternion.identity).GetComponent<AudioSource>();
@@ -33,7 +57,8 @@ public class Sound
         Swing,
         Arrow,
         Healing,
-        Click
+        Click,
+        OpenChest
     }
 
     public SoundType soundType;

@@ -66,10 +66,6 @@ public class EnemyHealthBar : MonoBehaviour
     {
         isTakeDamage = true;
         target = currentHealth / maxHealth;
-        if(target <= 0)
-        {
-            gameObject.SetActive(false);
-        }
     }
 
     public void UpdateBar()

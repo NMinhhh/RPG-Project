@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 6486038235761927244}
   - component: {fileID: 8401044017286229133}
   - component: {fileID: 3084465179722365740}
-  - component: {fileID: 6861110256011735106}
   - component: {fileID: 5588590987005713314}
   - component: {fileID: 8954110182329860207}
   - component: {fileID: 2378898055052911972}
@@ -173,28 +172,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6861110256011735106
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2449082490810652023}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7372710628413522813, guid: 721802e1fc935344ba69b92b6c2c4128, type: 3}
 --- !u!95 &5588590987005713314
 Animator:
   serializedVersion: 5
@@ -229,8 +206,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemList:
+  - {fileID: 11400000, guid: ab1995861f77a8d46b4f803b27defce6, type: 2}
+  - {fileID: 11400000, guid: 284984542e3f4f14aac23dc0fda609e6, type: 2}
+  - {fileID: 11400000, guid: 7fab3adba29d6394aa922b82f4337332, type: 2}
+  - {fileID: 11400000, guid: 68c32d3318ace16449123e11b1f4dd53, type: 2}
+  - {fileID: 11400000, guid: 2240bb1f62aec9144a1e2e37483a077f, type: 2}
+  - {fileID: 11400000, guid: 93a8f246e7589c3468c9355e1a520550, type: 2}
+  - {fileID: 11400000, guid: 924b2abce7de7274e86f1971202bfef7, type: 2}
   - {fileID: 11400000, guid: 937020544aaec4a47b284f14282c6503, type: 2}
-  - {fileID: 11400000, guid: ec1774063b43a4549be9d8a9b19b986d, type: 2}
+  - {fileID: 11400000, guid: 84c2e837825fb8e4687e7cea611ac591, type: 2}
+  - {fileID: 11400000, guid: 97b9835b30eaf404cad50addafa9ee80, type: 2}
+  - {fileID: 11400000, guid: 2887f8b52959da14b988dcc66b747160, type: 2}
+  - {fileID: 11400000, guid: aa45307d8b8db2642be58336f4ef1b4c, type: 2}
+  isOpen: 0
 --- !u!65 &2378898055052911972
 BoxCollider:
   m_ObjectHideFlags: 0

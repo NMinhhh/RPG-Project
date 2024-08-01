@@ -99,12 +99,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  enemy: []
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
   box: {fileID: 60293445957293248}
-  blood: {fileID: 5829601955516263796, guid: 4d541080d6603aa4bba2c9a2bbb1157f, type: 3}
+  percentStrongDamage: 50
+  slashEffect:
+  - {fileID: 4899570523202495228, guid: ad1f686245c2ae7408a5fd104623e248, type: 3}
+  - {fileID: 3485647826182670916, guid: 4d6ff8809fc52f14bb7ff0e8206d99ac, type: 3}
+  - {fileID: 4021579557025741840, guid: 57d3d466e63e54046ab09c09c1a046e1, type: 3}
 --- !u!1 &4196368558761497357
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4204968229349926988
 Transform:
   m_ObjectHideFlags: 0
@@ -14856,8 +14859,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.21688825, y: 1.1901267, z: 0.1813536}
-  m_Center: {x: 1.6378676e-10, y: -0.09506374, z: 0}
+  m_Size: {x: 0.21688825, y: 1.3643445, z: 0.1813536}
+  m_Center: {x: -0.0000000666935, y: -0.18217292, z: -2.468302e-11}
 --- !u!1 &8817156499414562637
 GameObject:
   m_ObjectHideFlags: 0

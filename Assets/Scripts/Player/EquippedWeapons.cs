@@ -13,7 +13,6 @@ public class EquippedWeapons : MonoBehaviour
 
     private List<GameObject> enemy;
 
-    private Transform damagePoint;
     private bool isAttack;
     private bool isStrongAttack;
 
@@ -30,26 +29,35 @@ public class EquippedWeapons : MonoBehaviour
     {
         if(isAttack)
         {
-            RaycastHit[] hit = Physics.BoxCastAll(box.bounds.center, box.bounds.extents, transform.up, box.transform.rotation, 0, whatIsEnemy);
-            foreach (RaycastHit hit2 in hit)
+            RaycastHit[] hits = Physics.BoxCastAll(box.bounds.center, box.bounds.extents, transform.up, box.transform.rotation, 0, whatIsEnemy);
+
+            foreach (RaycastHit hit in hits)
             {
-                if (!enemy.Contains(hit2.collider.gameObject))
+                if (!enemy.Contains(hit.collider.gameObject))
                 {
-                    damagePoint = hit2.collider.transform.Find("DamagePoint");
-                    IDamageable damagaeble = hit2.collider.gameObject.GetComponent<IDamageable>();
-                    Vector3 dir = (hit2.transform.position - player.position).normalized;
+                    IDamageable damagaeble = hit.collider.gameObject.GetComponent<IDamageable>();
+
+                    Vector3 dir = (hit.transform.position - player.position).normalized;
+
                     if (damagaeble != null)
                     {
-                        IKnockBackable knockBackable = hit2.collider.GetComponent<IKnockBackable>();
+                        IKnockBackable knockBackable = hit.collider.GetComponent<IKnockBackable>();
+
                         if(knockBackable != null)
                         {
                             knockBackable.DamageDiretion(dir);
                         }
+
                         float currentDamage = (isStrongAttack ? damage + damage * percentStrongDamage / 100 : damage);
+
                         damagaeble.Damage(currentDamage);
-                        ObjectPool.Instance.SpawnFromPool(Pool.Type.BloodParticle,damagePoint.position, Quaternion.identity).transform.SetParent(hit2.transform);
                     }
-                    enemy.Add(hit2.collider.gameObject);
+                    //Spawn Blood
+                    Vector3 spawnPos = hit.transform.position;
+                    spawnPos.y = transform.position.y;
+                    ObjectPool.Instance.SpawnFromPool(Pool.Type.BloodParticle, spawnPos, Quaternion.identity).transform.SetParent(hit.transform);
+
+                    enemy.Add(hit.collider.gameObject);
                 }
             }
         }
@@ -66,7 +74,12 @@ public class EquippedWeapons : MonoBehaviour
         this.damage = damage;
     }
 
-    public void StartDealDamage() => isAttack = true;
+    public void StartDealDamage()
+    {
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Swing), transform.position);
+        isAttack = true;
+    }  
+
 
     public void EndDealDamage()
     {

@@ -73,6 +73,11 @@ public class SpawnEnemy : MonoBehaviour
         }
     }
 
+    public void Disable()
+    {
+        gameObject.SetActive(false);
+    }
+
     public void StartSpawn()
     {
         currentWave = 1;
@@ -88,7 +93,7 @@ public class SpawnEnemy : MonoBehaviour
         {
             canSpawn = false;
             isFinishSpawn = true;
-            gameObject.SetActive(false);
+            Invoke(nameof(Disable), 8);
 
         }
         isStartSpawn = true;

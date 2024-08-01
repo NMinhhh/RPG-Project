@@ -61030,8 +61030,15 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.8833333
+  - time: 0.85
     functionName: TriggerAnimation
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.05
+    functionName: SlashEffectRight
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

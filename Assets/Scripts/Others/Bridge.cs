@@ -10,7 +10,8 @@ public class Bridge : MonoBehaviour, IDamageable
     [SerializeField] private GameObject brigde;
     [SerializeField] private GameObject blockHolder;
     [SerializeField] private GameObject block;
-    [SerializeField] private ParticleSystem vfx;
+    [SerializeField] private ParticleSystem fireEffect;
+    [SerializeField] private GameObject explodeEffect;
     [SerializeField] private int amountOfDamage;
 
     private Animator anim;
@@ -39,7 +40,7 @@ public class Bridge : MonoBehaviour, IDamageable
             Appear();
             if (dissolveAmount == 0)
             {
-                vfx.Play();
+                fireEffect.Play();
                 isAppear = false;
             }
         }
@@ -90,6 +91,7 @@ public class Bridge : MonoBehaviour, IDamageable
     {
         capsuleCollider.enabled = false;
         blockHolder.SetActive(false);
+        Instantiate(explodeEffect, blockHolder.transform.position, Quaternion.identity);
         block.GetComponent<Rigidbody>().isKinematic = false;
         anim.SetTrigger("Fall");
         Invoke(nameof(BlockDisable), 5f);
