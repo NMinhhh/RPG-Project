@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Bits: 256
   box: {fileID: 8552996250154457459}
   percentStrongDamage: 50
-  slashEffect:
-  - {fileID: 3834510082207927980, guid: ae9b56b978bddec49bc7875891a7da55, type: 3}
-  - {fileID: 543832190202568610, guid: f5159f9e5608bab468cb0dc17e034f73, type: 3}
-  - {fileID: 5673687432795347221, guid: b820b65e4eaa0d2459c948246643f127, type: 3}
+  slashEffectName:
+  - Dual-LAxe Slash 1
+  - Dual-LAxe Slash 2
+  - Dual-LAxe Slash 3

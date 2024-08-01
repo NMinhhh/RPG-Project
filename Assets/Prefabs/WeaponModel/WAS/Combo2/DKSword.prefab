@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Bits: 256
   box: {fileID: 1643500098254320670}
   percentStrongDamage: 50
-  slashEffect:
-  - {fileID: 5741387039562252182, guid: 32bfa37924e63154f914bd4fad9917e7, type: 3}
-  - {fileID: 8342350322664202813, guid: fd423a61caa06af419be662e813466a7, type: 3}
-  - {fileID: 1475437288907276430, guid: 2a9a260c4a7f77e43aa6cad607153dee, type: 3}
+  slashEffectName:
+  - DeadWAS Slash 1
+  - DeadWAS Slash 2
+  - DeadWAS Slash 3

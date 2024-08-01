@@ -16,7 +16,7 @@ public class DisableSound : MonoBehaviour
     {
         if (!audioSource.isPlaying)
         {
-            ObjectPool.Instance.AddInPool(Pool.Type.Sound, this.gameObject);
+            ObjectPool.Instance.AddInPool("Sound", this.gameObject);
         }
     }
 }

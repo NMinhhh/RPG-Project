@@ -105,10 +105,10 @@ MonoBehaviour:
     m_Bits: 256
   box: {fileID: 6181088191989575048}
   percentStrongDamage: 50
-  slashEffect:
-  - {fileID: 3844447270603544686, guid: 665c122675065cb43ba7adbf1a1c7394, type: 3}
-  - {fileID: 4572704095069413961, guid: 96db3584b277c3845a081240be1ff62a, type: 3}
-  - {fileID: 5125626954531535765, guid: 67ef7a692e872c3489e6188290dfd042, type: 3}
+  slashEffectName:
+  - Blade Slash 1
+  - Blade Slash 2
+  - Blade Slash 3
 --- !u!1 &6618230334158886560
 GameObject:
   m_ObjectHideFlags: 0

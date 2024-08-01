@@ -353,10 +353,10 @@ MonoBehaviour:
     m_Bits: 256
   box: {fileID: 680724716326409506}
   percentStrongDamage: 50
-  slashEffect:
-  - {fileID: 8793206633940890862, guid: 9c55b9fbde23c6c4090f4c8f9dd74255, type: 3}
-  - {fileID: 3453436869742516054, guid: ca5e548438a77834b9a897524dc6b8c6, type: 3}
-  - {fileID: 8811071366858236519, guid: f69d1033255a9c94bbf05f944326e482, type: 3}
+  slashEffectName:
+  - Dual-RKatana Slash 1
+  - Dual-RKatana Slash 2
+  - Dual-RKatana Slash 3
 --- !u!1 &8519814714471022646
 GameObject:
   m_ObjectHideFlags: 0

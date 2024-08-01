@@ -6,14 +6,14 @@ using UnityEngine;
 public class ObjectPool : Singleton<ObjectPool>
 {
 
-    public Dictionary<Pool.Type, Queue<GameObject>> poolDictionary;
+    public Dictionary<string, Queue<GameObject>> poolDictionary;
 
     public List<Pool> pools;
 
     // Start is called before the first frame update
     void Start()
     {
-        poolDictionary = new Dictionary<Pool.Type, Queue<GameObject>>();
+        poolDictionary = new Dictionary<string, Queue<GameObject>>();
         CreatePool();
     }
 
@@ -29,25 +29,25 @@ public class ObjectPool : Singleton<ObjectPool>
                 objectPool.transform.SetParent(pool.objectHolder);
                 queue.Enqueue(objectPool);
             }
-            poolDictionary.Add(pool.type, queue);
+            poolDictionary.Add(pool.name, queue);
         }
     }
 
 
-    public GameObject SpawnFromPool(Pool.Type type, Vector3 position, Quaternion rotation)
+    public GameObject SpawnFromPool(string name, Vector3 position, Quaternion rotation)
     {
-        if (!poolDictionary.ContainsKey(type))
+        if (!poolDictionary.ContainsKey(name))
         {
             return null;
         }
         GameObject objectSpawn;
-        if (poolDictionary[type].Count == 0) 
+        if (poolDictionary[name].Count == 0) 
         {
-            objectSpawn = Instantiate(GetPool(type).objectPref);
+            objectSpawn = Instantiate(GetPool(name).objectPref);
         }
         else
         {
-            objectSpawn = poolDictionary[type].Dequeue();
+            objectSpawn = poolDictionary[name].Dequeue();
         }
         objectSpawn.transform.SetParent(transform.root);
         objectSpawn.transform.position = position; 
@@ -61,19 +61,19 @@ public class ObjectPool : Singleton<ObjectPool>
         return objectSpawn;
     }
 
-    public void AddInPool(Pool.Type type, GameObject objectPool)
+    public void AddInPool(string name, GameObject objectPool)
     {
         objectPool.SetActive(false);
-        objectPool.transform.SetParent(GetPool(type).objectHolder);
-        poolDictionary[type].Enqueue(objectPool);
+        objectPool.transform.SetParent(GetPool(name).objectHolder);
+        poolDictionary[name].Enqueue(objectPool);
 
     }
 
-    public Pool GetPool(Pool.Type type)
+    public Pool GetPool(string name)
     {
         foreach (Pool pool in pools)
         {
-            if(pool.type == type)
+            if(pool.name == name)
                 return pool;
         }
         return null;
@@ -82,17 +82,7 @@ public class ObjectPool : Singleton<ObjectPool>
 [System.Serializable]
 public class Pool
 {
-    public enum Type
-    {
-        BloodParticle,
-        Sound,
-        Arrow,
-        NoticePickUp,
-        GhoulProjectile,
-        SwordSlash,
-    }
-
-    public Type type;
+    public string name;
     public GameObject objectPref;
     public int size;
     public Transform objectHolder;

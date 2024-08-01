@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Bits: 256
   box: {fileID: 4192904434281557190}
   percentStrongDamage: 50
-  slashEffect:
-  - {fileID: 4899570523202495228, guid: 4f37d92bbd591a847b48c92812f2a46c, type: 3}
-  - {fileID: 3485647826182670916, guid: ca52202cf2c4d4e41a7e9d0acd338a9b, type: 3}
-  - {fileID: 4021579557025741840, guid: 9cec60263fb1f6d429fcb73eb447bdd0, type: 3}
+  slashEffectName:
+  - Scythe Slash 1
+  - Scythe Slash 2
+  - Scythe Slash 3

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 185603351654859271}
   - component: {fileID: 580776062901380479}
   - component: {fileID: 1326785254609623768}
+  - component: {fileID: 7760766961191221991}
   m_Layer: 0
   m_Name: Electro slash
   m_TagString: Untagged
@@ -43,7 +44,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 0.5
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4888,6 +4889,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &7760766961191221991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 485066366683692507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ce28a454d791b44bd9d3bb85ef9c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objName: Blade Slash 1
 --- !u!1 &3844447270603544686
 GameObject:
   m_ObjectHideFlags: 0

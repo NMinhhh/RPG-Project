@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class DisableParticle : MonoBehaviour
 {
-    private ParticleSystem p;
+    [SerializeField] private string objName;
+
+    private ParticleSystem particle;
     // Start is called before the first frame update
     void Start()
     {
-        p = GetComponent<ParticleSystem>();
+        particle = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (p.isStopped)
+        if (particle.isStopped)
         {
-            ObjectPool.Instance.AddInPool(Pool.Type.BloodParticle, this.gameObject);
+            if (transform.parent == null)
+                ObjectPool.Instance.AddInPool(objName, this.gameObject);
+            else
+                ObjectPool.Instance.AddInPool(objName, this.transform.parent.gameObject);
         }
     }
 }

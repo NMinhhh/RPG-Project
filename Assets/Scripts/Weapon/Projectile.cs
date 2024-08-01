@@ -20,7 +20,7 @@ public class Projectile : MonoBehaviour, IPooledObject
         currentTimeLife -= Time.deltaTime;
         if(currentTimeLife <= 0)
         {
-            ObjectPool.Instance.AddInPool(Pool.Type.Arrow, this.gameObject);
+            ObjectPool.Instance.AddInPool("Arrow", this.gameObject);
         }
     }
 
@@ -33,7 +33,7 @@ public class Projectile : MonoBehaviour, IPooledObject
             {
                 damageable.Damage(damage);
             }
-            ObjectPool.Instance.AddInPool(Pool.Type.Arrow, this.gameObject);
+            ObjectPool.Instance.AddInPool("Arrow", this.gameObject);
 
         }
     }

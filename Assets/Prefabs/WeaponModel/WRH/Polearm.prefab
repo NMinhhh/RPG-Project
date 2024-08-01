@@ -104,10 +104,10 @@ MonoBehaviour:
     m_Bits: 256
   box: {fileID: 60293445957293248}
   percentStrongDamage: 50
-  slashEffect:
-  - {fileID: 4899570523202495228, guid: ad1f686245c2ae7408a5fd104623e248, type: 3}
-  - {fileID: 3485647826182670916, guid: 4d6ff8809fc52f14bb7ff0e8206d99ac, type: 3}
-  - {fileID: 4021579557025741840, guid: 57d3d466e63e54046ab09c09c1a046e1, type: 3}
+  slashEffectName:
+  - Polearm Slash 1
+  - Polearm Slash 2
+  - Polearm Slash 3
 --- !u!1 &4196368558761497357
 GameObject:
   m_ObjectHideFlags: 0

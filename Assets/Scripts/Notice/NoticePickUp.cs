@@ -27,7 +27,7 @@ public class NoticePickUp : MonoBehaviour, IPooledObject
                 break;
             yield return null;
         }
-        ObjectPool.Instance.AddInPool(Pool.Type.NoticePickUp, this.gameObject);
+        ObjectPool.Instance.AddInPool("NoticePickUp", this.gameObject);
     }
 
     public void SetInfo(Sprite icon, string text)

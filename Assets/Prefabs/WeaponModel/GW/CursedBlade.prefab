@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Bits: 256
   box: {fileID: 5000854789695454978}
   percentStrongDamage: 50
-  slashEffect:
-  - {fileID: 3844447270603544686, guid: fe3ddce892334ae419e9fde113abc1b7, type: 3}
-  - {fileID: 4572704095069413961, guid: 0fa354b7518be2248bae901f5260b6ed, type: 3}
-  - {fileID: 5125626954531535765, guid: 48e0f636160081346a283ed52dad79c2, type: 3}
+  slashEffectName:
+  - CBlade Slash 1
+  - CBlade Slash 2
+  - CBlade Slash 3

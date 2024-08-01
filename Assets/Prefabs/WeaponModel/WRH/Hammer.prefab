@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 0
-  enemy: []
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
   box: {fileID: 8024032684218951925}
-  blood: {fileID: 0}
+  percentStrongDamage: 50
+  slashEffectName: []

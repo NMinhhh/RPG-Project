@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7173591289765284618}
   - component: {fileID: 5567417626392730217}
   - component: {fileID: 9212883382849580021}
+  - component: {fileID: 2221823807399054349}
   m_Layer: 0
   m_Name: Electro slash
   m_TagString: Untagged
@@ -43,7 +44,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 0.5
   simulationSpeed: 1
-  stopAction: 2
+  stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -4888,6 +4889,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2221823807399054349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1261642518506977275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ce28a454d791b44bd9d3bb85ef9c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objName: AAK-LAxe Slash 3
 --- !u!1 &5673687432795347221
 GameObject:
   m_ObjectHideFlags: 0

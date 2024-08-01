@@ -15,7 +15,7 @@ public class EnemyProjectile : Projectile
         currentTimeLife -= Time.deltaTime;
         if (currentTimeLife <= 0)
         {
-            ObjectPool.Instance.AddInPool(Pool.Type.GhoulProjectile, this.gameObject);
+            ObjectPool.Instance.AddInPool("GhoulProjectile", this.gameObject);
         }
     }
 
@@ -28,7 +28,7 @@ public class EnemyProjectile : Projectile
             {
                 damageable.Damage(damage);
             }
-            ObjectPool.Instance.AddInPool(Pool.Type.GhoulProjectile, this.gameObject);
+            ObjectPool.Instance.AddInPool("GhoulProjectile", this.gameObject);
 
         }
     }

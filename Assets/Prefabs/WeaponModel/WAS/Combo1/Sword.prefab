@@ -156,7 +156,7 @@ MonoBehaviour:
     m_Bits: 256
   box: {fileID: 7674833399840880755}
   percentStrongDamage: 50
-  slashEffect:
-  - {fileID: 5741387039562252182, guid: 7a480033cbbba624696fc1d94976df09, type: 3}
-  - {fileID: 8342350322664202813, guid: 9e1c6ec11410294428233c95a49958a1, type: 3}
-  - {fileID: 1475437288907276430, guid: e31ff6500862b224ca08e785f6afe763, type: 3}
+  slashEffectName:
+  - KnightWAS Slash 1
+  - KnightWAS Slash 2
+  - KnightWAS Slash 3

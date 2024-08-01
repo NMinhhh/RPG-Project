@@ -103,10 +103,10 @@ MonoBehaviour:
     m_Bits: 256
   box: {fileID: 2265098222330891651}
   percentStrongDamage: 50
-  slashEffect:
-  - {fileID: 3834510082207927980, guid: 8e39e096b4473c646a54a2f6f9450969, type: 3}
-  - {fileID: 543832190202568610, guid: b83f952a6fc36fe4bbce068eea2466cd, type: 3}
-  - {fileID: 5673687432795347221, guid: 9022ea83cac557747a38f4c7d79552c1, type: 3}
+  slashEffectName:
+  - AAK-LAxe Slash 1
+  - AAK-LAxe Slash 2
+  - AAK-LAxe Slash 3
 --- !u!1 &8253393603614952902
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class EquippedWeapons : MonoBehaviour
     [SerializeField] private BoxCollider box;
     [SerializeField] private float percentStrongDamage = 50f;
     [Header("Slash Effect")]
-    [SerializeField] private GameObject[] slashEffect;
+    [SerializeField] private string[] slashEffectName;
 
     private List<GameObject> enemy;
 
@@ -55,7 +55,7 @@ public class EquippedWeapons : MonoBehaviour
                     //Spawn Blood
                     Vector3 spawnPos = hit.transform.position;
                     spawnPos.y = transform.position.y;
-                    ObjectPool.Instance.SpawnFromPool(Pool.Type.BloodParticle, spawnPos, Quaternion.identity).transform.SetParent(hit.transform);
+                    ObjectPool.Instance.SpawnFromPool("Blood Hit", spawnPos, Quaternion.identity).transform.SetParent(hit.transform);
 
                     enemy.Add(hit.collider.gameObject);
                 }
@@ -90,7 +90,7 @@ public class EquippedWeapons : MonoBehaviour
 
     public void TriggerEffect(int order,Vector3 pos, Quaternion rotaion)
     {
-        Instantiate(slashEffect[order], pos, rotaion);
+        ObjectPool.Instance.SpawnFromPool(slashEffectName[order], pos, rotaion);
     }
 }
 
