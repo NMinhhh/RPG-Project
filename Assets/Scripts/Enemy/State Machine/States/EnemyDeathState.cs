@@ -18,10 +18,10 @@ public class EnemyDeathState : EnemyState
     public override void Enter()
     {
         base.Enter();
+        enemy.GetComponent<Collider>().enabled = false;
         enemy.WeaponsController.EndDealDamageAll();
         enemy.SetSpeed(0);
         enemy.Move(enemy.transform.position);
-        enemy.WeaponsController.enabled = false;
     }
 
     public override void Exit()

@@ -4902,6 +4902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: Dual-LKatana Slash 1
+  isParent: 1
 --- !u!1 &3834510082207927980
 GameObject:
   m_ObjectHideFlags: 0

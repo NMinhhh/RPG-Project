@@ -4902,6 +4902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: Dual-RAxe Slash 2
+  isParent: 1
 --- !u!1 &3453436869742516054
 GameObject:
   m_ObjectHideFlags: 0

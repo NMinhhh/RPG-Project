@@ -14707,6 +14707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ce28a454d791b44bd9d3bb85ef9c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objName: Blood Hit
 --- !u!1 &6989039788393700822
 GameObject:
   m_ObjectHideFlags: 0

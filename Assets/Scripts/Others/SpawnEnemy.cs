@@ -13,7 +13,7 @@ public class SpawnEnemy : MonoBehaviour
     private List<Transform> currentRangeSpawnPos = new List<Transform>();
 
     [Header("Enemy list to spawn")]
-    [SerializeField] private List<EnemyToSpawn> enemyToSpawnList;
+    [SerializeField] private List<Wave> wavaList;
 
     [Header("Enemy Holder")]
     [SerializeField] private Transform enemyHolder;
@@ -25,12 +25,8 @@ public class SpawnEnemy : MonoBehaviour
     [Header("delay time next enemy spawn")]
     [SerializeField] private float spawnDelayTime;
 
-    //Current all wave to spawn
-    //Enemy melee attack
-    private Dictionary<int, List<GameObject>> enemyWaveDictionary;
-
     //Enemy in current wave
-    private List<GameObject> currentEnemyWave;
+    private List<Enemy> currentEnemyInWave;
 
     private int currentWave;
 
@@ -44,10 +40,8 @@ public class SpawnEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentEnemyWave = new List<GameObject>();
-        enemyWaveDictionary = new Dictionary<int, List<GameObject>>();
+        currentEnemyInWave = new List<Enemy>();
         currentWDT = waveDelayTime;
-        CreateAllEnemy();
     }
 
     // Update is called once per frame
@@ -80,7 +74,7 @@ public class SpawnEnemy : MonoBehaviour
 
     public void StartSpawn()
     {
-        currentWave = 1;
+        currentWave = 0;
         canSpawn = true;
         isStartSpawn = true;
         isFinishSpawn = false;
@@ -89,7 +83,7 @@ public class SpawnEnemy : MonoBehaviour
     public void NextWave()
     {
         currentWave++;
-        if (currentWave > enemyWaveDictionary.Count)
+        if (currentWave >= wavaList.Count)
         {
             canSpawn = false;
             isFinishSpawn = true;
@@ -102,39 +96,51 @@ public class SpawnEnemy : MonoBehaviour
     public bool CheckToNextWave()
     {
         int count = 0 ;
-        foreach (GameObject enemy in currentEnemyWave)
+        foreach (Enemy enemy in currentEnemyInWave)
         {
-            if (enemy.GetComponentInChildren<Enemy>().isDie)
+            if (enemy.isDie)
             {
                 count++;
             }
         }
 
 
-        return currentEnemyWave.Count == count;
+        return currentEnemyInWave.Count == count;
     }
 
     void CreateWave()
     {
         currentMeleeSpawnPos.Clear();
         currentRangeSpawnPos.Clear();
-        currentEnemyWave.Clear();
-        currentEnemyWave = enemyWaveDictionary[currentWave];
+        currentEnemyInWave.Clear();
         StartCoroutine(Spawn());
     }
 
 
     IEnumerator Spawn()
     {
-        for (int i = 0; i < currentEnemyWave.Count; i++)
+        Wave wave = wavaList[currentWave];
+        foreach (EnemyObject enemy in wave.enemyObjects)
         {
-            if (currentEnemyWave[i].GetComponentInChildren<Enemy>().enemyType == Enemy.EnemyType.MeleeAttack)
-                currentEnemyWave[i].transform.position = GetMeleeSpawnPos();
-            else
-                currentEnemyWave[i].transform.position = GetRangeSpawnPos();
-            currentEnemyWave[i].GetComponentInChildren<EnemyAppearEffect>().StartAppear();
-            currentEnemyWave[i].SetActive(true);
-            yield return new WaitForSeconds(spawnDelayTime);
+            for (int i = 0; i < enemy.size; i++)
+            {
+                Vector3 spawnPos;
+                if(enemy.enemyType == EnemyObject.EnemyType.MeleeAttack)
+                    spawnPos = GetMeleeSpawnPos();
+                else
+                    spawnPos = GetRangeSpawnPos();
+
+                GameObject enemySpawn = ObjectPool.Instance.SpawnFromPool(enemy.name, spawnPos, Quaternion.identity);
+
+                enemySpawn.transform.SetParent(enemyHolder);
+
+                if(!enemySpawn.GetComponent<Enemy>())
+                    currentEnemyInWave.Add(enemySpawn.GetComponentInChildren<Enemy>());
+                else
+                    currentEnemyInWave.Add(enemySpawn.GetComponent<Enemy>());
+
+                yield return new WaitForSeconds(spawnDelayTime);
+            }
         }
         yield return null;
     }
@@ -162,55 +168,27 @@ public class SpawnEnemy : MonoBehaviour
         currentMeleeSpawnPos.RemoveAt(i);
         return pos;
     }
-
-    void CreateAllEnemy()
-    {
-        foreach (EnemyToSpawn enemys in enemyToSpawnList)
-        {
-            List<GameObject> enemySpawnList = new List<GameObject>();
-            for (int i = 0; i < enemys.GetLength; i++)
-            {
-                for(int j = 0; j < enemys.GetSizeEnemyObject(i); j++)
-                {
-                    GameObject enemy = Instantiate(enemys.GetEnemy(i));
-                    enemy.SetActive(false);
-                    enemy.transform.SetParent(enemyHolder);
-                    enemySpawnList.Add(enemy);
-                }
-            }
-            enemyWaveDictionary.Add(enemyToSpawnList.IndexOf(enemys) + 1, enemySpawnList);
-
-        }
-    }
 }
 
 [System.Serializable]
-public class EnemyToSpawn
+public class Wave
 {
+    public string name;
+
     public EnemyObject[] enemyObjects;
 
-    public int GetLength
-    {
-        get
-        {
-            return enemyObjects.Length;
-        }
-    }
-
-    public int GetSizeEnemyObject(int index)
-    {
-        return enemyObjects[index].size;
-    }
-
-    public GameObject GetEnemy(int index)
-    {
-        return enemyObjects[index].obj;
-    }
 }
 
 [System.Serializable]
 public class EnemyObject
 {
-    public GameObject obj;
+    public string name;
     public int size;
+    public EnemyType enemyType;
+
+    public enum EnemyType
+    {
+        MeleeAttack,
+        RangeAttack
+    }
 }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class EnemyHealthBar : MonoBehaviour
 {
     [Header("Health Bar")]
+    [SerializeField] protected GameObject healthBar;
     [SerializeField] protected Image healthImage;
     [SerializeField] protected Image easeHealthImage;
     [SerializeField] private float lerpSpeed;
@@ -20,10 +21,10 @@ public class EnemyHealthBar : MonoBehaviour
 
 
     protected float target = 1;
-    protected bool isTakeDamage;
 
     void Start()
     {
+        healthBar.SetActive(false);
         cam = Camera.main;
         healthImage.fillAmount = 1;
         easeHealthImage.fillAmount = 1;
@@ -64,7 +65,7 @@ public class EnemyHealthBar : MonoBehaviour
 
     public void UpdateHealth(float currentHealth, float maxHealth)
     {
-        isTakeDamage = true;
+        healthBar.SetActive(true);
         target = currentHealth / maxHealth;
     }
 
@@ -80,5 +81,13 @@ public class EnemyHealthBar : MonoBehaviour
 
         }
     }
-  
+
+    public void ResetHealthBar()
+    {
+        healthImage.fillAmount = 1;
+        easeHealthImage.fillAmount = 1;
+        damageText.gameObject.SetActive(false);
+        amountOfDamage = 0;
+        healthBar.SetActive(false);
+    }
 }

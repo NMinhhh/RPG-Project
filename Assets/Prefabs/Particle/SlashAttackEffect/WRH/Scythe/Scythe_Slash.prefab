@@ -4902,6 +4902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: Scythe Slash 1
+  isParent: 1
 --- !u!1 &4899570523202495228
 GameObject:
   m_ObjectHideFlags: 0

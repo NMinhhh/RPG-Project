@@ -4902,6 +4902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: AAK-LAxe Slash 3
+  isParent: 1
 --- !u!1 &5673687432795347221
 GameObject:
   m_ObjectHideFlags: 0

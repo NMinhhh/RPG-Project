@@ -42,7 +42,6 @@ public class Demon : Enemy
     protected override void Start()
     {
         base.Start();
-        enemyType = EnemyType.MeleeAttack;
         IdleState = new DemonIdleState(this, StateMachine, "Idle", _idleData, this);
         HurtState = new DemonHurtState(this, StateMachine, "Hurt", _hurtData, this);
         MoveState = new DemonMoveState(this, StateMachine, "Move", _moveData, destinations, this);
@@ -71,6 +70,17 @@ public class Demon : Enemy
         {
             StateMachine.ChangeState(DeathState);
         }
+    }
+
+    public override void OnObjectSpawn()
+    {
+        base.OnObjectSpawn();
+    }
+
+    private void OnEnable()
+    {
+        if (StateMachine != null)
+            StateMachine.ChangeState(PlayerDetectedState);
     }
 
     public override void Die()

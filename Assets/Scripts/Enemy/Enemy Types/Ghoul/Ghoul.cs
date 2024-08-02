@@ -34,7 +34,6 @@ public class Ghoul : Enemy
     protected override void Start()
     {
         base.Start();
-        enemyType = EnemyType.RangeAttack;
         PlayerDetectedState = new GhoulPlayerDetectedState(this, StateMachine, "PlayerDetected", playerDetectedData, this);
         RangeAttackState = new GhoulRangeAttackState(this, StateMachine, "RangeAttack", rangeAttackData, attackPoint, this);
         HurtState = new GhoulHurtState(this, StateMachine, "Hurt", hurtData, this);
@@ -66,5 +65,10 @@ public class Ghoul : Enemy
         base.Die();
     }
 
- 
+    private void OnEnable()
+    {
+        if (StateMachine != null)
+            StateMachine.ChangeState(PlayerDetectedState);
+    }
+
 }

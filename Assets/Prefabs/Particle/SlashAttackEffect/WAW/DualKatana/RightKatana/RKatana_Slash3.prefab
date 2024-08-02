@@ -4902,6 +4902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: Dual-RKatana Slash 3
+  isParent: 1
 --- !u!1 &8811071366858236519
 GameObject:
   m_ObjectHideFlags: 0

@@ -4934,3 +4934,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: DeadWAS Slash 3
+  isParent: 1

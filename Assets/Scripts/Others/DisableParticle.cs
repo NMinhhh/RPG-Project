@@ -5,7 +5,7 @@ using UnityEngine;
 public class DisableParticle : MonoBehaviour
 {
     [SerializeField] private string objName;
-
+    [SerializeField] private bool isParent;
     private ParticleSystem particle;
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class DisableParticle : MonoBehaviour
     {
         if (particle.isStopped)
         {
-            if (transform.parent == null)
+            if (!isParent)
                 ObjectPool.Instance.AddInPool(objName, this.gameObject);
             else
                 ObjectPool.Instance.AddInPool(objName, this.transform.parent.gameObject);

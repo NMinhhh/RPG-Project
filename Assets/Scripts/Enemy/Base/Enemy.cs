@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
+public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
 {
     #region State Machine
 
@@ -40,14 +40,6 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     #region Variable
 
     [SerializeField] private bool isDrawGizmos;
-
-    public enum EnemyType
-    {
-        MeleeAttack,
-        RangeAttack,
-    }
-
-    public EnemyType enemyType;
 
     public Transform playerPos { get; private set; }
 
@@ -111,12 +103,12 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         if (!data.isBoss)
         {
             HealthBar = GetComponentInChildren<EnemyHealthBar>();
-            HealthBar.gameObject.SetActive(false);
+            HealthBar.ResetHealthBar();
         }
         else
         {
             BossStats.Instance.SetHealth(currentHealth, maxHelth);
-            BossStats.Instance.SetName(this.name);
+            BossStats.Instance.SetName(data.enemyName);
         }
         if (data.isDash)
         {
@@ -179,13 +171,11 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
         }
         else
         {
-            if (!HealthBar.gameObject.activeInHierarchy)
-                HealthBar.gameObject.SetActive(true);
-            HealthBar.UpdateHealth(currentHealth, maxHelth);
             HealthBar.SetDamageText(damage);
+            HealthBar.UpdateHealth(currentHealth, maxHelth);
             if (currentHealth <= 0)
             {
-                HealthBar.gameObject.SetActive(false);
+                HealthBar.ResetHealthBar();
             }
         }
         if (currentHealth > 0 && currentAODToHurt <= 0)
@@ -202,6 +192,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     public virtual void Die()
     {
         gameObject.transform.parent.gameObject.SetActive(false);
+        ObjectPool.Instance.AddInPool(data.enemyName, gameObject.transform.parent.gameObject);
     }
     
 
@@ -348,7 +339,32 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
     #endregion
 
     #region Spawn Objects
-
+    public virtual void OnObjectSpawn()
+    {
+        transform.localPosition = Vector3.zero;
+        maxHelth = data.MaxHealthData;
+        currentHealth = maxHelth;
+        maxCombo = data.maxCombo;
+        currentAODToHurt = data.amountOfDamageToHurt;
+        isFirstDamage = false;
+        isBoss = data.isBoss;
+        isHurt = false;
+        isDie = false;
+        if (!HealthBar)
+        {
+            if (!data.isBoss)
+            {
+                HealthBar = GetComponentInChildren<EnemyHealthBar>();
+                HealthBar.ResetHealthBar();
+            }
+            else
+            {
+                BossStats.Instance.SetHealth(currentHealth, maxHelth);
+                BossStats.Instance.SetName(this.name);
+            }
+        }
+        
+    }
     public void SpawnCooldown()
     {
         canSpawn = false;
@@ -394,6 +410,8 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckThrow);
         }
     }
+
+    
 
     #endregion
 }

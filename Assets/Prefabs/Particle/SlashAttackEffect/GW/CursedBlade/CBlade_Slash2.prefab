@@ -4934,3 +4934,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: CBlade Slash 2
+  isParent: 1

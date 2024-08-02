@@ -2,41 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAppearEffect : MonoBehaviour
+public class EnemyAppearEffect : MonoBehaviour, IPooledObject
 {
     [SerializeField] private SkinnedMeshRenderer[] skinnedMeshRenderers;
     [SerializeField] private float startDissolveAmount = 1;
     [SerializeField] private float dissolveSpeed = 0.5f;
 
     [SerializeField] private Enemy enemy;
-    [SerializeField] private GameObject healthBar;
-    
+
     private Material[] material;
 
     private bool isAppear;
 
     private float dissolveAmount;
 
-
     private void Start()
     {
-        enemy.enabled = false;
-        healthBar.SetActive(false);
         GetMaterial();
-    }
-
-    void GetMaterial()
-    {
-        if (isAppear)
-        {
-            material = new Material[skinnedMeshRenderers.Length];
-            for (int i = 0; i < skinnedMeshRenderers.Length; i++)
-            {
-                material[i] = skinnedMeshRenderers[i].material;
-                material[i].SetFloat("_Dissolve", 1);
-            }
-        }
-       
     }
 
     private void Update()
@@ -45,14 +27,22 @@ public class EnemyAppearEffect : MonoBehaviour
         {
             dissolveAmount = Mathf.Clamp01(dissolveAmount - dissolveSpeed * Time.deltaTime);
             Appear();
-            if(dissolveAmount <= 0)
+            if (dissolveAmount <= 0)
             {
-                healthBar.SetActive(true);
-                enemy.enabled = true;
-                isAppear = false;
+                StopAppear();
             }
         }
-        
+
+    }
+
+    void GetMaterial()
+    {
+        material = new Material[skinnedMeshRenderers.Length];
+        for (int i = 0; i < skinnedMeshRenderers.Length; i++)
+        {
+            material[i] = skinnedMeshRenderers[i].material;
+            material[i].SetFloat("_Dissolve", 1);
+        }
     }
 
     public void Appear()
@@ -65,8 +55,24 @@ public class EnemyAppearEffect : MonoBehaviour
 
     public void StartAppear()
     {
-        this.isAppear = true;
+        enemy.enabled = false;
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = false;
         dissolveAmount = startDissolveAmount;
+        this.isAppear = true;
     }
-    
+
+    public void StopAppear()
+    {
+        enemy.enabled = true;
+        isAppear = false;
+        Collider collider = GetComponent<Collider>();
+        collider.enabled = true;
+    }
+
+    public void OnObjectSpawn()
+    {
+        GetMaterial();
+        StartAppear();
+    }
 }

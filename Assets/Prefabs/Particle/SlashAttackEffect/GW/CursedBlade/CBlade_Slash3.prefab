@@ -4902,6 +4902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: CBlade Slash 3
+  isParent: 1
 --- !u!1 &5125626954531535765
 GameObject:
   m_ObjectHideFlags: 0

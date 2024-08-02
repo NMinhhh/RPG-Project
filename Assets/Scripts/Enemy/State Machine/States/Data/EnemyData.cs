@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName ="newData",menuName = "Enemy Data/Base Data",order = 0)]
 public class EnemyData : ScriptableObject
 {
+    public string enemyName;
+
     public bool isBoss;
 
     public float MaxHealthData;

@@ -4934,3 +4934,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: Polearm Slash 3
+  isParent: 1

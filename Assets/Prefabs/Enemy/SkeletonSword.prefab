@@ -1465,6 +1465,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6989347740739599887}
   m_LocalEulerAnglesHint: {x: -20.095566, y: -109.61154, z: 25.83851}
+--- !u!1 &6021026327612737199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3006779715458548445}
+  - component: {fileID: 7388880949410839215}
+  m_Layer: 5
+  m_Name: HealthBarHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3006779715458548445
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021026327612737199}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3829998557265253386}
+  m_Father: {fileID: 5536499743499973636}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7388880949410839215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6021026327612737199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79a4f0448485b7429ba853e9d67d634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 7826844215429907531}
+  healthImage: {fileID: 4186142040727621385}
+  easeHealthImage: {fileID: 1846944613088630662}
+  lerpSpeed: 0.05
+  damageText: {fileID: 2395996623578453897}
+  disappearTime: 3
 --- !u!1 &6045643205882079992
 GameObject:
   m_ObjectHideFlags: 0
@@ -1872,7 +1927,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3829998557265253386}
-  - component: {fileID: 5819002674216530261}
   m_Layer: 5
   m_Name: 'HealthBar '
   m_TagString: Untagged
@@ -1887,8 +1941,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7826844215429907531}
-  m_LocalRotation: {x: 0.000000029802322, y: 0.000000059604645, z: -0.000000074505806, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.00000005960465, y: -0.000000029802326, z: -0.00000008940698, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.000020954752}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1896,30 +1950,13 @@ RectTransform:
   - {fileID: 4216083428674525205}
   - {fileID: 854866046184028921}
   - {fileID: 5150274808681046535}
-  m_Father: {fileID: 5536499743499973636}
+  m_Father: {fileID: 3006779715458548445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.00066635036, y: 0}
   m_SizeDelta: {x: 600, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5819002674216530261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7826844215429907531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b79a4f0448485b7429ba853e9d67d634, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthImage: {fileID: 4186142040727621385}
-  easeHealthImage: {fileID: 1846944613088630662}
-  lerpSpeed: 0.05
-  damageText: {fileID: 2395996623578453897}
-  disappearTime: 3
 --- !u!1 &7884701547087028686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1975,7 +2012,6 @@ MonoBehaviour:
   - {fileID: 446279917527169863}
   - {fileID: 8749265918482988118}
   isDrawGizmos: 0
-  enemyType: 0
   _idleData: {fileID: 11400000, guid: 7c6e101b9d53c9b43bc72b0f3c56c1e2, type: 2}
   _hurtData: {fileID: 11400000, guid: 043fe720d0ac16b49aaf2a7c873074d8, type: 2}
   _moveData: {fileID: 11400000, guid: 2ee0f5b00bbc8e5459899dc53ef51f99, type: 2}
@@ -2159,7 +2195,7 @@ RectTransform:
   m_LocalScale: {x: 0.00016666668, y: 0.00016666668, z: 0.0001666667}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3829998557265253386}
+  - {fileID: 3006779715458548445}
   m_Father: {fileID: 6989347740739599887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

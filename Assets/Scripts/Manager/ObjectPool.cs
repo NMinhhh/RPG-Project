@@ -52,17 +52,31 @@ public class ObjectPool : Singleton<ObjectPool>
         objectSpawn.transform.SetParent(transform.root);
         objectSpawn.transform.position = position; 
         objectSpawn.transform.rotation = rotation;
-        IPooledObject pooledObject = objectSpawn.GetComponent<IPooledObject>();
-        if (pooledObject != null)
+
+        //Trigger fuction
+        IPooledObject[] pooledObjectParent = objectSpawn.GetComponents<IPooledObject>();
+        IPooledObject[] pooledObjectChild= objectSpawn.GetComponentsInChildren<IPooledObject>();
+        List<IPooledObject> pooledObjects = new List<IPooledObject>();
+
+        if(pooledObjectParent.Length > 0) 
+            pooledObjects.AddRange(pooledObjectParent);
+        if(pooledObjectChild.Length > 0)
+            pooledObjects.AddRange(pooledObjectChild);
+
+        foreach(IPooledObject pooledObject in pooledObjects)
         {
             pooledObject.OnObjectSpawn();
         }
+
         objectSpawn.SetActive(true);
+
         return objectSpawn;
     }
 
     public void AddInPool(string name, GameObject objectPool)
     {
+        if (!poolDictionary.ContainsKey(name))
+            return;
         objectPool.SetActive(false);
         objectPool.transform.SetParent(GetPool(name).objectHolder);
         poolDictionary[name].Enqueue(objectPool);

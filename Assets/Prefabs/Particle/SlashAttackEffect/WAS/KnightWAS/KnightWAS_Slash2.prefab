@@ -4902,6 +4902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objName: KnightWAS Slash 2
+  isParent: 1
 --- !u!1 &8342350322664202813
 GameObject:
   m_ObjectHideFlags: 0

@@ -200,7 +200,7 @@ RectTransform:
   m_LocalScale: {x: 0.000040000035, y: 0.000040000075, z: 0.000040000064}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1443067010241140356}
+  - {fileID: 8354102504263208815}
   m_Father: {fileID: 7190948783116238000}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -736,7 +736,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1443067010241140356}
-  - component: {fileID: 39550181404106045}
   m_Layer: 5
   m_Name: 'HealthBar '
   m_TagString: Untagged
@@ -752,7 +751,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1835679119190111892}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00009313225}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -760,30 +759,13 @@ RectTransform:
   - {fileID: 7816370527079273760}
   - {fileID: 4492441510372379020}
   - {fileID: 7293486155230012388}
-  m_Father: {fileID: 9186851727125147700}
+  m_Father: {fileID: 8354102504263208815}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &39550181404106045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1835679119190111892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b79a4f0448485b7429ba853e9d67d634, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthImage: {fileID: 8811643763809448701}
-  easeHealthImage: {fileID: 3499724739937819580}
-  lerpSpeed: 0.05
-  damageText: {fileID: 947728736495167936}
-  disappearTime: 3
 --- !u!1 &1886107731917038722
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +884,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   isDrawGizmos: 0
-  enemyType: 0
   _idleData: {fileID: 11400000, guid: ec5eb1797dca2044c84c2d1f0650dc5d, type: 2}
   _hurtData: {fileID: 11400000, guid: 21543a932425b814baea7c1a9b2c109f, type: 2}
   _moveData: {fileID: 11400000, guid: 522472e7aa3fca642910a07b89a0a4d4, type: 2}
@@ -1129,6 +1110,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8723397551460659882}
   m_LocalEulerAnglesHint: {x: -3.0647862, y: -22.983393, z: -44.008907}
+--- !u!1 &3613047040916009286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8354102504263208815}
+  - component: {fileID: 3063100814685845626}
+  m_Layer: 5
+  m_Name: HealthBarHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8354102504263208815
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3613047040916009286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1443067010241140356}
+  m_Father: {fileID: 9186851727125147700}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3063100814685845626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3613047040916009286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79a4f0448485b7429ba853e9d67d634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 1835679119190111892}
+  healthImage: {fileID: 8811643763809448701}
+  easeHealthImage: {fileID: 3499724739937819580}
+  lerpSpeed: 0.05
+  damageText: {fileID: 947728736495167936}
+  disappearTime: 3
 --- !u!1 &3696390094067551401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,7 +1808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7293486155230012388
 RectTransform:
   m_ObjectHideFlags: 0
