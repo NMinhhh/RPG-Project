@@ -8,7 +8,7 @@ public class ThirdPersonCamera : MonoBehaviour
 {
     [SerializeField] private GameObject cinemachineTargetCamera;
 
-    [SerializeField] private float sensivitive;
+    [SerializeField] private float sensetivity;
     [SerializeField] private float mixPitch;
     [SerializeField] private float maxPitch;
     private float cinemachineTargetYaw;
@@ -33,9 +33,25 @@ public class ThirdPersonCamera : MonoBehaviour
         SetPitch(mixPitch, maxPitch);
     }
 
+    private void OnEnable()
+    {
+        ControlsUI.setSensetivity += SetSensetivity;
+    }
+
+    private void OnDisable()
+    {
+        ControlsUI.setSensetivity -= SetSensetivity;
+    }
+
     private void LateUpdate()
     {
         UpdateCameraRotation();  
+    }
+
+
+    public void SetSensetivity(float sensetivity)
+    {
+        this.sensetivity = sensetivity;
     }
 
     public void SetPitch(float mixpitch, float maxPitch)
@@ -59,7 +75,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     public float GetMouseSpeed(float input)
     {
-        return input * sensivitive * Time.deltaTime;
+        return input * sensetivity * Time.deltaTime;
     }
 
     public Vector3 MoveRotation(Vector3 direction)

@@ -8,6 +8,7 @@ public class PlayerShootState : PlayerState
     private bool isAim;
     private GameObject go;
     private Projectile projectile;
+    private Vector3 direction;
 
     public PlayerShootState(Player player, PlayerStateMachine stateMachine, PlayerData data, string isAnimationName, Transform shootPoint) : base(player, stateMachine, data, isAnimationName)
     {
@@ -17,8 +18,9 @@ public class PlayerShootState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Arrow), player.transform.position, .5f);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Shoot Arrow"), player.transform.position, .5f);
         player.thirdPersonAim.Aim();
+        direction = (player.thirdPersonAim.mousePos - shootPoint.position).normalized;
     }
 
     public override void Exit()
@@ -65,7 +67,6 @@ public class PlayerShootState : PlayerState
     public override void TriggerAnimation()
     {
         base.TriggerAnimation();
-        Vector3 direction = (player.thirdPersonAim.mousePos - shootPoint.position).normalized;
         go = ObjectPool.Instance.SpawnFromPool("Arrow", shootPoint.position, Quaternion.LookRotation(direction, Vector3.up));
         projectile = go.GetComponent<Projectile>();
         projectile.CreateProjectile(data.arrowDamage, data.arrowSpeed, data.arrowTimeLife);

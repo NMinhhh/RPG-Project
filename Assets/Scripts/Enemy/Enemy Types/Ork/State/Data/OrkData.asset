@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Ork
   isBoss: 1
-  MaxHealthData: 100
+  MaxHealthData: 1200
   radiusCheckToChase: 10.77
   radiusCheckToAttack: 1.3
   whatIsWall:

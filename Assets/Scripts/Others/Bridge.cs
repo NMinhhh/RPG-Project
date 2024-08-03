@@ -30,6 +30,7 @@ public class Bridge : MonoBehaviour, IDamageable
         capsuleCollider = GetComponent<CapsuleCollider>();
         GetMaterial();
         isFinishFall = false;
+        capsuleCollider.enabled = false;
     }
 
     private void Update()
@@ -40,6 +41,7 @@ public class Bridge : MonoBehaviour, IDamageable
             Appear();
             if (dissolveAmount == 0)
             {
+                capsuleCollider.enabled = true;
                 fireEffect.Play();
                 isAppear = false;
             }
@@ -80,7 +82,7 @@ public class Bridge : MonoBehaviour, IDamageable
     public void Damage(float damage)
     {
         amountOfDamage--;
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Hit), transform.position, .5f);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Damage Hit"), transform.position);
         if (amountOfDamage == 0)
         {
             Die();
@@ -91,6 +93,7 @@ public class Bridge : MonoBehaviour, IDamageable
     {
         capsuleCollider.enabled = false;
         blockHolder.SetActive(false);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Explosion"), transform.position);
         Instantiate(explodeEffect, blockHolder.transform.position, Quaternion.identity);
         block.GetComponent<Rigidbody>().isKinematic = false;
         anim.SetTrigger("Fall");

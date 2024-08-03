@@ -347,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b937633d081c19141b68d70e584235f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundName: Sword Swing
   damage: 0
   whatIsEnemy:
     serializedVersion: 2
@@ -357,6 +358,7 @@ MonoBehaviour:
   - Dual-RKatana Slash 1
   - Dual-RKatana Slash 2
   - Dual-RKatana Slash 3
+  - Dual-RKatana Slash 4
 --- !u!1 &8519814714471022646
 GameObject:
   m_ObjectHideFlags: 0

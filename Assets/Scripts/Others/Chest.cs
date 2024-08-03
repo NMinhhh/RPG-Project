@@ -16,7 +16,7 @@ public class Chest : MonoBehaviour, IInteracable
     {
         boxCollider.enabled = false;
         anim.SetTrigger("Open");
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.OpenChest), transform.position);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Open Chest"), transform.position);
     }
 
     void TriggerAnimation()

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Demon
   isBoss: 0
-  MaxHealthData: 200
+  MaxHealthData: 150
   radiusCheckToChase: 10
   radiusCheckToAttack: 1.65
   whatIsWall:

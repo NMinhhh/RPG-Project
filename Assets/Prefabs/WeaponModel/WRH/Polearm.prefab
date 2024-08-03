@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b937633d081c19141b68d70e584235f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundName: Axe Swing
   damage: 20
   whatIsEnemy:
     serializedVersion: 2
@@ -108,6 +109,7 @@ MonoBehaviour:
   - Polearm Slash 1
   - Polearm Slash 2
   - Polearm Slash 3
+  - Polearm Slash 4
 --- !u!1 &4196368558761497357
 GameObject:
   m_ObjectHideFlags: 0

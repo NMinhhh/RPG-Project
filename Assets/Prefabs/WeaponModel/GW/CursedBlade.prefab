@@ -80,14 +80,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5576206942248239187}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03929716, y: 0.12673205, z: 0.6778351, w: 0.72314197}
-  m_LocalPosition: {x: -0.339, y: 0.001, z: 0.102}
+  m_LocalRotation: {x: -0.034597386, y: 0.08409706, z: 0.67211986, w: 0.7348371}
+  m_LocalPosition: {x: -0.347, y: 0.012, z: 0.046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1314242466470855336}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -6.602, y: 13.777, z: 85.497}
+  m_LocalEulerAnglesHint: {x: -9.433, y: 4.482, z: 84.525}
 --- !u!33 &7227596590930449548
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b937633d081c19141b68d70e584235f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundName: Sword Swing
   damage: 0
   whatIsEnemy:
     serializedVersion: 2
@@ -160,3 +161,4 @@ MonoBehaviour:
   - CBlade Slash 1
   - CBlade Slash 2
   - CBlade Slash 3
+  - CBlade Slash 4

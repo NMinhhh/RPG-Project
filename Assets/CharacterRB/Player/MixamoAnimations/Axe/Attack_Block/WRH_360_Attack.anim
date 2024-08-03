@@ -145821,6 +145821,13 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
+  - time: 0.6
+    functionName: TriggerAnimation
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.73333335
     functionName: StartDealDamageToTheRight
     data: 
@@ -145828,12 +145835,12 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.81666666
-    functionName: TriggerAnimation
+  - time: 1.1666666
+    functionName: SlashEffectRight
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
-    intParameter: 0
+    intParameter: 3
     messageOptions: 0
   - time: 1.4333333
     functionName: EndDealDamageToTheRight

@@ -80,7 +80,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2599180948242105604}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.03721507, y: -0.040018406, z: 0.65148103, w: 0.75669414}
+  m_LocalRotation: {x: 0.037216183, y: -0.040020537, z: 0.6514795, w: 0.75669533}
   m_LocalPosition: {x: -0.288, y: 0.036, z: 0.026}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b937633d081c19141b68d70e584235f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundName: Sword Swing
   damage: 0
   whatIsEnemy:
     serializedVersion: 2
@@ -160,3 +161,4 @@ MonoBehaviour:
   - KnightWAS Slash 1
   - KnightWAS Slash 2
   - KnightWAS Slash 3
+  - KnightWAS Slash 4

@@ -38,6 +38,7 @@ public class ObjectPool : Singleton<ObjectPool>
     {
         if (!poolDictionary.ContainsKey(name))
         {
+            Debug.Log(name);
             return null;
         }
         GameObject objectSpawn;

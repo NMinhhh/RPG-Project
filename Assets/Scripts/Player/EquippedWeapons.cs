@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EquippedWeapons : MonoBehaviour
 {
+    [Header("Sound Name")]
+    [SerializeField] private string soundName;
+
+    [Header("Info")]
     [SerializeField] private float damage;
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private BoxCollider box;
@@ -76,7 +80,7 @@ public class EquippedWeapons : MonoBehaviour
 
     public void StartDealDamage()
     {
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(Sound.SoundType.Swing), transform.position);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound(soundName), transform.position);
         isAttack = true;
     }  
 

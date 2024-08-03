@@ -22,7 +22,7 @@ public class EnemyHealthBar : MonoBehaviour
 
     protected float target = 1;
 
-    void Start()
+    protected virtual void Start()
     {
         healthBar.SetActive(false);
         cam = Camera.main;
@@ -84,6 +84,7 @@ public class EnemyHealthBar : MonoBehaviour
 
     public void ResetHealthBar()
     {
+        target = 1;
         healthImage.fillAmount = 1;
         easeHealthImage.fillAmount = 1;
         damageText.gameObject.SetActive(false);

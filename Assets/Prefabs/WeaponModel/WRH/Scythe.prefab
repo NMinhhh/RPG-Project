@@ -150,6 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b937633d081c19141b68d70e584235f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundName: Axe Swing
   damage: 0
   whatIsEnemy:
     serializedVersion: 2
@@ -160,3 +161,4 @@ MonoBehaviour:
   - Scythe Slash 1
   - Scythe Slash 2
   - Scythe Slash 3
+  - Scythe Slash 4

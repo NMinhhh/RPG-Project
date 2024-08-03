@@ -38,11 +38,11 @@ public class SoundFXManager : Singleton<SoundFXManager>
         soundS.PlayOneShot(sound.clip, value);
     }
 
-    public Sound GetSound(Sound.SoundType type)
+    public Sound GetSound(string soundName)
     {
         foreach (var sound in soundList) 
         {
-            if(sound.soundType == type) return sound;
+            if(sound.soundName == soundName) return sound;
         }
         return null;
     }
@@ -51,16 +51,6 @@ public class SoundFXManager : Singleton<SoundFXManager>
 [System.Serializable]
 public class Sound
 {
-    public enum SoundType
-    {
-        Hit,
-        Swing,
-        Arrow,
-        Healing,
-        Click,
-        OpenChest
-    }
-
-    public SoundType soundType;
+    public string soundName;
     public AudioClip clip;
 }
