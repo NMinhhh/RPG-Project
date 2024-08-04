@@ -6,6 +6,7 @@ public class EnemyMeleeAttackState : EnemyState
 {
     protected EnemyMeleeAttackData data;
     protected bool isPlayerDetected;
+    protected bool isPlayerToAttack;
     public EnemyMeleeAttackState(Enemy enemy, EnemyStateMachine stateMachine, string isAnimationName, EnemyMeleeAttackData data) : base(enemy, stateMachine, isAnimationName)
     {
         this.data = data;
@@ -15,18 +16,18 @@ public class EnemyMeleeAttackState : EnemyState
     {
         base.DoCheck();
         isPlayerDetected = enemy.CheckPlayerDetected();
+        isPlayerToAttack = enemy.CheckPlayerToMeleeAttack();
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemy.Anim.SetInteger("Combo",enemy.GetCurrentCombo());
         enemy.WeaponsController.SetDamageRightWeapon(data.rightDamage);
         enemy.WeaponsController.SetDamageLeftWeapon(data.leftDamage);
         enemy.SetSpeed(0);
         enemy.Move(enemy.transform.position);
         enemy.transform.LookAt(new Vector3(enemy.playerPos.position.x, enemy.transform.position.y, enemy.playerPos.position.z));
-        enemy.IncreaseAmountOfAttack();
+        enemy.Anim.SetInteger("Combo",enemy.GetCurrentCombo());
     }
 
     public override void Exit()

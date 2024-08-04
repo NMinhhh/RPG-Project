@@ -22,6 +22,9 @@ public class EnemyShieldAttackState : EnemyState
         base.Enter();
         enemy.WeaponsController.SetDamageLeftWeapon(data.damageLeft);
         enemy.WeaponsController.SetDamageRightWeapon(data.damageRight);
+        enemy.SetSpeed(0);
+        enemy.Move(enemy.transform.position);
+        enemy.transform.LookAt(new Vector3(enemy.playerPos.position.x, enemy.transform.position.y, enemy.playerPos.position.z));
     }
 
     public override void Exit()

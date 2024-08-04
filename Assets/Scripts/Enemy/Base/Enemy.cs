@@ -55,13 +55,10 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
     public Vector3 damageDir {  get; private set; }
 
     protected int maxCombo;
-    protected int currentCombo;
+    public int currentCombo {  get; private set; }
 
     //Amount of damage to change hurt state
     protected int currentAODToHurt;
-
-    //Amount of attack to change state
-    public int amountOfAttack {  get; private set; }
 
     //Check first damage to attack player
     protected bool isFirstDamage;
@@ -255,15 +252,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
 
     #region Attack Function
 
-    public void IncreaseAmountOfAttack()
-    {
-        amountOfAttack++;
-    }
 
-    public void ResetAmountOfAttack()
-    {
-        amountOfAttack = 0;
-    }
     public int GetCurrentCombo()
     {
         currentCombo++;
@@ -413,10 +402,18 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckToChase);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckToAttack);
-            Gizmos.color = Color.black;
-            Gizmos.DrawWireSphere(transform.position, data.radiusCheckThrow);
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckToShieldAttack);
+            if (data.isThrowWeapon)
+            {
+                Gizmos.color = Color.black;
+                Gizmos.DrawWireSphere(transform.position, data.radiusCheckThrow);
+            }
+            if (data.isSpawnObjects)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(transform.position, data.raidusCheckSpawn);
+            }
         }
     }
 

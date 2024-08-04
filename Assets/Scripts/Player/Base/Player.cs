@@ -299,8 +299,8 @@ public class Player : MonoBehaviour, IDamageable
 
     private void OnDrawGizmos()
     {
-        //if (groundCheck != null)
-        //    Gizmos.DrawWireSphere(groundCheck.position, data.radius);
+        if (groundCheck != null)
+            Gizmos.DrawWireSphere(groundCheck.position, data.radius);
     }
 
     #endregion

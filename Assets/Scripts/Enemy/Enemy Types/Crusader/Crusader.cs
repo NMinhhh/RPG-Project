@@ -32,6 +32,7 @@ public class Crusader : Enemy
 
     #endregion
 
+
     protected override void Start()
     {
         base.Start();

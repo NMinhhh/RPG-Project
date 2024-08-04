@@ -21,7 +21,6 @@ public class EnemyDashAttackState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        enemy.ResetAmountOfAttack();
         enemy.SetSpeed(0);
         enemy.Move(enemy.transform.position);
         isFinishDash = false;
