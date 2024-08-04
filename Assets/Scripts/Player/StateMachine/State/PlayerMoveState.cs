@@ -48,7 +48,6 @@ public class PlayerMoveState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         player.Move(direction, data.speed);
 
         if (isJump)

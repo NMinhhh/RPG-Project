@@ -11,6 +11,7 @@ public class PlayerHurtState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Player Hurt"), player.transform.position);
         player.weaponsController.EndDealDamageAll();
         player.Anim.SetLayerWeight(1, 0);
         player.thirdPersonAim.NotAim();

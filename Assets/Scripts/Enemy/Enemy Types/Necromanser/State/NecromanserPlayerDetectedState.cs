@@ -38,15 +38,15 @@ public class NecromanserPlayerDetectedState : EnemyPlayerDetectedState
         {
             stateMachine.ChangeState(necromanser.SpawnSkillState);
         }
-        else if (canThrow && !isPlayerInRange && isPlayerInRangeToThrow)
+        else if (canThrow && !isPlayerToAttack && isPlayerInRangeToThrow)
         {
             stateMachine.ChangeState(necromanser.ThrowWeaponState);
         }
-        else if (isPlayerInRange && isDetectedOver)
+        else if (isPlayerToAttack && isDetectedOver)
         {
             stateMachine.ChangeState(necromanser.MeleeAttackState);
         }
-        else if ((isPlayerDetected && !isPlayerInRange) || !isPlayerDetected)
+        else if ((isPlayerDetected && !isPlayerToAttack) || !isPlayerDetected)
         {
             stateMachine.ChangeState(necromanser.ChaseState);
         }

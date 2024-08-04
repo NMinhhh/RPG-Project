@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afdc73453c6a85a4aba6c0ff89e8a72f, type: 3}
+  m_Name: CrusaderData
+  m_EditorClassIdentifier: 
+  enemyName: Crusader
+  isBoss: 1
+  MaxHealthData: 1000
+  radiusCheckToChase: 10
+  radiusCheckToAttack: 1.6
+  radiusCheckToShieldAttack: 0.9
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 128
+  maxCombo: 3
+  amountOfDamageToHurt: 10
+  isDash: 0
+  dashCooldownRan: {x: 0, y: 0}
+  isThrowWeapon: 0
+  radiusCheckThrow: 0
+  throwWeaponCooldownRan: {x: 0, y: 0}
+  isSpawnObjects: 0
+  raidusCheckSpawn: 0
+  spawnObjectCooldown: {x: 0, y: 0}

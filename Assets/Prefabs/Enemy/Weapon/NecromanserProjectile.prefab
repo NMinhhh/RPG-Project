@@ -110,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 1865783474843341331}
   serializedVersion: 2
   m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0.102}
+  m_LocalPosition: {x: 0, y: -0.009, z: 0.145}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -748,7 +748,7 @@ ParticleSystem:
     serializedVersion: 6
     enabled: 1
     type: 4
-    angle: 26.64
+    angle: 46.97
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
@@ -9830,6 +9830,10 @@ MonoBehaviour:
   damage: 20
   speed: 10
   timeLife: 5
+  hitEffect: []
+  layerEffectHit:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!136 &7740508219725448907
 CapsuleCollider:
   m_ObjectHideFlags: 0

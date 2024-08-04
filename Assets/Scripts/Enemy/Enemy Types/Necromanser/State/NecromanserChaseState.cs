@@ -41,7 +41,7 @@ public class NecromanserChaseState : EnemyChaseState
         {
             stateMachine.ChangeState(necromanser.ThrowWeaponState);
         }
-        else if (isPlayerInRange)
+        else if (isPlayerToAttack)
         {
             stateMachine.ChangeState(necromanser.MeleeAttackState);
         }

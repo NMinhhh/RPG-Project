@@ -6,7 +6,8 @@ public class EnemyPlayerDetectedState : EnemyState
 {
     protected EnemyPlayerDetectedData data;
     protected bool isPlayerDetected;
-    protected bool isPlayerInRange;
+    protected bool isPlayerToAttack;
+    protected bool isPlayerToShieldAttack;
     protected bool isPlayerInRangeToThrow;
     protected bool isPlayerInRangeToSpawn;
     protected bool isDetectedOver;
@@ -22,9 +23,10 @@ public class EnemyPlayerDetectedState : EnemyState
     {
         base.DoCheck();
         isPlayerDetected = enemy.CheckPlayerDetected();
-        isPlayerInRange = enemy.CheckPlayerInRange();
+        isPlayerToAttack = enemy.CheckPlayerToMeleeAttack();
         isPlayerInRangeToThrow = enemy.CheckPlayerInRangeToThrow();
         isPlayerInRangeToSpawn = enemy.CheckPlayerInRangeToSpawn();
+        isPlayerToShieldAttack = enemy.CheckPlayerToShieldAttack();
         enemy.WeaponsController.EndDealDamageAll();
         canDash = enemy.CanDash();
         canThrow = enemy.CanThrow();

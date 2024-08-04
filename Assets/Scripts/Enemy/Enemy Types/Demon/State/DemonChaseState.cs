@@ -28,7 +28,7 @@ public class DemonChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (isPlayerInRange)
+        if (isPlayerToAttack)
         {
             stateMachine.ChangeState(_demon.MeleeAttackState);
         }

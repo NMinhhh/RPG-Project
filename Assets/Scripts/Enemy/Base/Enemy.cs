@@ -211,9 +211,14 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
         return Vector3.Distance(transform.position, playerPos.position) <= data.radiusCheckToChase;
     }
 
-    public bool CheckPlayerInRange()
+    public bool CheckPlayerToMeleeAttack()
     {
         return Vector3.Distance(transform.position, playerPos.position) <= data.radiusCheckToAttack;
+    }
+
+    public bool CheckPlayerToShieldAttack()
+    {
+        return Vector3.Distance(transform.position, playerPos.position) <= data.radiusCheckToShieldAttack;
     }
 
     public bool CheckPlayerInRangeToThrow()
@@ -408,7 +413,10 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckToChase);
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckToAttack);
+            Gizmos.color = Color.black;
             Gizmos.DrawWireSphere(transform.position, data.radiusCheckThrow);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, data.radiusCheckToShieldAttack);
         }
     }
 

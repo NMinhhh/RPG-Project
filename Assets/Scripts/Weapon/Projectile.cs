@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour, IPooledObject
@@ -7,6 +8,8 @@ public class Projectile : MonoBehaviour, IPooledObject
     [SerializeField] protected float damage = 20f;
     [SerializeField] protected float speed = 10;
     [SerializeField] protected float timeLife = 5f;
+    [SerializeField] protected List<string> hitEffect;
+    [SerializeField] protected LayerMask layerEffectHit;
     protected float currentTimeLife;
     protected virtual void Start()
     {
@@ -28,6 +31,7 @@ public class Projectile : MonoBehaviour, IPooledObject
     {
         if (other.tag == "Enemy")
         {
+            SpawnHitEffect(other);
             IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
             if (damageable != null)
             {
@@ -35,6 +39,34 @@ public class Projectile : MonoBehaviour, IPooledObject
             }
             ObjectPool.Instance.AddInPool("Arrow", this.gameObject);
 
+        }
+    }
+
+    void SpawnHitEffect(Collider collider)
+    {
+        CollisionType collisionType = collider.GetComponent<CollisionType>();
+        string hitEffect = "";
+        if (!collisionType)
+        {
+            Debug.Log("Don't have collision");
+            return;
+        }
+        switch (collisionType.type)
+        {
+            default:
+                break;
+            case CollisionType.Type.Meat:
+                hitEffect = this.hitEffect[0];
+                break;
+            case CollisionType.Type.Wood:
+                hitEffect = this.hitEffect[1];
+                break;
+
+        }
+        if(Physics.Raycast(transform.position, transform.forward,out RaycastHit hit, 10, layerEffectHit))
+        {
+            Vector3 direction = transform.position - hit.point;
+            ObjectPool.Instance.SpawnFromPool(hitEffect, hit.point, Quaternion.LookRotation(direction.normalized, Vector3.up)).transform.SetParent(collider.transform);
         }
     }
 

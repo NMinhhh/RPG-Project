@@ -11110,6 +11110,7 @@ GameObject:
   - component: {fileID: 4690119536389894313}
   - component: {fileID: 8823017227750061910}
   - component: {fileID: 8027036006557815045}
+  - component: {fileID: 5785405275831502923}
   m_Layer: 8
   m_Name: Necromanser
   m_TagString: Enemy
@@ -11142,7 +11143,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2656353738814907788}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd2675b5159f22b489708d8faccaafc1, type: 3}
   m_Name: 
@@ -11150,7 +11151,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: db36271cd8681b344bc4f0e649924cd3, type: 2}
   destinations: []
   isDrawGizmos: 0
-  enemyType: 0
   playerDetectedData: {fileID: 11400000, guid: d3b0318a458e5c149a53e6d18ad99e37, type: 2}
   chaseData: {fileID: 11400000, guid: 324a5e8a490a13141a64587d0941eba2, type: 2}
   meleeAttackData: {fileID: 11400000, guid: 5891db48191c2b94caf6a69dc0ca77ef, type: 2}
@@ -11189,7 +11189,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2656353738814907788}
-  m_Enabled: 0
+  m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.4
   m_Speed: 3.5
@@ -11200,7 +11200,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 2.21
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -11223,10 +11223,23 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.24798696
-  m_Height: 1.9395428
+  m_Radius: 0.3278531
+  m_Height: 2.2867775
   m_Direction: 1
-  m_Center: {x: 0, y: 0.94904804, z: 0}
+  m_Center: {x: 4.983055e-17, y: 1.1226654, z: 0.011319011}
+--- !u!114 &5785405275831502923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2656353738814907788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5651711873efbcb4c803f554ddb7f9ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &2661013650677780824
 GameObject:
   m_ObjectHideFlags: 0

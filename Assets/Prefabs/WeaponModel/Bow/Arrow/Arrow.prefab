@@ -265,7 +265,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3623f53bea4d714a956f285d0203c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 20
   speed: 30
+  timeLife: 5
+  hitEffect:
+  - Blood Arrow Hit
+  - Wood Hit
+  layerEffectHit:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!54 &3376697300793901487
 Rigidbody:
   m_ObjectHideFlags: 0

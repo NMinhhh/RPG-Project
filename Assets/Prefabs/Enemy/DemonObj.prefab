@@ -841,6 +841,7 @@ GameObject:
   - component: {fileID: 234127011924882352}
   - component: {fileID: 3099438565347913957}
   - component: {fileID: 6898942936302536440}
+  - component: {fileID: 2596550484045104807}
   m_Layer: 8
   m_Name: DemonObj
   m_TagString: Enemy
@@ -952,6 +953,19 @@ CapsuleCollider:
   m_Height: 2.777205
   m_Direction: 1
   m_Center: {x: 0, y: 1.4474523, z: 0}
+--- !u!114 &2596550484045104807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2533336855416425905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5651711873efbcb4c803f554ddb7f9ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &2719551165258557108
 GameObject:
   m_ObjectHideFlags: 0

@@ -4629,6 +4629,7 @@ GameObject:
   - component: {fileID: 2322495597709752671}
   - component: {fileID: 8765855504656580932}
   - component: {fileID: 4811062136619286170}
+  - component: {fileID: 165278532647727999}
   m_Layer: 8
   m_Name: Ghoul
   m_TagString: Enemy
@@ -4753,7 +4754,19 @@ MonoBehaviour:
   startDissolveAmount: 1
   dissolveSpeed: 0.5
   enemy: {fileID: 7868489080774911863}
-  healthBar: {fileID: 3950068081537895729}
+--- !u!114 &165278532647727999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2387607231226706650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5651711873efbcb4c803f554ddb7f9ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &2399093163538343169
 GameObject:
   m_ObjectHideFlags: 0

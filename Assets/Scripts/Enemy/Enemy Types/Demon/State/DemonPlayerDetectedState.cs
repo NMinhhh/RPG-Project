@@ -33,11 +33,11 @@ public class DemonPlayerDetectedState : EnemyPlayerDetectedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (isPlayerInRange && isDetectedOver)
+        if (isPlayerToAttack && isDetectedOver)
         {
             stateMachine.ChangeState(_demon.MeleeAttackState);
         }
-        else if ((isPlayerDetected && !isPlayerInRange) || !isPlayerDetected)
+        else if ((isPlayerDetected && !isPlayerToAttack) || !isPlayerDetected)
         {
             stateMachine.ChangeState(_demon.ChaseState);
         }

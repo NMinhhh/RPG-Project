@@ -38,6 +38,6 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, radiusInteracted);
+        //Gizmos.DrawWireSphere(transform.position, radiusInteracted);
     }
 }

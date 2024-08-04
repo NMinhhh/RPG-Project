@@ -33,15 +33,15 @@ public class OrkPlayerDetectedState : EnemyPlayerDetectedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if(!isPlayerInRange && isPlayerDetected && canDash)
+        if(!isPlayerToAttack && isPlayerDetected && canDash)
         {
             stateMachine.ChangeState(ork.DashAttackState);
         }
-        else if (isPlayerInRange && isDetectedOver)
+        else if (isPlayerToAttack && isDetectedOver)
         {
             stateMachine.ChangeState(ork.MeleeAttackState);
         }
-        else if ((isPlayerDetected && !isPlayerInRange) || !isPlayerDetected)
+        else if ((isPlayerDetected && !isPlayerToAttack) || !isPlayerDetected)
         {
             stateMachine.ChangeState(ork.ChaseState);
         }

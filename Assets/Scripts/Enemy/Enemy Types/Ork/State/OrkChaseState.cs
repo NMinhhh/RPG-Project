@@ -34,10 +34,10 @@ public class OrkChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (isPlayerInRange)
+        if (isPlayerToAttack)
         {
             stateMachine.ChangeState(ork.MeleeAttackState);
-        }else if(canDash && !isPlayerInRange)
+        }else if(canDash && !isPlayerToAttack)
         {
             stateMachine.ChangeState(ork.DashAttackState);
         }

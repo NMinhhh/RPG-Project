@@ -4740,12 +4740,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b79a4f0448485b7429ba853e9d67d634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   healthImage: {fileID: 7649595485722393836}
   easeHealthImage: {fileID: 1227769741100912311}
-  normalColor: {r: 0.55345905, g: 0.5447568, b: 0.5447568, a: 1}
-  damageColor: {r: 0.9811321, g: 0.32554147, b: 0.23139893, a: 1}
-  decreaseTime: 0.5
-  delay: 0.02
+  lerpSpeed: 0
+  damageText: {fileID: 0}
+  disappearTime: 0
 --- !u!1 &2508715252887903139
 GameObject:
   m_ObjectHideFlags: 0
@@ -10305,6 +10305,7 @@ GameObject:
   - component: {fileID: 330700718052720130}
   - component: {fileID: 5991570487414640965}
   - component: {fileID: 2747578266668330632}
+  - component: {fileID: 1118814541257754552}
   m_Layer: 8
   m_Name: Ork
   m_TagString: Enemy
@@ -10345,7 +10346,6 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 6c4163535ab9851438ef6aebfeea206e, type: 2}
   destinations: []
   isDrawGizmos: 0
-  enemyType: 0
   idleData: {fileID: 11400000, guid: 4b98f1da230b4d74daf8ec6956d7f2c6, type: 2}
   moveData: {fileID: 11400000, guid: 6a865f27f53f16b4b80fe2a8e39c5c38, type: 2}
   playerDetectedData: {fileID: 11400000, guid: e4229c0cc305a97449d282394488864b, type: 2}
@@ -10443,6 +10443,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &1118814541257754552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5150451269424126611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5651711873efbcb4c803f554ddb7f9ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &5232222040031779807
 GameObject:
   m_ObjectHideFlags: 0

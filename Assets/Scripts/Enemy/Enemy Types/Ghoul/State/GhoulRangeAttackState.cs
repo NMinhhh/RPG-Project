@@ -52,6 +52,7 @@ public class GhoulRangeAttackState : EnemyRangeAttackState
         base.TriggerAnimation();
         Vector3 direction = (new Vector3(enemy.playerPos.position.x, enemy.playerPos.position.y + data.offsetY, enemy.playerPos.position.z) - attackPoint.position).normalized;
         go = ObjectPool.Instance.SpawnFromPool("GhoulProjectile", attackPoint.position, Quaternion.LookRotation(direction, Vector3.up));
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Fire Ball"), go.transform.position);
         projectile = go.GetComponent<EnemyProjectile>();
         projectile.CreateProjectile(data.damage, data.speed, data.timeLife);
     }

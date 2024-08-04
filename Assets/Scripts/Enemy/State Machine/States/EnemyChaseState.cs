@@ -5,9 +5,10 @@ using UnityEngine;
 public class EnemyChaseState : EnemyState
 {
     protected EnemyChaseData data;
-    protected bool isPlayerInRange;
+    protected bool isPlayerToAttack;
     protected bool isPlayerInRangeToThrow;
     protected bool isPlayerInRangeToSpawn;
+    protected bool isPlayerToShieldAttack;
     protected bool canDash;
     protected bool canThrow;
     protected bool canSpawn;
@@ -19,9 +20,10 @@ public class EnemyChaseState : EnemyState
     public override void DoCheck()
     {
         base.DoCheck();
-        isPlayerInRange = enemy.CheckPlayerInRange();
+        isPlayerToAttack = enemy.CheckPlayerToMeleeAttack();
         isPlayerInRangeToThrow = enemy.CheckPlayerInRangeToThrow();
         isPlayerInRangeToSpawn = enemy.CheckPlayerInRangeToSpawn();
+        isPlayerToShieldAttack = enemy.CheckPlayerToShieldAttack();
         canDash = enemy.CanDash();
         canThrow = enemy.CanThrow();
         canSpawn = enemy.CanSpawn();

@@ -15,6 +15,8 @@ public class EnemyData : ScriptableObject
 
     public float radiusCheckToAttack;
 
+    public float radiusCheckToShieldAttack;
+
     public LayerMask whatIsWall;
 
     public int maxCombo = 1;

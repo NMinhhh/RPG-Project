@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class Test : MonoBehaviour
 {
-    [SerializeField] private Dialog dialog;
-    private void Update()
+    public Vector3 boxSize = new Vector3(2f, 4f, 6f);
+    public Vector3 boxCenter = Vector3.zero; 
+
+    void OnDrawGizmosSelected()
     {
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            dialog.SetDialogInfo("Minh dep trai");
-            dialog.gameObject.SetActive(true);
-        }
+        Gizmos.color = Color.red; 
+
+        Vector3 halfExtents = boxSize / 2;
+
+        Gizmos.DrawWireCube(transform.position + boxCenter, boxSize);
+
+        Debug.Log($"Half Extents: {halfExtents}");
     }
 
 }
