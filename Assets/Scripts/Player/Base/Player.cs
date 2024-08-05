@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IDamageable
+public class Player : MonoBehaviour, IDamageable, IKnockBackable
 {
 
     #region Data
@@ -75,6 +75,7 @@ public class Player : MonoBehaviour, IDamageable
 
     //Health
     private float currentHealth;
+    private Vector3 damageDirection;
 
     //Stamina
     private float currentStamina;
@@ -301,6 +302,16 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (groundCheck != null)
             Gizmos.DrawWireSphere(groundCheck.position, data.radius);
+    }
+
+    public void DamageDiretion(Vector3 direction)
+    {
+        damageDirection = direction;
+    }
+
+    public void KnockBack(float knockBackSpeed)
+    {
+        character.Move(damageDirection * knockBackSpeed * Time.deltaTime);
     }
 
     #endregion

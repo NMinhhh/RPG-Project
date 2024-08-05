@@ -14650,3 +14650,7 @@ MonoBehaviour:
   damage: 20
   speed: 10
   timeLife: 3
+  hitEffect: []
+  layerEffectHit:
+    serializedVersion: 2
+    m_Bits: 0

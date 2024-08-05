@@ -46,7 +46,7 @@ public class Dialog : MonoBehaviour
     {
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
         LeanTween.scale(button.gameObject, Vector2.zero, duration);
-        LeanTween.scale(gameObject, Vector2.zero, duration).setDelay(0).setOnComplete(FinishClose);
+        LeanTween.scale(gameObject, Vector2.zero, duration).setOnComplete(FinishClose);
     }
 
     public void FinishClose()
