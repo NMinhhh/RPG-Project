@@ -34,7 +34,7 @@ public class MutantChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if(isPlayerToShieldAttack && enemy.currentCombo == 3)
+        if(isPlayerToShieldAttack && (enemy.currentCombo == 3 || (enemy.currentCombo == 1 && !mutant.isEquip)))
         {
             enemy.ResetCombo();
             stateMachine.ChangeState(mutant.SwingState);

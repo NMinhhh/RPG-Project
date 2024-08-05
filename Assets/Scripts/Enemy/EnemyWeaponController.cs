@@ -38,6 +38,28 @@ public class EnemyWeaponController : MonoBehaviour
         }
     }
 
+    public void ChangeRightWeapon(EnemyWeapon rightWeapon)
+    {
+        if(currentRightWeapon != null)
+        {
+            currentRightWeapon.gameObject.SetActive(false);
+            currentRightWeapon = null;
+        }
+        currentRightWeapon = rightWeapon;
+        currentRightWeapon.gameObject.SetActive(true);
+    }
+
+    public void ChangeLeftWeapon(EnemyWeapon leftWeapon)
+    {
+        if (currentLeftWeapon != null)
+        {
+            currentLeftWeapon.gameObject.SetActive(false);
+            currentLeftWeapon = null;
+        }
+        currentLeftWeapon = leftWeapon;
+        currentLeftWeapon.gameObject.SetActive(true);
+    }
+
     public void StartDealDamageToTheLeft() => currentLeftWeapon.StartDealDamage();
 
     public void EndDealDamageToTheLeft() => currentLeftWeapon.EndDealDamage();

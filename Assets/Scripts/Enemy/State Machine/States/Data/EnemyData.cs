@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="newData",menuName = "Enemy Data/Base Data",order = 0)]
+[CreateAssetMenu(fileName ="newData",menuName = "Enemy Data/Base Data",order = 1)]
 public class EnemyData : ScriptableObject
 {
     public string enemyName;

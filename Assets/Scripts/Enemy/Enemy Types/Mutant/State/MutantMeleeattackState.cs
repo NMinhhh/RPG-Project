@@ -35,14 +35,22 @@ public class MutantMeleeattackState : EnemyMeleeAttackState
         base.LogicUpdate();
         if (isFinishAnimation)
         {
-            if(enemy.currentCombo == 3 || !isPlayerToAttack)
+            if (mutant.isEquip)
+            {
+                if (enemy.currentCombo == 3 || !isPlayerToAttack)
+                {
+                    stateMachine.ChangeState(mutant.PlayerDetectedState);
+                }
+                else if (isPlayerToAttack)
+                {
+                    stateMachine.ChangeState(mutant.MeleeattackState);
+                }
+            }
+            else
             {
                 stateMachine.ChangeState(mutant.PlayerDetectedState);
             }
-            else if(isPlayerToAttack)
-            {
-                stateMachine.ChangeState(mutant.MeleeattackState);
-            }
+            
           
         }
     }

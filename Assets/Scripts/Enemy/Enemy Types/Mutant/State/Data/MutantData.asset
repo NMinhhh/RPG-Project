@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afdc73453c6a85a4aba6c0ff89e8a72f, type: 3}
   m_Name: MutantData
   m_EditorClassIdentifier: 
-  enemyName: 4000
+  enemyName: Mutant
   isBoss: 1
-  MaxHealthData: 5000
+  MaxHealthData: 1000
   radiusCheckToChase: 10
-  radiusCheckToAttack: 3.15
+  radiusCheckToAttack: 1.84
   radiusCheckToShieldAttack: 2.57
   whatIsWall:
     serializedVersion: 2
     m_Bits: 128
   maxCombo: 3
-  amountOfDamageToHurt: 10
+  amountOfDamageToHurt: 15
   isDash: 0
   dashCooldownRan: {x: 0, y: 0}
   isThrowWeapon: 0

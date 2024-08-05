@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
 
     #region Variable
 
-    [SerializeField] private bool isDrawGizmos;
+    public bool isDrawGizmos;
 
     public Transform playerPos { get; private set; }
 
@@ -56,6 +56,9 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
 
     protected int maxCombo;
     public int currentCombo {  get; private set; }
+
+    //Radius check attack
+    protected float radiusCheckToAttack;
 
     //Amount of damage to change hurt state
     protected int currentAODToHurt;
@@ -91,8 +94,12 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
         Agent = GetComponent<NavMeshAgent>();
         StateMachine = new EnemyStateMachine();
         WeaponsController = GetComponent<EnemyWeaponController>();
+        //Radius
+        radiusCheckToAttack = data.radiusCheckToAttack;
+        //Health
         maxHelth = data.MaxHealthData;
         currentHealth = maxHelth;
+        //combo
         maxCombo = data.maxCombo;
         currentAODToHurt = data.amountOfDamageToHurt;
         isFirstDamage = false;
@@ -210,7 +217,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
 
     public bool CheckPlayerToMeleeAttack()
     {
-        return Vector3.Distance(transform.position, playerPos.position) <= data.radiusCheckToAttack;
+        return Vector3.Distance(transform.position, playerPos.position) <= radiusCheckToAttack;
     }
 
     public bool CheckPlayerToShieldAttack()

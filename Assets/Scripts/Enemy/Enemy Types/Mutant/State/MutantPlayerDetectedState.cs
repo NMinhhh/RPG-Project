@@ -34,7 +34,7 @@ public class MutantPlayerDetectedState : EnemyPlayerDetectedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if(isDetectedOver && isPlayerToShieldAttack && enemy.currentCombo == 3)
+        if(isDetectedOver && isPlayerToShieldAttack && (enemy.currentCombo == 3 || (enemy.currentCombo == 1 && !mutant.isEquip)))
         {
             enemy.ResetCombo();
             stateMachine.ChangeState(mutant.SwingState);
