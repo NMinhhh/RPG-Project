@@ -51,7 +51,8 @@ public class Intro
         StartGameIntro,
         OrkIntro,
         DummyIntro,
-        NecromanserIntro
+        NecromanserIntro,
+        TeleIntro
     }
 
     public IntroName type;

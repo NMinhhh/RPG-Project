@@ -268,13 +268,14 @@ MonoBehaviour:
   objectName: Arrow
   damage: 20
   speed: 30
-  timeLife: 5
+  timeLife: 10
   hitEffect:
   - Blood Arrow Hit
   - Wood Hit
   layerEffectHit:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1280
+  offsetEffect: {x: 0, y: 0, z: 0}
 --- !u!54 &3376697300793901487
 Rigidbody:
   m_ObjectHideFlags: 0
