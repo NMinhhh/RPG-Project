@@ -6,6 +6,15 @@ using UnityEngine;
 public class Test : MonoBehaviour
 {
     [SerializeField] private float knockbackSpeed;
+    [SerializeField] protected Transform[] posShoot;
+    private void Start()
+    {
+        foreach (Transform pos in posShoot)
+        {
+            ObjectPool.Instance.SpawnFromPool("Arrow(Trap)", pos.position, pos.rotation);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

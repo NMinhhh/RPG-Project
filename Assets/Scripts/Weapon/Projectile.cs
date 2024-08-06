@@ -5,12 +5,20 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour, IPooledObject
 {
+    [Header("Name")]
+    [SerializeField] protected string objectName;
+
+    [Header("Info")]
     [SerializeField] protected float damage = 20f;
     [SerializeField] protected float speed = 10;
     [SerializeField] protected float timeLife = 5f;
+    protected float currentTimeLife;
+
+    [Header("Effect")]
     [SerializeField] protected List<string> hitEffect;
     [SerializeField] protected LayerMask layerEffectHit;
-    protected float currentTimeLife;
+    [SerializeField] protected Vector3 offsetEffect;
+
     protected virtual void Start()
     {
         currentTimeLife = timeLife;
@@ -23,7 +31,7 @@ public class Projectile : MonoBehaviour, IPooledObject
         currentTimeLife -= Time.deltaTime;
         if(currentTimeLife <= 0)
         {
-            ObjectPool.Instance.AddInPool("Arrow", this.gameObject);
+            ObjectPool.Instance.AddInPool(objectName, this.gameObject);
         }
     }
 
@@ -37,12 +45,12 @@ public class Projectile : MonoBehaviour, IPooledObject
             {
                 damageable.Damage(damage);
             }
-            ObjectPool.Instance.AddInPool("Arrow", this.gameObject);
+            ObjectPool.Instance.AddInPool(objectName, this.gameObject);
 
         }
     }
 
-    void SpawnHitEffect(Collider collider)
+    protected void SpawnHitEffect(Collider collider)
     {
         CollisionType collisionType = collider.GetComponent<CollisionType>();
         string hitEffect = "";
@@ -66,7 +74,7 @@ public class Projectile : MonoBehaviour, IPooledObject
         if(Physics.Raycast(transform.position, transform.forward,out RaycastHit hit, 10, layerEffectHit))
         {
             Vector3 direction = transform.position - hit.point;
-            ObjectPool.Instance.SpawnFromPool(hitEffect, hit.point, Quaternion.LookRotation(direction.normalized, Vector3.up)).transform.SetParent(collider.transform);
+            ObjectPool.Instance.SpawnFromPool(hitEffect, hit.point + offsetEffect, Quaternion.LookRotation(direction.normalized, Vector3.up)).transform.SetParent(collider.transform);
         }
     }
 
