@@ -77,7 +77,10 @@ public class ObjectPool : Singleton<ObjectPool>
     public void AddInPool(string name, GameObject objectPool)
     {
         if (!poolDictionary.ContainsKey(name))
+        {
+            Debug.Log(name);
             return;
+        }
         objectPool.SetActive(false);
         objectPool.transform.SetParent(GetPool(name).objectHolder);
         poolDictionary[name].Enqueue(objectPool);

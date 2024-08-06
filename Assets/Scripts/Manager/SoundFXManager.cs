@@ -38,13 +38,14 @@ public class SoundFXManager : Singleton<SoundFXManager>
     }
 
 
-    public void PlaySound(Sound sound, Vector3 pos, float value = 1)
+    public void PlaySound(Sound sound, Vector3 pos, float volume = 1)
     {
         if(sound == null) return;
         if (CanPlayerSound(sound.soundName))
         {
             AudioSource soundS = ObjectPool.Instance.SpawnFromPool("Sound", pos, Quaternion.identity).GetComponent<AudioSource>();
-            soundS.PlayOneShot(sound.clip, value);
+            soundS.volume = volume;
+            soundS.PlayOneShot(sound.clip, volume);
         }
    
     }

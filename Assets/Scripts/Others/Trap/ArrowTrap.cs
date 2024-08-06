@@ -6,11 +6,10 @@ public class ArrowTrap : MonoBehaviour
 {
     [Header("Shoot Pos")]
     [SerializeField] private Transform[] shootPos;
+    [SerializeField] private Transform arrowHolder;
     [Header("Delay")]
     [SerializeField] protected float startTimeDelay;
     [SerializeField] private float delayTime;
-    [Header("Target Direction")]
-    [SerializeField] protected Transform target;
 
     void Start()
     {
@@ -21,8 +20,8 @@ public class ArrowTrap : MonoBehaviour
     {
         foreach (Transform pos in shootPos)
         {
-            Vector3 direction = (new Vector3(target.position.x,pos.position.y,pos.position.z) - pos.position).normalized;
-            ObjectPool.Instance.SpawnFromPool("Arrow(Trap)", pos.position, Quaternion.LookRotation(direction, Vector3.up));
+            ObjectPool.Instance.SpawnFromPool("Arrow(Trap)", pos.position, transform.rotation).transform.SetParent(arrowHolder);
+
         }
         Invoke(nameof(Shoot), delayTime);
     }
