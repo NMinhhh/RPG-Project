@@ -72,7 +72,7 @@ public class InventorySystem : Singleton<InventorySystem>
             return;
         }
         Transform slotAvailable = GetAvailableSlot().transform;
-        GameObject item = Instantiate(Resources.Load<GameObject>("Item/Item"), slotAvailable.position, slotAvailable.rotation);
+        GameObject item = ObjectPool.Instance.SpawnFromPool("Item UI", slotAvailable.position, slotAvailable.rotation);
         InventoryItem inventoryItem = item.GetComponent<InventoryItem>();
         inventoryItem.SetItemData(itemData);
         inventoryItem.SetSelectedItem(OnItemSelected);
