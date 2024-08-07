@@ -537,7 +537,11 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'mixamorig:Spine1'\n\tTransform 'mixamorig:Spine'\n\tTransform
+    'mixamorig:Spine1'\n\tTransform 'mixamorig:Spine'\n\tTransform 'mixamorig:Spine1'\n\tTransform
+    'mixamorig:Spine'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -1158,7 +1162,7 @@ CharacterController:
   m_StepOffset: 0.2
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0.09, y: 0.87, z: 0.08}
+  m_Center: {x: 0.03, y: 0.87, z: 0.08}
 --- !u!114 &1421620520287085970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1249,7 +1253,7 @@ MonoBehaviour:
   crossHairOnTarget: {fileID: 0}
   whatIsTarget:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 1408
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
@@ -1268,10 +1272,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 192e154b62c9b10419b8993703248719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactUI: {fileID: 0}
   radiusInteracted: 1.3
   whatIsInteract:
     serializedVersion: 2
     m_Bits: 512
+  isDrawGizmos: 0
 --- !u!114 &5034313641803396533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,11 +1290,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47906b2cadaf5584c86fbc73f14916f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDrawGizmos: 0
   radius: 7
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
-  closesTarget: {fileID: 0}
   whatIsBlock:
     serializedVersion: 2
     m_Bits: 0
@@ -2140,7 +2146,7 @@ Transform:
   m_GameObject: {fileID: 3572947558967483297}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.03, y: 0, z: 0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

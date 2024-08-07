@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    [SerializeField] private GameObject interactUI;
     [SerializeField] private float radiusInteracted;
     [SerializeField] private LayerMask whatIsInteract;
+    [Header("Gizmos")]
+    [SerializeField] private bool isDrawGizmos;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,14 +18,21 @@ public class PlayerInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (CheckToInteract() && Input.GetKeyDown(KeyCode.F))
+        if (CheckToInteract())
         {
-            IInteracable interacable = GetObj()[0].gameObject.GetComponent<IInteracable>();
-            if(interacable != null)
+            interactUI.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.F))
             {
-                interacable.Interact();
+                IInteracable interacable = GetObj()[0].gameObject.GetComponent<IInteracable>();
+                if (interacable != null)
+                {
+                    interacable.Interact();
+                }
             }
+        }
+        else
+        {
+            interactUI.SetActive(false);
         }
     }
 
@@ -38,6 +48,9 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawWireSphere(transform.position, radiusInteracted);
+        if (isDrawGizmos)
+        {
+            Gizmos.DrawWireSphere(transform.position, radiusInteracted);
+        }
     }
 }
