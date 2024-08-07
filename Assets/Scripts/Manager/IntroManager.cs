@@ -52,7 +52,8 @@ public class Intro
         OrkIntro,
         DummyIntro,
         NecromanserIntro,
-        TeleIntro
+        TeleIntro,
+        MutantIntro
     }
 
     public IntroName type;

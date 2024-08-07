@@ -9827,13 +9827,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded5dbbd999dcdb41b9fdcb0367aedf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectName: 
   damage: 20
   speed: 10
   timeLife: 5
-  hitEffect: []
+  hitEffect:
+  - Blood Hit
   layerEffectHit:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
+  offsetEffect: {x: 0, y: 0, z: 0}
 --- !u!136 &7740508219725448907
 CapsuleCollider:
   m_ObjectHideFlags: 0

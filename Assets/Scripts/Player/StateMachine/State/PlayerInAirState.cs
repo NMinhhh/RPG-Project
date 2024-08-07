@@ -12,11 +12,13 @@ public class PlayerInAirState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        player.character.center += data.centerOffset;
     }
 
     public override void Exit()
     {
         base.Exit();
+        player.character.center -= data.centerOffset;
     }
 
     public override void HandleInput()

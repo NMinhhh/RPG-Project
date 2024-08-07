@@ -14651,7 +14651,9 @@ MonoBehaviour:
   damage: 20
   speed: 10
   timeLife: 3
-  hitEffect: []
+  hitEffect:
+  - Blood Hit
   layerEffectHit:
     serializedVersion: 2
     m_Bits: 2048
+  offsetEffect: {x: 0, y: 0, z: 0}

@@ -8,14 +8,19 @@ public class CanvasManager : Singleton<CanvasManager>
     
     void Start()
     {
-        //CursorUnLock();
-        //InputManager.instance.CanNotGetInput();
-        //foreach (UIObject UIObj in uIObjects)
-        //{
-        //    UIObj.obj.SetActive(false);
-        //    if (UIObj.name == UIObject.UIName.MenuGame)
-        //        UIObj.obj.SetActive(true);
-        //}
+       //Initialize();
+    }
+
+    void Initialize()
+    {
+        CursorUnLock();
+        InputManager.instance.CanNotGetInput();
+        foreach (UIObject UIObj in uIObjects)
+        {
+            UIObj.obj.SetActive(false);
+            if (UIObj.name == UIObject.UIName.MenuGame)
+                UIObj.obj.SetActive(true);
+        }
     }
 
     public void LoadUIGamePlay()

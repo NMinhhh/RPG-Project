@@ -168,7 +168,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
         isHurt = false;
         currentAODToHurt--;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHelth);
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Damage Hit"), transform.position, .5f);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Damage Hit"), transform.position);
         if (isBoss)
         {
             BossStats.Instance.SetDamage(damage);

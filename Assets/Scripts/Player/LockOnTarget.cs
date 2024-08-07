@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class LockOnTarget : MonoBehaviour
 {
+    [Header("Gizmos")]
+    [SerializeField] private bool isDrawGizmos;
+    [Space]
+    [Space]
     [SerializeField] private float radius;
     [SerializeField] private LayerMask whatIsEnemy;
-    [SerializeField] private GameObject closesTarget;
     [SerializeField] private LayerMask whatIsBlock;
+    private GameObject closesTarget;
     private float minDistance = 1000;
     private float currentMinDistance;
 
@@ -46,7 +50,6 @@ public class LockOnTarget : MonoBehaviour
     public void GetTargetInRange()
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, radius, whatIsEnemy);
-        currentMinDistance = minDistance;
         if (cols.Length > 0)
         {
             foreach (var col in cols)
@@ -67,6 +70,7 @@ public class LockOnTarget : MonoBehaviour
                 closesTarget = null;
                 player.lockOn = false;
                 currentMinDistance = minDistance;
+
             }
             else
             {
@@ -80,6 +84,7 @@ public class LockOnTarget : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //Gizmos.DrawWireSphere(transform.position, radius);
+        if(isDrawGizmos)
+            Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

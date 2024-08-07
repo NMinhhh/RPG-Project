@@ -18,7 +18,7 @@ public class GroundBrokenTrap : MonoBehaviour
     void Broken()
     {
         gameObject.SetActive(false);
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("GroundBroken"), transform.position, 0.5f);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("GroundBroken"), transform.position);
         ObjectPool.Instance.SpawnFromPool("GroundBroken", transform.position, transform.rotation);
     }
 }

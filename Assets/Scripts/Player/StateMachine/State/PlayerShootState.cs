@@ -18,7 +18,7 @@ public class PlayerShootState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Shoot Arrow"), player.transform.position, .5f);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Shoot Arrow"), player.transform.position);
         player.thirdPersonAim.Aim();
         direction = (player.thirdPersonAim.mousePos - shootPoint.position).normalized;
     }

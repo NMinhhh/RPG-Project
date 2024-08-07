@@ -21,10 +21,20 @@ public class SoundFXManager : Singleton<SoundFXManager>
 
     private Dictionary<string, float> soundDictionary;
 
+    [SerializeField] private string textSound;
+
     private void Start()
     {
         soundDictionary = new Dictionary<string, float>();
         soundDictionary["Player Step"] = 0f;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            PlaySound(GetSound(textSound),transform.position);
+        }
     }
 
     public void SetMusicVolume(float volume)
@@ -38,14 +48,14 @@ public class SoundFXManager : Singleton<SoundFXManager>
     }
 
 
-    public void PlaySound(Sound sound, Vector3 pos, float volume = 1)
+    public void PlaySound(Sound sound, Vector3 pos)
     {
         if(sound == null) return;
         if (CanPlayerSound(sound.soundName))
         {
             AudioSource soundS = ObjectPool.Instance.SpawnFromPool("Sound", pos, Quaternion.identity).GetComponent<AudioSource>();
-            soundS.volume = volume;
-            soundS.PlayOneShot(sound.clip, volume);
+            soundS.volume = sound.volume;
+            soundS.PlayOneShot(sound.clip);
         }
    
     }
@@ -99,4 +109,6 @@ public class Sound
 {
     public string soundName;
     public AudioClip clip;
+    [Range(0, 1)]
+    public float volume = .5f;
 }

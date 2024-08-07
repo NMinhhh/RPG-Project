@@ -12,7 +12,7 @@ public class TaskManager : Singleton<TaskManager>
 
     private void Start()
     {
-        GetMainTask().InitializeTaskStep(0);
+        //GetMainTask().InitializeTaskStep(0);
     }
 
     public void Initialize(int currentId)

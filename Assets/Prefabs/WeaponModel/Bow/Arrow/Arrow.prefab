@@ -268,7 +268,7 @@ MonoBehaviour:
   objectName: Arrow
   damage: 20
   speed: 30
-  timeLife: 10
+  timeLife: 15
   hitEffect:
   - Blood Arrow Hit
   - Wood Hit

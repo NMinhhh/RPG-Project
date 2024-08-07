@@ -159,7 +159,7 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
     public void Healing(float health)
     {
         healingParticle.Play();
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Healing"), transform.position, .5f);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Healing"), transform.position);
         currentHealth = Mathf.Clamp(currentHealth + health, 0, data.maxHealth);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
     }

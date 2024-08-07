@@ -18,6 +18,7 @@ public class PlayerData : ScriptableObject
     public float gravity = -9.81f * 2;
     public float jumpSpeed = 10f; 
     public float jumpHeight = 2f;
+    public Vector3 centerOffset;
 
     [Header("Check ground")]
     public float radius;
