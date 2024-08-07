@@ -12,5 +12,6 @@ public class EnemySpawnObjectsData : ScriptableObject
     public float spawnDelayTime = .5f;
     public float prepTime;
     public float offsetY = 1f;
+    public string spawmObjectName;
     public GameObject spawnObject;
 }

@@ -41,7 +41,7 @@ public class NecromanserSpawnSkillState : EnemySpawnObjectsState
             {
                 Vector3 point = spawnPoints[Random.Range(0, spawnPoints.Length)].position;
                 Vector3 direction = (new Vector3(enemy.playerPos.position.x, enemy.playerPos.position.y + data.offsetY, enemy.playerPos.position.z) - point).normalized;
-                go = GameObject.Instantiate(data.spawnObject, point, Quaternion.LookRotation(direction,Vector3.up));
+                go = ObjectPool.Instance.SpawnFromPool(data.spawmObjectName, point, Quaternion.LookRotation(direction, Vector3.up));
                 projectile = go.GetComponent<EnemyProjectile>();
                 projectile.CreateProjectile(data.damage, data.speed, data.timeLife);
                 amountOfObject--;

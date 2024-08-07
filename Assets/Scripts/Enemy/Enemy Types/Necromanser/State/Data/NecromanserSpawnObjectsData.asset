@@ -19,4 +19,5 @@ MonoBehaviour:
   spawnDelayTime: 0.5
   prepTime: 2
   offsetY: 1
+  spawmObjectName: Necromanser Projectile
   spawnObject: {fileID: 6721096272149411946, guid: f01bfa9f705086744b1890725cacb5d6, type: 3}
