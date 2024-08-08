@@ -94,9 +94,8 @@ GameObject:
   - component: {fileID: 6486038235761927244}
   - component: {fileID: 8401044017286229133}
   - component: {fileID: 3084465179722365740}
-  - component: {fileID: 5588590987005713314}
-  - component: {fileID: 8954110182329860207}
   - component: {fileID: 2378898055052911972}
+  - component: {fileID: 8954110182329860207}
   m_Layer: 9
   m_Name: Chest
   m_TagString: Untagged
@@ -114,7 +113,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 159.437, y: 1.5621667, z: -43.052}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5593639017414862105}
@@ -172,27 +171,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &5588590987005713314
-Animator:
-  serializedVersion: 5
+--- !u!65 &2378898055052911972
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2449082490810652023}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f8756125400ecfe4285f16e45f48986d, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  serializedVersion: 3
+  m_Size: {x: 0.7557513, y: 1.9422925, z: 0.48718664}
+  m_Center: {x: -0.36537567, y: 0.9711462, z: 0.23109333}
 --- !u!114 &8954110182329860207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,28 +217,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 97b9835b30eaf404cad50addafa9ee80, type: 2}
   - {fileID: 11400000, guid: 2887f8b52959da14b988dcc66b747160, type: 2}
   - {fileID: 11400000, guid: aa45307d8b8db2642be58336f4ef1b4c, type: 2}
-  isOpen: 0
---- !u!65 &2378898055052911972
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2449082490810652023}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.7557513, y: 1.9422925, z: 0.48718664}
-  m_Center: {x: -0.36537567, y: 0.9711462, z: 0.23109333}
+  chestTopObj: {fileID: 2042675640955120804}
+  openTime: 0.8
+  lootItemDelayTime: 0.4
 --- !u!1 &4607737549501705930
 GameObject:
   m_ObjectHideFlags: 0

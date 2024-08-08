@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour, IInteracable
 {
+    [Header("list Item in chest")]
     [SerializeField] private List<ItemData> itemList;
-
-    private Animator anim;
+    [Header("Chest Top")]
+    [SerializeField] private GameObject chestTopObj;
+    [SerializeField] private float openTime;
+    [SerializeField] private float lootItemDelayTime;
 
     private BoxCollider boxCollider;
 
-    public bool isOpen;
+    public bool isOpen { get; private set; }
 
     public void Interact()
     {
         boxCollider.enabled = false;
-        anim.SetTrigger("Open");
+        LeanTween.rotateX(chestTopObj, -90, openTime);
+        LeanTween.delayedCall(lootItemDelayTime, LootItem);
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Open Chest"), transform.position);
     }
 
-    void TriggerAnimation()
+    void LootItem()
     {
         isOpen = true;
         foreach (ItemData item in itemList)
@@ -43,7 +47,6 @@ public class Chest : MonoBehaviour, IInteracable
 
     void Start()
     {
-        anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider>();
     }
 
