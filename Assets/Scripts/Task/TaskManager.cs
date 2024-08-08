@@ -18,6 +18,7 @@ public class TaskManager : Singleton<TaskManager>
     public void Initialize(int currentId)
     {
         currentTask = currentId;
+        SaveManager.Instance.SaveTask(currentTask);
     }
 
     public MainTask GetMainTask()
@@ -31,6 +32,10 @@ public class TaskManager : Singleton<TaskManager>
         if (currentTask == mainTaskList.Count)
         {
             isFinishAllTask = true;
+        }
+        else
+        {
+            SaveManager.Instance.SaveTask(currentTask);
         }
     }
 

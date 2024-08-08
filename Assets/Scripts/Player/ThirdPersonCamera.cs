@@ -36,11 +36,13 @@ public class ThirdPersonCamera : MonoBehaviour
     private void OnEnable()
     {
         ControlsUI.setSensetivity += SetSensetivity;
+        SaveManager.loadSensetivity += SetSensetivity;
     }
 
     private void OnDisable()
     {
         ControlsUI.setSensetivity -= SetSensetivity;
+        SaveManager.loadSensetivity -= SetSensetivity;
     }
 
     private void LateUpdate()

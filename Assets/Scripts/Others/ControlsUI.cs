@@ -20,10 +20,14 @@ public class ControlsUI : MonoBehaviour
         GenerateControlUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        SaveManager.loadSensetivity += SetSensitivity;
+    }
+
+    private void OnDisable()
+    {
+        SaveManager.loadSensetivity += SetSensitivity;
     }
 
     void GenerateControlUI()
@@ -41,6 +45,7 @@ public class ControlsUI : MonoBehaviour
     {
         sensetivity.value = sensitivity;
         setSensetivity?.Invoke(sensitivity * 100);
+        SaveManager.Instance.SaveSensetivity(sensitivity);
     }
 }
 

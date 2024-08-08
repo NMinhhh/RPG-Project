@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class SaveSystem 
 {
-    public static string SaveFolder = Application.persistentDataPath + "/Save/";
+    public static readonly string SaveFolder = Application.persistentDataPath + "/Saves/";
     public static void Initilize()
     {
         if (!Directory.Exists(SaveFolder))

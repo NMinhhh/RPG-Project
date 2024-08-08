@@ -37,14 +37,17 @@ public class SoundFXManager : Singleton<SoundFXManager>
         }
     }
 
+
     public void SetMusicVolume(float volume)
     {
         audioMixer.SetFloat("MusicVolume", Mathf.Log10(volume) * 20);
+        SaveManager.Instance.SaveMusicVolume(volume);
     }
 
     public void SetSoundVolume(float volume)
     {
         audioMixer.SetFloat("SoundVolume", Mathf.Log10(volume) * 20);
+        SaveManager.instance.SaveSoundVolume(volume);
     }
 
 

@@ -17,7 +17,16 @@ public class MenuGameManager : Singleton<MenuGameManager>
     // Start is called before the first frame update
     void Start()
     {
-        menuPlay.SetActive(false);
+        if (SaveSystem.LoadFile(SaveManager.instance.GetFileName()) != null)
+        {
+            menuIdle.SetActive(false);
+            menuPlay.SetActive(true);
+        }
+        else
+        {
+            menuPlay.SetActive(false);
+            menuIdle.SetActive(true);
+        }
         isOpen = true;
     }
 
@@ -67,6 +76,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
         Time.timeScale = 1;
         SoundFXManager.instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
         isOpen = false;
+        vcam.SetActive(false);
         CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGame);
         CanvasManager.Instance.CloseUI(UIObject.UIName.Settings);
         CanvasManager.Instance.CursorLock();
