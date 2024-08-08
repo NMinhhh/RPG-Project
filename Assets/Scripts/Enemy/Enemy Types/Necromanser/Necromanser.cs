@@ -62,14 +62,16 @@ public class Necromanser : Enemy
     public override void Damage(float damage)
     {
         base.Damage(damage);
-        if(isHurt && StateMachine.CurrentEnemyState != HurtState && StateMachine.CurrentEnemyState != ThrowWeaponState && StateMachine.CurrentEnemyState != SpawnSkillState)
-        {
-            StateMachine.ChangeState(HurtState);
-        }
         if (isDie)
         {
             StateMachine.ChangeState(DeathState);
+            return;
         }
+        if (isHurt && StateMachine.CurrentEnemyState != HurtState && StateMachine.CurrentEnemyState != ThrowWeaponState && StateMachine.CurrentEnemyState != SpawnSkillState)
+        {
+            StateMachine.ChangeState(HurtState);
+        }
+        
     }
 
     public override void Die()

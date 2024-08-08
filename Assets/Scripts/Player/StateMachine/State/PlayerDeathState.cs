@@ -11,6 +11,7 @@ public class PlayerDeathState : PlayerState
     public override void Enter()
     {
         base.Enter();
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Player Hurt"), player.transform.position);
     }
 
     public override void Exit()

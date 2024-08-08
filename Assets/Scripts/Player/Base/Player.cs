@@ -38,6 +38,8 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
 
     public PlayerShootState ShootState { get; private set; }
 
+    public PlayerDeathState DeathState {  get; private set; } 
+
     #endregion
 
     #region Component Variable
@@ -76,6 +78,8 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
     //Health
     private float currentHealth;
     private Vector3 damageDirection;
+    private bool isHurt;
+    private bool isDie;
 
     //Stamina
     private float currentStamina;
@@ -116,6 +120,7 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
         HurtState = new PlayerHurtState(this, StateMachine, data, "Hurt");
         AimState = new PlayerAimState(this, StateMachine, data, "Aim");
         ShootState = new PlayerShootState(this, StateMachine, data, "Shoot", shootPoint);
+        DeathState = new PlayerDeathState(this, StateMachine, data, "Death");
     }
 
     // Start is called before the first frame update
@@ -166,22 +171,32 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
 
     public void Damage(float damage)
     {
-        if (isParry) return;
+        if (isParry || isDie) return;
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, data.maxHealth);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
-        if(currentHealth > 0 && StateMachine.currentState != HurtState && StateMachine.currentState != StrongAttack && StateMachine.currentState != ShootState)
+        if (currentHealth > 0)
         {
-            StateMachine.ChangeState(HurtState);
+            isHurt = true;
         }
-        if (currentHealth < 0)
+        else
+        {
+            isDie = true;
+        }
+        if (isDie)
         {
             Die();
         }
+        if(isHurt && StateMachine.currentState != HurtState && StateMachine.currentState != StrongAttack && StateMachine.currentState != ShootState)
+        {
+            StateMachine.ChangeState(HurtState);
+
+        }
+        
     }
 
     public void Die()
     {
-
+        StateMachine.ChangeState(DeathState);
     }
 
     #endregion

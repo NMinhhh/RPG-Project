@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 6500000}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StoneFence_Post_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,5 +104,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.793978, y: 2.3642044, z: 0.8096838}
-  m_Center: {x: 0, y: 1.1821022, z: 0.000000014901161}
+  m_Size: {x: 0.793978, y: 4.5135517, z: 0.8096838}
+  m_Center: {x: -1.009742e-28, y: 2.2567759, z: 0.000000029802322}
