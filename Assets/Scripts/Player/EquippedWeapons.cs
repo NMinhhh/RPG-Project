@@ -8,10 +8,14 @@ public class EquippedWeapons : MonoBehaviour
     [SerializeField] private string soundName;
 
     [Header("Info")]
+    [Header("Critical Rate")]
+    [SerializeField] private float criticalRate;
+    [Header("Damage")]
     [SerializeField] private float damage;
+    [Header("Strong Damage Percent")]
+    [SerializeField] private float strongDamagePercent = 50f;
     [SerializeField] private LayerMask whatIsEnemy;
     [SerializeField] private BoxCollider box;
-    [SerializeField] private float percentStrongDamage = 50f;
     [Header("Slash Effect")]
     [SerializeField] private string[] slashEffectName;
 
@@ -51,10 +55,10 @@ public class EquippedWeapons : MonoBehaviour
                         {
                             knockBackable.DamageDiretion(dir);
                         }
-
-                        float currentDamage = (isStrongAttack ? damage + damage * percentStrongDamage / 100 : damage);
-
-                        damagaeble.Damage(currentDamage);
+                        //Get normal damage or strong damage
+                        float currentDamage = (isStrongAttack ? damage + damage * strongDamagePercent / 100 : damage);
+                        //Get critical damage or current damage
+                        damagaeble.Damage(CriticalHitManager.Instance.GetFinalDamage(currentDamage, criticalRate));
                     }
                     //Spawn Blood
                     Vector3 spawnPos = hit.transform.position;
@@ -73,9 +77,10 @@ public class EquippedWeapons : MonoBehaviour
         isStrongAttack = true;
     }
 
-    public void SetDamage(float damage)
+    public void InitializeWeapon(float damage, float criticalRate)
     {
         this.damage = damage;
+        this.criticalRate = criticalRate;
     }
 
     public void StartDealDamage()

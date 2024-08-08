@@ -18,6 +18,7 @@ MonoBehaviour:
   itemType: 0
   attackType: 2
   damage: 20
+  criticalRate: 30
   isRightHand: 1
   isLeftHand: 1
   modelRightHand: {fileID: 3265568171121243950, guid: 1d1300b0d12c4564c8c0fb95f4e09bbe, type: 3}

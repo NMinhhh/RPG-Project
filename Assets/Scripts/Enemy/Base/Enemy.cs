@@ -340,7 +340,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
 
     #endregion
 
-    #region Spawn Objects
+    #region Spawn Objects Pool
     public virtual void OnObjectSpawn()
     {
         transform.localPosition = Vector3.zero;

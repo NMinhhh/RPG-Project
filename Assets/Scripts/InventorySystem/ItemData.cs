@@ -19,6 +19,8 @@ public class ItemData : ScriptableObject
     [Header("Weapon Data")]
     public TypeAnimator.AttackType attackType;
     public float damage;
+    [Range(0,100)]
+    public float criticalRate;
     public bool isRightHand;
     public bool isLeftHand;
     public GameObject modelRightHand;

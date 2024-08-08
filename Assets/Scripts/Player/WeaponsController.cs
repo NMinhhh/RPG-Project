@@ -81,7 +81,7 @@ public class WeaponsController : MonoBehaviour
     {
         EquippedWeapons weapons = weaponData.modelLeftHand.GetComponent<EquippedWeapons>();
         currentLeftWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;
-        currentLeftWeapons.SetDamage(weaponData.damage);
+        currentLeftWeapons.InitializeWeapon(weaponData.damage, weaponData.criticalRate);
         currentLeftWeapons.transform.SetParent(leftWeaponsHolder.transform, false);
 
     }
@@ -91,7 +91,7 @@ public class WeaponsController : MonoBehaviour
     {
         EquippedWeapons weapons = weaponData.modelRightHand.GetComponent<EquippedWeapons>();
         currentRightWeapons = Instantiate(weapons, weapons.transform.localPosition, weapons.transform.rotation) as EquippedWeapons;
-        currentRightWeapons.SetDamage(weaponData.damage);
+        currentRightWeapons.InitializeWeapon(weaponData.damage, weaponData.criticalRate);
         currentRightWeapons.transform.SetParent(rightWeaponsHolder.transform, false);
 
     }
