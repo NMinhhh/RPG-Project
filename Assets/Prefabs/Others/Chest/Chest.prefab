@@ -204,19 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5324af7fabba14087cc053dcbf88c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemList:
-  - {fileID: 11400000, guid: ab1995861f77a8d46b4f803b27defce6, type: 2}
-  - {fileID: 11400000, guid: 284984542e3f4f14aac23dc0fda609e6, type: 2}
-  - {fileID: 11400000, guid: 7fab3adba29d6394aa922b82f4337332, type: 2}
-  - {fileID: 11400000, guid: 68c32d3318ace16449123e11b1f4dd53, type: 2}
-  - {fileID: 11400000, guid: 2240bb1f62aec9144a1e2e37483a077f, type: 2}
-  - {fileID: 11400000, guid: 93a8f246e7589c3468c9355e1a520550, type: 2}
-  - {fileID: 11400000, guid: 924b2abce7de7274e86f1971202bfef7, type: 2}
-  - {fileID: 11400000, guid: 937020544aaec4a47b284f14282c6503, type: 2}
-  - {fileID: 11400000, guid: 84c2e837825fb8e4687e7cea611ac591, type: 2}
-  - {fileID: 11400000, guid: 97b9835b30eaf404cad50addafa9ee80, type: 2}
-  - {fileID: 11400000, guid: 2887f8b52959da14b988dcc66b747160, type: 2}
-  - {fileID: 11400000, guid: aa45307d8b8db2642be58336f4ef1b4c, type: 2}
+  itemList: []
   chestTopObj: {fileID: 2042675640955120804}
   openTime: 0.8
   lootItemDelayTime: 0.4

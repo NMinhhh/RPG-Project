@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Necromanser
   isBoss: 1
-  MaxHealthData: 2500
+  MaxHealthData: 24512
   radiusCheckToChase: 14.51
   radiusCheckToAttack: 1.7
+  radiusCheckToShieldAttack: 0
   whatIsWall:
     serializedVersion: 2
     m_Bits: 0

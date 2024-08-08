@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Skeleton Sword
   isBoss: 0
-  MaxHealthData: 120
+  MaxHealthData: 774
   radiusCheckToChase: 30
   radiusCheckToAttack: 1.6
+  radiusCheckToShieldAttack: 0
   whatIsWall:
     serializedVersion: 2
     m_Bits: 128

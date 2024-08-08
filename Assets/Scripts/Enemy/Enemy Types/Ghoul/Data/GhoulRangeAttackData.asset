@@ -16,3 +16,4 @@ MonoBehaviour:
   speed: 25
   timeLife: 3
   offsetY: 1
+  spawnObjectName: Ghoul Projectile

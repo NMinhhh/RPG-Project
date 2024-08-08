@@ -5,10 +5,9 @@ using UnityEngine;
 public class CanvasManager : Singleton<CanvasManager> 
 {
     [SerializeField] private List<UIObject> uIObjects;
-    
     void Start()
     {
-       //Initialize();
+        //Initialize();
     }
 
     void Initialize()

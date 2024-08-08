@@ -100,6 +100,7 @@ public class SoundFXManager : Singleton<SoundFXManager>
         {
             if(sound.soundName == soundName) return sound;
         }
+        Debug.Log("Don't have " + soundName);
         return null;
     }
 }

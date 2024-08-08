@@ -14647,7 +14647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded5dbbd999dcdb41b9fdcb0367aedf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectName: GhoulProjectile
+  objectName: Ghoul Projectile
   damage: 20
   speed: 10
   timeLife: 3

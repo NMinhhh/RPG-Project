@@ -17,7 +17,8 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 4641191615e28f041abe05a5dbe54b2f, type: 3}
   itemType: 0
   attackType: 3
-  damage: 25
+  damage: 127
+  criticalRate: 25
   isRightHand: 1
   isLeftHand: 0
   modelRightHand: {fileID: 3716356697886013828, guid: 092305b360809304db49334b11cf1668, type: 3}
