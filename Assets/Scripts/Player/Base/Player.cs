@@ -184,7 +184,7 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
         }
         if (isDie)
         {
-            Die();
+            StateMachine.ChangeState(DeathState);
         }
         if(isHurt && StateMachine.currentState != HurtState && StateMachine.currentState != StrongAttack && StateMachine.currentState != ShootState)
         {
@@ -196,7 +196,20 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
 
     public void Die()
     {
-        StateMachine.ChangeState(DeathState);
+        SceneManager.Instance.LoadSceneRespawn(Respawn);
+    }
+
+    public void Respawn()
+    {
+        GameManager.Instance.RespawnPlayer(this);
+        currentHealth = data.maxHealth;
+        currentComboAttack = 0;
+        isDie = false;
+        isHurt = false;
+        PlayerStats.Instance.SetStamina(currentStamina, currentStamina);
+        PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
+        if (StateMachine != null)
+            StateMachine.ChangeState(IdleState);
     }
 
     #endregion

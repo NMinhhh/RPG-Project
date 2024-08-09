@@ -15,12 +15,13 @@ public class SaveManager : Singleton<SaveManager>
     void Start()
     {
         SaveSystem.Initilize();
-        LoadGame();
+        //LoadGame();
+        LoadSettingData();
     }
 
     private void OnApplicationQuit()
     {
-        SaveGame();
+        //SaveGame();
     }
 
     public string GetFileName()
@@ -84,12 +85,24 @@ public class SaveManager : Singleton<SaveManager>
     public void LoadGame()
     {
         isLoading = true;
-        StartCoroutine(LoadData());
+        StartCoroutine(LoadGameData());
     }
 
-    IEnumerator LoadData() 
+    IEnumerator LoadGameData() 
     { 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0);
+        if (this.saveData != null)
+        {
+            LoadTask(saveData);
+            LoadChestOpenObj(saveData);
+            LoadItem(saveData);
+            LoadItemEquipped(saveData);
+        }
+        isLoading = false;
+    }
+
+    public void LoadSettingData()
+    {
         string jsonString = SaveSystem.LoadFile(this.save);
         this.saveData = JsonUtility.FromJson<SaveData>(jsonString);
 
@@ -97,12 +110,7 @@ public class SaveManager : Singleton<SaveManager>
         {
             LoadVolume(saveData);
             LoadSensetivity(saveData);
-            LoadTask(saveData);
-            LoadChestOpenObj(saveData);
-            LoadItem(saveData);
-            LoadItemEquipped(saveData);
         }
-        isLoading = false;
     }
 
     public void LoadVolume(SaveData saveData)

@@ -6,8 +6,8 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private List<Chest> chestList;
     [SerializeField] private List<ItemData> dataList;
+    [SerializeField] private List<Transform> respawnPoint;
     public bool isLoss {  get; private set; }
-
 
 
     // Start is called before the first frame update
@@ -21,6 +21,15 @@ public class GameManager : Singleton<GameManager>
     {
         
     }
+
+
+
+    public void RespawnPlayer(Player player)
+    {
+        player.gameObject.transform.position = respawnPoint[TaskManager.Instance.currentTask - 1].position;
+    }
+
+
     public Chest GetChest(int id)
     {
         foreach (Chest chest in chestList)

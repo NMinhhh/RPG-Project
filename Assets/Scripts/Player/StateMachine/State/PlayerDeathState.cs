@@ -32,6 +32,11 @@ public class PlayerDeathState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (isFinishAnimtion)
+        {
+            isFinishAnimtion = false;
+            player.Die();
+        }
 
     }
 

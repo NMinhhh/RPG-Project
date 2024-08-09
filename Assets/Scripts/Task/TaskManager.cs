@@ -6,7 +6,7 @@ public class TaskManager : Singleton<TaskManager>
 {
     [SerializeField] private List<MainTask> mainTaskList;
 
-    [SerializeField] private int currentTask;
+    [SerializeField] public int currentTask {  get; private set; }
 
     private bool isFinishAllTask;
 

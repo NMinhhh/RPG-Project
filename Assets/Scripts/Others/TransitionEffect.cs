@@ -37,6 +37,7 @@ public class TransitionEffect : MonoBehaviour
         {
             image.color = Color.Lerp(new Color(0, 0, 0, 1), new Color(0, 0, 0, 0), value);
         });
+        Invoke(nameof(ImageDisable), transTimer);
     }
 
     public void ImageDisable()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UIObject;
 
 public class MenuGameManager : Singleton<MenuGameManager>
@@ -59,11 +60,20 @@ public class MenuGameManager : Singleton<MenuGameManager>
         }
     }
 
+    public void SetCameraHome(bool state)
+    {
+        vcam.SetActive(state);
+    }
+
+    public void OnButtonStartNewGame()
+    {
+        SceneManager.Instance.LoadScene(StartNewGame);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
+    }
+
     public void StartNewGame()
     {
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
         isOpen = false;
-        vcam.SetActive(false);
         menuPlay.SetActive(true);
         menuIdle.SetActive(false);
         CanvasManager.Instance.LoadUIGamePlay();
@@ -71,12 +81,16 @@ public class MenuGameManager : Singleton<MenuGameManager>
         TaskManager.Instance.GetMainTask().InitializeTaskStep(0);
     }
 
+    public void OnButtonContinue()
+    {
+        SceneManager.Instance.LoadScene(Continue);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
+    }
+
     public void Continue()
     {
         Time.timeScale = 1;
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
         isOpen = false;
-        vcam.SetActive(false);
         CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGame);
         CanvasManager.Instance.CloseUI(UIObject.UIName.Settings);
         CanvasManager.Instance.CursorLock();
