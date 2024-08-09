@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class TaskStep : MonoBehaviour
 {
-    private bool isFinished = false;
+    protected bool isFinished = false;
 
     protected void FinishTaskStep()
     {
@@ -15,5 +15,4 @@ public abstract class TaskStep : MonoBehaviour
             TaskManager.Instance.FinishTaskStep();
         }
     }
-
 }

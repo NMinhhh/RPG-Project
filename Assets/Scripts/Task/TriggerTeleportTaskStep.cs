@@ -6,6 +6,8 @@ public class TriggerTeleportTaskStep : TaskStep
 {
     [SerializeField] private TeleStation teleStation;
 
+   
+
     private void Start()
     {
         teleStation.TriggerParticleStation();

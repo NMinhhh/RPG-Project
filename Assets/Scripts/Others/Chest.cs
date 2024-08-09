@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour, IInteracable
 {
+    [Header("ID")]
+    [SerializeField] public int id;
     [Header("list Item in chest")]
     [SerializeField] private List<ItemData> itemList;
     [Header("Chest Top")]
@@ -23,8 +25,18 @@ public class Chest : MonoBehaviour, IInteracable
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Open Chest"), transform.position);
     }
 
+    public void ChestOpened()
+    {
+        if(boxCollider == null)
+            boxCollider = GetComponent<BoxCollider>();
+        isOpen = true;
+        boxCollider.enabled = false;
+        chestTopObj.transform.eulerAngles = new Vector3(-90, 0, 0);
+    }
+
     void LootItem()
     {
+        SaveManager.Instance.SaveChestOpenedId(id);
         isOpen = true;
         foreach (ItemData item in itemList)
         {

@@ -65,7 +65,11 @@ public class InventorySystem : Singleton<InventorySystem>
 
     public void AddToInventory(ItemData itemData)
     {
-        NoticePickUpManager.instance.Notice(itemData.image, "+1 " + itemData.itemName);
+        if (!SaveManager.Instance.isLoading)
+        {
+            SaveManager.Instance.SaveItem(itemData.name);
+            NoticePickUpManager.Instance.Notice(itemData.image, "+1 " + itemData.itemName);
+        }
         if (itemData.isBow)
         {
             equippedBow?.Invoke();

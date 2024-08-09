@@ -28,4 +28,6 @@ public class KillEnemyTaskStep : TaskStep
         }
         return enemys.Length == count;
     }
+
+  
 }

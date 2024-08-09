@@ -6,6 +6,8 @@ public class PickUpBowTask : TaskStep
 {
     private WeaponsController weaponController;
 
+   
+
     private void Start()
     {
         weaponController = GameObject.Find("Player").GetComponent<WeaponsController>();

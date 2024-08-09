@@ -10,9 +10,12 @@ public class SaveManager : Singleton<SaveManager>
 
     public static event Action<float> loadSensetivity;
 
+    public bool isLoading;
+
     void Start()
     {
         SaveSystem.Initilize();
+        LoadGame();
     }
 
     private void OnApplicationQuit()
@@ -53,12 +56,34 @@ public class SaveManager : Singleton<SaveManager>
         saveData.taskId = taskId;
     }
 
+    public void SaveChestOpenedId(int id)
+    {
+        saveData.chestOpenedId.Add(id);
+    }
+
+    public void SaveItem(string name)
+    {
+        saveData.itemName.Add(name);
+    }
+
+    public void SaveItemEquipped(string name)
+    {
+        saveData.itemName.Remove(name);
+        saveData.itemEquippedName = name;
+    }
+
+    public void SavePotionAmount(int amount)
+    {
+        saveData.potionAmount = amount;
+    }
+
     #endregion
 
     #region Load
 
     public void LoadGame()
     {
+        isLoading = true;
         StartCoroutine(LoadData());
     }
 
@@ -66,19 +91,23 @@ public class SaveManager : Singleton<SaveManager>
     { 
         yield return new WaitForSeconds(1f);
         string jsonString = SaveSystem.LoadFile(this.save);
-
         this.saveData = JsonUtility.FromJson<SaveData>(jsonString);
 
         if (this.saveData != null)
         {
             LoadVolume(saveData);
+            LoadSensetivity(saveData);
+            LoadTask(saveData);
+            LoadChestOpenObj(saveData);
+            LoadItem(saveData);
+            LoadItemEquipped(saveData);
         }
+        isLoading = false;
     }
 
     public void LoadVolume(SaveData saveData)
     {
-        SoundFXManager.Instance.SetMusicVolume(saveData.musicVolume);
-        SoundFXManager.Instance.SetSoundVolume(saveData.soundVolume);
+        SoundFXManager.Instance.LoadSliderValue(saveData.soundVolume, saveData.musicVolume);
     }
 
     public void LoadSensetivity(SaveData saveData)
@@ -94,7 +123,38 @@ public class SaveManager : Singleton<SaveManager>
     public void LoadTask(SaveData saveData)
     {
         TaskManager.Instance.Initialize(saveData.taskId);
-        TaskManager.Instance.GetMainTask().InitializeTaskStep(0);
+    }
+
+    public void LoadChestOpenObj(SaveData saveData)
+    {
+        foreach (int id in saveData.chestOpenedId)
+        {
+            Chest chest = GameManager.Instance.GetChest(id);
+            chest.ChestOpened();
+        }
+    }
+
+    public void LoadItem(SaveData saveData)
+    {
+        foreach(string itemName in saveData.itemName)
+        {
+            ItemData itemData = GameManager.Instance.GetItemData(itemName);
+            InventorySystem.Instance.AddToInventory(itemData);
+        }
+    }
+
+    public void LoadItemEquipped(SaveData saveData)
+    {
+        if(saveData.itemEquippedName != null  && saveData.itemEquippedName != "")
+        {
+            ItemData itemData = GameManager.Instance.GetItemData(saveData.itemEquippedName);
+            EquipSystem.Instance.EquipWeapon(itemData);
+        }
+    }
+
+    public void LoadPotionAmount(SaveData saveData)
+    {
+        EquipSystem.Instance.AddPotionItem(saveData.potionAmount - 2);
     }
 
     #endregion

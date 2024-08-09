@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class SoundFXManager : Singleton<SoundFXManager>
@@ -37,6 +38,16 @@ public class SoundFXManager : Singleton<SoundFXManager>
         }
     }
 
+    public void LoadSliderValue(float soundVolume, float musicVolume)
+    {
+        //Sound
+        soundSlider.value = soundVolume;
+        audioMixer.SetFloat("MusicVolume", Mathf.Log10(soundVolume) * 20);
+        //Music
+        musicSlider.value = musicVolume;
+        audioMixer.SetFloat("SoundVolume", Mathf.Log10(musicVolume) * 20);
+    }
+
 
     public void SetMusicVolume(float volume)
     {
@@ -47,7 +58,7 @@ public class SoundFXManager : Singleton<SoundFXManager>
     public void SetSoundVolume(float volume)
     {
         audioMixer.SetFloat("SoundVolume", Mathf.Log10(volume) * 20);
-        SaveManager.instance.SaveSoundVolume(volume);
+        SaveManager.Instance.SaveSoundVolume(volume);
     }
 
 

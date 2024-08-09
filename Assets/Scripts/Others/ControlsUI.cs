@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ControlsUI : MonoBehaviour
 {
     [Header("Sensitivity Slider")]
-    [SerializeField] private Slider sensetivity;
+    [SerializeField] private Slider sensetivitySlider;
 
     public static event Action<float> setSensetivity;
 
@@ -18,16 +18,7 @@ public class ControlsUI : MonoBehaviour
     void Start()
     {
         GenerateControlUI();
-    }
-
-    private void OnEnable()
-    {
-        SaveManager.loadSensetivity += SetSensitivity;
-    }
-
-    private void OnDisable()
-    {
-        SaveManager.loadSensetivity += SetSensitivity;
+        sensetivitySlider.value = SaveManager.Instance.GetSesetivity() / 100;
     }
 
     void GenerateControlUI()
@@ -43,9 +34,9 @@ public class ControlsUI : MonoBehaviour
 
     public void SetSensitivity(float sensitivity)
     {
-        sensetivity.value = sensitivity;
+        sensetivitySlider.value = sensitivity;
         setSensetivity?.Invoke(sensitivity * 100);
-        SaveManager.Instance.SaveSensetivity(sensitivity);
+        SaveManager.Instance.SaveSensetivity(sensitivity * 100);
     }
 }
 

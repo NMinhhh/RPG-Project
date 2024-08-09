@@ -26,6 +26,8 @@ public class ItemSlot : MonoBehaviour,IDropHandler
         if (isLock || !DragDrop.itemBeingDragged) return;
         if (Getitem)
         {
+            if (isQuickSlot)
+                SaveManager.Instance.SaveItem(Getitem.GetComponent<InventoryItem>().GetItemData.name);
             Getitem.GetComponent<DragDrop>().SetCanDrag(true);
             Getitem.GetComponent<DragDrop>().SetNewPos(DragDrop.itemBeingDragged.startPos, DragDrop.itemBeingDragged.startParent);
         }

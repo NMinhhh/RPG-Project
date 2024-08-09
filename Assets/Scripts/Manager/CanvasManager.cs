@@ -7,13 +7,13 @@ public class CanvasManager : Singleton<CanvasManager>
     [SerializeField] private List<UIObject> uIObjects;
     void Start()
     {
-        //Initialize();
+        Initialize();
     }
 
     void Initialize()
     {
         CursorUnLock();
-        InputManager.instance.CanNotGetInput();
+        InputManager.Instance.CanNotGetInput();
         foreach (UIObject UIObj in uIObjects)
         {
             UIObj.obj.SetActive(false);

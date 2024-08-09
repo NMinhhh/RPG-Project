@@ -65,7 +65,7 @@ public class MainTask
 
     public Task[] taskSteps;
 
-    public int currentTaskStep;
+    public int currentTaskStep = 0;
 
     public bool isFinished;
 

@@ -6,6 +6,9 @@ public class KillEnemySpawnTask : TaskStep
 {
     [SerializeField] private SpawnEnemy spawnEnemy;
     [SerializeField] private bool isSpawned;
+
+   
+
     // Start is called before the first frame update
     void Start()
     {

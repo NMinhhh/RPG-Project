@@ -7,6 +7,7 @@ public class CutsceneTaskStep : TaskStep
     [SerializeField] private Intro.IntroName introName;
     private void Start()
     {
+        if (isFinished) return;
         InputManager.Instance.CanNotGetInput();
         IntroManager.Instance.PlayCutScene(introName);
     }
@@ -17,4 +18,6 @@ public class CutsceneTaskStep : TaskStep
         InputManager.Instance.CanGetInput();
         FinishTaskStep();
     }
+
+    
 }

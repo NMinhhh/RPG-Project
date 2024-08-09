@@ -25,7 +25,7 @@ public class EquipSystem : Singleton<EquipSystem>
     }
     private void Update()
     {
-        if (InputManager.instance.pressTKey && numberOfItem > 0)
+        if (InputManager.Instance.pressTKey && numberOfItem > 0)
         {
             UsePotion(potionItem.consumeValue);
         }
@@ -34,7 +34,7 @@ public class EquipSystem : Singleton<EquipSystem>
 
     public void AddPotionItem(int number)
     {
-        NoticePickUpManager.instance.Notice(potionItem.image, "+1 "+ number + " " + potionItem.name);
+        NoticePickUpManager.Instance.Notice(potionItem.image, "+1 "+ number + " " + potionItem.name);
         numberOfItem += number;
         ChangeNumberOfItem?.Invoke();
     }
@@ -51,8 +51,18 @@ public class EquipSystem : Singleton<EquipSystem>
         if (itemData.itemType == ItemData.ItemType.Weapon)
         {
             controller.EquippedWeapons(itemData);
-
         }
+        if (!SaveManager.Instance.isLoading)
+            SaveManager.Instance.SaveItemEquipped(itemData.name);
+        else
+        {
+            GameObject item = ObjectPool.Instance.SpawnFromPool("Item UI", slotWeapon.position, slotWeapon.rotation);
+            InventoryItem inventoryItem = item.GetComponent<InventoryItem>();
+            inventoryItem.SetItemData(itemData);
+            item.GetComponent<Image>().sprite = itemData.image;
+            item.transform.SetParent(slotWeapon);
+        }
+
     }
 
 }
