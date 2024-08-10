@@ -38,7 +38,6 @@ public class EnemyPlayerDetectedState : EnemyState
         base.Enter();
         isDetectedOver = false;
         enemy.SetSpeed(0);
-        enemy.Move(enemy.transform.position);
         enemy.transform.LookAt(new Vector3(enemy.playerPos.position.x, enemy.transform.position.y, enemy.playerPos.position.z));
     }
 
@@ -56,6 +55,8 @@ public class EnemyPlayerDetectedState : EnemyState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (GameManager.Instance.isLoss)
+            return;
         if (Time.time >= startTime + data.detectedTime)
         {
             isDetectedOver = true;

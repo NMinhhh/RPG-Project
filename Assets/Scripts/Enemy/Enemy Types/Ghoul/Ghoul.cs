@@ -65,10 +65,11 @@ public class Ghoul : Enemy
         base.Die();
     }
 
-    private void OnEnable()
+    public override void ResetEnemy()
     {
-        if (StateMachine != null)
-            StateMachine.ChangeState(PlayerDetectedState);
+        base.ResetEnemy();
+        StateMachine.ChangeState(PlayerDetectedState);
     }
+
 
 }

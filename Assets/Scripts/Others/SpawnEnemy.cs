@@ -131,14 +131,13 @@ public class SpawnEnemy : MonoBehaviour
                     spawnPos = GetRangeSpawnPos();
 
                 GameObject enemySpawn = ObjectPool.Instance.SpawnFromPool(enemy.name, spawnPos, Quaternion.identity);
-
+                enemySpawn.name = enemy.name;
                 enemySpawn.transform.SetParent(enemyHolder);
 
                 if(!enemySpawn.GetComponent<Enemy>())
                     currentEnemyInWave.Add(enemySpawn.GetComponentInChildren<Enemy>());
                 else
                     currentEnemyInWave.Add(enemySpawn.GetComponent<Enemy>());
-
                 yield return new WaitForSeconds(spawnDelayTime);
             }
         }
@@ -167,6 +166,18 @@ public class SpawnEnemy : MonoBehaviour
         Vector3 pos = currentMeleeSpawnPos[i].position;
         currentMeleeSpawnPos.RemoveAt(i);
         return pos;
+    }
+
+    public void ResetSpawn()
+    {
+        canSpawn = false;
+        isStartSpawn = false;
+        foreach (Enemy enemy in currentEnemyInWave)
+        {
+            if(!enemy.isDie)
+                ObjectPool.Instance.AddInPool(enemy.transform.parent.name, enemy.transform.parent.gameObject);
+            enemy.ResetEnemy();
+        }
     }
 }
 

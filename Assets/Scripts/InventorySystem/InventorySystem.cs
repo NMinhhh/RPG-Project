@@ -19,7 +19,7 @@ public class InventorySystem : Singleton<InventorySystem>
     public static event Action OnItemSelected;
 
 
-    public event Action equippedBow;
+    public event Action<bool> equippedBow;
 
     public bool isOpen { get; private set; }
 
@@ -72,7 +72,7 @@ public class InventorySystem : Singleton<InventorySystem>
         }
         if (itemData.isBow)
         {
-            equippedBow?.Invoke();
+            equippedBow?.Invoke(true);
             return;
         }
         Transform slotAvailable = GetAvailableSlot().transform;

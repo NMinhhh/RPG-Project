@@ -4,10 +4,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(Door))]
 
-public class OpenDoorTaskStep : TaskStep
+public class OpenDoorTaskStep : TaskStep, IResetable
 {
     [SerializeField] private Door doorAnim;
     [SerializeField] protected bool isOpen;
+
+    private bool isFirstStart;
+
     private void OnValidate()
     {
         #if UNITY_EDITOR
@@ -16,7 +19,7 @@ public class OpenDoorTaskStep : TaskStep
         #endif
     }
 
-    private void Start()
+    public override void StartTask()
     {
         if (isOpen)
             doorAnim.OpenDoor();
@@ -25,5 +28,8 @@ public class OpenDoorTaskStep : TaskStep
         FinishTaskStep();
     }
 
-   
+    public void ResetBaseState()
+    {
+        doorAnim.ResetDoor();
+    }
 }

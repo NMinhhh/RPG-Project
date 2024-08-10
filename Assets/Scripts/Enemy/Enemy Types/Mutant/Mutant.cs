@@ -93,6 +93,12 @@ public class Mutant : Enemy
         effectRage.SetActive(true);
     }
 
+    public override void ResetEnemy()
+    {
+        base.ResetEnemy();
+        StateMachine.ChangeState(PlayerDetectedState);
+    }
+
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();

@@ -79,7 +79,11 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
     protected bool canSpawn;
 
     //Boss
-    protected bool isBoss;
+    public bool isBoss {  get; private set; }
+    //start pos
+    private Vector3 startPos;
+    private bool isFirstStart;
+    private Vector3 startAngle;
 
     #endregion
 
@@ -88,12 +92,15 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
     // Start is called before the first frame update
     protected virtual void Start()
     {
+        isFirstStart = true;
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         alive = transform.Find("Alive").gameObject;
         Anim = alive.GetComponent<Animator>();
         Agent = GetComponent<NavMeshAgent>();
         StateMachine = new EnemyStateMachine();
         WeaponsController = GetComponent<EnemyWeaponController>();
+        startPos = transform.localPosition;
+        startAngle = alive.transform.eulerAngles;
         //Radius
         radiusCheckToAttack = data.radiusCheckToAttack;
         //Health
@@ -104,12 +111,34 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
         currentAODToHurt = data.amountOfDamageToHurt;
         isFirstDamage = false;
         isBoss = data.isBoss;
-        if (!data.isBoss)
+        if (!isBoss)
         {
             HealthBar = GetComponentInChildren<EnemyHealthBar>();
             HealthBar.ResetHealthBar();
         }
         else
+        {
+            BossStats.Instance.SetHealth(currentHealth, maxHelth);
+            BossStats.Instance.SetName(data.enemyName);
+        }
+        if (data.isDash)
+        {
+            DashCooldown();
+        }
+        if (data.isThrowWeapon)
+        {
+            ThrowCooldown();
+        }
+        if (data.isSpawnObjects)
+        {
+            SpawnCooldown();
+        }
+    }
+
+    private void OnEnable()
+    {
+        CancelInvoke();
+        if(isBoss && isFirstStart)
         {
             BossStats.Instance.SetHealth(currentHealth, maxHelth);
             BossStats.Instance.SetName(data.enemyName);
@@ -340,33 +369,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
 
     #endregion
 
-    #region Spawn Objects Pool
-    public virtual void OnObjectSpawn()
-    {
-        transform.localPosition = Vector3.zero;
-        maxHelth = data.MaxHealthData;
-        currentHealth = maxHelth;
-        maxCombo = data.maxCombo;
-        currentAODToHurt = data.amountOfDamageToHurt;
-        isFirstDamage = false;
-        isBoss = data.isBoss;
-        isHurt = false;
-        isDie = false;
-        if (!HealthBar)
-        {
-            if (!data.isBoss)
-            {
-                HealthBar = GetComponentInChildren<EnemyHealthBar>();
-                HealthBar.ResetHealthBar();
-            }
-            else
-            {
-                BossStats.Instance.SetHealth(currentHealth, maxHelth);
-                BossStats.Instance.SetName(this.name);
-            }
-        }
-        
-    }
+    #region Spawn Objects
     public void SpawnCooldown()
     {
         canSpawn = false;
@@ -382,6 +385,61 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
     public bool CanSpawn()
     {
         return canSpawn;
+    }
+
+    #endregion
+
+    #region Object Pool
+    public virtual void OnObjectSpawn()
+    {
+        transform.localPosition = Vector3.zero;
+        maxHelth = data.MaxHealthData;
+        currentHealth = maxHelth;
+        maxCombo = data.maxCombo;
+        currentAODToHurt = data.amountOfDamageToHurt;
+        isFirstDamage = false;
+        isBoss = data.isBoss;
+        isHurt = false;
+        isDie = false;
+        if (!HealthBar)
+        {
+            if (!isBoss)
+            {
+                HealthBar = GetComponentInChildren<EnemyHealthBar>();
+                HealthBar.ResetHealthBar();
+            }
+            else
+            {
+                BossStats.Instance.SetHealth(currentHealth, maxHelth);
+                BossStats.Instance.SetName(this.name);
+            }
+        }
+
+    }
+    #endregion
+
+    #region Reset
+
+    public virtual void ResetEnemy()
+    {
+        isDie = false;
+        maxHelth = data.MaxHealthData;
+        currentHealth = maxHelth;
+        if(!isBoss)
+        {
+            HealthBar.UpdateHealth(currentHealth, maxHelth);
+            HealthBar.ResetHealthBar();
+        }
+        if (isBoss)
+        {
+            BossStats.Instance.UpdateHealthBar(0);
+            CancelInvoke();
+        }
+        currentAODToHurt = 0;
+        currentCombo = 0;
+        transform.localPosition = startPos;
+        transform.localEulerAngles = startAngle;
+        GetComponent<Collider>().enabled = true;
     }
 
     #endregion
@@ -424,7 +482,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
         }
     }
 
-    
+
 
     #endregion
 }

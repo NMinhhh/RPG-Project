@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Bridge : MonoBehaviour, IDamageable
 {
+    public int id;
     [SerializeField] private MeshRenderer[] skinnedMeshRenderers;
     [SerializeField] private float dissolveSpeed = 0.5f;
     private Material[] material;
@@ -26,9 +27,11 @@ public class Bridge : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        dissolveAmount = 1;
         anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         GetMaterial();
+        Appear();
         isFinishFall = false;
         capsuleCollider.enabled = false;
     }
@@ -91,6 +94,7 @@ public class Bridge : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        SaveManager.Instance.SaveBirdgeID(id);
         capsuleCollider.enabled = false;
         blockHolder.SetActive(false);
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Explosion"), transform.position);
@@ -103,5 +107,24 @@ public class Bridge : MonoBehaviour, IDamageable
     public void BlockDisable()
     {
         block.SetActive(false);
+    }
+
+    public void ResetBridge()
+    {
+        dissolveAmount = 1;
+        Appear();
+        anim.SetTrigger("Idle");
+        isFinishFall = false;
+        capsuleCollider.enabled = false;
+    }
+
+    public void BridgeFall()
+    {
+        dissolveAmount = 0;
+        Appear();
+        capsuleCollider.enabled = false;
+        blockHolder.SetActive(false);
+        block.SetActive(false);
+        anim.SetTrigger("Fall");
     }
 }

@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CutsceneTaskStep : TaskStep
+public class CutsceneTaskStep : TaskStep, IResetable
 {
     [SerializeField] private Intro.IntroName introName;
-    private void Start()
+
+    public override void StartTask()
     {
         if (isFinished) return;
         InputManager.Instance.CanNotGetInput();
@@ -19,5 +20,8 @@ public class CutsceneTaskStep : TaskStep
         FinishTaskStep();
     }
 
-    
+    public void ResetBaseState()
+    {
+       
+    }
 }

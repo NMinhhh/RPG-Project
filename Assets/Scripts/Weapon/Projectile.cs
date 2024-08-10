@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour, IPooledObject
     [SerializeField] protected float damage = 20f;
     [SerializeField] protected float speed = 10;
     [SerializeField] protected float timeLife = 5f;
-    protected float currentTimeLife;
+    protected float currentTimeLife = 1;
 
     [Header("Effect")]
     [SerializeField] protected List<string> hitEffect;

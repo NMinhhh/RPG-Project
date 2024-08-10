@@ -28,11 +28,14 @@ public class SceneManager : Singleton<SceneManager>
     
     IEnumerator Respawn(Action action)
     {
+        InputManager.Instance.CanNotGetUIInput();
         transitionEffect.StartTransition();
         yield return new WaitForSeconds(loadTime);
         action?.Invoke();
         yield return new WaitForSeconds(finishTransitionTime);
         transitionEffect.StopTransition();
+        InputManager.Instance.CanGetUIInput();
+        GameManager.Instance.SetGameState(false);
     }
 
     public void LoadScene(Action action)
@@ -42,12 +45,15 @@ public class SceneManager : Singleton<SceneManager>
 
     IEnumerator Load(Action action)
     {
+        InputManager.Instance.CanNotGetUIInput();
         transitionEffect.StartTransition();
         SaveManager.Instance.LoadGame();
         yield return new WaitForSeconds(loadTime);
+        GameManager.Instance.RespawnPlayer();
         MenuGameManager.Instance.SetCameraHome(false);
         yield return new WaitForSeconds(finishTransitionTime);
         transitionEffect.StopTransition();
         action?.Invoke();
+        InputManager.Instance.CanGetUIInput();
     }
 }

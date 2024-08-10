@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class ItemWorld : MonoBehaviour, IInteracable
 {
+    public int id;
     [SerializeField] private ItemData data;
+
+    public void ItemWorldPickedUp()
+    {
+        gameObject.SetActive(false);
+    }
 
     public void Interact()
     {
         AddToInventory(data);
         gameObject.SetActive(false);
+        SaveManager.Instance.SaveItemWorldId(id);
     }
 
     void AddToInventory(ItemData data)

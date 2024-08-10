@@ -39,6 +39,7 @@ public class Demon : Enemy
     [SerializeField] private EnemyDeathData _deathData;
     #endregion
 
+
     protected override void Start()
     {
         base.Start();
@@ -69,6 +70,12 @@ public class Demon : Enemy
         {
             StateMachine.ChangeState(DeathState);
         }
+    }
+
+    public override void ResetEnemy()
+    {
+        base.ResetEnemy();
+        StateMachine.ChangeState(IdleState);
     }
 
     public override void OnObjectSpawn()

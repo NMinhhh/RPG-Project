@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillEnemySpawnTask : TaskStep
+public class KillEnemySpawnTask : TaskStep, IResetable
 {
     [SerializeField] private SpawnEnemy spawnEnemy;
     [SerializeField] private bool isSpawned;
 
-   
+    public void ResetBaseState()
+    {
+        spawnEnemy.ResetSpawn();
+    }
 
-    // Start is called before the first frame update
-    void Start()
+    public override void StartTask()
     {
         if (!isSpawned)
         {

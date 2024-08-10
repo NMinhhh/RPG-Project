@@ -45,4 +45,10 @@ public class Dummy : Enemy
         }
     }
 
+    public override void ResetEnemy()
+    {
+        base.ResetEnemy();
+        StateMachine.ChangeState(IdleState);
+    }
+
 }

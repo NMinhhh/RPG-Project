@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MakeBridgeFallTask : TaskStep
+public class MakeBridgeFallTask : TaskStep,IResetable
 {
     [Header("Bridge")]
     [SerializeField] private Bridge bridge;
 
-   
+    public void ResetBaseState()
+    {
+        bridge.ResetBridge();
+    }
 
-    // Start is called before the first frame update
-    void Start()
+    public override void StartTask()
     {
         bridge.StartAppear();
         bridge.gameObject.SetActive(true);

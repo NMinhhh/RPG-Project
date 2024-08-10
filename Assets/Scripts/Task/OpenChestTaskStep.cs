@@ -6,7 +6,9 @@ public class OpenChestTaskStep : TaskStep
 {
     [SerializeField] private Chest chest;
 
-   
+    public override void StartTask()
+    {
+    }
 
     // Update is called once per frame
     void Update()

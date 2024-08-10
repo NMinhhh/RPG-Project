@@ -13,6 +13,10 @@ public abstract class TaskStep : MonoBehaviour
             isFinished = true;
             gameObject.SetActive(false);
             TaskManager.Instance.FinishTaskStep();
+            isFinished = false;
         }
     }
+
+    public abstract void StartTask();
+
 }

@@ -21,7 +21,7 @@ public class SaveManager : Singleton<SaveManager>
 
     private void OnApplicationQuit()
     {
-        //SaveGame();
+        SaveGame();
     }
 
     public string GetFileName()
@@ -61,16 +61,27 @@ public class SaveManager : Singleton<SaveManager>
     {
         saveData.chestOpenedId.Add(id);
     }
+    
+    public void SaveItemWorldId(int id)
+    {
+        saveData.itemWorldId.Add(id);
+    }
 
     public void SaveItem(string name)
     {
         saveData.itemName.Add(name);
     }
 
+
     public void SaveItemEquipped(string name)
     {
         saveData.itemName.Remove(name);
         saveData.itemEquippedName = name;
+    }
+
+    public void SaveBirdgeID(int id)
+    {
+        saveData.bridgeId.Add(id);
     }
 
     public void SavePotionAmount(int amount)
@@ -95,8 +106,10 @@ public class SaveManager : Singleton<SaveManager>
         {
             LoadTask(saveData);
             LoadChestOpenObj(saveData);
+            LoadItemWolrd(saveData);
             LoadItem(saveData);
             LoadItemEquipped(saveData);
+            LoadBridge(saveData);
         }
         isLoading = false;
     }
@@ -142,6 +155,16 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
+    public void LoadItemWolrd(SaveData saveData)
+    {
+        foreach (int id in saveData.itemWorldId)
+        {
+            ItemWorld chest = GameManager.Instance.GetItemWorld(id);
+            chest.ItemWorldPickedUp();
+        }
+    }
+
+
     public void LoadItem(SaveData saveData)
     {
         foreach(string itemName in saveData.itemName)
@@ -157,6 +180,15 @@ public class SaveManager : Singleton<SaveManager>
         {
             ItemData itemData = GameManager.Instance.GetItemData(saveData.itemEquippedName);
             EquipSystem.Instance.EquipWeapon(itemData);
+        }
+    }
+
+    public void LoadBridge(SaveData saveData)
+    {
+        foreach (int id in saveData.bridgeId)
+        {
+            Bridge bridge = GameManager.Instance.GetBridge(id);
+            bridge.BridgeFall();
         }
     }
 

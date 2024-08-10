@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CanvasManager : Singleton<CanvasManager> 
 {
+    [SerializeField] private GameObject canvasUI;
     [SerializeField] private List<UIObject> uIObjects;
     void Start()
     {
@@ -70,6 +71,11 @@ public class CanvasManager : Singleton<CanvasManager>
             }
         }
         return null;
+    }
+
+    public void SetCanvasState(bool state)
+    {
+        canvasUI.SetActive(state);
     }
 }
 

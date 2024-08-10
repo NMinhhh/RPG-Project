@@ -8,12 +8,6 @@ public class ShowDialogTaskStep : TaskStep
     [TextArea(5,10)]
     [SerializeField] protected string textInfo;
 
-    private void Start()
-    {
-        dialog.SetDialogInfo(textInfo);
-        CanvasManager.Instance.OpenUI(UIObject.UIName.Dialog);
-    }
-
     private void Update()
     {
         if (dialog.isClose)
@@ -22,5 +16,9 @@ public class ShowDialogTaskStep : TaskStep
         }
     }
 
-   
+    public override void StartTask()
+    {
+        dialog.SetDialogInfo(textInfo);
+        CanvasManager.Instance.OpenUI(UIObject.UIName.Dialog);
+    }
 }

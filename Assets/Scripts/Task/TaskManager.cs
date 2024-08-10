@@ -69,6 +69,16 @@ public class MainTask
 
     public bool isFinished;
 
+    public void ResetMainTask()
+    {
+        foreach(var task in taskSteps)
+        {
+            task.RestTask();
+        }
+        isFinished = false;
+        InitializeTaskStep(0);
+    }
+
     public void InitializeTaskStep(int id)
     {
         currentTaskStep = id;
@@ -101,6 +111,17 @@ public class Task
     public bool isNeedTrigger;
     public bool isFinished;
 
+    public void RestTask()
+    {
+        isFinished = false;
+        taskObj.SetActive(false);
+        IResetable resetable = taskObj.GetComponent<IResetable>();
+        if (resetable != null)
+        {
+            resetable.ResetBaseState();
+        }
+    }
+
     public void FinishTask()
     {
         isFinished = true;
@@ -108,16 +129,17 @@ public class Task
    
     public void TriggerTask()
     {
-        taskObj.SetActive(true);
+        taskObj.GetComponent<TaskStep>().StartTask();
     }
 
     public void TaskActive()
     {
+        taskObj.SetActive(true);
         if (isNeedTrigger)
         {
             triggerObj.SetActive(true);
             return;
         }
-        taskObj.SetActive(true);
+        taskObj.GetComponent<TaskStep>().StartTask();
     }
 }

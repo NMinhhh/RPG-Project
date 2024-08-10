@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>   
 {
+    [SerializeField] private Player player;
     [SerializeField] private List<Chest> chestList;
     [SerializeField] private List<ItemData> dataList;
     [SerializeField] private List<Transform> respawnPoint;
+    [SerializeField] private List<ItemWorld> itemWorldList;
+    [SerializeField] private List<Bridge> bridgeList;
     public bool isLoss {  get; private set; }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isLoss = false;
     }
 
     // Update is called once per frame
@@ -22,9 +25,12 @@ public class GameManager : Singleton<GameManager>
         
     }
 
+    public void SetGameState(bool state)
+    {
+        isLoss = state;
+    }
 
-
-    public void RespawnPlayer(Player player)
+    public void RespawnPlayer()
     {
         player.gameObject.transform.position = respawnPoint[TaskManager.Instance.currentTask - 1].position;
     }
@@ -50,5 +56,29 @@ public class GameManager : Singleton<GameManager>
             }
         }
         return null;
-    } 
+    }
+
+    public ItemWorld GetItemWorld(int id)
+    {
+        foreach (ItemWorld item in itemWorldList)
+        {
+            if (item.id == id)
+            {
+                return item;
+            }
+        }
+        return null;
+    }
+    
+    public Bridge GetBridge(int id)
+    {
+        foreach (Bridge bridge in bridgeList)
+        {
+            if (bridge.id == id)
+            {
+                return bridge;
+            }
+        }
+        return null;
+    }
 }

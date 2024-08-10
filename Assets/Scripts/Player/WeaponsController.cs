@@ -159,9 +159,9 @@ public class WeaponsController : MonoBehaviour
             EndDealDamageToTheRight();
     }
 
-    public void EquippedBow()
+    public void EquippedBow(bool state)
     {
-        isEquippedBow = true;
+        isEquippedBow = state;
     }
 
     public void StartArrowShoot()

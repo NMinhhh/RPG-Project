@@ -12,6 +12,9 @@ public class PlayerDeathState : PlayerState
     {
         base.Enter();
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Player Hurt"), player.transform.position);
+        player.weaponsController.EndDealDamageAll();
+        player.Anim.SetLayerWeight(1, 0);
+        player.thirdPersonAim.NotAim();
     }
 
     public override void Exit()

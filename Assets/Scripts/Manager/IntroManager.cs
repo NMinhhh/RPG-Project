@@ -19,6 +19,7 @@ public class IntroManager : Singleton<IntroManager>
 
     public void PlayCutScene(Intro.IntroName type)
     {
+        CanvasManager.Instance.SetCanvasState(false);
         isPlayIntro = true;
         currentIntro = GetIntro(type);
         currentIntro.SetActive(true);
@@ -28,6 +29,7 @@ public class IntroManager : Singleton<IntroManager>
     {
         isPlayIntro = false;
         currentIntro.SetActive(false);
+        CanvasManager.Instance.SetCanvasState(true);
     }
 
     public GameObject GetIntro(Intro.IntroName type)

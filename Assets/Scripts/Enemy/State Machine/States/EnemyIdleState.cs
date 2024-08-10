@@ -30,7 +30,7 @@ public class EnemyIdleState : EnemyState
     public override void Enter()
     {
         base.Enter();
-        enemy.Move(enemy.transform.position);
+        enemy.SetSpeed(0);
         isIdleFinish = false;
     }
 
