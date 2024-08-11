@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>   
 {
+    [Header("Player")]
     [SerializeField] private Player player;
-    [SerializeField] private List<Chest> chestList;
-    [SerializeField] private List<ItemData> dataList;
+    [Header("Respawn Point")]
     [SerializeField] private List<Transform> respawnPoint;
+    [Header("Item Data")]
+    [SerializeField] private List<ItemData> dataList;
+    [Header("Object")]
+    [SerializeField] private List<Chest> chestList;
     [SerializeField] private List<ItemWorld> itemWorldList;
     [SerializeField] private List<Bridge> bridgeList;
     public bool isLoss {  get; private set; }
@@ -45,7 +49,7 @@ public class GameManager : Singleton<GameManager>
     public Chest GetChest(int id)
     {
         foreach (Chest chest in chestList)
-        { 
+        {
             if(chest.id == id)
                 return chest;
         }

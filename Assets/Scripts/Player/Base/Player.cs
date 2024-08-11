@@ -198,7 +198,7 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
 
     public void Die()
     {
-        SceneManager.Instance.LoadScene(GameManager.Instance.RespawnPlayer, true);
+        TransisionManager.Instance.LoadScene(GameManager.Instance.RespawnPlayer, true);
     }
 
     public void Respawn()

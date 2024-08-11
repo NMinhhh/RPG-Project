@@ -117,7 +117,8 @@ public class SaveManager : Singleton<SaveManager>
 
     #endregion
 
-    #region Load Setting
+    #region Setting
+
 
     public void LoadSettingData()
     {
@@ -155,6 +156,12 @@ public class SaveManager : Singleton<SaveManager>
     #endregion
 
     #region Load Game
+
+    public void ResetGameData()
+    {
+        saveGameData.Reset();
+        SaveAllData();
+    }
 
     public void LoadGame()
     {
@@ -243,4 +250,5 @@ public class SaveManager : Singleton<SaveManager>
     }
 
     #endregion
+
 }

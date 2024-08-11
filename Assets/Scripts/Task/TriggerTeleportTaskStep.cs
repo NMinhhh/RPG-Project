@@ -8,7 +8,7 @@ public class TriggerTeleportTaskStep : TaskStep, IResetable
 
     public void ResetBaseState()
     {
-        
+        teleStation.RestTele();
     }
 
     public override void StartTask()

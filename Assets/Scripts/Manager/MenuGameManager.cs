@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static UIObject;
 
 public class MenuGameManager : Singleton<MenuGameManager>
 {
@@ -72,7 +72,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
 
     public void OnButtonStartNewGame()
     {
-        SceneManager.Instance.LoadScene(StartNewGame, true);
+        TransisionManager.Instance.LoadScene(StartNewGame, true);
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
     }
 
@@ -80,6 +80,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
     {
         isPlaying = true;
         isOpen = false;
+        SaveManager.Instance.ResetGameData();
         SaveManager.Instance.LoadGame();
         menuPlay.SetActive(true);
         menuIdle.SetActive(false);
@@ -91,7 +92,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
 
     public void OnButtonContinueHome()
     {
-        SceneManager.Instance.LoadScene(ContinueHome, true);
+        TransisionManager.Instance.LoadScene(ContinueHome, true);
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
     }
 
@@ -133,25 +134,14 @@ public class MenuGameManager : Singleton<MenuGameManager>
 
     public void OnButtonExitGamePlay()
     {
-        SceneManager.Instance.LoadScene(ExitGamePlay, false);
+        TransisionManager.Instance.LoadScene(ExitGamePlay, false);
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
     }
 
     void ExitGamePlay()
     {
-        isPlaying = false;
-        Time.timeScale = 1;
-        CanvasManager.Instance.CursorUnLock();
-        InputManager.Instance.CanNotGetInput();
-        CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGamePlay);
-        CanvasManager.Instance.OpenUI(UIObject.UIName.MenuHome);
-        menuPlay.SetActive(true);
-        SetCameraHome(true);
-        TaskManager.Instance.GetMainTask().ResetMainTask();
-        GameManager.Instance.RespawnPlayer();
         SaveManager.Instance.SaveAllData();
-        InventorySystem.Instance.ResetInventory();
-        EquipSystem.Instance.ResetEquip();
+        SceneManager.LoadScene(0);
     }
 
     #endregion

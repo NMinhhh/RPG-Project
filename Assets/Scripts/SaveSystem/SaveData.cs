@@ -12,6 +12,18 @@ public class SaveGameData
     public List<int> bridgeId = new List<int>();
     public string itemEquippedName;
     public int potionAmount;
+
+    public void Reset()
+    {
+        taskId = 0;
+        chestOpenedId.Clear();
+        itemWorldId.Clear();
+        itemName.Clear();
+        bridgeId.Clear();
+        itemName.Clear();
+        itemEquippedName = null;
+        potionAmount = 0;
+    }
 }
 
 [System.Serializable]
