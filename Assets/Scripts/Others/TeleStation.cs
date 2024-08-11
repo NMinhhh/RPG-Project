@@ -45,14 +45,20 @@ public class TeleStation : MonoBehaviour,IDamageable
 
     public void Damage(float damage)
     {
-        isTriggerTele = true;
-        triggerColliderPos.enabled = false;
+        Die();
     }
 
     public void Die()
     {
-        
+        isTriggerTele = true;
+        triggerColliderPos.enabled = false;
     }
 
+    public void RestTele()
+    {
+        particleStation.gameObject.SetActive(false);
+        triggerColliderPos.enabled = false;
+        isTriggerTele = false;
+    }
    
 }

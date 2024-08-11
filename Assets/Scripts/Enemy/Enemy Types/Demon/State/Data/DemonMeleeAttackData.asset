@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f869b1a60c1dd342b41d5df3e483ea0, type: 3}
   m_Name: DemonMeleeAttackData
   m_EditorClassIdentifier: 
-  leftDamage: 10
-  rightDamage: 20
+  leftDamage: 89
+  rightDamage: 89

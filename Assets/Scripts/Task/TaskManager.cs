@@ -76,7 +76,6 @@ public class MainTask
             task.RestTask();
         }
         isFinished = false;
-        InitializeTaskStep(0);
     }
 
     public void InitializeTaskStep(int id)

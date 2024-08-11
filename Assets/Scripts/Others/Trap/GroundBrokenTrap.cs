@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundBrokenTrap : MonoBehaviour
+public class GroundBrokenTrap : MonoBehaviour, IResetable
 {
     [SerializeField] private float brokenDelayTime;
 
@@ -20,5 +20,10 @@ public class GroundBrokenTrap : MonoBehaviour
         gameObject.SetActive(false);
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("GroundBroken"), transform.position);
         ObjectPool.Instance.SpawnFromPool("GroundBroken", transform.position, transform.rotation);
+    }
+
+    public void ResetBaseState()
+    {
+        gameObject.SetActive(true);
     }
 }

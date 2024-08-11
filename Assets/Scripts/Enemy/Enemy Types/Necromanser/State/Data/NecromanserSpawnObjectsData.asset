@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NecromanserSpawnObjectsData
   m_EditorClassIdentifier: 
   amountOfObject: 10
-  damage: 20
+  damage: 153
   speed: 35
   timeLife: 3
   spawnDelayTime: 0.5

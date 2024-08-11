@@ -20,12 +20,12 @@ public class EquipSystem : Singleton<EquipSystem>
     
     void Start()
     {
-        numberOfItem = 2;
+        //numberOfItem = 2;
         ChangeNumberOfItem?.Invoke();
     }
     private void Update()
     {
-        if (InputManager.Instance.pressTKey && numberOfItem > 0)
+        if (InputManager.Instance.pressTKey && numberOfItem > 0 && !GameManager.Instance.isLoss)
         {
             UsePotion(potionItem.consumeValue);
         }
@@ -34,7 +34,8 @@ public class EquipSystem : Singleton<EquipSystem>
 
     public void AddPotionItem(int number)
     {
-        NoticePickUpManager.Instance.Notice(potionItem.image, "+1 "+ number + " " + potionItem.name);
+        if(!SaveManager.Instance.isLoading)
+            NoticePickUpManager.Instance.Notice(potionItem.image,  "+ " + number + " " + potionItem.name);
         numberOfItem += number;
         ChangeNumberOfItem?.Invoke();
     }
@@ -63,6 +64,11 @@ public class EquipSystem : Singleton<EquipSystem>
             item.transform.SetParent(slotWeapon);
         }
 
+    }
+
+    public void ResetEquip()
+    {
+        numberOfItem = 0;
     }
 
 }

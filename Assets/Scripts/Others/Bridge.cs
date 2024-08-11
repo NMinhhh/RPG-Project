@@ -13,7 +13,8 @@ public class Bridge : MonoBehaviour, IDamageable
     [SerializeField] private GameObject block;
     [SerializeField] private ParticleSystem fireEffect;
     [SerializeField] private GameObject explodeEffect;
-    [SerializeField] private int amountOfDamage;
+    [SerializeField] private int damageAmount;
+    private int currentDamageAmount;
 
     private Animator anim;
     private CapsuleCollider capsuleCollider;
@@ -27,6 +28,7 @@ public class Bridge : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        currentDamageAmount = damageAmount;
         dissolveAmount = 1;
         anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -84,9 +86,9 @@ public class Bridge : MonoBehaviour, IDamageable
 
     public void Damage(float damage)
     {
-        amountOfDamage--;
+        currentDamageAmount--;
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Damage Hit"), transform.position);
-        if (amountOfDamage == 0)
+        if (currentDamageAmount <= 0)
         {
             Die();
         }
@@ -94,6 +96,7 @@ public class Bridge : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        isFinishFall = true;
         SaveManager.Instance.SaveBirdgeID(id);
         capsuleCollider.enabled = false;
         blockHolder.SetActive(false);
@@ -111,6 +114,8 @@ public class Bridge : MonoBehaviour, IDamageable
 
     public void ResetBridge()
     {
+        currentDamageAmount = damageAmount;
+        fireEffect.Stop();
         dissolveAmount = 1;
         Appear();
         anim.SetTrigger("Idle");

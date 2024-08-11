@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d7f5d02656fdc3438dc652ab958f34d, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
   maxStamina: 300
   speed: 8
   gravity: -19.62
   jumpSpeed: 10
   jumpHeight: 1
   centerOffset: {x: 0, y: 0.25, z: 0}
-  radius: 0.3
+  radius: 0.25
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128

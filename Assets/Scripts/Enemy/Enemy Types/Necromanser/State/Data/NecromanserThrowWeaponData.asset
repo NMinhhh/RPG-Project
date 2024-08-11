@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: NecromanserThrowWeaponData
   m_EditorClassIdentifier: 
   speed: 30
-  damage: 50
+  damage: 197
   moveTime: 1
   throwTime: 0.5
   catchTime: 0.5

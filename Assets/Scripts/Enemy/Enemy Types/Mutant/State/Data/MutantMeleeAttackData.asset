@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MutantMeleeAttackData
   m_EditorClassIdentifier: 
   leftDamage: 0
-  rightDamage: 30
+  rightDamage: 231

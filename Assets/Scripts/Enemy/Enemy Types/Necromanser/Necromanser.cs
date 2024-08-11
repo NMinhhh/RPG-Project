@@ -77,8 +77,10 @@ public class Necromanser : Enemy
     public override void ResetEnemy()
     {
         base.ResetEnemy();
+        if (StateMachine == null) return;
         StateMachine.ChangeState(PlayerDetectedState);
     }
+
     public override void Die()
     {
         base.Die();

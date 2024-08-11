@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 811417d7be963d04986549d80c42bfa2, type: 3}
   m_Name: MutantSwingAttackData
   m_EditorClassIdentifier: 
-  damageRight: 10
-  damageLeft: 30
+  damageRight: 241
+  damageLeft: 241

@@ -18,7 +18,7 @@ public class CanvasManager : Singleton<CanvasManager>
         foreach (UIObject UIObj in uIObjects)
         {
             UIObj.obj.SetActive(false);
-            if (UIObj.name == UIObject.UIName.MenuGame)
+            if (UIObj.name == UIObject.UIName.MenuHome)
                 UIObj.obj.SetActive(true);
         }
     }
@@ -93,7 +93,8 @@ public class UIObject
         PlayerStatsBar,
         NoticePickUp,
         Dialog,
-        MenuGame,
+        MenuHome,
+        MenuGamePlay,
         Settings,
     }
 

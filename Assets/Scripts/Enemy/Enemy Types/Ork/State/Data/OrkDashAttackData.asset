@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OrkDashAttackData
   m_EditorClassIdentifier: 
   dashTime: 1.5
-  leftDamage: 20
-  rightDamage: 20
+  leftDamage: 231
+  rightDamage: 231
   dashSpeed: 15
   dashDelayTime: 0.2

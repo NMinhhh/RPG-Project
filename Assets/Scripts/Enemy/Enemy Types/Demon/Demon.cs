@@ -72,21 +72,16 @@ public class Demon : Enemy
         }
     }
 
-    public override void ResetEnemy()
-    {
-        base.ResetEnemy();
-        StateMachine.ChangeState(IdleState);
-    }
-
     public override void OnObjectSpawn()
     {
         base.OnObjectSpawn();
     }
 
-    private void OnEnable()
+    public override void ResetEnemy()
     {
-        if (StateMachine != null)
-            StateMachine.ChangeState(PlayerDetectedState);
+        base.ResetEnemy();
+        if (StateMachine == null) return;
+        StateMachine.ChangeState(IdleState);
     }
 
     public override void Die()

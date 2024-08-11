@@ -6,19 +6,22 @@ using static UIObject;
 
 public class MenuGameManager : Singleton<MenuGameManager>
 {
-
+    [Header("Home")]
     [SerializeField] private GameObject menuIdle;
     [SerializeField] private GameObject menuPlay;
     [SerializeField] private GameObject vcam;
+    [Header("Gameplay")]
 
     [SerializeField] private List<GameObject> settingObj;
 
     public bool isOpen {  get; private set; }
 
+    public bool isPlaying { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
-        if (SaveSystem.LoadFile(SaveManager.Instance.GetFileName()) != null)
+        if (SaveSystem.LoadFile(SaveManager.Instance.GetSaveName(SaveManager.SaveType.GameData)) != null)
         {
             menuIdle.SetActive(false);
             menuPlay.SetActive(true);
@@ -39,7 +42,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
             if(!isOpen)
             {
                 isOpen = true;
-                CanvasManager.Instance.OpenUI(UIObject.UIName.MenuGame);
+                CanvasManager.Instance.OpenUI(UIObject.UIName.MenuGamePlay);
                 CanvasManager.Instance.CursorUnLock();
                 InputManager.Instance.CanNotGetInput();
                 Time.timeScale = 0;
@@ -47,7 +50,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
             else
             {
                 isOpen = false;
-                CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGame);
+                CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGamePlay);
                 CanvasManager.Instance.CloseUI(UIObject.UIName.Settings);
                 if (!InventorySystem.Instance.isOpen)
                 {
@@ -60,6 +63,8 @@ public class MenuGameManager : Singleton<MenuGameManager>
         }
     }
 
+    #region Home
+
     public void SetCameraHome(bool state)
     {
         vcam.SetActive(state);
@@ -67,41 +72,96 @@ public class MenuGameManager : Singleton<MenuGameManager>
 
     public void OnButtonStartNewGame()
     {
-        SceneManager.Instance.LoadScene(StartNewGame);
+        SceneManager.Instance.LoadScene(StartNewGame, true);
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
     }
 
     public void StartNewGame()
     {
+        isPlaying = true;
         isOpen = false;
+        SaveManager.Instance.LoadGame();
         menuPlay.SetActive(true);
         menuIdle.SetActive(false);
+        SetCameraHome(false);
         CanvasManager.Instance.LoadUIGamePlay();
-        TaskManager.Instance.Initialize(0);
-        TaskManager.Instance.GetMainTask().InitializeTaskStep(0);
+        GameManager.Instance.RespawnPlayer();
+        MenuGameManager.Instance.SetCameraHome(false);
     }
 
-    public void OnButtonContinue()
+    public void OnButtonContinueHome()
     {
-        SceneManager.Instance.LoadScene(Continue);
+        SceneManager.Instance.LoadScene(ContinueHome, true);
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
     }
 
-    public void Continue()
+    public void ContinueHome()
+    {
+        isOpen = false;
+        isPlaying = true;
+        Time.timeScale = 1;
+        SetCameraHome(false);
+        SaveManager.Instance.LoadGame();
+        CanvasManager.Instance.CloseUI(UIObject.UIName.MenuHome);
+        CanvasManager.Instance.CloseUI(UIObject.UIName.Settings);
+        GameManager.Instance.RespawnPlayer();
+        CanvasManager.Instance.LoadUIGamePlay();
+    }
+
+    public void ExitGame()
+    {
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
+        Application.Quit();
+    }
+
+    #endregion
+
+
+    #region Gameplay
+
+    public void ContinueGamePlay()
     {
         Time.timeScale = 1;
-        isOpen = false;
-        CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGame);
+        CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGamePlay);
         CanvasManager.Instance.CloseUI(UIObject.UIName.Settings);
-        CanvasManager.Instance.CursorLock();
-        InputManager.Instance.CanGetInput();
-        CanvasManager.Instance.LoadUIGamePlay();
-        TaskManager.Instance.GetMainTask().InitializeTaskStep(0);
+        if (!InventorySystem.Instance.isOpen)
+        {
+            CanvasManager.Instance.CursorLock();
+            InputManager.Instance.CanGetInput();
+        }
     }
+
+    public void OnButtonExitGamePlay()
+    {
+        SceneManager.Instance.LoadScene(ExitGamePlay, false);
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
+    }
+
+    void ExitGamePlay()
+    {
+        isPlaying = false;
+        Time.timeScale = 1;
+        CanvasManager.Instance.CursorUnLock();
+        InputManager.Instance.CanNotGetInput();
+        CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGamePlay);
+        CanvasManager.Instance.OpenUI(UIObject.UIName.MenuHome);
+        menuPlay.SetActive(true);
+        SetCameraHome(true);
+        TaskManager.Instance.GetMainTask().ResetMainTask();
+        GameManager.Instance.RespawnPlayer();
+        SaveManager.Instance.SaveAllData();
+        InventorySystem.Instance.ResetInventory();
+        EquipSystem.Instance.ResetEquip();
+    }
+
+    #endregion
 
     public void OpenSettings()
     {
-        CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGame);
+        if (!isPlaying)
+            CanvasManager.Instance.CloseUI(UIObject.UIName.MenuHome);
+        else
+            CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGamePlay);
         CanvasManager.Instance.OpenUI(UIObject.UIName.Settings);
         Open("Audio");
     }
@@ -109,7 +169,10 @@ public class MenuGameManager : Singleton<MenuGameManager>
     public void CloseSettings()
     {
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
-        CanvasManager.Instance.OpenUI(UIObject.UIName.MenuGame);
+        if(!isPlaying)
+            CanvasManager.Instance.OpenUI(UIObject.UIName.MenuHome);
+        else
+            CanvasManager.Instance.OpenUI(UIObject.UIName.MenuGamePlay);
         CanvasManager.Instance.CloseUI(UIObject.UIName.Settings);
     } 
     
@@ -129,15 +192,5 @@ public class MenuGameManager : Singleton<MenuGameManager>
         }
     }
 
-    public void ExitGameGamePlay()
-    {
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
-        menuPlay.SetActive(true);
-        vcam.SetActive(true);
-    }
-
-    public void ExitGame()
-    {
-        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
-    }
+    
 }

@@ -7,8 +7,9 @@ using UnityEngine;
 public class SceneManager : Singleton<SceneManager>
 {
     [SerializeField] private float loadTime;
-    [SerializeField] private float finishTransitionTime;
+    [SerializeField] private float transisionTime;
     [SerializeField] private TransitionEffect transitionEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,30 +31,37 @@ public class SceneManager : Singleton<SceneManager>
     {
         InputManager.Instance.CanNotGetUIInput();
         transitionEffect.StartTransition();
-        yield return new WaitForSeconds(loadTime);
+        yield return new WaitForSeconds(transisionTime);
         action?.Invoke();
-        yield return new WaitForSeconds(finishTransitionTime);
+        yield return new WaitForSeconds(loadTime);
         transitionEffect.StopTransition();
+        yield return new WaitForSeconds(transisionTime);
         InputManager.Instance.CanGetUIInput();
         GameManager.Instance.SetGameState(false);
     }
 
-    public void LoadScene(Action action)
+    public void LoadScene(Action action, bool isTaskInit)
     {
-        StartCoroutine(Load(action));
+        Time.timeScale = 1;
+        StartCoroutine(Load(action, isTaskInit));
     }
 
-    IEnumerator Load(Action action)
+    IEnumerator Load(Action action, bool isTaskInit)
     {
         InputManager.Instance.CanNotGetUIInput();
         transitionEffect.StartTransition();
-        SaveManager.Instance.LoadGame();
         yield return new WaitForSeconds(loadTime);
-        GameManager.Instance.RespawnPlayer();
-        MenuGameManager.Instance.SetCameraHome(false);
-        yield return new WaitForSeconds(finishTransitionTime);
-        transitionEffect.StopTransition();
         action?.Invoke();
-        InputManager.Instance.CanGetUIInput();
+        yield return new WaitForSeconds(transisionTime);
+        transitionEffect.StopTransition();
+        if(MenuGameManager.Instance.isPlaying && !IntroManager.Instance.isPlayIntro)
+            InputManager.Instance.CanGetUIInput();
+        if (isTaskInit)
+        {
+            TaskManager.Instance.GetMainTask().InitializeTaskStep(0);
+        }
     }
+    
+
+
 }

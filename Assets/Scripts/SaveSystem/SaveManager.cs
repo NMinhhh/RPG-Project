@@ -5,8 +5,15 @@ using UnityEngine;
 
 public class SaveManager : Singleton<SaveManager>
 {
-    private string save = "Save_1";
-    [SerializeField] protected SaveData saveData = new SaveData();
+    public enum SaveType
+    {
+        Setting,
+        GameData
+    }
+
+    private string save = "Save";
+    [SerializeField] protected SettingData saveSettingData = new SettingData();
+    [SerializeField] protected SaveGameData saveGameData = new SaveGameData();
 
     public static event Action<float> loadSensetivity;
 
@@ -15,138 +22,176 @@ public class SaveManager : Singleton<SaveManager>
     void Start()
     {
         SaveSystem.Initilize();
-        //LoadGame();
         LoadSettingData();
     }
 
     private void OnApplicationQuit()
     {
-        SaveGame();
+        SaveAllData();
     }
 
-    public string GetFileName()
-    {
-        return save;
-    }
 
     #region Save
 
-    public void SaveGame()
+    public string GetSaveName(SaveType saveType)
     {
-        string jsonString = JsonUtility.ToJson(this.saveData);
-        SaveSystem.SaveFile(save, jsonString);
+        return save + "_" + saveType;
+    }
+
+    public void SaveAllData()
+    {
+        SaveData(SaveType.Setting);
+        SaveData(SaveType.GameData);
+    }
+
+    public void SaveData(SaveType saveType)
+    {
+        string jsonString;
+        switch (saveType)
+        {
+            default:
+                return;
+            case SaveType.Setting:
+                jsonString = JsonUtility.ToJson(this.saveSettingData);
+                SaveSystem.SaveFile(GetSaveName(saveType), jsonString);
+                break;
+            case SaveType.GameData:
+                jsonString = JsonUtility.ToJson(this.saveGameData);
+                SaveSystem.SaveFile(GetSaveName(saveType), jsonString);
+                break;
+        }
+       
     }
 
     public void SaveMusicVolume(float volume)
     {
-        saveData.musicVolume = volume;
+        saveSettingData.musicVolume = volume;
     }
 
     public void SaveSoundVolume(float volume)
     {
-        saveData.soundVolume = volume;
+        saveSettingData.soundVolume = volume;
     }
 
     public void SaveSensetivity(float sensetivity)
     {
-        saveData.sensetivity = sensetivity;
+        saveSettingData.sensetivity = sensetivity;
     }
 
     public void SaveTask(int taskId)
     {
-        saveData.taskId = taskId;
+        saveGameData.taskId = taskId;
     }
 
     public void SaveChestOpenedId(int id)
     {
-        saveData.chestOpenedId.Add(id);
+        saveGameData.chestOpenedId.Add(id);
     }
     
     public void SaveItemWorldId(int id)
     {
-        saveData.itemWorldId.Add(id);
+        saveGameData.itemWorldId.Add(id);
     }
 
     public void SaveItem(string name)
     {
-        saveData.itemName.Add(name);
+        saveGameData.itemName.Add(name);
     }
 
 
     public void SaveItemEquipped(string name)
     {
-        saveData.itemName.Remove(name);
-        saveData.itemEquippedName = name;
+        saveGameData.itemName.Remove(name);
+        saveGameData.itemEquippedName = name;
     }
 
     public void SaveBirdgeID(int id)
     {
-        saveData.bridgeId.Add(id);
+        saveGameData.bridgeId.Add(id);
     }
 
     public void SavePotionAmount(int amount)
     {
-        saveData.potionAmount = amount;
+        saveGameData.potionAmount = amount;
     }
 
     #endregion
 
-    #region Load
-
-    public void LoadGame()
-    {
-        isLoading = true;
-        StartCoroutine(LoadGameData());
-    }
-
-    IEnumerator LoadGameData() 
-    { 
-        yield return new WaitForSeconds(0);
-        if (this.saveData != null)
-        {
-            LoadTask(saveData);
-            LoadChestOpenObj(saveData);
-            LoadItemWolrd(saveData);
-            LoadItem(saveData);
-            LoadItemEquipped(saveData);
-            LoadBridge(saveData);
-        }
-        isLoading = false;
-    }
+    #region Load Setting
 
     public void LoadSettingData()
     {
-        string jsonString = SaveSystem.LoadFile(this.save);
-        this.saveData = JsonUtility.FromJson<SaveData>(jsonString);
+        string jsonString = SaveSystem.LoadFile(GetSaveName(SaveType.Setting));
+        this.saveSettingData = JsonUtility.FromJson<SettingData>(jsonString);
 
-        if (this.saveData != null)
+        if (this.saveSettingData != null)
         {
-            LoadVolume(saveData);
-            LoadSensetivity(saveData);
+            LoadVolume(saveSettingData);
+            LoadSensetivity(saveSettingData);
+        }
+        else
+        {
+            SaveData(SaveType.Setting);
         }
     }
 
-    public void LoadVolume(SaveData saveData)
+    public void LoadVolume(SettingData saveSettingData)
     {
-        SoundFXManager.Instance.LoadSliderValue(saveData.soundVolume, saveData.musicVolume);
+        SoundFXManager.Instance.LoadSliderValue(saveSettingData.soundVolume, saveSettingData.musicVolume);
     }
 
-    public void LoadSensetivity(SaveData saveData)
+    public void LoadSensetivity(SettingData saveSettingData)
     {
-        loadSensetivity?.Invoke(saveData.sensetivity);
+        loadSensetivity?.Invoke(saveSettingData.sensetivity);
     }
 
     public float GetSesetivity()
     {
-        return saveData.sensetivity;
+        return saveSettingData.sensetivity;
     }
 
-    public void LoadTask(SaveData saveData)
+
+
+    #endregion
+
+    #region Load Game
+
+    public void LoadGame()
+    {
+        isLoading = true;
+        string jsonString = SaveSystem.LoadFile(GetSaveName(SaveType.GameData));
+        this.saveGameData = JsonUtility.FromJson<SaveGameData>(jsonString);
+        if(this.saveGameData != null)
+        {
+            LoadGameData(saveGameData);
+        }
+        else
+        {
+            SaveData(SaveType.GameData);
+        }
+    }
+
+    void LoadGameData(SaveGameData saveGameData)
+    {
+        if (saveGameData != null)
+        {
+            LoadTask(saveGameData);
+            LoadChestOpenObj(saveGameData);
+            LoadItemWolrd(saveGameData);
+            LoadItem(saveGameData);
+            LoadItemEquipped(saveGameData);
+            LoadBridge(saveGameData);
+            LoadPotionAmount(saveGameData);
+        }
+        isLoading = false;
+    }
+
+    public void LoadTask(SaveGameData saveData)
     {
         TaskManager.Instance.Initialize(saveData.taskId);
     }
 
-    public void LoadChestOpenObj(SaveData saveData)
+    public void LoadChestOpenObj(SaveGameData saveData)
     {
         foreach (int id in saveData.chestOpenedId)
         {
@@ -155,7 +200,7 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    public void LoadItemWolrd(SaveData saveData)
+    public void LoadItemWolrd(SaveGameData saveData)
     {
         foreach (int id in saveData.itemWorldId)
         {
@@ -165,25 +210,25 @@ public class SaveManager : Singleton<SaveManager>
     }
 
 
-    public void LoadItem(SaveData saveData)
+    public void LoadItem(SaveGameData saveData)
     {
-        foreach(string itemName in saveData.itemName)
+        foreach (string itemName in saveData.itemName)
         {
             ItemData itemData = GameManager.Instance.GetItemData(itemName);
             InventorySystem.Instance.AddToInventory(itemData);
         }
     }
 
-    public void LoadItemEquipped(SaveData saveData)
+    public void LoadItemEquipped(SaveGameData saveData)
     {
-        if(saveData.itemEquippedName != null  && saveData.itemEquippedName != "")
+        if (saveData.itemEquippedName != null && saveData.itemEquippedName != "")
         {
             ItemData itemData = GameManager.Instance.GetItemData(saveData.itemEquippedName);
             EquipSystem.Instance.EquipWeapon(itemData);
         }
     }
 
-    public void LoadBridge(SaveData saveData)
+    public void LoadBridge(SaveGameData saveData)
     {
         foreach (int id in saveData.bridgeId)
         {
@@ -192,9 +237,9 @@ public class SaveManager : Singleton<SaveManager>
         }
     }
 
-    public void LoadPotionAmount(SaveData saveData)
+    public void LoadPotionAmount(SaveGameData saveData)
     {
-        EquipSystem.Instance.AddPotionItem(saveData.potionAmount - 2);
+        EquipSystem.Instance.AddPotionItem(saveData.potionAmount);
     }
 
     #endregion

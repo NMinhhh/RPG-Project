@@ -69,7 +69,7 @@ public class Mutant : Enemy
         if(currentHealth <= maxHelth / 2 && !isEquip)
         {
             isEquip = true;
-            WeaponsController.ChangeRightWeapon(newRightWeapon);
+            currentRightWeapon.gameObject.SetActive(false);
             StateMachine.ChangeState(DrawWeaponState);
             return;
         }
@@ -86,6 +86,7 @@ public class Mutant : Enemy
 
     public void MutantChange()
     {
+        WeaponsController.ChangeRightWeapon(newRightWeapon);
         Anim.SetBool("IsEquip", true);
         sheath.SetActive(false);
         newRightWeapon.gameObject.SetActive(true);
@@ -96,7 +97,15 @@ public class Mutant : Enemy
     public override void ResetEnemy()
     {
         base.ResetEnemy();
+        if (StateMachine == null) return;
+        WeaponsController.ChangeRightWeapon(currentRightWeapon);
+        isEquip = false;
+        Anim.SetBool("IsEquip", false);
+        sheath.SetActive(true);
+        newRightWeapon.gameObject.SetActive(false);
+        radiusCheckToAttack = data.radiusCheckToAttack;
         StateMachine.ChangeState(PlayerDetectedState);
+        effectRage.SetActive(false);
     }
 
     protected override void OnDrawGizmos()

@@ -83,8 +83,10 @@ public class Ork : Enemy
     public override void ResetEnemy()
     {
         base.ResetEnemy();
+        if (StateMachine == null) return;
         StateMachine.ChangeState(PlayerDetectedState);
     }
+
 
     protected override void OnDrawGizmos()
     {

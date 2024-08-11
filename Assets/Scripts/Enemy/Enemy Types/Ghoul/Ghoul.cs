@@ -68,8 +68,8 @@ public class Ghoul : Enemy
     public override void ResetEnemy()
     {
         base.ResetEnemy();
+        if (StateMachine == null) return;
         StateMachine.ChangeState(PlayerDetectedState);
     }
-
 
 }

@@ -32,9 +32,15 @@ public class GameManager : Singleton<GameManager>
 
     public void RespawnPlayer()
     {
-        player.gameObject.transform.position = respawnPoint[TaskManager.Instance.currentTask - 1].position;
+        player.Respawn();
+        SetGameState(false);
     }
 
+
+    public Vector3 GetRespawnPoint()
+    {
+        return respawnPoint[TaskManager.Instance.currentTask].position;
+    }
 
     public Chest GetChest(int id)
     {

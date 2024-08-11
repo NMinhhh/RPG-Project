@@ -198,18 +198,24 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
 
     public void Die()
     {
-        SceneManager.Instance.LoadSceneRespawn(Respawn);
+        SceneManager.Instance.LoadScene(GameManager.Instance.RespawnPlayer, true);
     }
 
     public void Respawn()
     {
-        GameManager.Instance.RespawnPlayer();
         currentHealth = data.maxHealth;
         currentComboAttack = 0;
         isDie = false;
         isHurt = false;
         PlayerStats.Instance.SetStamina(currentStamina, currentStamina);
         PlayerStats.Instance.SetHealth(currentHealth, data.maxHealth);
+        transform.position = GameManager.Instance.GetRespawnPoint();
+        if (character)
+        {
+            character.enabled = false;
+            transform.position = GameManager.Instance.GetRespawnPoint();
+            character.enabled = true;
+        }
         if (StateMachine != null)
             StateMachine.ChangeState(IdleState);
         TaskManager.Instance.GetMainTask().ResetMainTask();

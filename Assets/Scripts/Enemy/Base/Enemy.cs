@@ -425,15 +425,18 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
         isDie = false;
         maxHelth = data.MaxHealthData;
         currentHealth = maxHelth;
-        if(!isBoss)
+        if(HealthBar!= null)
         {
-            HealthBar.UpdateHealth(currentHealth, maxHelth);
-            HealthBar.ResetHealthBar();
-        }
-        if (isBoss)
-        {
-            BossStats.Instance.UpdateHealthBar(0);
-            CancelInvoke();
+            if (!isBoss)
+            {
+                HealthBar.UpdateHealth(currentHealth, maxHelth);
+                HealthBar.ResetHealthBar();
+            }
+            if (isBoss)
+            {
+                BossStats.Instance.UpdateHealthBar(0);
+                CancelInvoke();
+            }
         }
         currentAODToHurt = 0;
         currentCombo = 0;

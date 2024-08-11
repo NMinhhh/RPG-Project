@@ -109,4 +109,15 @@ public class InventorySystem : Singleton<InventorySystem>
         }
         return false;
     }
+
+    public void ResetInventory()
+    {
+        foreach (GameObject slot in slotList)
+        {
+            if (slot.transform.childCount != 0)
+            {
+                ObjectPool.Instance.AddInPool("Item UI",slot.transform.GetChild(0).gameObject);
+            }
+        }
+    }
 }

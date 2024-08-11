@@ -8,7 +8,6 @@ public class CutsceneTaskStep : TaskStep, IResetable
 
     public override void StartTask()
     {
-        if (isFinished) return;
         InputManager.Instance.CanNotGetInput();
         IntroManager.Instance.PlayCutScene(introName);
     }
