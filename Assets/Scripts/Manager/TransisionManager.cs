@@ -29,7 +29,7 @@ public class TransisionManager : Singleton<TransisionManager>
         action?.Invoke();
         yield return new WaitForSeconds(transisionTime);
         transitionEffect.StopTransition();
-        if(MenuGameManager.Instance.isPlaying && !IntroManager.Instance.isPlayIntro)
+        if(GameManager.Instance.isPlaying && !IntroManager.Instance.isPlayIntro)
             InputManager.Instance.CanGetUIInput();
         if (isTaskInit)
         {

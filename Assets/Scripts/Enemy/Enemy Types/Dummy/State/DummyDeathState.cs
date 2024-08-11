@@ -34,6 +34,10 @@ public class DummyDeathState : EnemyDeathState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (isFinishAnimation)
+        {
+            enemy.Die();
+        }
     }
 
     public override void PhysicUpdate()

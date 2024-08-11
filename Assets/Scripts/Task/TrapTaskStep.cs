@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class TrapTaskStep : TaskStep, IResetable
 {
+    [Header("Trap Demo")]
+    [SerializeField] private GroundBrokenTrap groundBrokenDemon;
+    [Header("Trap Obj")]
     [SerializeField] private GameObject[] trapObject;
+
     public void ResetBaseState()
     {
         foreach (var trap in trapObject)
@@ -15,10 +19,12 @@ public class TrapTaskStep : TaskStep, IResetable
                 resetable.ResetBaseState();
             }
         }
+        groundBrokenDemon.ResetBaseState();
     }
 
     public override void StartTask()
     {
+        groundBrokenDemon.Broken();
         FinishTaskStep();
     }
 }

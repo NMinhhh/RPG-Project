@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,11 +9,13 @@ public class NoticePickUp : MonoBehaviour, IPooledObject
     [SerializeField] private Text text;
     [SerializeField] private float appearTime;
     [SerializeField] private float disappearTime;
+    private bool isAppear;
 
-
+    
 
     IEnumerator Disappear()
     {
+        isAppear = true;
         yield return new WaitForSeconds(appearTime);
         float timer = 0;
         while (timer <= disappearTime)
@@ -27,6 +28,7 @@ public class NoticePickUp : MonoBehaviour, IPooledObject
                 break;
             yield return null;
         }
+        isAppear = false;
         ObjectPool.Instance.AddInPool("NoticePickUp", this.gameObject);
     }
 
@@ -37,6 +39,12 @@ public class NoticePickUp : MonoBehaviour, IPooledObject
         StartCoroutine(Disappear());
     }
 
+    private void OnEnable()
+    {
+        if(isAppear)
+            ObjectPool.Instance.AddInPool("NoticePickUp", this.gameObject);
+    }
+  
     public void OnObjectSpawn()
     {
         this.bg.color = new Color(0, 0, 0, .5f);

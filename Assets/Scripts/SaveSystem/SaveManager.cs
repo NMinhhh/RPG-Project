@@ -27,7 +27,8 @@ public class SaveManager : Singleton<SaveManager>
 
     private void OnApplicationQuit()
     {
-        SaveAllData();
+        if(GameManager.Instance.isPlaying)
+            SaveAllData();
     }
 
 

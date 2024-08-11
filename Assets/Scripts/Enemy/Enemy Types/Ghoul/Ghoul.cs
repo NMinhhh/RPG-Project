@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class Ghoul : Enemy
@@ -64,6 +65,14 @@ public class Ghoul : Enemy
     {
         base.Die();
     }
+
+    public override void OnObjectSpawn()
+    {
+        base.OnObjectSpawn();
+        if (StateMachine == null) return;
+        StateMachine.ChangeState(PlayerDetectedState);
+    }
+
 
     public override void ResetEnemy()
     {

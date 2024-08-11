@@ -92,7 +92,6 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        isFirstStart = true;
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         alive = transform.Find("Alive").gameObject;
         Anim = alive.GetComponent<Animator>();
@@ -133,6 +132,7 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
         {
             SpawnCooldown();
         }
+        isFirstStart = true;
     }
 
     private void OnEnable()
@@ -401,19 +401,20 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
         isBoss = data.isBoss;
         isHurt = false;
         isDie = false;
-        if (!HealthBar)
+        if (!isBoss)
         {
-            if (!isBoss)
+            if (!HealthBar)
             {
                 HealthBar = GetComponentInChildren<EnemyHealthBar>();
                 HealthBar.ResetHealthBar();
             }
-            else
-            {
-                BossStats.Instance.SetHealth(currentHealth, maxHelth);
-                BossStats.Instance.SetName(this.name);
-            }
         }
+        else
+        {
+            BossStats.Instance.SetHealth(currentHealth, maxHelth);
+            BossStats.Instance.SetName(this.name);
+        }
+        
 
     }
     #endregion
@@ -425,24 +426,28 @@ public class Enemy : MonoBehaviour, IDamageable, IKnockBackable, IPooledObject
         isDie = false;
         maxHelth = data.MaxHealthData;
         currentHealth = maxHelth;
-        if(HealthBar!= null)
+        if (!isBoss)
         {
-            if (!isBoss)
+            if(HealthBar != null)
             {
                 HealthBar.UpdateHealth(currentHealth, maxHelth);
                 HealthBar.ResetHealthBar();
             }
-            if (isBoss)
-            {
-                BossStats.Instance.UpdateHealthBar(0);
-                CancelInvoke();
-            }
         }
-        currentAODToHurt = 0;
-        currentCombo = 0;
-        transform.localPosition = startPos;
-        transform.localEulerAngles = startAngle;
-        GetComponent<Collider>().enabled = true;
+        else
+        {
+            BossStats.Instance.UpdateHealthBar(0);
+            CancelInvoke();
+        }
+        if (isFirstStart)
+        {
+            currentAODToHurt = data.amountOfDamageToHurt;
+            currentCombo = 0;
+            transform.localPosition = startPos;
+            transform.localEulerAngles = startAngle;
+            GetComponent<Collider>().enabled = true;
+        }
+       
     }
 
     #endregion

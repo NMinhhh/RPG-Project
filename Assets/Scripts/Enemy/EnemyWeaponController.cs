@@ -70,8 +70,8 @@ public class EnemyWeaponController : MonoBehaviour
 
     public void EndDealDamageAll()
     {
-        if(currentLeftWeapon!= null) currentLeftWeapon.EndDealDamage();
+        if (currentLeftWeapon != null) EndDealDamageToTheLeft();
 
-        if(currentRightWeapon!= null) currentRightWeapon.EndDealDamage();
+        if (currentRightWeapon != null) EndDealDamageToTheRight();
     }
 }

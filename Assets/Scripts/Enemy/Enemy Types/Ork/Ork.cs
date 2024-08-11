@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Ork : Enemy
 {
@@ -61,18 +60,19 @@ public class Ork : Enemy
     {
         base.Update();
     }
-
     public override void Damage(float damage)
     {
         base.Damage(damage);
+        if (isDie)
+        {
+            StateMachine.ChangeState(DeathState);
+            return;
+        }
         if (isHurt && StateMachine.CurrentEnemyState != HurtState && !isDie && StateMachine.CurrentEnemyState != DashAttackState)
         {
             StateMachine.ChangeState(HurtState);
         }
-        if (isDie)
-        {
-            StateMachine.ChangeState(DeathState);
-        }
+       
     }
 
     public override void Die()
@@ -86,7 +86,6 @@ public class Ork : Enemy
         if (StateMachine == null) return;
         StateMachine.ChangeState(PlayerDetectedState);
     }
-
 
     protected override void OnDrawGizmos()
     {

@@ -103,7 +103,7 @@ public class Bridge : MonoBehaviour, IDamageable
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Explosion"), transform.position);
         Instantiate(explodeEffect, blockHolder.transform.position, Quaternion.identity);
         block.GetComponent<Rigidbody>().isKinematic = false;
-        anim.SetTrigger("Fall");
+        anim.SetBool("Fall", true);
         Invoke(nameof(BlockDisable), 5f);
     }
 
@@ -117,8 +117,10 @@ public class Bridge : MonoBehaviour, IDamageable
         currentDamageAmount = damageAmount;
         fireEffect.Stop();
         dissolveAmount = 1;
-        Appear();
-        anim.SetTrigger("Idle");
+        Appear(); 
+        if (anim == null)
+            anim = GetComponent<Animator>();
+        anim.SetBool("Fall", false);
         isFinishFall = false;
         capsuleCollider.enabled = false;
     }
@@ -130,6 +132,8 @@ public class Bridge : MonoBehaviour, IDamageable
         capsuleCollider.enabled = false;
         blockHolder.SetActive(false);
         block.SetActive(false);
-        anim.SetTrigger("Fall");
+        if(anim == null)
+            anim = GetComponent<Animator>();
+        anim.SetBool("Fall", true);
     }
 }

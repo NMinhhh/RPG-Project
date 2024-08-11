@@ -15,7 +15,7 @@ public class GroundBrokenTrap : MonoBehaviour, IResetable
         }
     }
 
-    void Broken()
+    public void Broken()
     {
         gameObject.SetActive(false);
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("GroundBroken"), transform.position);
@@ -24,6 +24,7 @@ public class GroundBrokenTrap : MonoBehaviour, IResetable
 
     public void ResetBaseState()
     {
+        GetComponent<Collider>().enabled = true;
         gameObject.SetActive(true);
     }
 }

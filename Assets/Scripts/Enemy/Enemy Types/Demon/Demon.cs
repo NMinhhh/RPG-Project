@@ -62,19 +62,23 @@ public class Demon : Enemy
     public override void Damage(float damage)
     {
         base.Damage(damage);
+        if (isDie)
+        {
+            StateMachine.ChangeState(DeathState);
+            return;
+        }
         if (isHurt && StateMachine.CurrentEnemyState != HurtState && !isDie)
         {
             StateMachine.ChangeState(HurtState);
         }
-        if (isDie)
-        {
-            StateMachine.ChangeState(DeathState);
-        }
+       
     }
 
     public override void OnObjectSpawn()
     {
         base.OnObjectSpawn();
+        if (StateMachine == null) return;
+        StateMachine.ChangeState(IdleState);
     }
 
     public override void ResetEnemy()

@@ -31,7 +31,7 @@ public class Chest : MonoBehaviour, IInteracable
             boxCollider = GetComponent<BoxCollider>();
         isOpen = true;
         boxCollider.enabled = false;
-        chestTopObj.transform.eulerAngles = new Vector3(-90, 0, 0);
+        chestTopObj.transform.localEulerAngles = new Vector3(-90, 0, 0);
     }
 
     void LootItem()

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.DebugUI;
 
 public class SoundFXManager : Singleton<SoundFXManager>
 {
@@ -16,6 +17,10 @@ public class SoundFXManager : Singleton<SoundFXManager>
     [Header("Sound Slider")]
     [SerializeField] private Slider soundSlider;
 
+    [Header("Music")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private List<Sound> musicList;
+     
     [Header("Sound Source")]
     [SerializeField] private AudioSource soundSource;
     [SerializeField] private List<Sound> soundList = new List<Sound>();
@@ -27,7 +32,7 @@ public class SoundFXManager : Singleton<SoundFXManager>
     private void Start()
     {
         soundDictionary = new Dictionary<string, float>();
-        soundDictionary["Player Step"] = 0f;
+        soundDictionary["Damage Hit"] = 0f;
     }
 
     private void Update()
@@ -37,6 +42,8 @@ public class SoundFXManager : Singleton<SoundFXManager>
             PlaySound(GetSound(textSound),transform.position);
         }
     }
+
+    #region Slider
 
     public void LoadSliderValue(float soundVolume, float musicVolume)
     {
@@ -61,6 +68,9 @@ public class SoundFXManager : Singleton<SoundFXManager>
         SaveManager.Instance.SaveSoundVolume(volume);
     }
 
+    #endregion
+
+    #region Sound
 
     public void PlaySound(Sound sound, Vector3 pos)
     {
@@ -81,7 +91,7 @@ public class SoundFXManager : Singleton<SoundFXManager>
         {
             default:
                 return true;
-            case "Player Step":
+            case "Damage Hit":
                 return CheckCanPlayerSound(soundName);
         }
     }
@@ -92,7 +102,7 @@ public class SoundFXManager : Singleton<SoundFXManager>
         {
             float lastTime = soundDictionary[soundName];
             float soundLength = GetSound(soundName).clip.length;
-            if(Time.time > lastTime + soundLength)
+            if(Time.time > lastTime + soundLength - soundLength - 0.1f)
             {
                 soundDictionary[soundName] = Time.time;
                 return true;
@@ -117,6 +127,39 @@ public class SoundFXManager : Singleton<SoundFXManager>
         Debug.Log("Don't have " + soundName);
         return null;
     }
+
+    #endregion
+
+    #region Music
+
+    public void ChangeMusic()
+    {
+        LeanTween.value(0, 1, 2).setOnUpdate((value) =>
+        {
+            musicSource.volume = Mathf.Lerp(musicSource.volume, 0, value);
+        });
+
+    }
+
+    public void PlayMusic(Sound music)
+    {
+        musicSource.volume = 0;
+        musicSource.clip = music.clip;
+        musicSource.volume = music.volume;
+        musicSource.Play();
+    }
+
+    public Sound GetMusic(string musicName)
+    {
+        foreach (var music in musicList)
+        {
+            if (music.soundName == musicName) return music;
+        }
+        Debug.Log("Don't have " + musicName);
+        return null;
+    }
+
+    #endregion
 }
 
 [System.Serializable]

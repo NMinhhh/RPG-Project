@@ -82,6 +82,7 @@ public class MainTask
     {
         currentTaskStep = id;
         GetTaskStep().TaskActive();
+        SoundFXManager.Instance.PlayMusic(SoundFXManager.Instance.GetMusic(mainTextName));
     }
 
     public Task GetTaskStep()

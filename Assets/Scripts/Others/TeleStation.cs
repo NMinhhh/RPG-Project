@@ -21,7 +21,7 @@ public class TeleStation : MonoBehaviour,IDamageable
 
     public void Teleport()
     {
-        player.transform.position = telePos.position;
+        player.GetComponent<Player>().SetPlayerPos(telePos.position);
     }
 
     public void TriggerParticleStation()
@@ -45,6 +45,7 @@ public class TeleStation : MonoBehaviour,IDamageable
 
     public void Damage(float damage)
     {
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Damage Hit"), transform.position); 
         Die();
     }
 

@@ -19,6 +19,7 @@ public class MutantRoarState : EnemyRoarState
     public override void Enter()
     {
         base.Enter();
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Mutant Roar"), enemy.transform.position);
     }
 
     public override void Exit()

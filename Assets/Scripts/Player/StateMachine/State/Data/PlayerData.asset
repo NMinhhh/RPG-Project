@@ -18,8 +18,8 @@ MonoBehaviour:
   gravity: -19.62
   jumpSpeed: 10
   jumpHeight: 1
-  centerOffset: {x: 0, y: 0.25, z: 0}
-  radius: 0.25
+  centerOffset: {x: 0, y: 0.28, z: 0}
+  radius: 0.3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
@@ -32,7 +32,7 @@ MonoBehaviour:
   parryTime: 0.2
   blockStamina: 20
   arrow: {fileID: 8330857282276292541, guid: e17a91aa3e1172541bffad2fcdb0b8a6, type: 3}
-  arrowDamage: 35
+  arrowDamage: 100
   arrowSpeed: 30
   arrowTimeLife: 5
   shootStamina: 20

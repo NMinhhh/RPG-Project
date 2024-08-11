@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21d8c182f2388684ca989c128093e44f, type: 3}
   m_Name: MutantHurtData
   m_EditorClassIdentifier: 
-  hurtTime: 2
+  hurtTime: 3
   knockBackSpeed: 0

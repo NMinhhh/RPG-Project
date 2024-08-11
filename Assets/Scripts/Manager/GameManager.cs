@@ -14,6 +14,8 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private List<Chest> chestList;
     [SerializeField] private List<ItemWorld> itemWorldList;
     [SerializeField] private List<Bridge> bridgeList;
+
+    public bool isPlaying {  get; private set; }
     public bool isLoss {  get; private set; }
 
 
@@ -27,6 +29,12 @@ public class GameManager : Singleton<GameManager>
     void Update()
     {
         
+    }
+
+
+    public void GamePlaying(bool state)
+    {
+        isPlaying = state;
     }
 
     public void SetGameState(bool state)

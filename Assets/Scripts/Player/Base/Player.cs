@@ -330,6 +330,16 @@ public class Player : MonoBehaviour, IDamageable, IKnockBackable
 
     #region Others Function
 
+    public void SetPlayerPos(Vector3 pos)
+    {
+        if (character)
+        {
+            character.enabled = false;
+            transform.position = pos;
+            character.enabled = true;
+        }
+    }
+
     public void TrtiggerAnimation() => StateMachine.currentState.TriggerAnimation();
 
     public void FinishAnimation() => StateMachine.currentState.FinishAnimation();

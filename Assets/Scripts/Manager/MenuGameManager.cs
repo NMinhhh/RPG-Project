@@ -16,8 +16,6 @@ public class MenuGameManager : Singleton<MenuGameManager>
 
     public bool isOpen {  get; private set; }
 
-    public bool isPlaying { get; private set; }
-
     // Start is called before the first frame update
     void Start()
     {
@@ -78,7 +76,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
 
     public void StartNewGame()
     {
-        isPlaying = true;
+        GameManager.Instance.GamePlaying(true);
         isOpen = false;
         SaveManager.Instance.ResetGameData();
         SaveManager.Instance.LoadGame();
@@ -99,7 +97,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
     public void ContinueHome()
     {
         isOpen = false;
-        isPlaying = true;
+        GameManager.Instance.GamePlaying(true);
         Time.timeScale = 1;
         SetCameraHome(false);
         SaveManager.Instance.LoadGame();
@@ -122,7 +120,9 @@ public class MenuGameManager : Singleton<MenuGameManager>
 
     public void ContinueGamePlay()
     {
+        SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
         Time.timeScale = 1;
+        isOpen = false;
         CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGamePlay);
         CanvasManager.Instance.CloseUI(UIObject.UIName.Settings);
         if (!InventorySystem.Instance.isOpen)
@@ -141,6 +141,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
     void ExitGamePlay()
     {
         SaveManager.Instance.SaveAllData();
+        GameManager.Instance.GamePlaying(false);
         SceneManager.LoadScene(0);
     }
 
@@ -148,7 +149,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
 
     public void OpenSettings()
     {
-        if (!isPlaying)
+        if (!GameManager.Instance.isPlaying)
             CanvasManager.Instance.CloseUI(UIObject.UIName.MenuHome);
         else
             CanvasManager.Instance.CloseUI(UIObject.UIName.MenuGamePlay);
@@ -159,7 +160,7 @@ public class MenuGameManager : Singleton<MenuGameManager>
     public void CloseSettings()
     {
         SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Click"), transform.position);
-        if(!isPlaying)
+        if(!GameManager.Instance.isPlaying)
             CanvasManager.Instance.OpenUI(UIObject.UIName.MenuHome);
         else
             CanvasManager.Instance.OpenUI(UIObject.UIName.MenuGamePlay);

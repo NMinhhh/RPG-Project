@@ -45,6 +45,13 @@ public class Dummy : Enemy
         }
     }
 
+    public override void OnObjectSpawn()
+    {
+        base.OnObjectSpawn();
+        if (StateMachine == null) return;
+        StateMachine.ChangeState(IdleState);
+    }
+
     public override void ResetEnemy()
     {
         base.ResetEnemy();
