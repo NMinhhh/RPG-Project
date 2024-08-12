@@ -11,7 +11,7 @@ public class SaveGameData
     public List<string> itemName = new List<string>();
     public List<int> bridgeId = new List<int>();
     public string itemEquippedName;
-    public int potionAmount;
+    public int potionAmount = 2;
 
     public void Reset()
     {
@@ -22,7 +22,7 @@ public class SaveGameData
         bridgeId.Clear();
         itemName.Clear();
         itemEquippedName = null;
-        potionAmount = 0;
+        potionAmount = 2;
     }
 }
 

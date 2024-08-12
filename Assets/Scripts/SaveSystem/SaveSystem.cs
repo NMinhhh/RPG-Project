@@ -31,4 +31,13 @@ public static class SaveSystem
 
     }
 
+
+    public static void DeleteFile(string filename)
+    {
+        string file = SaveFolder + filename + ".txt";
+        if (File.Exists(file))
+        {
+            File.Delete(file);
+        }
+    }
 }

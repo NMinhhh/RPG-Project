@@ -96,6 +96,7 @@ public class UIObject
         MenuHome,
         MenuGamePlay,
         Settings,
+        Credit
     }
 
     public UIName name;

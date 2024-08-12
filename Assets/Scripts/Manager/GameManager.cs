@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class GameManager : Singleton<GameManager>
 {
     [Header("Player")]
     [SerializeField] private Player player;
+    [Header("Credit")]
+    [SerializeField] private Credit credit;
     [Header("Respawn Point")]
     [SerializeField] private List<Transform> respawnPoint;
     [Header("Item Data")]
@@ -31,6 +34,11 @@ public class GameManager : Singleton<GameManager>
         
     }
 
+
+    public void ShowCredit()
+    {
+        credit.ShowCredit();
+    }
 
     public void GamePlaying(bool state)
     {

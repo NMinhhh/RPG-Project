@@ -32,6 +32,7 @@ public class TaskManager : Singleton<TaskManager>
         if (currentTask == mainTaskList.Count)
         {
             isFinishAllTask = true;
+            GameManager.Instance.ShowCredit();
         }
         else
         {

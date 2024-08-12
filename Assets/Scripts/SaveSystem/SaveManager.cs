@@ -27,6 +27,7 @@ public class SaveManager : Singleton<SaveManager>
 
     private void OnApplicationQuit()
     {
+        SaveData(SaveType.Setting);
         if(GameManager.Instance.isPlaying)
             SaveAllData();
     }
@@ -124,12 +125,14 @@ public class SaveManager : Singleton<SaveManager>
     public void LoadSettingData()
     {
         string jsonString = SaveSystem.LoadFile(GetSaveName(SaveType.Setting));
-        this.saveSettingData = JsonUtility.FromJson<SettingData>(jsonString);
-
-        if (this.saveSettingData != null)
+        if (jsonString != null)
         {
-            LoadVolume(saveSettingData);
-            LoadSensetivity(saveSettingData);
+            this.saveSettingData = JsonUtility.FromJson<SettingData>(jsonString);
+            if (this.saveSettingData != null)
+            {
+                LoadVolume(saveSettingData);
+                LoadSensetivity(saveSettingData);
+            }
         }
         else
         {
@@ -168,10 +171,13 @@ public class SaveManager : Singleton<SaveManager>
     {
         isLoading = true;
         string jsonString = SaveSystem.LoadFile(GetSaveName(SaveType.GameData));
-        this.saveGameData = JsonUtility.FromJson<SaveGameData>(jsonString);
-        if(this.saveGameData != null)
+        if (jsonString != null)
         {
-            LoadGameData(saveGameData);
+            this.saveGameData = JsonUtility.FromJson<SaveGameData>(jsonString);
+            if (this.saveGameData != null)
+            {
+                LoadGameData(saveGameData);
+            }
         }
         else
         {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PotionWorld
   m_EditorClassIdentifier: 
   itemName: Potion
-  number: 3
+  number: 5
   image: {fileID: 21300000, guid: e25f9cb49d715ac4eab558ccd6a64f3d, type: 3}
   itemType: 1
   attackType: 0

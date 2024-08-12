@@ -76,16 +76,14 @@ public class MenuGameManager : Singleton<MenuGameManager>
 
     public void StartNewGame()
     {
+        Time.timeScale = 1;
         GameManager.Instance.GamePlaying(true);
         isOpen = false;
+        SetCameraHome(false);
         SaveManager.Instance.ResetGameData();
         SaveManager.Instance.LoadGame();
-        menuPlay.SetActive(true);
-        menuIdle.SetActive(false);
-        SetCameraHome(false);
-        CanvasManager.Instance.LoadUIGamePlay();
         GameManager.Instance.RespawnPlayer();
-        MenuGameManager.Instance.SetCameraHome(false);
+        CanvasManager.Instance.LoadUIGamePlay();
     }
 
     public void OnButtonContinueHome()
@@ -101,8 +99,6 @@ public class MenuGameManager : Singleton<MenuGameManager>
         Time.timeScale = 1;
         SetCameraHome(false);
         SaveManager.Instance.LoadGame();
-        CanvasManager.Instance.CloseUI(UIObject.UIName.MenuHome);
-        CanvasManager.Instance.CloseUI(UIObject.UIName.Settings);
         GameManager.Instance.RespawnPlayer();
         CanvasManager.Instance.LoadUIGamePlay();
     }

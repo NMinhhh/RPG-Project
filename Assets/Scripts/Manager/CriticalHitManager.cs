@@ -15,7 +15,7 @@ public class CriticalHitManager : Singleton<CriticalHitManager>
         }
         else
         {
-            return baseDamage;
+            return Mathf.FloorToInt(baseDamage);
         }
     }
 }

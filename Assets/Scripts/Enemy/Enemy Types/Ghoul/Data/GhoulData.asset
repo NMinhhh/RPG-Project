@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Ghoul
   isBoss: 0
-  MaxHealthData: 100
+  MaxHealthData: 234
   radiusCheckToChase: 0
   radiusCheckToAttack: 0
+  radiusCheckToShieldAttack: 0
   whatIsWall:
     serializedVersion: 2
     m_Bits: 0

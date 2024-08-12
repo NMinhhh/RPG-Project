@@ -24,5 +24,5 @@ MonoBehaviour:
   modelRightHand: {fileID: 0}
   modelLeftHand: {fileID: 0}
   isBow: 0
-  consumeValue: 500
+  consumeValue: 800
   item3DViewerModel: {fileID: 0}

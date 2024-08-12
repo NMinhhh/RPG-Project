@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Dummy
   isBoss: 0
-  MaxHealthData: 50
+  MaxHealthData: 156
   radiusCheckToChase: 0
   radiusCheckToAttack: 0
+  radiusCheckToShieldAttack: 0
   whatIsWall:
     serializedVersion: 2
     m_Bits: 0

@@ -11273,6 +11273,7 @@ GameObject:
   - component: {fileID: 7677186789608723923}
   - component: {fileID: 521742718447685644}
   - component: {fileID: 5317538873153316873}
+  - component: {fileID: 6494133303261151111}
   m_Layer: 8
   m_Name: MutantObj
   m_TagString: Enemy
@@ -11385,6 +11386,19 @@ MonoBehaviour:
   leftWeapon: {fileID: 10130024509088112}
   isLeft: 1
   isRight: 1
+--- !u!114 &6494133303261151111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6798818361635223822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5651711873efbcb4c803f554ddb7f9ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 2
 --- !u!1 &6895130446795063316
 GameObject:
   m_ObjectHideFlags: 0

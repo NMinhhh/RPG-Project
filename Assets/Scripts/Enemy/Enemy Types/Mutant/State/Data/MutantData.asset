@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyName: Mutant
   isBoss: 1
-  MaxHealthData: 45352
+  MaxHealthData: 15972
   radiusCheckToChase: 10
   radiusCheckToAttack: 1.84
   radiusCheckToShieldAttack: 2.57
