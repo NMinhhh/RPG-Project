@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class TaskManager : Singleton<TaskManager>
 {
+    [Header("Task Notice UI")]
+    [SerializeField] public TaskNoticeUI taskNotice;
+
+    [Header("Task List")]
     [SerializeField] private List<MainTask> mainTaskList;
 
     [SerializeField] public int currentTask {  get; private set; }
@@ -12,6 +16,7 @@ public class TaskManager : Singleton<TaskManager>
 
     private void Start()
     {
+        
         //GetMainTask().InitializeTaskStep(0);
     }
 
@@ -57,6 +62,8 @@ public class TaskManager : Singleton<TaskManager>
     {
         GetMainTask().GetTaskStep().TriggerTask();
     }
+
+    public TaskNoticeUI GetTaskNoticeUI() => taskNotice;
 }
 
 [System.Serializable]
@@ -99,7 +106,6 @@ public class MainTask
             isFinished = true;
             return;
         }
-
         GetTaskStep().TaskActive();
     }
 }
@@ -109,9 +115,10 @@ public class Task
 {
     public GameObject taskObj;
     public GameObject triggerObj;
+    public string taskInfo;
     public bool isNeedTrigger;
     public bool isFinished;
-
+    public bool isNoticed;
     public void RestTask()
     {
         isFinished = false;
@@ -131,6 +138,7 @@ public class Task
     public void TriggerTask()
     {
         taskObj.GetComponent<TaskStep>().StartTask();
+        TaskNotice();
     }
 
     public void TaskActive()
@@ -142,5 +150,16 @@ public class Task
             return;
         }
         taskObj.GetComponent<TaskStep>().StartTask();
+        TaskNotice();
+    }
+
+    void TaskNotice()
+    {
+        if (isNoticed)
+        {
+            CanvasManager.Instance.OpenUI(UIObject.UIName.TaskNotice);
+            TaskManager.Instance.GetTaskNoticeUI().SetText(taskInfo);
+            SoundFXManager.Instance.PlaySound(SoundFXManager.Instance.GetSound("Notice"), TaskManager.Instance.gameObject.transform.position);
+        }
     }
 }

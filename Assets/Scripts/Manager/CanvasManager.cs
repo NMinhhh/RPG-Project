@@ -96,7 +96,8 @@ public class UIObject
         MenuHome,
         MenuGamePlay,
         Settings,
-        Credit
+        Credit,
+        TaskNotice
     }
 
     public UIName name;
