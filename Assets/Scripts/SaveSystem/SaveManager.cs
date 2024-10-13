@@ -114,7 +114,7 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SavePotionAmount(int amount)
     {
-        saveGameData.potionAmount = amount;
+        saveGameData.potionAmount += amount;
     }
 
     #endregion

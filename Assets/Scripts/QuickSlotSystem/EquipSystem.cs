@@ -34,8 +34,11 @@ public class EquipSystem : Singleton<EquipSystem>
 
     public void AddPotionItem(int number)
     {
-        if(!SaveManager.Instance.isLoading)
+        if (!SaveManager.Instance.isLoading)
+        {
             NoticePickUpManager.Instance.Notice(potionItem.image,  "+ " + number + " " + potionItem.itemName);
+            SaveManager.Instance.SavePotionAmount(number);
+        }
         numberOfItem += number;
         ChangeNumberOfItem?.Invoke();
     }

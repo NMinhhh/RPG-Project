@@ -15,6 +15,7 @@ public class PlayerHurtState : PlayerState
         player.weaponsController.EndDealDamageAll();
         player.Anim.SetLayerWeight(1, 0);
         player.thirdPersonAim.NotAim();
+        player.weaponsController.EndArrowShoot();
     }
 
     public override void Exit()
